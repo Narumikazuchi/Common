@@ -72,7 +72,8 @@ namespace Narumikazuchi
                 }
                 else
                 {
-                    field.SetValue(result, field.GetValue(original)?.DeepCopy());
+                    Object? value = field.GetValue(original);
+                    field.SetValue(result, value is not null ? DeepCopy(value) : null);
                 }
             }
             foreach (PropertyInfo? property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
@@ -105,18 +106,15 @@ namespace Narumikazuchi
                 }
                 else
                 {
-                    property.SetValue(result, property.GetValue(original)?.DeepCopy());
+                    Object? value = property.GetValue(original);
+                    property.SetValue(result, value is not null ? DeepCopy(value) : null);
                 }
             }
 
             return (T)result;
         }
 
-        /// <summary>
-        /// Creates a deep copy of this object.
-        /// </summary>
-        /// <returns>A deep copy of this object</returns>
-        public static Object DeepCopy(this Object original)
+        private static Object DeepCopy(Object original)
         {
             Object? result = FormatterServices.GetSafeUninitializedObject(original.GetType());
             foreach (FieldInfo? field in original.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
@@ -146,7 +144,8 @@ namespace Narumikazuchi
                 }
                 else
                 {
-                    field.SetValue(result, field.GetValue(original)?.DeepCopy());
+                    Object? value = field.GetValue(original);
+                    field.SetValue(result, value is not null ? DeepCopy(value) : null);
                 }
             }
             foreach (PropertyInfo? property in original.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
@@ -179,7 +178,8 @@ namespace Narumikazuchi
                 }
                 else
                 {
-                    property.SetValue(result, property.GetValue(original)?.DeepCopy());
+                    Object? value = property.GetValue(original);
+                    property.SetValue(result, value is not null ? DeepCopy(value) : null);
                 }
             }
 
