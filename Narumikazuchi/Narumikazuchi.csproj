@@ -6,26 +6,21 @@
     <Authors>Narumikazuchi</Authors>
     <Description>A small framework containing some utilities for my work.
 
-      Contents:
-      - AttributeResolver static class (to fetch attributes from types, parameters etc.)
-      - EnumValidator (Checks if Enum-Value is defined)
-      - EnumEnumerator (Can enumerate over each flag value that is set)
-      - Clamp Extension method for IComparables
-      - DeepCopy Extensions method for Objects
-      - Span and BigSpan structs
-      - ISingleton&lt;T&gt; interface (for the use of this interface also ConstructorNotFoundException as well as PublicConstructorFoundException)
-      - Generic EventHandler delegates
-      - IConvertible&lt;T&gt; interface and Converter static class</Description>
+Contents:
+- AttributeResolver static class (to fetch attributes from types, parameters etc.)
+- EnumValidator (Checks if Enum-Value is defined)
+- EnumEnumerator (Can enumerate over each flag value that is set)
+- Clamp Extension method for IComparables
+- DeepCopy Extensions method for Objects
+- Span and BigSpan structs
+- ISingleton&lt;T&gt; interface (for the use of this interface also ConstructorNotFoundException as well as PublicConstructorFoundException)
+- Generic EventHandler delegates
+- IConvertible&lt;T&gt; interface and Converter static class</Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/CSharp-Utilities</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0</Version>
-    <PackageReleaseNotes>
-      Splitted EnumValidator into 1 additional class, EnumEnumerator.
-      Implemented generic IConvertible interface and Converter class.
-      Reorganized stuff.
-      Moved IByteConvertible out into new serialization assembly.
-    </PackageReleaseNotes>
+    <Version>3.0.1</Version>
+    <PackageReleaseNotes>Moved EqualityComaprison into this assembly.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
   </PropertyGroup>
