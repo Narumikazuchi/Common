@@ -3,7 +3,7 @@
 namespace Narumikazuchi
 {
     /// <summary>
-    /// Exception thrown by <see cref="ISingleton{T}"/> when derived type does contain one or more public constructors.
+    /// Exception thrown by <see cref="Singleton{T}"/> when derived type does contain one or more public constructors.
     /// </summary>
     public sealed class PublicConstructorFoundException : Exception
     {
@@ -26,7 +26,7 @@ namespace Narumikazuchi
 
         #region Constants
 
-        private const String MESSAGE = "Singleton<T> derived types do not allow public constructors.";
+        private const String MESSAGE = "Singleton derived types do not allow public constructors.";
 
         #endregion
     }

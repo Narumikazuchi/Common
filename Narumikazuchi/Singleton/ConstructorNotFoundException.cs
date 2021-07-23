@@ -3,7 +3,7 @@
 namespace Narumikazuchi
 {
     /// <summary>
-    /// Exception thrown by <see cref="ISingleton{T}"/> when derived type does not contain a non-public default constructor.
+    /// Exception thrown by <see cref="Singleton{T}"/> when derived type does not contain a non-public default constructor.
     /// </summary>
     public class ConstructorNotFoundException : Exception
     {
@@ -26,7 +26,7 @@ namespace Narumikazuchi
 
         #region Constants
 
-        private const String MESSAGE = "Singleton<T> derived types require a non-public default constructor.";
+        private const String MESSAGE = "Singleton derived types require a non-public parameterless constructor.";
 
         #endregion
     }
