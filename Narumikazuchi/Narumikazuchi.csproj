@@ -13,7 +13,8 @@ Contents:
 - Clamp Extension method for IComparables
 - DeepCopy Extensions method for Objects
 - Span and BigSpan structs
-- Singleton&lt;T&gt; struct (for the use of this struct also ConstructorNotFoundException as well as PublicConstructorFoundException)
+- Singleton abstract class to implement by other classes
+- Singleton&lt;T&gt; static class (for the use of this class also ConstructorNotFoundException as well as PublicConstructorFoundException)
 - Generic EventHandler delegates
 - IConvertible&lt;T&gt; interface and Converter static class</Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
