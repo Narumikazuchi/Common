@@ -19,18 +19,18 @@ Contents:
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/CSharp-Utilities</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>3.0.0</Version>
     <PackageReleaseNotes>Moved EqualityComaprison into this assembly.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Narumikazuchi.Common.xml</DocumentationFile>
+    <DocumentationFile>..\Narumikazuchi.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\..\..\Managed Code Libraries\Custom\net5.0\Narumikazuchi.Common.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\Managed Code Libraries\Custom\net5.0\Narumikazuchi.xml</DocumentationFile>
     <OutputPath>..\..\..\Managed Code Libraries\Custom\</OutputPath>
   </PropertyGroup>
 
