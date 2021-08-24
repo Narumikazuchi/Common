@@ -66,7 +66,6 @@ namespace Narumikazuchi
             {
                 throw new PublicConstructorFoundException("Public ctor() found for class " + typeof(TClass).Name + ".");
             }
-
         }
 
         #endregion
