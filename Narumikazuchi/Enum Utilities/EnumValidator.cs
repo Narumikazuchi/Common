@@ -14,7 +14,8 @@ namespace Narumikazuchi
         /// <param name="enumValue">The value to check.</param>
         /// <returns><see langword="true"/> if the specified enum value is defined else <see langword="false"/></returns>
         [Pure]
-        public static Boolean IsDefined<TEnum>(TEnum enumValue) where TEnum : Enum => 
-            __EnumChache<TEnum>.DefinedValues.Contains(enumValue);
+        public static Boolean IsDefined<TEnum>(TEnum enumValue) 
+            where TEnum : Enum => 
+                __EnumChache<TEnum>.DefinedValues.Contains(enumValue);
     }
 }

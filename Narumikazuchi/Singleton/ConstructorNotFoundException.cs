@@ -7,27 +7,31 @@ namespace Narumikazuchi
     /// </summary>
     public class ConstructorNotFoundException : Exception
     {
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorNotFoundException"/> class.
         /// </summary>
-        public ConstructorNotFoundException() : base(MESSAGE) { }
+        public ConstructorNotFoundException() :
+            base(MESSAGE) 
+        { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorNotFoundException"/> class.
         /// </summary>
-        public ConstructorNotFoundException(String? auxMessage) : base(String.Format("{0} - {1}", MESSAGE, auxMessage)) { }
+        public ConstructorNotFoundException(String? auxMessage) : 
+            base(String.Format("{0} - {1}", 
+                               MESSAGE, 
+                               auxMessage)) 
+        { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorNotFoundException"/> class.
         /// </summary>
-        public ConstructorNotFoundException(String? auxMessage, Exception? inner) : base(String.Format("{0} - {1}", MESSAGE, auxMessage), inner) { }
-
-        #endregion
-
-        #region Constants
+        public ConstructorNotFoundException(String? auxMessage, 
+                                            Exception? inner) : 
+            base(String.Format("{0} - {1}", 
+                               MESSAGE, 
+                               auxMessage), 
+                inner) 
+        { }
 
         private const String MESSAGE = "Singleton derived types require a non-public parameterless constructor.";
-
-        #endregion
     }
 }

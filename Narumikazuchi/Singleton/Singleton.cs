@@ -11,8 +11,6 @@ namespace Narumikazuchi
     /// </summary>
     public abstract class Singleton
     {
-        #region Constructor
-
         /// <summary>
         /// Initializes a new <see cref="Singleton"/>.
         /// </summary>
@@ -20,57 +18,48 @@ namespace Narumikazuchi
         {
 #nullable disable
             Type singleton = typeof(Singleton<>).MakeGenericType(this.GetType());
-            FieldInfo creating = singleton.GetField("_creating", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo creating = singleton.GetField("_creating", 
+                                                    BindingFlags.Static | BindingFlags.NonPublic);
             Boolean bySingleton = (Boolean)creating.GetValue(null);
             if (!bySingleton)
             {
-                throw new InvalidOperationException("Can't create instances of a singleton from reflection.");
+                throw new InvalidOperationException(REFLECTION_IS_INVALID);
             }
-#nullable enable
-            String? name = this.GetType().AssemblyQualifiedName;
-            if (name is null)
-            {
-                throw new InvalidCastException("Type didn't have a qualified assembly name.");
-            }
+            String name = this.GetType()
+                              .AssemblyQualifiedName;
             if (_initialized.Contains(name))
             {
-                throw new InvalidOperationException("Can't create multiple instances of the same singleton.");
+                throw new InvalidOperationException(MULTIPLE_INSTANCES_ARE_INVALID);
             }
             _initialized.Add(name);
+#nullable enable
         }
-
-        #endregion
-
-        #region Fields
 
         internal static readonly Collection<String> _initialized = new();
 
-        #endregion
+        private const String REFLECTION_IS_INVALID = "Can't create instances of a singleton from reflection.";
+        private const String MULTIPLE_INSTANCES_ARE_INVALID = "Can't create multiple instances of the same singleton.";
     }
 
     /// <summary>
     /// Gives access to the instance of an <see cref="Singleton"/>.
     /// </summary>
-    public static class Singleton<TClass> where TClass : Singleton
+    public static class Singleton<TClass> 
+        where TClass : Singleton
     {
-        #region Constructor
-
         static Singleton()
         {
             if (typeof(TClass).IsAbstract)
             {
-                throw new InvalidOperationException("Can't create singleton instance of an abstract class.");
+                throw new InvalidOperationException(CANT_CREATE_ABSTRACT_CLASSES);
             }
             ConstructorInfo[] ctors = typeof(TClass).GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             if (ctors.Length > 0)
             {
-                throw new PublicConstructorFoundException("Public ctor() found for class " + typeof(TClass).Name + ".");
+                throw new PublicConstructorFoundException(String.Format(PUBLIC_CONSTRUCTORS_NOT_ALLOWED, 
+                                                                        typeof(TClass).Name));
             }
         }
-
-        #endregion
-
-        #region Creation
 
         private static TClass CreateInstanceOf()
         {
@@ -79,29 +68,25 @@ namespace Narumikazuchi
                                                   .FirstOrDefault(c => c.GetParameters().Length == 0);
             if (ctor is null)
             {
-                throw new ConstructorNotFoundException("Non-public ctor() not found for class " + typeof(TClass).Name + ".");
+                throw new ConstructorNotFoundException(String.Format(NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
+                                                                     typeof(TClass).Name));
             }
             TClass result = (TClass)ctor.Invoke(Array.Empty<Object>());
             _creating = false;
             return result;
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets the singleton instance for the <typeparamref name="TClass"/> class.
         /// </summary>
         public static TClass Instance => _instance.Value;
 
-        #endregion
-
-        #region Fields
-
         internal static Boolean _creating = false;
-        private static readonly Lazy<TClass> _instance = new(CreateInstanceOf, LazyThreadSafetyMode.ExecutionAndPublication);
+        private static readonly Lazy<TClass> _instance = new(CreateInstanceOf, 
+                                                             LazyThreadSafetyMode.ExecutionAndPublication);
 
-        #endregion
+        private const String CANT_CREATE_ABSTRACT_CLASSES = "Can't create singleton instance of an abstract class.";
+        private const String PUBLIC_CONSTRUCTORS_NOT_ALLOWED = "Public constructors are not allowed for singletons but found one for class {0}.";
+        private const String NO_NONPUBLIC_CONSTRUCTORS_FOUND = "No non-public constructor found for class {0} to instantiate it as singleton.";
     }
 }

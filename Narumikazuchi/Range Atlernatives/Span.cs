@@ -12,22 +12,17 @@ namespace Narumikazuchi
     [XmlRoot(nameof(Span))]
     public readonly struct Span
     {
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Span"/>.
         /// </summary>
         /// <param name="begin">The starting point of the <see cref="Span"/>.</param>
         /// <param name="end">The end point of the <see cref="Span"/>.</param>
-        public Span(Int32 begin, Int32 end)
+        public Span(Int32 begin, 
+                    Int32 end)
         {
             this.Begin = begin;
             this.End = end;
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets the starting point of the <see cref="Span"/>.
@@ -45,8 +40,7 @@ namespace Narumikazuchi
         /// Gets the length of the <see cref="Span"/>.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public Int32 Length => this.End - this.Begin;
-
-        #endregion
+        public Int32 Length => 
+            this.End - this.Begin;
     }
 }

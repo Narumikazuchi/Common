@@ -8,12 +8,6 @@ namespace Narumikazuchi
     /// </summary>
     public static class Converter
     {
-        #region Conversion
-
-        private static TType ToTypeInternal<TConvertible, TType>(TConvertible convertible, IFormatProvider? provider)
-            where TConvertible : IConvertible<TType> =>
-                convertible.ToType(provider);
-
         /// <summary>
         /// Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TType"/> type. 
         /// </summary>
@@ -31,10 +25,14 @@ namespace Narumikazuchi
         /// <param name="provider">An <see cref="IFormatProvider"/> implementation which provides culture-specific formatting.</param>
         /// <returns>A new instance of <typeparamref name="TType"/> with the 
         /// same value as the specified <typeparamref name="TConvertible"/></returns>
-        public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible, [DisallowNull] IFormatProvider provider)
+        public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible, 
+                                                        [DisallowNull] IFormatProvider provider)
             where TConvertible : IConvertible<TType> =>
                 ToTypeInternal<TConvertible, TType>(convertible, provider);
 
-        #endregion
+        private static TType ToTypeInternal<TConvertible, TType>(TConvertible convertible, 
+                                                                 IFormatProvider? provider)
+            where TConvertible : IConvertible<TType> =>
+                convertible.ToType(provider);
     }
 }
