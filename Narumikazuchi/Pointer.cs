@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 
 namespace Narumikazuchi
@@ -20,6 +22,7 @@ namespace Narumikazuchi
             this._pointer = pointer.ToPointer();
 
         /// <inheritdoc/>
+        [Pure]
         public override String? ToString() => 
             this.Value?
                 .ToString();
@@ -39,6 +42,7 @@ namespace Narumikazuchi
         /// <summary>
         /// Gets the current address of this pointer.
         /// </summary>
+        [Pure]
         public IntPtr Address =>
             (IntPtr)this._pointer;
 
@@ -53,6 +57,7 @@ namespace Narumikazuchi
         }
     }
 
+    // Non-Public
     unsafe partial struct Pointer<T>
     {
         private Pointer<T> Increment(Int64 amount)
@@ -69,9 +74,18 @@ namespace Narumikazuchi
             return this;
         }
 
+        private static void* Offset(void* pointer,
+                                    Int64 index)
+        {
+            Int64 offset = Unsafe.SizeOf<T>() * index;
+            return (void*)(((Int64)pointer) + offset);
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private void* _pointer;
     }
 
+    // Static
     unsafe partial struct Pointer<T>
     {
         /// <summary>
@@ -106,12 +120,5 @@ namespace Narumikazuchi
         public static implicit operator Pointer<T>(void* pointer) =>
             new(pointer);
 #pragma warning restore
-
-        private static void* Offset(void* pointer, 
-                                    Int64 index)
-        {
-            Int64 offset = Unsafe.SizeOf<T>() * index;
-            return (void*)(((Int64)pointer) + offset);
-        }
     }
 }

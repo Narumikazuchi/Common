@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -35,9 +37,12 @@ namespace Narumikazuchi
 #nullable enable
         }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal static readonly Collection<String> _initialized = new();
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String REFLECTION_IS_INVALID = "Can't create instances of a singleton from reflection.";
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String MULTIPLE_INSTANCES_ARE_INVALID = "Can't create multiple instances of the same singleton.";
     }
 
@@ -79,14 +84,20 @@ namespace Narumikazuchi
         /// <summary>
         /// Gets the singleton instance for the <typeparamref name="TClass"/> class.
         /// </summary>
+        [Pure]
         public static TClass Instance => _instance.Value;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal static Boolean _creating = false;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Lazy<TClass> _instance = new(CreateInstanceOf, 
                                                              LazyThreadSafetyMode.ExecutionAndPublication);
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String CANT_CREATE_ABSTRACT_CLASSES = "Can't create singleton instance of an abstract class.";
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String PUBLIC_CONSTRUCTORS_NOT_ALLOWED = "Public constructors are not allowed for singletons but found one for class {0}.";
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String NO_NONPUBLIC_CONSTRUCTORS_FOUND = "No non-public constructor found for class {0} to instantiate it as singleton.";
     }
 }

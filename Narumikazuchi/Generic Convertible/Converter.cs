@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 
 namespace Narumikazuchi
 {
@@ -14,6 +15,7 @@ namespace Narumikazuchi
         /// <param name="convertible">The instance to convert.</param>
         /// <returns>A new instance of <typeparamref name="TType"/> with the 
         /// same value as the specified <typeparamref name="TConvertible"/></returns>
+        [Pure]
         public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible) 
             where TConvertible : IConvertible<TType> =>
                 ToTypeInternal<TConvertible, TType>(convertible, null);
@@ -25,6 +27,7 @@ namespace Narumikazuchi
         /// <param name="provider">An <see cref="IFormatProvider"/> implementation which provides culture-specific formatting.</param>
         /// <returns>A new instance of <typeparamref name="TType"/> with the 
         /// same value as the specified <typeparamref name="TConvertible"/></returns>
+        [Pure]
         public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible, 
                                                         [DisallowNull] IFormatProvider provider)
             where TConvertible : IConvertible<TType> =>

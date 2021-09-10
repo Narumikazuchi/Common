@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Reflection;
@@ -20,7 +21,9 @@ namespace Narumikazuchi
                    usage.AllowMultiple;
         }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String MULTIPLE_INSTANCES_ARE_ALLOWED = "This method is supposed to only work with Attributes that disallow multiple instances.";
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "An Attribute of type {0} has not been defined for the specified {1}.";
     }
 

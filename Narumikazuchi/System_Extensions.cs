@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -18,21 +20,31 @@ namespace Narumikazuchi
         /// <param name="value"></param>
         /// <param name="lowBound">Low-bound for the clamping</param>
         /// <param name="highBound">High-bound for the clamping</param>
+        /// <exception cref="ArgumentNullException"/>
+        [Pure]
         public static T Clamp<T>(this T value, 
-                                 T lowBound, 
-                                 T highBound) 
+                                 [DisallowNull] T lowBound,
+                                 [DisallowNull] T highBound) 
             where T : IComparable<T>
         {
-            T result = value;
-            if (result.CompareTo(lowBound) < 0)
+            if (lowBound is null)
             {
-                result = lowBound;
+                throw new ArgumentNullException(nameof(lowBound));
             }
-            else if (result.CompareTo(highBound) > 0)
+            if (highBound is null)
             {
-                result = highBound;
+                throw new ArgumentNullException(nameof(highBound));
             }
-            return result;
+
+            if (value.CompareTo(lowBound) < 0)
+            {
+                return lowBound;
+            }
+            else if (value.CompareTo(highBound) > 0)
+            {
+                return highBound;
+            }
+            return value;
         }
 
         /// <summary>
@@ -140,6 +152,7 @@ namespace Narumikazuchi
         /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
         /// </summary>
         /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
+        [Pure]
         public static String SanitizeForFilename(this String raw)
         {
             IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()
@@ -157,6 +170,7 @@ namespace Narumikazuchi
         /// Determines whether this type is a <see cref="Singleton"/>.
         /// </summary>
         /// <returns><see langword="true"/> if this type is a <see cref="Singleton"/>; else, <see langword="false"/></returns>
+        [Pure]
         public static Boolean IsSingleton(this Type type) => 
             type.IsAssignableTo(typeof(Singleton));
     }
