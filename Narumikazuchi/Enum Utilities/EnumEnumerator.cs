@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
@@ -15,6 +16,7 @@ namespace Narumikazuchi
         /// </summary>
         /// <returns>An <see cref="IEnumerable{T}"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
         [Pure]
+        [return: NotNull]
         public static IEnumerable<TEnum> EnumerateValues<TEnum>() 
             where TEnum : Enum =>
                 __EnumChache<TEnum>.DefinedValues;
@@ -25,6 +27,7 @@ namespace Narumikazuchi
         /// <param name="enumValue">The value to enumerate the flags of.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in the input value.</returns>
         [Pure]
+        [return: NotNull]
         public static IEnumerable<TEnum> EnumerateFlags<TEnum>(TEnum enumValue) 
             where TEnum : Enum
         {

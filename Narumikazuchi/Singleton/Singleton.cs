@@ -85,7 +85,11 @@ namespace Narumikazuchi
         /// <summary>
         /// Gets the singleton instance for the <typeparamref name="TClass"/> class.
         /// </summary>
+        /// <exception cref="ConstructorNotFoundException"/>
+        /// <exception cref="InvalidOperationException"/>
+        /// <exception cref="PublicConstructorFoundException"/>
         [DisallowNull]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
         [Pure]
         public static TClass Instance => _instance.Value;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi
 {
@@ -16,7 +17,7 @@ namespace Narumikazuchi
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorNotFoundException"/> class.
         /// </summary>
-        public ConstructorNotFoundException(String? auxMessage) : 
+        public ConstructorNotFoundException([AllowNull] String? auxMessage) : 
             base(String.Format("{0} - {1}", 
                                MESSAGE, 
                                auxMessage)) 
@@ -24,8 +25,8 @@ namespace Narumikazuchi
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorNotFoundException"/> class.
         /// </summary>
-        public ConstructorNotFoundException(String? auxMessage, 
-                                            Exception? inner) : 
+        public ConstructorNotFoundException([AllowNull] String? auxMessage,
+                                            [AllowNull] Exception? inner) : 
             base(String.Format("{0} - {1}", 
                                MESSAGE, 
                                auxMessage), 

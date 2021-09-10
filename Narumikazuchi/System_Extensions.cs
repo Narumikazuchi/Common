@@ -22,6 +22,7 @@ namespace Narumikazuchi
         /// <param name="highBound">High-bound for the clamping</param>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
+        [return: NotNull]
         public static T Clamp<T>(this T value, 
                                  [DisallowNull] T lowBound,
                                  [DisallowNull] T highBound) 
@@ -51,6 +52,8 @@ namespace Narumikazuchi
         /// Creates a deep copy of this object.
         /// </summary>
         /// <returns>A deep copy of this object</returns>
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [return: NotNull]
         public static T DeepCopy<T>(this T original)
         {
             Object result = FormatterServices.GetSafeUninitializedObject(typeof(T));
@@ -153,6 +156,7 @@ namespace Narumikazuchi
         /// </summary>
         /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
         [Pure]
+        [return: NotNull]
         public static String SanitizeForFilename(this String raw)
         {
             IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()

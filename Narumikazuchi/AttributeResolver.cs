@@ -49,6 +49,7 @@ namespace Narumikazuchi
         /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attributes from.</param>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
+        [return: NotNull]
         public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly) 
             where TAttribute : Attribute =>
                 assembly is null 
@@ -62,6 +63,7 @@ namespace Narumikazuchi
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="InvalidOperationException"/>
         [Pure]
+        [return: NotNull]
         public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] Assembly assembly)
             where TAttribute : Attribute
         {
@@ -100,6 +102,7 @@ namespace Narumikazuchi
         /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attributes from.</param>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
+        [return: NotNull]
         public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
             where TAttribute : Attribute =>
                 info is null
@@ -113,6 +116,7 @@ namespace Narumikazuchi
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="InvalidOperationException"/>
         [Pure]
+        [return: NotNull]
         public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] MemberInfo info)
             where TAttribute : Attribute
         {
@@ -151,6 +155,7 @@ namespace Narumikazuchi
         /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attributes from.</param>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
+        [return: NotNull]
         public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
             where TAttribute : Attribute =>
                 info is null
@@ -164,6 +169,7 @@ namespace Narumikazuchi
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="InvalidOperationException"/>
         [Pure]
+        [return: NotNull]
         public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] ParameterInfo info)
             where TAttribute : Attribute
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 
@@ -23,6 +24,7 @@ namespace Narumikazuchi
 
         /// <inheritdoc/>
         [Pure]
+        [return: MaybeNull]
         public override String? ToString() => 
             this.Value?
                 .ToString();
@@ -49,7 +51,8 @@ namespace Narumikazuchi
         /// <summary>
         /// Gets or sets the value of where the pointer currently points at.
         /// </summary>
-        public T Value
+        [MaybeNull]
+        public T? Value
         {
             get => Unsafe.Read<T>(this._pointer);
             set => Unsafe.Write(this._pointer, 
