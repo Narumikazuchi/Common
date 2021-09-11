@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("")]
+[assembly: InternalsVisibleTo("Narumikazuchi")]
 
 namespace UnitTest
 {
@@ -40,8 +40,7 @@ namespace UnitTest
         [TestMethod]
         public void AssemblyFetchOnlyAllowedAttribute()
         {
-            InternalsVisibleToAttribute value = AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly());
-            Assert.IsNull(value);
+            Assert.ThrowsException<InvalidOperationException>(() => AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly()));
         }
 
         [TestMethod]

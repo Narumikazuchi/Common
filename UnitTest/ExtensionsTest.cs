@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Narumikazuchi;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace UnitTest
 {
@@ -22,15 +19,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void DeepCopy()
-        {
-            PropertyInfo property = typeof(IndexerSignature).GetProperty(nameof(IndexerSignature.Indecies));
-            IndexerSignature original = new(property);
-            IndexerSignature copy = original.DeepCopy();
-            Assert.IsTrue(original.Equals(copy));
-        }
-
-        [TestMethod]
         public void IsSingletonTrue()
         {
             Assert.IsTrue(typeof(ValidSingleton).IsSingleton());
@@ -39,39 +27,23 @@ namespace UnitTest
         [TestMethod]
         public void IsSingletonFalse()
         {
-            Assert.IsFalse(typeof(IndexerSignature).IsSingleton());
+            Assert.IsFalse(typeof(Int64).IsSingleton());
         }
-    }
 
-    public readonly partial struct IndexerSignature
-    {
-        internal IndexerSignature(PropertyInfo indexer)
+        [TestMethod]
+        public void SanitizeFilename()
         {
-            this.Type = indexer.PropertyType;
-            this.Indecies = new List<Type>(indexer.GetIndexParameters().Select(p => p.ParameterType));
+            String raw = @"\Some?F1l<n:m/>e";
+            String sanitized = raw.SanitizeForFilename();
+            Assert.AreEqual("SomeF1lnme", sanitized);
         }
 
-        public Type Type { get; }
-        public IReadOnlyList<Type> Indecies { get; }
-    }
+        public TestContext TestContext
+        {
+            get => this._instance;
+            set => this._instance = value;
+        }
 
-    partial struct IndexerSignature : IEquatable<IndexerSignature>
-    {
-        public Boolean Equals(IndexerSignature other) =>
-            this.Type == other.Type &&
-            this.Indecies.SequenceEqual(other.Indecies);
-
-        public override Boolean Equals(Object obj) =>
-            obj is IndexerSignature other &&
-            this.Equals(other);
-
-        public override Int32 GetHashCode() =>
-            this.Type.GetHashCode() ^
-            this.Indecies.GetHashCode();
-
-        public static Boolean operator ==(IndexerSignature left, IndexerSignature right) =>
-            left.Equals(right);
-        public static Boolean operator !=(IndexerSignature left, IndexerSignature right) =>
-            !left.Equals(right);
+        private TestContext _instance;
     }
 }

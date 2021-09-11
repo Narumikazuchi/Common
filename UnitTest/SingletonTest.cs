@@ -7,10 +7,10 @@ using System.Reflection;
 namespace UnitTest
 {
     [TestClass]
-    public class SingletonTest
+    public partial class SingletonTest
     {
         [TestMethod]
-        public void ValidSingleton()
+        public void ValidSingletonClass()
         {
             ValidSingleton instance = Singleton<ValidSingleton>.Instance;
             Assert.IsNotNull(instance);
@@ -19,56 +19,65 @@ namespace UnitTest
         [TestMethod]
         public void ReflectionSingleton()
         {
-            ValidSingleton instance = Singleton<ValidSingleton>.Instance;
+            _ = Singleton<ValidSingleton>.Instance;
             ConstructorInfo constructor = typeof(ValidSingleton).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, Array.Empty<Type>(), null);
-            constructor.Invoke(Array.Empty<Object>());
+            Assert.ThrowsException<TargetInvocationException>(() => constructor.Invoke(Array.Empty<Object>()));
         }
 
         [TestMethod]
         public void MultipleSingleton()
         {
-            FieldInfo field = typeof(Singleton).GetField("_initialized");
+            _ = Singleton<ValidSingleton>.Instance;
+            FieldInfo field = typeof(Singleton).GetField("_initialized", BindingFlags.Static | BindingFlags.NonPublic);
             Collection<String> init = (Collection<String>)field.GetValue(null);
-            init.Add(typeof(ValidSingleton).AssemblyQualifiedName);
-            ValidSingleton instance = Singleton<ValidSingleton>.Instance;
+            init.Add(typeof(ValidSingleton2).AssemblyQualifiedName);
+            Assert.ThrowsException<TargetInvocationException>(() => _ = Singleton<ValidSingleton2>.Instance);
         }
 
         [TestMethod]
-        public void AbstractSingleton()
+        public void AbstractClassSingleton()
         {
-            AbstractSingleton instance = Singleton<AbstractSingleton>.Instance;
+            Assert.ThrowsException<TypeInitializationException>(() => _ = Singleton<AbstractSingleton>.Instance);
         }
 
         [TestMethod]
-        public void PublicSingleton()
+        public void PublicConstructorSingleton()
         {
-            PublicSingleton instance = Singleton<PublicSingleton>.Instance;
+            Assert.ThrowsException<TypeInitializationException>(() => _ = Singleton<PublicSingleton>.Instance);
         }
 
         [TestMethod]
-        public void NonPublicSingleton()
+        public void NonPublicConstructorSingleton()
         {
-            NonPublicFailedSingleton instance = Singleton<NonPublicFailedSingleton>.Instance;
+            Assert.ThrowsException<ConstructorNotFoundException>(() => _ = Singleton<NonPublicFailedSingleton>.Instance);
         }
     }
 
-    public class ValidSingleton : Singleton
+    partial class SingletonTest
     {
-        private ValidSingleton() { }
-    }
+        public class ValidSingleton : Singleton
+        {
+            private ValidSingleton() { }
+        }
 
-    public abstract class AbstractSingleton : Singleton
-    {
-        private AbstractSingleton() { }
-    }
+        public class ValidSingleton2 : Singleton
+        {
+            private ValidSingleton2() { }
+        }
 
-    public class PublicSingleton : Singleton
-    {
-        public PublicSingleton() { }
-    }
+        public abstract class AbstractSingleton : Singleton
+        {
+            private AbstractSingleton() { }
+        }
 
-    public class NonPublicFailedSingleton : Singleton
-    {
-        private NonPublicFailedSingleton(String _) { }
+        public class PublicSingleton : Singleton
+        {
+            public PublicSingleton() { }
+        }
+
+        public class NonPublicFailedSingleton : Singleton
+        {
+            private NonPublicFailedSingleton(String _) { }
+        }
     }
 }

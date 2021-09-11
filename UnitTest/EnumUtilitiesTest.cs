@@ -51,6 +51,7 @@ namespace UnitTest
         public void EnumerateNonFlags()
         {
             IEnumerable<ConsoleColor> values = EnumEnumerator.EnumerateFlags(ConsoleColor.Yellow);
+            Assert.IsFalse(values.Any());
         }
 
         [TestMethod]

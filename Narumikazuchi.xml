@@ -312,6 +312,9 @@
             <summary>
             Gets the singleton instance for the <typeparamref name="TClass"/> class.
             </summary>
+            <exception cref="T:Narumikazuchi.ConstructorNotFoundException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+            <exception cref="T:Narumikazuchi.PublicConstructorFoundException"/>
         </member>
         <member name="T:Narumikazuchi.System_Extensions">
             <summary>
@@ -325,12 +328,7 @@
             <param name="value"></param>
             <param name="lowBound">Low-bound for the clamping</param>
             <param name="highBound">High-bound for the clamping</param>
-        </member>
-        <member name="M:Narumikazuchi.System_Extensions.DeepCopy``1(``0)">
-            <summary>
-            Creates a deep copy of this object.
-            </summary>
-            <returns>A deep copy of this object</returns>
+            <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Narumikazuchi.System_Extensions.SanitizeForFilename(System.String)">
             <summary>
