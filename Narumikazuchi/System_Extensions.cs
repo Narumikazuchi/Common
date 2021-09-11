@@ -4,8 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Narumikazuchi
 {
@@ -49,109 +47,6 @@ namespace Narumikazuchi
         }
 
         /// <summary>
-        /// Creates a deep copy of this object.
-        /// </summary>
-        /// <returns>A deep copy of this object</returns>
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        [return: NotNull]
-        public static T DeepCopy<T>(this T original)
-        {
-            Object result = FormatterServices.GetSafeUninitializedObject(typeof(T));
-            foreach (FieldInfo? field in typeof(T).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                if (field is null)
-                {
-                    continue;
-                }
-                if (field.FieldType.IsPrimitive ||
-                    field.FieldType.IsValueType ||
-                    field.FieldType.IsEnum ||
-                    field.FieldType.Equals(typeof(String)))
-                {
-                    field.SetValue(result, 
-                                   field.GetValue(original));
-                }
-                else if (field.FieldType
-                              .IsArray)
-                {
-                    Array? source = (Array?)field.GetValue(original);
-                    Type? element = field.FieldType
-                                         .GetElementType();
-                    if (source is not null &&
-                        element is not null)
-                    {
-                        Array destination = Array.CreateInstance(element, 
-                                                                 source.Length);
-                        Array.Copy(source, 
-                                   destination, 
-                                   source.Length);
-                        field.SetValue(result, 
-                                       destination);
-                    }
-                }
-                else
-                {
-                    Object? value = field.GetValue(original);
-                    field.SetValue(result, 
-                                   value is not null 
-                                        ? DeepCopy(value) 
-                                        : null);
-                }
-            }
-
-            return (T)result;
-        }
-
-        private static Object DeepCopy(Object original)
-        {
-            Object? result = FormatterServices.GetSafeUninitializedObject(original.GetType());
-            foreach (FieldInfo? field in original.GetType()
-                                                 .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                if (field is null)
-                {
-                    continue;
-                }
-                if (field.FieldType.IsPrimitive ||
-                    field.FieldType.IsValueType ||
-                    field.FieldType.IsEnum ||
-                    field.FieldType.Equals(typeof(String)))
-                {
-                    field.SetValue(result, 
-                                   field.GetValue(original));
-                }
-                else if (field.FieldType
-                              .IsArray)
-                {
-                    Array? source = (Array?)field.GetValue(original);
-                    Type? element = field.FieldType
-                                         .GetElementType();
-                    if (source is not null &&
-                        element is not null)
-                    {
-                        Array destination = Array.CreateInstance(element, 
-                                                                 source.Length);
-                        Array.Copy(source, 
-                                   destination, 
-                                   source.Length);
-                        field.SetValue(result, 
-                                       destination);
-                    }
-                }
-                else
-                {
-                    Object? value = field.GetValue(original);
-                    field.SetValue(result, 
-                                   value is not null 
-                                        ? DeepCopy(value) 
-                                        : null);
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
         /// </summary>
         /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
@@ -164,8 +59,9 @@ namespace Narumikazuchi
             String result = raw;
             foreach (Char c in invalid)
             {
-                result = raw.Replace(c.ToString(), 
-                                     "");
+                result = result.Replace(c.ToString(), 
+                                        String.Empty,
+                                        StringComparison.InvariantCultureIgnoreCase);
             }
             return result;
         }
