@@ -4,26 +4,18 @@
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Authors>Narumikazuchi</Authors>
-    <Description>A small framework containing some utilities for my work.
-
-Contents:
-- AttributeResolver static class (to fetch attributes from types, parameters etc.)
-- EnumValidator (Checks if Enum-Value is defined)
-- EnumEnumerator (Can enumerate over each flag value that is set)
-- Clamp Extension method for IComparables
-- DeepCopy Extensions method for Objects
-- Span and BigSpan structs
-- Singleton abstract class to implement by other classes
-- Singleton&lt;T&gt; static class (for the use of this class also ConstructorNotFoundException as well as PublicConstructorFoundException)
-- Generic EventHandler delegates
-- IConvertible&lt;T&gt; interface and Converter static class</Description>
+    <Description>A small framework with generic classes that I need for my projects almost every time.
+A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.</Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
-    <RepositoryUrl>https://github.com/Narumikazuchi/CSharp-Utilities</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.0</Version>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <PackageProjectUrl>https://github.com/Narumikazuchi/Common</PackageProjectUrl>
+    <PackageIcon>Narumikazuchi nuget.png</PackageIcon>
+    <PackageTags>Enum; Convertable; Range; Span; Attribute; Pointer; Singleton</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,6 +32,10 @@ Contents:
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\Narumikazuchi nuget.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
