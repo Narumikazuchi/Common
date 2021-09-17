@@ -13,7 +13,7 @@ A detailed overview of the contents and their used can be found here https://git
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <PackageProjectUrl>https://github.com/Narumikazuchi/Common</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
     <PackageIcon>Narumikazuchi nuget.png</PackageIcon>
     <PackageTags>Enum; Convertable; Range; Span; Attribute; Pointer; Singleton</PackageTags>
   </PropertyGroup>
