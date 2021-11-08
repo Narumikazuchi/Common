@@ -112,6 +112,25 @@
             <param name="enumValue">The value to enumerate the flags of.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in the input value.</returns>
         </member>
+        <member name="T:Narumikazuchi.EnumExtensions">
+            <summary>
+            Extensions class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.EnumExtensions.IsDefined``1(``0)">
+            <summary>
+            Checks if the specified enum value is valid/defined in the enum.
+            </summary>
+            <param name="enumValue">The value to check.</param>
+            <returns><see langword="true"/> if the specified enum value is defined else <see langword="false"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.EnumExtensions.EnumerateFlags``1(``0)">
+            <summary>
+            Enumerates the flags, which are set in the input value.
+            </summary>
+            <param name="enumValue">The value to enumerate the flags of.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in the input value.</returns>
+        </member>
         <member name="T:Narumikazuchi.EnumValidator">
             <summary>
             Checks an enum value for validity.

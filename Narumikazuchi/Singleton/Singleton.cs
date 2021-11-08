@@ -104,6 +104,6 @@ namespace Narumikazuchi
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const String PUBLIC_CONSTRUCTORS_NOT_ALLOWED = "Public constructors are not allowed for singletons but found one for class {0}.";
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private const String NO_NONPUBLIC_CONSTRUCTORS_FOUND = "No non-public constructor found for class {0} to instantiate it as singleton.";
+        private const String NO_NONPUBLIC_CONSTRUCTORS_FOUND = "No non-public, parameterless constructor found for class {0} to instantiate it as singleton.";
     }
 }

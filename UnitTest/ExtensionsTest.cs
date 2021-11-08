@@ -19,9 +19,10 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void IsSingletonTrue()
+        public void ThrowOnNull()
         {
-            Assert.IsTrue(typeof(ValidSingleton).IsSingleton());
+            this.ThrowMethod("Test");
+            Assert.ThrowsException<ArgumentNullException>(() => this.ThrowMethod(null));
         }
 
         [TestMethod]
@@ -36,6 +37,11 @@ namespace UnitTest
             String raw = @"\Some?F1l<n:m/>e";
             String sanitized = raw.SanitizeForFilename();
             Assert.AreEqual("SomeF1lnme", sanitized);
+        }
+
+        private void ThrowMethod(String message)
+        {
+            ExceptionHelpers.ThrowIfNullOrEmpty(message);
         }
 
         public TestContext TestContext
