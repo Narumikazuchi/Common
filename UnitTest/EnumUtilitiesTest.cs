@@ -10,18 +10,6 @@ namespace UnitTest
     public class EnumUtilitiesTest
     {
         [TestMethod]
-        public void ValidatorTrue()
-        {
-            Assert.IsTrue(EnumValidator.IsDefined(ConsoleColor.Green));
-        }
-
-        [TestMethod]
-        public void ValidatorFalse()
-        {
-            Assert.IsFalse(EnumValidator.IsDefined((ConsoleColor)128));
-        }
-
-        [TestMethod]
         public void EnumerateValues()
         {
             IEnumerable<ConsoleColor> values = EnumEnumerator.EnumerateValues<ConsoleColor>();
