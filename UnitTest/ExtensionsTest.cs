@@ -21,8 +21,8 @@ namespace UnitTest
         [TestMethod]
         public void ThrowOnNull()
         {
-            this.ThrowMethod("Test");
-            Assert.ThrowsException<ArgumentNullException>(() => this.ThrowMethod(null));
+            ExceptionHelpers.ThrowIfNullOrEmpty("Test");
+            Assert.ThrowsException<NullReferenceException>(() => ExceptionHelpers.ThrowIfNull(null));
         }
 
         [TestMethod]
@@ -32,16 +32,35 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void ExceptionHelperTest()
+        {
+            try
+            {
+                Exception exception = new("Somethinng went wrong!");
+                exception.Data.Add("Typename",
+                                   typeof(Int64).FullName);
+                throw exception;
+            }
+            catch (Exception e)
+            {
+                var info = ExceptionHelpers.ExtractInformation(e);
+                Assert.AreEqual(info.CallStack.Count, 1);
+                Assert.AreEqual(info.CallStack[0].Line, 42);
+                Assert.AreEqual(info.Data.Count, 1);
+                Assert.AreEqual((String)info.Data["Typename"], typeof(Int64).FullName);
+                Assert.AreEqual(info.SourceType, typeof(ExtensionsTest));
+                Assert.AreEqual(info.SourceMemberType, "Method");
+                Assert.AreEqual(info.SourceMember, "Void ExceptionHelperTest()");
+                Assert.AreEqual(info.SourceLibrary, @"\\192.168.0.30\davy\Programmierung\Projects\Utility Common\UnitTest\bin\Debug\net6.0\UnitTest.dll");
+            }
+        }
+
+        [TestMethod]
         public void SanitizeFilename()
         {
             String raw = @"\Some?F1l<n:m/>e";
             String sanitized = raw.SanitizeForFilename();
             Assert.AreEqual("SomeF1lnme", sanitized);
-        }
-
-        private void ThrowMethod(String message)
-        {
-            ExceptionHelpers.ThrowIfNullOrEmpty(message);
         }
 
         public TestContext TestContext

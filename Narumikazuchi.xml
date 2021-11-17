@@ -112,36 +112,179 @@
             <param name="enumValue">The value to enumerate the flags of.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in the input value.</returns>
         </member>
-        <member name="T:Narumikazuchi.EnumExtensions">
+        <member name="T:Narumikazuchi.ExceptionHelpers">
             <summary>
-            Extensions class.
+            Contains helpers for throwing exceptions.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.EnumExtensions.IsDefined``1(``0)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.Object,System.String)">
             <summary>
-            Checks if the specified enum value is valid/defined in the enum.
+            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
             </summary>
-            <param name="enumValue">The value to check.</param>
-            <returns><see langword="true"/> if the specified enum value is defined else <see langword="false"/></returns>
+            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
         </member>
-        <member name="M:Narumikazuchi.EnumExtensions.EnumerateFlags``1(``0)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.Object,System.String)">
             <summary>
-            Enumerates the flags, which are set in the input value.
+            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
             </summary>
-            <param name="enumValue">The value to enumerate the flags of.</param>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in the input value.</returns>
+            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
         </member>
-        <member name="T:Narumikazuchi.EnumValidator">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String)">
             <summary>
-            Checks an enum value for validity.
+            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null or completely made of whitespace.
+            </summary>
+            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
+            <summary>
+            Extracts precise Inforamtion from the specified <see cref="T:System.Exception"/>.
+            </summary>
+            <param name="source">The exception to extract data from.</param>
+            <returns>An information object, containing detailed data on the exception</returns>
+        </member>
+        <member name="T:Narumikazuchi.ExceptionInformation">
+            <summary>
+            Contains detailed information of an <see cref="T:System.Exception"/>.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.EnumValidator.IsDefined``1(``0)">
+        <member name="P:Narumikazuchi.ExceptionInformation.Data">
             <summary>
-            Checks if the specified enum value is valid/defined in the enum.
+            Gets the environment data from when the <see cref="T:System.Exception"/> has been thrown.
             </summary>
-            <param name="enumValue">The value to check.</param>
-            <returns><see langword="true"/> if the specified enum value is defined else <see langword="false"/></returns>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.InnerException">
+            <summary>
+            Gets the inner <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.CallStack">
+            <summary>
+            Gets the callstack from when the <see cref="T:System.Exception"/> occured.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.SourceType">
+            <summary>
+            Gets the type in which the <see cref="T:System.Exception"/> occured.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.SourceLibrary">
+            <summary>
+            Gets the library where the <see cref="P:Narumikazuchi.ExceptionInformation.SourceType"/> is declared.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.SourceMember">
+            <summary>
+            Gets the member who caused the <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ExceptionInformation.SourceMemberType">
+            <summary>
+            Gets the member type of the <see cref="P:Narumikazuchi.ExceptionInformation.SourceMember"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.FunctionCallInformation">
+            <summary>
+            Contains the information for a function call on the call stack.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.FunctionCallInformation.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.FunctionCallInformation.File">
+            <summary>
+            Gets the path to the file, where the function is defined.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FunctionCallInformation.Target">
+            <summary>
+            Gets the name of the declaring type.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FunctionCallInformation.Name">
+            <summary>
+            Gets the name of the function.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FunctionCallInformation.Line">
+            <summary>
+            Gets the line number in the file.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FunctionCallInformation.Column">
+            <summary>
+            Gets the column in the line of the file.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.NotAllowed">
+            <summary>
+            Exception thrown when an unallowed action is about to be performed.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.ValueTuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.ValueTuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.ValueTuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.Tuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Tuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.Tuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.Converter">
             <summary>
@@ -218,98 +361,24 @@
             <param name="t">The object to create a <see cref="T:Narumikazuchi.Pointer`1"/> of.</param>
             <returns>A <see cref="T:Narumikazuchi.Pointer`1"/> to the reference of <typeparamref name="T"/></returns>
         </member>
-        <member name="T:Narumikazuchi.BigSpan">
-            <summary>
-            Represents a numeric span.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.BigSpan.#ctor(System.Int64,System.Int64)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.BigSpan"/>.
-            </summary>
-            <param name="begin">The starting point of the <see cref="T:Narumikazuchi.BigSpan"/>.</param>
-            <param name="end">The end point of the <see cref="T:Narumikazuchi.BigSpan"/>.</param>
-        </member>
-        <member name="P:Narumikazuchi.BigSpan.Begin">
-            <summary>
-            Gets the starting point of the <see cref="T:Narumikazuchi.BigSpan"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.BigSpan.End">
-            <summary>
-            Gets the end point of the <see cref="T:Narumikazuchi.BigSpan"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.BigSpan.Length">
-            <summary>
-            Gets the length of the <see cref="T:Narumikazuchi.BigSpan"/>.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.Span">
-            <summary>
-            Represents a numeric span.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Span.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.Span"/>.
-            </summary>
-            <param name="begin">The starting point of the <see cref="T:Narumikazuchi.Span"/>.</param>
-            <param name="end">The end point of the <see cref="T:Narumikazuchi.Span"/>.</param>
-        </member>
-        <member name="P:Narumikazuchi.Span.Begin">
-            <summary>
-            Gets the starting point of the <see cref="T:Narumikazuchi.Span"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Span.End">
-            <summary>
-            Gets the end point of the <see cref="T:Narumikazuchi.Span"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Span.Length">
-            <summary>
-            Gets the length of the <see cref="T:Narumikazuchi.Span"/>.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.ConstructorNotFoundException">
+        <member name="T:Narumikazuchi.ConstructorNotFound">
             <summary>
             Exception thrown by <see cref="T:Narumikazuchi.Singleton`1"/> when derived type does not contain a non-public default constructor.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ConstructorNotFoundException.#ctor">
+        <member name="M:Narumikazuchi.ConstructorNotFound.#ctor(System.String,System.ValueTuple{System.String,System.String}[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ConstructorNotFoundException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFoundException"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ConstructorNotFoundException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFoundException"/> class.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.PublicConstructorFoundException">
+        <member name="T:Narumikazuchi.PublicConstructorFound">
             <summary>
             Exception thrown by <see cref="T:Narumikazuchi.Singleton`1"/> when derived type does contain one or more public constructors.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.PublicConstructorFoundException.#ctor">
+        <member name="M:Narumikazuchi.PublicConstructorFound.#ctor(System.String,System.ValueTuple{System.String,System.String}[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.PublicConstructorFoundException"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.PublicConstructorFoundException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.PublicConstructorFoundException"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.PublicConstructorFoundException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.PublicConstructorFoundException"/> class.
+            Initializes a new instance of the <see cref="T:Narumikazuchi.PublicConstructorFound"/> class.
             </summary>
         </member>
         <member name="T:Narumikazuchi.Singleton">
@@ -331,9 +400,9 @@
             <summary>
             Gets the singleton instance for the <typeparamref name="TClass"/> class.
             </summary>
-            <exception cref="T:Narumikazuchi.ConstructorNotFoundException"/>
-            <exception cref="T:System.InvalidOperationException"/>
-            <exception cref="T:Narumikazuchi.PublicConstructorFoundException"/>
+            <exception cref="T:Narumikazuchi.ConstructorNotFound"/>
+            <exception cref="T:Narumikazuchi.NotAllowed"/>
+            <exception cref="T:Narumikazuchi.PublicConstructorFound"/>
         </member>
         <member name="T:Narumikazuchi.System_Extensions">
             <summary>

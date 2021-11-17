@@ -40,7 +40,7 @@ namespace UnitTest
         [TestMethod]
         public void AssemblyFetchOnlyAllowedAttribute()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly()));
+            Assert.ThrowsException<NotAllowed>(() => AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly()));
         }
 
         [TestMethod]

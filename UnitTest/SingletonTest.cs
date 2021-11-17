@@ -2,6 +2,7 @@
 using Narumikazuchi;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace UnitTest
@@ -49,7 +50,7 @@ namespace UnitTest
         [TestMethod]
         public void NonPublicConstructorSingleton()
         {
-            Assert.ThrowsException<ConstructorNotFoundException>(() => _ = Singleton<NonPublicFailedSingleton>.Instance);
+            Assert.ThrowsException<ConstructorNotFound>(() => _ = Singleton<NonPublicFailedSingleton>.Instance);
         }
     }
 
