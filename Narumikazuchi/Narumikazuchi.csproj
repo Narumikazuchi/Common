@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnablePreviewFeatures>True</EnablePreviewFeatures>
     <Authors>Narumikazuchi</Authors>
     <Description>A small framework with generic classes that I need for my projects almost every time.
-A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.</Description>
+A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.    </Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,10 +19,6 @@ A detailed overview of the contents and their used can be found here https://git
     <PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
     <PackageIcon>Narumikazuchi nuget.png</PackageIcon>
     <PackageTags>Enum; Convertable; Range; Span; Attribute; Pointer; Singleton</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
