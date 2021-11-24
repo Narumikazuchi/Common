@@ -9,36 +9,36 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed() :
-        base(MESSAGE)
+        base(message: MESSAGE)
     { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? auxMessage) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage))
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage))
     { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? auxMessage,
                       [AllowNull] Exception? inner) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage),
-             inner)
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage),
+             innerException: inner)
     { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(MESSAGE)
+        base(message: MESSAGE)
     {
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data.Add(kv.key,
-                          kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
@@ -46,14 +46,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? auxMessage,
                       [DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage))
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage))
     {
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data.Add(kv.key,
-                          kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
@@ -62,27 +62,27 @@ public sealed class NotAllowed : Exception
     public NotAllowed([AllowNull] String? auxMessage,
                       [AllowNull] Exception? inner,
                       [DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage),
-             inner)
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage),
+             innerException: inner)
     {
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data.Add(kv.key,
-                          kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(MESSAGE)
+        base(message: MESSAGE)
     {
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data.Add(kv.Key,
-                          kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
@@ -90,14 +90,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? auxMessage,
                       [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage))
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage))
     {
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data.Add(kv.Key,
-                          kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
@@ -106,27 +106,27 @@ public sealed class NotAllowed : Exception
     public NotAllowed([AllowNull] String? auxMessage,
                       [AllowNull] Exception? inner,
                       [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage),
-             inner)
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage),
+             innerException: inner)
     {
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data.Add(kv.Key,
-                          kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(MESSAGE)
+        base(message: MESSAGE)
     {
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data.Add(tuple.Item1,
-                          tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
     /// <summary>
@@ -134,14 +134,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? auxMessage,
                       [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage))
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage))
     {
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data.Add(tuple.Item1,
-                          tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
     /// <summary>
@@ -150,15 +150,15 @@ public sealed class NotAllowed : Exception
     public NotAllowed([AllowNull] String? auxMessage,
                       [AllowNull] Exception? inner,
                       [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(String.Format("{0} - {1}",
-                           MESSAGE,
-                           auxMessage),
-             inner)
+        base(message: String.Format(format: "{0} - {1}",
+                                    arg0: MESSAGE,
+                                    arg1: auxMessage),
+             innerException: inner)
     {
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data.Add(tuple.Item1,
-                          tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
 

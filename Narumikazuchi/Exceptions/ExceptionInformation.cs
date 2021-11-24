@@ -52,11 +52,11 @@ partial struct ExceptionInformation
 
     private void ParseStackTrace()
     {
-        StackTrace st = new(this._source,
-                            true);
+        StackTrace st = new(e: this._source,
+                            fNeedFileInfo: true);
         foreach (StackFrame frame in st.GetFrames())
         {
-            this._callStack.Add(new(frame));
+            this._callStack.Add(item: new(frame: frame));
         }
     }
 

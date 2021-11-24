@@ -28,11 +28,11 @@ public unsafe partial struct Pointer<T>
     /// </summary>
     public T this[Int32 index]
     {
-        get => Unsafe.Read<T>(Offset(this._pointer, 
-                                     index));
-        set => Unsafe.Write(Offset(this._pointer, 
-                                   index), 
-                            value);
+        get => Unsafe.Read<T>(source: Offset(pointer: this._pointer, 
+                                             index: index));
+        set => Unsafe.Write(destination: Offset(pointer: this._pointer, 
+                                                index: index), 
+                            value: value);
     }
 
     /// <summary>
@@ -48,9 +48,9 @@ public unsafe partial struct Pointer<T>
     [MaybeNull]
     public T? Value
     {
-        get => Unsafe.Read<T>(this._pointer);
-        set => Unsafe.Write(this._pointer, 
-                            value);
+        get => Unsafe.Read<T>(source: this._pointer);
+        set => Unsafe.Write(destination: this._pointer, 
+                            value: value);
     }
 }
 
@@ -59,15 +59,15 @@ unsafe partial struct Pointer<T>
 {
     private Pointer<T> Increment(Int64 amount)
     {
-        this._pointer = Offset(this._pointer, 
-                               amount);
+        this._pointer = Offset(pointer: this._pointer, 
+                               index: amount);
         return this;
     }
 
     private Pointer<T> Decrement(Int64 amount)
     {
-        this._pointer = Offset(this._pointer, 
-                               -amount);
+        this._pointer = Offset(pointer: this._pointer,
+                               index: -amount);
         return this;
     }
 
@@ -93,28 +93,28 @@ unsafe partial struct Pointer<T>
     public static Pointer<T> AddressOf(ref T t)
     {
         TypedReference tr = __makeref(t);
-        return new(*(IntPtr*)&tr);
+        return new(pointer: *(IntPtr*)&tr);
     }
 
 #pragma warning disable
     public static Pointer<T> operator ++(Pointer<T> pointer) =>
-        pointer.Increment(1);
+        pointer.Increment(amount: 1);
 
     public static Pointer<T> operator --(Pointer<T> pointer) =>
-        pointer.Decrement(1);
+        pointer.Decrement(amount: 1);
 
     public static Pointer<T> operator +(Pointer<T> pointer, 
                                         Int64 amount) =>
-        pointer.Increment(amount);
+        pointer.Increment(amount: amount);
 
     public static Pointer<T> operator -(Pointer<T> pointer, 
                                         Int64 amount) =>
-        pointer.Decrement(amount);
+        pointer.Decrement(amount: amount);
 
     public static implicit operator Pointer<T>(IntPtr pointer) =>
-        new(pointer);
+        new(pointer: pointer);
 
     public static implicit operator Pointer<T>(void* pointer) =>
-        new(pointer);
+        new(pointer: pointer);
 #pragma warning restore
 }

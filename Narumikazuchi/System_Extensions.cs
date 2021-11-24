@@ -19,14 +19,14 @@ public static class System_Extensions
                              [DisallowNull] T highBound) 
         where T : IComparable<T>
     {
-        ExceptionHelpers.ThrowIfArgumentNull(lowBound);
-        ExceptionHelpers.ThrowIfArgumentNull(highBound);
+        ExceptionHelpers.ThrowIfArgumentNull(source: lowBound);
+        ExceptionHelpers.ThrowIfArgumentNull(source: highBound);
 
-        if (value.CompareTo(lowBound) < 0)
+        if (value.CompareTo(other: lowBound) < 0)
         {
             return lowBound;
         }
-        else if (value.CompareTo(highBound) > 0)
+        else if (value.CompareTo(other: highBound) > 0)
         {
             return highBound;
         }
@@ -42,13 +42,13 @@ public static class System_Extensions
     public static String SanitizeForFilename(this String raw)
     {
         IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()
-                                        .Union(Path.GetInvalidPathChars());
+                                        .Union(second: Path.GetInvalidPathChars());
         String result = raw;
         foreach (Char c in invalid)
         {
-            result = result.Replace(c.ToString(), 
-                                    String.Empty,
-                                    StringComparison.InvariantCultureIgnoreCase);
+            result = result.Replace(oldValue: c.ToString(), 
+                                    newValue: String.Empty,
+                                    comparisonType: StringComparison.InvariantCultureIgnoreCase);
         }
         return result;
     }
@@ -59,5 +59,5 @@ public static class System_Extensions
     /// <returns><see langword="true"/> if this type is a <see cref="Singleton"/>; else, <see langword="false"/></returns>
     [Pure]
     public static Boolean IsSingleton(this Type type) => 
-        type.IsAssignableTo(typeof(Singleton));
+        type.IsAssignableTo(targetType: typeof(Singleton));
 }

@@ -25,16 +25,16 @@ public static class EnumEnumerator
     public static IEnumerable<TEnum> EnumerateFlags<TEnum>([DisallowNull] TEnum enumValue) 
         where TEnum : Enum
     {
-        ExceptionHelpers.ThrowIfArgumentNull(enumValue);
-        if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
+        ExceptionHelpers.ThrowIfArgumentNull(source: enumValue);
+        if (!AttributeResolver.HasAttribute<FlagsAttribute>(info: typeof(TEnum)))
         {
             yield break;
         }
 #pragma warning disable
-        foreach (TEnum value in Enum.GetValues(typeof(TEnum))
+        foreach (TEnum value in Enum.GetValues(enumType: typeof(TEnum))
                                     .Cast<TEnum>())
         {
-            if (enumValue.HasFlag(value))
+            if (enumValue.HasFlag(flag: value))
             {
                 yield return value;
             }

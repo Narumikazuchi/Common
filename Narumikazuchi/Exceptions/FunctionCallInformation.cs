@@ -9,25 +9,25 @@ public readonly partial struct FunctionCallInformation
     public override String ToString()
     {
         StringBuilder builder = new();
-        builder.Append(this.Target);
-        builder.Append('.');
-        builder.Append(this.Name);
-        builder.Append('(');
-        builder.Append(String.Join(',',
-                                   this._parameters));
-        builder.Append(')');
+        builder.Append(value: this.Target);
+        builder.Append(value: '.');
+        builder.Append(value: this.Name);
+        builder.Append(value: '(');
+        builder.Append(value: String.Join(separator: ',',
+                                          values: this._parameters));
+        builder.Append(value: ')');
         if (this.File is null ||
             this.Line == 0)
         {
             return builder.ToString();
         }
-        builder.Append('\n');
-        builder.Append("at ");
-        builder.Append(this.File);
-        builder.Append(" line ");
-        builder.Append(this.Line);
-        builder.Append(':');
-        builder.Append(this.Column);
+        builder.Append(value: '\n');
+        builder.Append(value: "at ");
+        builder.Append(value: this.File);
+        builder.Append(value: " line ");
+        builder.Append(value: this.Line);
+        builder.Append(value: ':');
+        builder.Append(value: this.Column);
         return builder.ToString();
     }
 
@@ -69,7 +69,7 @@ partial struct FunctionCallInformation
         }
         foreach (ParameterInfo parameter in method.GetParameters())
         {
-            this._parameters.Add(parameter.ParameterType.FullName);
+            this._parameters.Add(item: parameter.ParameterType.FullName);
         }
     }
 

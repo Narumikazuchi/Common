@@ -32,9 +32,9 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly) 
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(assembly);
-        return Attribute.IsDefined(assembly,
-                                   typeof(TAttribute));
+        ExceptionHelpers.ThrowIfArgumentNull(source: assembly);
+        return Attribute.IsDefined(element: assembly,
+                                   attributeType: typeof(TAttribute));
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly) 
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(assembly);
+        ExceptionHelpers.ThrowIfArgumentNull(source: assembly);
         return assembly.GetCustomAttributes<TAttribute>();
     }
 
@@ -64,15 +64,15 @@ partial class AttributeResolver
     {
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
         return attribute is not null
                     ? attribute
-                    : throw new InvalidOperationException(String.Format(ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                        typeof(TAttribute).Name,
-                                                                        nameof(Assembly)));
+                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                                                                 arg0: typeof(TAttribute).Name,
+                                                                                 arg1: nameof(Assembly)));
     }
 }
 
@@ -88,9 +88,9 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
-        return Attribute.IsDefined(info,
-                                   typeof(TAttribute));
+        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        return Attribute.IsDefined(element: info,
+                                   attributeType: typeof(TAttribute));
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
+        ExceptionHelpers.ThrowIfArgumentNull(source: info);
         return info.GetCustomAttributes<TAttribute>();
     }
 
@@ -120,15 +120,15 @@ partial class AttributeResolver
     {
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         return attribute is not null
                     ? attribute
-                    : throw new InvalidOperationException(String.Format(ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                        typeof(TAttribute).Name,
-                                                                        info.GetType().Name));
+                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                                                                 arg0: typeof(TAttribute).Name,
+                                                                                 arg1: info.GetType().Name));
     }
 }
 
@@ -144,9 +144,9 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
-        return Attribute.IsDefined(info,
-                                   typeof(TAttribute));
+        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        return Attribute.IsDefined(element: info,
+                                   attributeType: typeof(TAttribute));
     }
 
     /// <summary>
@@ -159,7 +159,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(info);
+        ExceptionHelpers.ThrowIfArgumentNull(source: info);
         return info.GetCustomAttributes<TAttribute>();
     }
 
@@ -176,14 +176,14 @@ partial class AttributeResolver
     {
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         return attribute is not null
                     ? attribute
-                    : throw new InvalidOperationException(String.Format(ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                        typeof(TAttribute).Name,
-                                                                        nameof(ParameterInfo)));
+                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                                                                 arg0: typeof(TAttribute).Name,
+                                                                                 arg1: nameof(ParameterInfo)));
     }
 }

@@ -12,25 +12,25 @@ public abstract class Singleton
     {
 #nullable disable
         Type singleton = typeof(Singleton<>).MakeGenericType(this.GetType());
-        FieldInfo creating = singleton.GetField("_creating", 
-                                                BindingFlags.Static | BindingFlags.NonPublic);
-        Boolean bySingleton = (Boolean)creating.GetValue(null);
+        FieldInfo creating = singleton.GetField(name: "_creating", 
+                                                bindingAttr: BindingFlags.Static | BindingFlags.NonPublic);
+        Boolean bySingleton = (Boolean)creating.GetValue(obj: null);
         if (!bySingleton)
         {
-            throw new NotAllowed(REFLECTION_IS_INVALID,
+            throw new NotAllowed(auxMessage: REFLECTION_IS_INVALID,
                                  ("Typename", this.GetType().FullName),
                                  ("_creating", bySingleton));
         }
         String name = this.GetType()
                           .AssemblyQualifiedName;
-        if (_initialized.Contains(name))
+        if (_initialized.Contains(item: name))
         {
-            throw new NotAllowed(MULTIPLE_INSTANCES_ARE_INVALID,
+            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_INVALID,
                                  ("Typename", this.GetType().FullName),
                                  ("_creating", bySingleton),
                                  ("AssemblyQualifiedName", this.GetType().AssemblyQualifiedName));
         }
-        _initialized.Add(name);
+        _initialized.Add(item: name);
 #nullable enable
     }
 
@@ -53,14 +53,14 @@ public static class Singleton<TClass>
     {
         if (typeof(TClass).IsAbstract)
         {
-            throw new NotAllowed(CANT_CREATE_ABSTRACT_CLASSES,
+            throw new NotAllowed(auxMessage: CANT_CREATE_ABSTRACT_CLASSES,
                                  ("Typename", typeof(TClass).FullName));
         }
-        ConstructorInfo[] ctors = typeof(TClass).GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+        ConstructorInfo[] ctors = typeof(TClass).GetConstructors(bindingAttr: BindingFlags.Instance | BindingFlags.Public);
         if (ctors.Length > 0)
         {
-            throw new PublicConstructorFound(String.Format(PUBLIC_CONSTRUCTORS_NOT_ALLOWED, 
-                                                           typeof(TClass).Name),
+            throw new PublicConstructorFound(auxMessage: String.Format(format: PUBLIC_CONSTRUCTORS_NOT_ALLOWED, 
+                                                                       arg0: typeof(TClass).Name),
                                              ("Typename", typeof(TClass).FullName));
         }
     }
@@ -79,15 +79,15 @@ public static class Singleton<TClass>
     private static TClass CreateInstanceOf()
     {
         _creating = true;
-        ConstructorInfo? ctor = typeof(TClass).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
+        ConstructorInfo? ctor = typeof(TClass).GetConstructors(bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic)
                                               .FirstOrDefault(c => c.GetParameters().Length == 0);
         if (ctor is null)
         {
-            throw new ConstructorNotFound(String.Format(NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
-                                                        typeof(TClass).Name),
+            throw new ConstructorNotFound(auxMessage: String.Format(format: NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
+                                                                    arg0: typeof(TClass).Name),
                                           ("Typename", typeof(TClass).FullName));
         }
-        TClass result = (TClass)ctor.Invoke(Array.Empty<Object>());
+        TClass result = (TClass)ctor.Invoke(parameters: Array.Empty<Object>());
         _creating = false;
         return result;
     }
@@ -95,8 +95,8 @@ public static class Singleton<TClass>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     internal static Boolean _creating = false;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static readonly Lazy<TClass> _instance = new(CreateInstanceOf, 
-                                                         LazyThreadSafetyMode.ExecutionAndPublication);
+    private static readonly Lazy<TClass> _instance = new(valueFactory: CreateInstanceOf, 
+                                                         mode: LazyThreadSafetyMode.ExecutionAndPublication);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String CANT_CREATE_ABSTRACT_CLASSES = "Can't create singleton instance of an abstract class.";
