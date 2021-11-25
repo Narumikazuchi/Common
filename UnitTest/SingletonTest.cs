@@ -21,16 +21,20 @@ namespace UnitTest
         public void ReflectionSingleton()
         {
             _ = Singleton<ValidSingleton>.Instance;
-            ConstructorInfo constructor = typeof(ValidSingleton).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, Array.Empty<Type>(), null);
-            Assert.ThrowsException<TargetInvocationException>(() => constructor.Invoke(Array.Empty<Object>()));
+            ConstructorInfo constructor = typeof(ValidSingleton).GetConstructor(bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic, 
+                                                                                binder: null, 
+                                                                                types: Array.Empty<Type>(), 
+                                                                                modifiers: null);
+            Assert.ThrowsException<TargetInvocationException>(() => constructor.Invoke(parameters: Array.Empty<Object>()));
         }
 
         [TestMethod]
         public void MultipleSingleton()
         {
             _ = Singleton<ValidSingleton>.Instance;
-            FieldInfo field = typeof(Singleton).GetField("_initialized", BindingFlags.Static | BindingFlags.NonPublic);
-            Collection<String> init = (Collection<String>)field.GetValue(null);
+            FieldInfo field = typeof(Singleton).GetField(name: "_initialized", 
+                                                         bindingAttr: BindingFlags.Static | BindingFlags.NonPublic);
+            Collection<String> init = (Collection<String>)field.GetValue(obj: null);
             init.Add(typeof(ValidSingleton2).AssemblyQualifiedName);
             Assert.ThrowsException<TargetInvocationException>(() => _ = Singleton<ValidSingleton2>.Instance);
         }

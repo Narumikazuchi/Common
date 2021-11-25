@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Narumikazuchi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -19,55 +16,55 @@ namespace UnitTest
         [TestMethod]
         public void AssemblyHasAttributeTrue()
         {
-            Boolean result = AttributeResolver.HasAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly());
+            Boolean result = AttributeResolver.HasAttribute<InternalsVisibleToAttribute>(assembly: Assembly.GetExecutingAssembly());
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void AssemblyHasAttributeFalse()
         {
-            Boolean result = AttributeResolver.HasAttribute<UnusedAttribute>(Assembly.GetExecutingAssembly());
+            Boolean result = AttributeResolver.HasAttribute<UnusedAttribute>(assembly: Assembly.GetExecutingAssembly());
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void AssemblyFetchAttributes()
         {
-            IEnumerable<InternalsVisibleToAttribute> values = AttributeResolver.FetchAllAttributes<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly());
+            IEnumerable<InternalsVisibleToAttribute> values = AttributeResolver.FetchAllAttributes<InternalsVisibleToAttribute>(assembly: Assembly.GetExecutingAssembly());
             Assert.IsTrue(values.Count() == 1);
         }
 
         [TestMethod]
         public void AssemblyFetchOnlyAllowedAttribute()
         {
-            Assert.ThrowsException<NotAllowed>(() => AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(Assembly.GetExecutingAssembly()));
+            Assert.ThrowsException<NotAllowed>(() => AttributeResolver.FetchOnlyAllowedAttribute<InternalsVisibleToAttribute>(assembly: Assembly.GetExecutingAssembly()));
         }
 
         [TestMethod]
         public void MemberHasAttributeTrue()
         {
-            Boolean result = AttributeResolver.HasAttribute<SingleAttribute>(typeof(AttributeResolverTest));
+            Boolean result = AttributeResolver.HasAttribute<SingleAttribute>(info: typeof(AttributeResolverTest));
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void MemberHasAttributeFalse()
         {
-            Boolean result = AttributeResolver.HasAttribute<UnusedAttribute>(typeof(AttributeResolverTest));
+            Boolean result = AttributeResolver.HasAttribute<UnusedAttribute>(info: typeof(AttributeResolverTest));
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void MemberFetchAttributes()
         {
-            IEnumerable<MultiAttribute> values = AttributeResolver.FetchAllAttributes<MultiAttribute>(typeof(AttributeResolverTest));
+            IEnumerable<MultiAttribute> values = AttributeResolver.FetchAllAttributes<MultiAttribute>(info: typeof(AttributeResolverTest));
             Assert.IsTrue(values.Count() == 2);
         }
 
         [TestMethod]
         public void MemberFetchOnlyAllowedAttribute()
         {
-            SingleAttribute value = AttributeResolver.FetchOnlyAllowedAttribute<SingleAttribute>(typeof(AttributeResolverTest));
+            SingleAttribute value = AttributeResolver.FetchOnlyAllowedAttribute<SingleAttribute>(info: typeof(AttributeResolverTest));
             Assert.IsNotNull(value);
         }
     }

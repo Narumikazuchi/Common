@@ -38,14 +38,14 @@ namespace UnitTest
         [TestMethod]
         public void EnumerateNonFlags()
         {
-            IEnumerable<ConsoleColor> values = EnumEnumerator.EnumerateFlags(ConsoleColor.Yellow);
+            IEnumerable<ConsoleColor> values = EnumEnumerator.EnumerateFlags(enumValue: ConsoleColor.Yellow);
             Assert.IsFalse(values.Any());
         }
 
         [TestMethod]
         public void EnumerateFlags()
         {
-            IEnumerable<AttributeTargets> values = EnumEnumerator.EnumerateFlags(AttributeTargets.Class | AttributeTargets.Event | AttributeTargets.Method);
+            IEnumerable<AttributeTargets> values = EnumEnumerator.EnumerateFlags(enumValue: AttributeTargets.Class | AttributeTargets.Event | AttributeTargets.Method);
             AttributeTargets[] all = new AttributeTargets[]
             {
                 AttributeTargets.Class,
