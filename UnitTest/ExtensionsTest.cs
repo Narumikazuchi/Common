@@ -19,6 +19,17 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void Prime()
+        {
+            _instance.WriteLine(Primes.GetNext(15).ToString());
+            _instance.WriteLine(Primes.GetNext(999).ToString());
+            _instance.WriteLine(Primes.GetPrevious(21).ToString());
+            _instance.WriteLine(Primes.GetPrevious(1015).ToString());
+            _instance.WriteLine(Primes.IsPrime(883).ToString());
+            _instance.WriteLine(Primes.IsPrime(88).ToString());
+        }
+
+        [TestMethod]
         public void ThrowOnNull()
         {
             ExceptionHelpers.ThrowIfNullOrEmpty(source: "Test");
