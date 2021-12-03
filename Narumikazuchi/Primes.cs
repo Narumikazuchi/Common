@@ -10,7 +10,7 @@ public static partial class Primes
     /// </summary>
     /// <param name="candidate">The candidate to check.</param>
     /// <returns><see langword="true"/> if the specified candidate is a prime; otherwise <see langword="false"/></returns>
-    public static Boolean IsPrime(Int32 candidate)
+    public static Boolean IsPrime(in Int32 candidate)
     {
         if (candidate < 0)
         {
@@ -47,7 +47,7 @@ public static partial class Primes
     /// <param name="origin">The origin from where to start.</param>
     /// <returns>The nearest prime that is smaller than or equal to the specified parameter</returns>
     /// <exception cref="ArgumentException"/>
-    public static Int32 GetPrevious(Int32 origin)
+    public static Int32 GetPrevious(in Int32 origin)
     {
         if (origin < 0)
         {
@@ -80,7 +80,7 @@ public static partial class Primes
     /// <param name="origin">The origin from where to start.</param>
     /// <returns>The nearest prime that is greater than or equal to the specified parameter</returns>
     /// <exception cref="ArgumentException"/>
-    public static Int32 GetNext(Int32 origin)
+    public static Int32 GetNext(in Int32 origin)
     {
         if (origin < 0)
         {
@@ -119,7 +119,7 @@ public static partial class Primes
     /// </summary>
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
-    public static IEnumerable<Int32> ListUntil(Range range) =>
+    public static IEnumerable<Int32> ListUntil(in Range range) =>
         ListUntil(range.Start.Value, 
                   range.End.Value);
     /// <summary>
@@ -159,7 +159,7 @@ public static partial class Primes
 // Non-Public
 partial class Primes
 {
-    private static void FillMissingPrimes(Int32 upperBound)
+    private static void FillMissingPrimes(in Int32 upperBound)
     {
         for (Int32 i = upperBound; i < Int32.MaxValue; i += 2)
         {
@@ -179,9 +179,9 @@ partial class Primes
         _known.Sort();
     }
 
-    private static Int32 ApproachInRange(Int32 value,
-                                         Range range,
-                                         Boolean reverse)
+    private static Int32 ApproachInRange(in Int32 value,
+                                         in Range range,
+                                         in Boolean reverse)
     {
         Int32 length = range.End.Value - range.Start.Value;
         if (length == 1)
