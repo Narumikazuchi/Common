@@ -161,6 +161,14 @@ partial class Primes
 {
     private static void FillMissingPrimes(Int32 upperBound)
     {
+        for (Int32 i = upperBound; i < Int32.MaxValue; i += 2)
+        {
+            if (IsPrime(i))
+            {
+                _known.Add(i);
+                break;
+            }
+        }
         for (Int32 i = upperBound; i > _known[^1]; i -= 2)
         {
             if (IsPrime(i))
