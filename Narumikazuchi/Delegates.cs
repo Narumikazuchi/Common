@@ -4,16 +4,16 @@
 /// Represents the method that will handle an event without event data.
 /// </summary>
 /// <param name="sender">The object which raised the event.</param>
-/// <param name="e">The event data for the raised event.</param>
+/// <param name="eventArgs">The event data for the raised event.</param>
 public delegate void EventHandler<TSender>([DisallowNull] TSender sender, 
-                                           [AllowNull] EventArgs? e);
+                                           [AllowNull] EventArgs? eventArgs);
 /// <summary>
 /// Represents the method that will handle an event with certain event data.
 /// </summary>
 /// <param name="sender">The object which raised the event.</param>
-/// <param name="e">The event data for the raised event.</param>
+/// <param name="eventArgs">The event data for the raised event.</param>
 public delegate void EventHandler<TSender, TEventArgs>([DisallowNull] TSender sender,
-                                                       [AllowNull] TEventArgs? e) 
+                                                       [AllowNull] TEventArgs? eventArgs) 
     where TEventArgs : EventArgs;
 
 /// <summary>
