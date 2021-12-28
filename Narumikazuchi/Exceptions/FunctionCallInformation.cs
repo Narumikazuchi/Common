@@ -90,7 +90,7 @@ partial struct FunctionCallInformation
         }
         foreach (ParameterInfo parameter in method.GetParameters())
         {
-            this._parameters.Add(item: parameter.ParameterType.FullName);
+            this._parameters.Add(parameter.ParameterType.FullName);
         }
     }
 

@@ -29,7 +29,9 @@ public static partial class Primes
         if ((candidate & 1) != 0)
         {
             Int32 max = (Int32)Math.Sqrt(candidate);
-            for (Int32 i = 3; i <= max; i += 2)
+            for (Int32 i = 3; 
+                 i <= max; 
+                 i += 2)
             {
                 if (candidate % i == 0)
                 {
@@ -102,7 +104,9 @@ public static partial class Primes
         }
 
 
-        for (Int32 i = origin | 1; i < Int32.MaxValue; i += 2)
+        for (Int32 i = origin | 1; 
+             i < Int32.MaxValue; 
+             i += 2)
         {
             if (IsPrime(i))
             {
@@ -142,7 +146,9 @@ public static partial class Primes
             FillMissingPrimes(endPoint | 1);
         }
 
-        for (Int32 i = 0; i < _known.Count; i++)
+        for (Int32 i = 0; 
+             i < _known.Count; 
+             i++)
         {
             if (_known[i] < startPoint)
             {
@@ -163,7 +169,9 @@ partial class Primes
 {
     private static void FillMissingPrimes(in Int32 upperBound)
     {
-        for (Int32 i = upperBound; i < Int32.MaxValue; i += 2)
+        for (Int32 i = upperBound; 
+             i < Int32.MaxValue; 
+             i += 2)
         {
             if (IsPrime(i))
             {
@@ -171,7 +179,9 @@ partial class Primes
                 break;
             }
         }
-        for (Int32 i = upperBound; i > _known[^1]; i -= 2)
+        for (Int32 i = upperBound; 
+             i > _known[^1]; 
+             i -= 2)
         {
             if (IsPrime(i))
             {
