@@ -14,11 +14,12 @@ public abstract class Singleton
         Type singleton = typeof(Singleton<>).MakeGenericType(this.GetType());
         FieldInfo creating = singleton.GetField(name: "_creating", 
                                                 bindingAttr: BindingFlags.Static | BindingFlags.NonPublic);
-        Boolean bySingleton = (Boolean)creating.GetValue(obj: null);
+        Boolean bySingleton = (Boolean)creating.GetValue(null);
         if (!bySingleton)
         {
             throw new NotAllowed(auxMessage: REFLECTION_IS_INVALID,
-                                 ("Typename", this.GetType().FullName),
+                                 ("Typename", this.GetType()
+                                                  .FullName),
                                  ("_creating", bySingleton));
         }
         String name = this.GetType()
@@ -26,21 +27,25 @@ public abstract class Singleton
         if (_initialized.Contains(item: name))
         {
             throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_INVALID,
-                                 ("Typename", this.GetType().FullName),
+                                 ("Typename", this.GetType()
+                                                  .FullName),
                                  ("_creating", bySingleton),
-                                 ("AssemblyQualifiedName", this.GetType().AssemblyQualifiedName));
+                                 ("AssemblyQualifiedName", this.GetType()
+                                                               .AssemblyQualifiedName));
         }
-        _initialized.Add(item: name);
+        _initialized.Add(name);
 #nullable enable
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     internal static readonly Collection<String> _initialized = new();
 
+#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String REFLECTION_IS_INVALID = "Can't create instances of a singleton from reflection.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String MULTIPLE_INSTANCES_ARE_INVALID = "Can't create multiple instances of the same singleton.";
+#pragma warning restore
 }
 
 /// <summary>
@@ -72,7 +77,6 @@ public static class Singleton<TClass>
     /// <exception cref="NotAllowed"/>
     /// <exception cref="PublicConstructorFound"/>
     [DisallowNull]
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
     [Pure]
     public static TClass Instance => _instance.Value;
 
@@ -80,7 +84,8 @@ public static class Singleton<TClass>
     {
         _creating = true;
         ConstructorInfo? ctor = typeof(TClass).GetConstructors(bindingAttr: BindingFlags.Instance | BindingFlags.NonPublic)
-                                              .FirstOrDefault(c => c.GetParameters().Length == 0);
+                                              .FirstOrDefault(c => c.GetParameters()
+                                                                    .Length == 0);
         if (ctor is null)
         {
             throw new ConstructorNotFound(auxMessage: String.Format(format: NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
@@ -98,10 +103,12 @@ public static class Singleton<TClass>
     private static readonly Lazy<TClass> _instance = new(valueFactory: CreateInstanceOf, 
                                                          mode: LazyThreadSafetyMode.ExecutionAndPublication);
 
+#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String CANT_CREATE_ABSTRACT_CLASSES = "Can't create singleton instance of an abstract class.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String PUBLIC_CONSTRUCTORS_NOT_ALLOWED = "Public constructors are not allowed for singletons but found one for class {0}.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NO_NONPUBLIC_CONSTRUCTORS_FOUND = "No non-public, parameterless constructor found for class {0} to instantiate it as singleton.";
+#pragma warning restore
 }

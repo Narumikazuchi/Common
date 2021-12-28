@@ -48,7 +48,7 @@ public unsafe partial struct Pointer<T>
     [MaybeNull]
     public T? Value
     {
-        get => Unsafe.Read<T>(source: this._pointer);
+        get => Unsafe.Read<T>(this._pointer);
         set => Unsafe.Write(destination: this._pointer, 
                             value: value);
     }
@@ -98,18 +98,18 @@ unsafe partial struct Pointer<T>
 
 #pragma warning disable
     public static Pointer<T> operator ++(Pointer<T> pointer) =>
-        pointer.Increment(amount: 1);
+        pointer.Increment(1);
 
     public static Pointer<T> operator --(Pointer<T> pointer) =>
-        pointer.Decrement(amount: 1);
+        pointer.Decrement(1);
 
     public static Pointer<T> operator +(Pointer<T> pointer, 
                                         Int64 amount) =>
-        pointer.Increment(amount: amount);
+        pointer.Increment(amount);
 
     public static Pointer<T> operator -(Pointer<T> pointer, 
                                         Int64 amount) =>
-        pointer.Decrement(amount: amount);
+        pointer.Decrement(amount);
 
     public static implicit operator Pointer<T>(IntPtr pointer) =>
         new(pointer: pointer);

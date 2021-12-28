@@ -56,7 +56,7 @@ partial struct ExceptionInformation
                             fNeedFileInfo: true);
         foreach (StackFrame frame in st.GetFrames())
         {
-            this._callStack.Add(item: new(frame: frame));
+            this._callStack.Add(new(frame: frame));
         }
     }
 

@@ -14,10 +14,12 @@ public static partial class AttributeResolver
                usage.AllowMultiple;
     }
 
+#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String MULTIPLE_INSTANCES_ARE_ALLOWED = "This method is supposed to only work with Attributes that disallow multiple instances.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "An Attribute of type {0} has not been defined for the specified {1}.";
+    private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "The specified Attribute has not been defined for the specified type.";
+#pragma warning restore
 }
 
 // Assemblies
@@ -32,7 +34,7 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly) 
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: assembly);
+        ExceptionHelpers.ThrowIfArgumentNull(assembly);
         return Attribute.IsDefined(element: assembly,
                                    attributeType: typeof(TAttribute));
     }
@@ -47,7 +49,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly) 
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: assembly);
+        ExceptionHelpers.ThrowIfArgumentNull(assembly);
         return assembly.GetCustomAttributes<TAttribute>();
     }
 
@@ -62,17 +64,20 @@ partial class AttributeResolver
     public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+        ExceptionHelpers.ThrowIfArgumentNull(assembly);
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
-        return attribute is not null
-                    ? attribute
-                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                                 arg0: typeof(TAttribute).Name,
-                                                                                 arg1: nameof(Assembly)));
+        if (attribute is null)
+        {
+            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+        }
+        return attribute;
     }
 }
 
@@ -88,7 +93,7 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
     }
@@ -103,7 +108,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         return info.GetCustomAttributes<TAttribute>();
     }
 
@@ -118,17 +123,20 @@ partial class AttributeResolver
     public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
-        return attribute is not null
-                    ? attribute
-                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                                 arg0: typeof(TAttribute).Name,
-                                                                                 arg1: info.GetType().Name));
+        if (attribute is null)
+        {
+            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+        }
+        return attribute;
     }
 }
 
@@ -144,7 +152,7 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
     }
@@ -159,7 +167,7 @@ partial class AttributeResolver
     public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: info);
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         return info.GetCustomAttributes<TAttribute>();
     }
 
@@ -174,16 +182,19 @@ partial class AttributeResolver
     public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
+        ExceptionHelpers.ThrowIfArgumentNull(info);
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
-        return attribute is not null
-                    ? attribute
-                    : throw new InvalidOperationException(message: String.Format(format: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                                                                 arg0: typeof(TAttribute).Name,
-                                                                                 arg1: nameof(ParameterInfo)));
+        if (attribute is null)
+        {
+            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+        }
+        return attribute;
     }
 }

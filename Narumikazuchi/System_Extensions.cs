@@ -19,14 +19,14 @@ public static class System_Extensions
                              [DisallowNull] T highBound) 
         where T : IComparable<T>
     {
-        ExceptionHelpers.ThrowIfArgumentNull(source: lowBound);
-        ExceptionHelpers.ThrowIfArgumentNull(source: highBound);
+        ExceptionHelpers.ThrowIfArgumentNull(lowBound);
+        ExceptionHelpers.ThrowIfArgumentNull(highBound);
 
-        if (value.CompareTo(other: lowBound) < 0)
+        if (value.CompareTo(lowBound) < 0)
         {
             return lowBound;
         }
-        else if (value.CompareTo(other: highBound) > 0)
+        else if (value.CompareTo(highBound) > 0)
         {
             return highBound;
         }
@@ -59,5 +59,5 @@ public static class System_Extensions
     /// <returns><see langword="true"/> if this type is a <see cref="Singleton"/>; else, <see langword="false"/></returns>
     [Pure]
     public static Boolean IsSingleton(this Type type) => 
-        type.IsAssignableTo(targetType: typeof(Singleton));
+        type.IsAssignableTo(typeof(Singleton));
 }

@@ -9,14 +9,15 @@ public static class ExceptionHelpers
     /// Throws an <see cref="ArgumentNullException"/> if the source parameter is null.
     /// </summary>
     /// <param name="source">The source to check against <see langword="null"/>.</param>
-    /// <param name="paramName">The name of the parameter.</param>
+    /// <param name="varName">The name of the parameter.</param>
     /// <exception cref="ArgumentNullException" />
     public static void ThrowIfNull(Object? source, 
-                                   [CallerArgumentExpression("source")] String? paramName = null)
+                                   [CallerArgumentExpression("source")] String? varName = null)
     {
         if (source == null)
         {
-            throw new NullReferenceException(message: paramName);
+            throw new NullReferenceException(message: String.Format(format: NULLREF_MESSAGE,
+                                                                    arg0: varName));
         }
     }
 
@@ -34,6 +35,20 @@ public static class ExceptionHelpers
             throw new ArgumentNullException(paramName: paramName);
         }
     }
+    /// <summary>
+    /// Throws an <see cref="ArgumentNullException"/> if the source parameter is null.
+    /// </summary>
+    /// <param name="source">The source to check against <see langword="null"/>.</param>
+    /// <param name="paramName">The name of the parameter.</param>
+    /// <exception cref="ArgumentNullException" />
+    public static void ThrowIfArgumentNull(String? source,
+                                           [CallerArgumentExpression("source")] String? paramName = null)
+    {
+        if (String.IsNullOrWhiteSpace(source))
+        {
+            throw new ArgumentNullException(paramName: paramName);
+        }
+    }
 
     /// <summary>
     /// Throws an <see cref="ArgumentNullException"/> if the source parameter is null or completely made of whitespace.
@@ -44,9 +59,9 @@ public static class ExceptionHelpers
     public static void ThrowIfNullOrEmpty(String? source, 
                                           [CallerArgumentExpression("source")] String? paramName = null)
     {
-        if (String.IsNullOrWhiteSpace(value: source))
+        if (String.IsNullOrWhiteSpace(source))
         {
-            throw new ArgumentNullException(paramName: paramName);
+            throw new NullReferenceException(message: paramName);
         }
     }
 
@@ -57,7 +72,12 @@ public static class ExceptionHelpers
     /// <returns>An information object, containing detailed data on the exception</returns>
     public static ExceptionInformation ExtractInformation([DisallowNull] Exception source)
     {
-        ThrowIfArgumentNull(source: source);
+        ThrowIfArgumentNull(source);
         return new(source: source);
     }
+
+#pragma warning disable IDE1006
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private const String NULLREF_MESSAGE = "The specified variable with the name {0} is null.";
+#pragma warning restore
 }

@@ -45,4 +45,8 @@ A detailed overview of the contents and their used can be found here https://git
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Experimental" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>

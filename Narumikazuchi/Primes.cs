@@ -19,7 +19,7 @@ public static partial class Primes
 
         if (candidate <= _known[^1])
         {
-            Int32 index = _known.BinarySearch(candidate);
+            Int32 index = _known.BinarySearch(item: candidate);
             if (index > -1)
             {
                 return true;
@@ -51,26 +51,27 @@ public static partial class Primes
     {
         if (origin < 0)
         {
-            ArgumentException ex = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
-            ex.Data.Add(key: "origin",
-                        value: origin);
-            throw ex;
+            ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
+            exception.Data
+                     .Add(key: "origin",
+                          value: origin);
+            throw exception;
         }
 
         Int32 index;
         if (origin <= _known[^1])
         {
-            index = ApproachInRange(origin,
-                                    0..(_known.Count - 1),
-                                    true);
+            index = ApproachInRange(value: origin,
+                                    range: 0..(_known.Count - 1),
+                                    reverse: true);
             return _known[index];
         }
 
         FillMissingPrimes(origin);
 
-        index = ApproachInRange(origin,
-                                0..(_known.Count - 1),
-                                true);
+        index = ApproachInRange(value: origin,
+                                range: 0..(_known.Count - 1),
+                                reverse: true);
         return _known[index];
     }
 
@@ -84,23 +85,24 @@ public static partial class Primes
     {
         if (origin < 0)
         {
-            ArgumentException ex = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
-            ex.Data.Add(key: "origin",
-                        value: origin);
-            throw ex;
+            ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
+            exception.Data
+                     .Add(key: "origin",
+                          value: origin);
+            throw exception;
         }
 
         Int32 index;
         if (origin <= _known[^1])
         {
-            index = ApproachInRange(origin,
-                                    0..(_known.Count - 1),
-                                    false);
+            index = ApproachInRange(value: origin,
+                                    range: 0..(_known.Count - 1),
+                                    reverse: false);
             return _known[index];
         }
 
 
-        for (Int32 i = (origin | 1); i < Int32.MaxValue; i += 2)
+        for (Int32 i = origin | 1; i < Int32.MaxValue; i += 2)
         {
             if (IsPrime(i))
             {
@@ -108,9 +110,9 @@ public static partial class Primes
             }
         }
 
-        index = ApproachInRange(origin,
-                                0..(_known.Count - 1),
-                                false);
+        index = ApproachInRange(value: origin,
+                                range: 0..(_known.Count - 1),
+                                reverse: false);
         return _known[index];
     }
 
@@ -120,8 +122,8 @@ public static partial class Primes
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
     public static IEnumerable<Int32> ListUntil(in Range range) =>
-        ListUntil(range.Start.Value, 
-                  range.End.Value);
+        ListUntil(startPoint: range.Start.Value, 
+                  endPoint: range.End.Value);
     /// <summary>
     /// Enumerates all primes in the range specified by the specified starting point to the specified end point.
     /// </summary>
@@ -186,28 +188,32 @@ partial class Primes
         Int32 length = range.End.Value - range.Start.Value;
         if (length == 1)
         {
-            return reverse 
-                ? range.Start.Value
-                : range.End.Value;
+            if (reverse)
+            {
+                return range.Start.Value;
+            }
+            return range.End.Value;
         }
         length = (length + 1) / 2;
         if (value > _known[range.Start] &&
             value <= _known[range.Start.Value + length])
         {
-            return ApproachInRange(value,
-                                   range.Start.Value..(range.Start.Value + length),
-                                   reverse);
+            return ApproachInRange(value: value,
+                                   range: range.Start.Value..(range.Start.Value + length),
+                                   reverse: reverse);
         }
         if (value > _known[range.Start.Value + length] &&
             value <= _known[range.End])
         {
-            return ApproachInRange(value,
-                                   (range.Start.Value + length)..range.End,
-                                   reverse);
+            return ApproachInRange(value: value,
+                                   range: (range.Start.Value + length)..range.End,
+                                   reverse: reverse);
         }
-        return reverse
-            ? range.End.Value
-            : range.Start.Value;
+        if (reverse)
+        {
+            return range.End.Value;
+        }
+        return range.Start.Value;
     }
 
     private static readonly List<Int32> _known = new()
@@ -383,7 +389,7 @@ partial class Primes
         997
     };
 
-#pragma warning disable
+#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NEGATIVE_NUMBERS_NOT_SUPPORTED = "The prime finding for negative numbers is not supported.";
 #pragma warning restore

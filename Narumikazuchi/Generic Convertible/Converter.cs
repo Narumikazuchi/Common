@@ -41,5 +41,5 @@ partial class Converter
     private static TType ToTypeInternal<TConvertible, TType>(TConvertible convertible,
                                                              IFormatProvider? provider)
         where TConvertible : IConvertible<TType> =>
-            convertible.ToType(provider: provider);
+            convertible.ToType(provider);
 }
