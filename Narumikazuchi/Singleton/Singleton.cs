@@ -17,7 +17,7 @@ public abstract class Singleton
         Boolean bySingleton = (Boolean)creating.GetValue(null);
         if (!bySingleton)
         {
-            throw new NotAllowed(auxMessage: REFLECTION_IS_INVALID,
+            throw new NotAllowed(message: REFLECTION_IS_INVALID,
                                  ("Typename", this.GetType()
                                                   .FullName),
                                  ("_creating", bySingleton));
@@ -26,7 +26,7 @@ public abstract class Singleton
                           .AssemblyQualifiedName;
         if (_initialized.Contains(item: name))
         {
-            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_INVALID,
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_INVALID,
                                  ("Typename", this.GetType()
                                                   .FullName),
                                  ("_creating", bySingleton),
@@ -58,13 +58,13 @@ public static class Singleton<TClass>
     {
         if (typeof(TClass).IsAbstract)
         {
-            throw new NotAllowed(auxMessage: CANT_CREATE_ABSTRACT_CLASSES,
+            throw new NotAllowed(message: CANT_CREATE_ABSTRACT_CLASSES,
                                  ("Typename", typeof(TClass).FullName));
         }
         ConstructorInfo[] ctors = typeof(TClass).GetConstructors(bindingAttr: BindingFlags.Instance | BindingFlags.Public);
         if (ctors.Length > 0)
         {
-            throw new PublicConstructorFound(auxMessage: String.Format(format: PUBLIC_CONSTRUCTORS_NOT_ALLOWED, 
+            throw new PublicConstructorFound(message: String.Format(format: PUBLIC_CONSTRUCTORS_NOT_ALLOWED, 
                                                                        arg0: typeof(TClass).Name),
                                              ("Typename", typeof(TClass).FullName));
         }
@@ -88,7 +88,7 @@ public static class Singleton<TClass>
                                                                     .Length == 0);
         if (ctor is null)
         {
-            throw new ConstructorNotFound(auxMessage: String.Format(format: NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
+            throw new ConstructorNotFound(message: String.Format(format: NO_NONPUBLIC_CONSTRUCTORS_FOUND, 
                                                                     arg0: typeof(TClass).Name),
                                           ("Typename", typeof(TClass).FullName));
         }

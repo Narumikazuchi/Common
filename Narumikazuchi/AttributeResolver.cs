@@ -67,13 +67,13 @@ partial class AttributeResolver
         ExceptionHelpers.ThrowIfArgumentNull(assembly);
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
@@ -126,13 +126,13 @@ partial class AttributeResolver
         ExceptionHelpers.ThrowIfArgumentNull(info);
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
@@ -185,13 +185,13 @@ partial class AttributeResolver
         ExceptionHelpers.ThrowIfArgumentNull(info);
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(auxMessage: MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-            throw new NotAllowed(auxMessage: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
+            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
