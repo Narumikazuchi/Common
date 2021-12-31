@@ -1,38 +1,38 @@
 ﻿namespace Narumikazuchi;
 
 /// <summary>
-/// Exception thrown when an unallowed action is about to be performed.
+/// Exception thrown when an impossible state is reached inside an object.
 /// </summary>
-public sealed class NotAllowed : Exception
+public sealed class ImpossibleState : Exception
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed() :
+    public ImpossibleState() :
         base(message: MESSAGE)
     { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message) :
+    public ImpossibleState([AllowNull] String? message) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
     { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [AllowNull] Exception? innerException) :
+    public ImpossibleState([AllowNull] String? message,
+                           [AllowNull] Exception? innerException) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
              innerException: innerException)
     { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation) :
+    public ImpossibleState([DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: MESSAGE)
     {
         foreach ((Object key, Object? value) kv in stateInformation)
@@ -43,10 +43,10 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -59,11 +59,11 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [AllowNull] Exception? innerException,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [AllowNull] Exception? innerException,
+                           [DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -77,9 +77,9 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+    public ImpossibleState([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
@@ -90,10 +90,10 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -106,11 +106,11 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [AllowNull] Exception? innerException,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [AllowNull] Exception? innerException,
+                           [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -124,9 +124,9 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+    public ImpossibleState([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
         foreach (Tuple<Object, Object?> tuple in stateInformation)
@@ -137,10 +137,10 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -153,11 +153,11 @@ public sealed class NotAllowed : Exception
         }
     }
     /// <summary>
-    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public NotAllowed([AllowNull] String? message,
-                      [AllowNull] Exception? innerException,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+    public ImpossibleState([AllowNull] String? message,
+                           [AllowNull] Exception? innerException,
+                           [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -173,6 +173,6 @@ public sealed class NotAllowed : Exception
 
 #pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String MESSAGE = "The operation is not allowed.";
+    private const String MESSAGE = "The reached an impossible state.";
 #pragma warning restore
 }
