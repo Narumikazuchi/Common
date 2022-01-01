@@ -1,17 +1,17 @@
 ﻿namespace Narumikazuchi;
 
 /// <summary>
-/// Represents an immutable alpha-numeric version number.
+/// Represents an immutable alphanumeric version number.
 /// </summary>
 [DebuggerDisplay("{ToString()}")]
-public readonly partial struct Version
+public readonly partial struct AlphanumericVersion
 {
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major)
+    public AlphanumericVersion([DisallowNull] String major)
     {
         ExceptionHelpers.ThrowIfArgumentNull(major);
 
@@ -31,19 +31,19 @@ public readonly partial struct Version
         this._revision = null;
     }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major) :
+    public AlphanumericVersion(in Int64 major) :
         this(major.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor)
     {
         ExceptionHelpers.ThrowIfArgumentNull(major);
@@ -74,41 +74,41 @@ public readonly partial struct Version
         this._revision = null;
     }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor) :
         this(major: major,
              minor: minor.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor) :
         this(major: major.ToString(),
              minor: minor.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor) :
         this(major: major.ToString(),
              minor: minor.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build)
     {
@@ -150,11 +150,11 @@ public readonly partial struct Version
         this._revision = null;
     }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    in Int64 build) :
         this(major: major,
@@ -162,11 +162,11 @@ public readonly partial struct Version
              build: build.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    [DisallowNull] String build) :
         this(major: major,
@@ -174,11 +174,11 @@ public readonly partial struct Version
              build: build)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build) :
         this(major: major.ToString(),
@@ -186,11 +186,11 @@ public readonly partial struct Version
              build: build)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    in Int64 build) :
         this(major: major,
@@ -198,11 +198,11 @@ public readonly partial struct Version
              build: build.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    in Int64 build) :
         this(major: major.ToString(),
@@ -210,11 +210,11 @@ public readonly partial struct Version
              build: build.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    [DisallowNull] String build) :
         this(major: major.ToString(),
@@ -222,11 +222,11 @@ public readonly partial struct Version
              build: build)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    in Int64 build) :
         this(major: major.ToString(),
@@ -234,11 +234,11 @@ public readonly partial struct Version
              build: build.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build,
                    [DisallowNull] String revision)
@@ -291,11 +291,11 @@ public readonly partial struct Version
         this._revision = revision;
     }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build,
                    in Int64 revision) :
@@ -305,11 +305,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    in Int64 build,
                    [DisallowNull] String revision) :
@@ -319,11 +319,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    [DisallowNull] String build,
                    [DisallowNull] String revision) :
@@ -333,11 +333,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build,
                    [DisallowNull] String revision) :
@@ -347,11 +347,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    [DisallowNull] String minor,
                    in Int64 build,
                    in Int64 revision) :
@@ -361,11 +361,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    [DisallowNull] String build,
                    in Int64 revision) :
@@ -375,11 +375,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    [DisallowNull] String build,
                    in Int64 revision) :
@@ -389,11 +389,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    in Int64 build,
                    [DisallowNull] String revision) :
@@ -403,11 +403,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    in Int64 build,
                    [DisallowNull] String revision) :
@@ -417,11 +417,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    [DisallowNull] String build,
                    [DisallowNull] String revision) :
@@ -431,11 +431,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version([DisallowNull] String major,
+    public AlphanumericVersion([DisallowNull] String major,
                    in Int64 minor,
                    in Int64 build,
                    in Int64 revision) :
@@ -445,11 +445,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    [DisallowNull] String minor,
                    in Int64 build,
                    in Int64 revision) :
@@ -459,11 +459,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    [DisallowNull] String build,
                    in Int64 revision) :
@@ -473,11 +473,11 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    in Int64 build,
                    [DisallowNull] String revision) :
@@ -487,11 +487,11 @@ public readonly partial struct Version
              revision: revision)
     { }
     /// <summary>
-    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public Version(in Int64 major,
+    public AlphanumericVersion(in Int64 major,
                    in Int64 minor,
                    in Int64 build,
                    in Int64 revision) :
@@ -501,9 +501,26 @@ public readonly partial struct Version
              revision: revision.ToString())
     { }
 
+    /// <summary>
+    /// Parses the specified string into a new <see cref="AlphanumericVersion"/> object.
+    /// </summary>
+    public static AlphanumericVersion Parse([DisallowNull] String source) =>
+        Parse(source: source, 
+              provider: null);
+
+    /// <summary>
+    /// Tries to parse the specified string into a new <see cref="AlphanumericVersion"/> object.
+    /// </summary>
+    /// <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
+    public static Boolean TryParse([DisallowNull] String source,
+                                   out AlphanumericVersion result) =>
+        TryParse(source: source,
+                 provider: null,
+                 result: out result);
+
     /// <inheritdoc/>
     public override Boolean Equals([NotNullWhen(true)] Object? obj) =>
-        obj is Version other &&
+        obj is AlphanumericVersion other &&
         this.CompareTo(other) == 0;
 
     /// <inheritdoc/>
@@ -560,7 +577,14 @@ public readonly partial struct Version
             return builder.ToString();
         }
 
-        builder.Append(value: '.');
+        if (Char.IsDigit(this._minor[0]))
+        {
+            builder.Append(value: '.');
+        }
+        else
+        {
+            builder.Append(value: '-');
+        }
         builder.Append(value: this._minor);
 
         if (this._build is null)
@@ -568,7 +592,14 @@ public readonly partial struct Version
             return builder.ToString();
         }
 
-        builder.Append(value: '.');
+        if (Char.IsDigit(this._build[0]))
+        {
+            builder.Append(value: '.');
+        }
+        else
+        {
+            builder.Append(value: '-');
+        }
         builder.Append(value: this._build);
 
         if (this._revision is null)
@@ -576,18 +607,26 @@ public readonly partial struct Version
             return builder.ToString();
         }
 
-        builder.Append(value: '.');
+
+        if (Char.IsDigit(this._revision[0]))
+        {
+            builder.Append(value: '.');
+        }
+        else
+        {
+            builder.Append(value: '-');
+        }
         builder.Append(value: this._revision);
         return builder.ToString();
     }
 
     /// <summary>
-    /// Gets the major version component of this <see cref="Version"/>.
+    /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
     public String Major => 
         this._major;
     /// <summary>
-    /// Gets the minor version component of this <see cref="Version"/>. Returns -1 if no minor version component is specified.
+    /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
     public String Minor
     {
@@ -601,7 +640,7 @@ public readonly partial struct Version
         }
     }
     /// <summary>
-    /// Gets the build version component of this <see cref="Version"/>. Returns -1 if no build version component is specified.
+    /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
     public String Build
     {
@@ -615,7 +654,7 @@ public readonly partial struct Version
         }
     }
     /// <summary>
-    /// Gets the revision version component of this <see cref="Version"/>. Returns -1 if no revision  version component is specified.
+    /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
     public String Revision
     {
@@ -631,9 +670,9 @@ public readonly partial struct Version
 }
 
 // Non-Public
-partial struct Version
+partial struct AlphanumericVersion
 {
-    private Version(in Version original)
+    private AlphanumericVersion(in AlphanumericVersion original)
     {
         this._major = original._major;
         this._minor = original._minor;
@@ -682,7 +721,7 @@ partial struct Version
         return 0;
     }
 
-    private static readonly Regex _regex = new(@"^[a-zA-Z0-9]*$");
+    private static readonly Regex _regex = new(@"^[a-zA-Z0-9\-]*$");
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly String _major;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -701,19 +740,19 @@ partial struct Version
 }
 
 // ICloneable
-partial struct Version : ICloneable
+partial struct AlphanumericVersion : ICloneable
 {
     /// <inheritdoc/>
     public Object Clone() =>
-        new Version(original: this);
+        new AlphanumericVersion(original: this);
 }
 
 // IComparable
-partial struct Version : IComparable
+partial struct AlphanumericVersion : IComparable
 {
     Int32 IComparable.CompareTo([AllowNull] Object? obj)
     {
-        if (obj is Version other)
+        if (obj is AlphanumericVersion other)
         {
             return this.CompareTo(other);
         }
@@ -722,10 +761,10 @@ partial struct Version : IComparable
 }
 
 // IComparable<T>
-partial struct Version : IComparable<Version>
+partial struct AlphanumericVersion : IComparable<AlphanumericVersion>
 {
     /// <inheritdoc/>
-    public Int32 CompareTo(Version other)
+    public Int32 CompareTo(AlphanumericVersion other)
     {
         Int32 result = CompareComponent(this._major, 
                                         other._major);
@@ -759,31 +798,31 @@ partial struct Version : IComparable<Version>
 }
 
 // IEqualityOperators<T, U>
-partial struct Version : IEqualityOperators<Version, Version>
+partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, AlphanumericVersion>
 {
     /// <inheritdoc/>
-    public static Boolean operator ==(Version left, 
-                                      Version right) =>
+    public static Boolean operator ==(AlphanumericVersion left, 
+                                      AlphanumericVersion right) =>
         left.CompareTo(right) == 0;
     /// <inheritdoc/>
-    public static Boolean operator !=(Version left, 
-                                      Version right) =>
+    public static Boolean operator !=(AlphanumericVersion left, 
+                                      AlphanumericVersion right) =>
         left.CompareTo(right) != 0;
 }
 
 // IEquatable<T>
-partial struct Version : IEquatable<Version>
+partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
 {
     /// <inheritdoc/>
-    public Boolean Equals(Version other) =>
+    public Boolean Equals(AlphanumericVersion other) =>
         this.CompareTo(other) == 0;
 }
 
 // IParseable<T>
-partial struct Version : IParseable<Version>
+partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
 {
     /// <inheritdoc/>
-    public static Version Parse([DisallowNull] String source, 
+    public static AlphanumericVersion Parse([DisallowNull] String source, 
                                 [AllowNull] IFormatProvider? provider)
     {
         ExceptionHelpers.ThrowIfArgumentNull(source);
@@ -840,7 +879,7 @@ partial struct Version : IParseable<Version>
     /// <inheritdoc/>
     public static Boolean TryParse([NotNullWhen(true)] String? source, 
                                    [AllowNull] IFormatProvider? provider, 
-                                   out Version result)
+                                   out AlphanumericVersion result)
     {
         if (String.IsNullOrWhiteSpace(source))
         {
@@ -876,17 +915,20 @@ partial struct Version : IParseable<Version>
         if (segments.Length == 1)
         {
             result = new(major: segments[0]);
+            return true;
         }
         if (segments.Length == 2)
         {
             result = new(major: segments[0],
                          minor: segments[1]);
+            return true;
         }
         if (segments.Length == 3)
         {
             result = new(major: segments[0],
                          minor: segments[1],
                          build: segments[2]);
+            return true;
         }
         result = new(major: segments[0],
                      minor: segments[1],
@@ -897,7 +939,7 @@ partial struct Version : IParseable<Version>
 }
 
 // IStructuralComparable
-partial struct Version : IStructuralComparable
+partial struct AlphanumericVersion : IStructuralComparable
 {
     Int32 IStructuralComparable.CompareTo([AllowNull] Object? other, 
                                           [DisallowNull] IComparer comparer)
@@ -910,7 +952,7 @@ partial struct Version : IStructuralComparable
 }
 
 // IStructuralEquatable
-partial struct Version : IStructuralEquatable
+partial struct AlphanumericVersion : IStructuralEquatable
 {
     Boolean IStructuralEquatable.Equals([AllowNull] Object? other, 
                                         [DisallowNull] IEqualityComparer comparer)

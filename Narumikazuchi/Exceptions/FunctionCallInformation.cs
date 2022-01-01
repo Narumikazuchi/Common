@@ -3,7 +3,6 @@
 /// <summary>
 /// Contains the information for a function call on the call stack.
 /// </summary>
-[StructLayout(LayoutKind.Explicit)]
 public readonly partial struct FunctionCallInformation
 {
     /// <inheritdoc/>
@@ -94,16 +93,10 @@ partial struct FunctionCallInformation
         }
     }
 
-    [FieldOffset(0)]
     private readonly Int32 _line;
-    [FieldOffset(4)]
     private readonly Int32 _column;
-    [FieldOffset(8)]
     private readonly String? _filename;
-    [FieldOffset(268)]
     private readonly String? _target;
-    [FieldOffset(396)]
     private readonly String? _name;
-    [FieldOffset(524)]
     private readonly List<String?> _parameters = new();
 }

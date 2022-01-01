@@ -111,6 +111,7 @@ public static partial class Primes
             if (IsPrime(i))
             {
                 FillMissingPrimes(i);
+                break;
             }
         }
 
