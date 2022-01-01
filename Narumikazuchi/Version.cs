@@ -35,6 +35,14 @@ public readonly partial struct Version
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major) :
+        this(major.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
     public Version([DisallowNull] String major,
                    [DisallowNull] String minor)
     {
@@ -65,6 +73,36 @@ public readonly partial struct Version
         this._build = null;
         this._revision = null;
     }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor) :
+        this(major: major,
+             minor: minor.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor) :
+        this(major: major.ToString(),
+             minor: minor.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor) :
+        this(major: major.ToString(),
+             minor: minor.ToString())
+    { }
     /// <summary>
     /// Creates a new instance of the <see cref="Version"/> struct.
     /// </summary>
@@ -111,6 +149,90 @@ public readonly partial struct Version
         this._build = build;
         this._revision = null;
     }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   [DisallowNull] String minor,
+                   in Int64 build) :
+        this(major: major,
+             minor: minor,
+             build: build.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   [DisallowNull] String build) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   [DisallowNull] String build) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   in Int64 build) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   in Int64 build) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   [DisallowNull] String build) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   in Int64 build) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build.ToString())
+    { }
     /// <summary>
     /// Creates a new instance of the <see cref="Version"/> struct.
     /// </summary>
@@ -168,6 +290,216 @@ public readonly partial struct Version
         this._build = build;
         this._revision = revision;
     }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   [DisallowNull] String minor,
+                   [DisallowNull] String build,
+                   in Int64 revision) :
+        this(major: major,
+             minor: minor,
+             build: build,
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   [DisallowNull] String minor,
+                   in Int64 build,
+                   [DisallowNull] String revision) :
+        this(major: major,
+             minor: minor,
+             build: build.ToString(),
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   [DisallowNull] String build,
+                   [DisallowNull] String revision) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build,
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   [DisallowNull] String build,
+                   [DisallowNull] String revision) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build,
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   [DisallowNull] String minor,
+                   in Int64 build,
+                   in Int64 revision) :
+        this(major: major,
+             minor: minor,
+             build: build.ToString(),
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   [DisallowNull] String build,
+                   in Int64 revision) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build,
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   [DisallowNull] String build,
+                   in Int64 revision) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build,
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   in Int64 build,
+                   [DisallowNull] String revision) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build.ToString(),
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   in Int64 build,
+                   [DisallowNull] String revision) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build.ToString(),
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   [DisallowNull] String build,
+                   [DisallowNull] String revision) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build,
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version([DisallowNull] String major,
+                   in Int64 minor,
+                   in Int64 build,
+                   in Int64 revision) :
+        this(major: major,
+             minor: minor.ToString(),
+             build: build.ToString(),
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   [DisallowNull] String minor,
+                   in Int64 build,
+                   in Int64 revision) :
+        this(major: major.ToString(),
+             minor: minor,
+             build: build.ToString(),
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   [DisallowNull] String build,
+                   in Int64 revision) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build,
+             revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   in Int64 build,
+                   [DisallowNull] String revision) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build.ToString(),
+             revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="Version"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public Version(in Int64 major,
+                   in Int64 minor,
+                   in Int64 build,
+                   in Int64 revision) :
+        this(major: major.ToString(),
+             minor: minor.ToString(),
+             build: build.ToString(),
+             revision: revision.ToString())
+    { }
 
     /// <inheritdoc/>
     public override Boolean Equals([NotNullWhen(true)] Object? obj) =>
