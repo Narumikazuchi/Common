@@ -667,6 +667,33 @@ public readonly partial struct AlphanumericVersion
             return this._revision;
         }
     }
+
+    /// <summary>
+    /// Implicit conversion from <see cref="Version"/> class.
+    /// </summary>
+    public static implicit operator AlphanumericVersion(Version source)
+    {
+        if (source is null)
+        {
+            return new();
+        }
+
+        if (source.Revision > -1)
+        {
+            return new(major: source.Major,
+                       minor: source.Minor,
+                       build: source.Build,
+                       revision: source.Revision);
+        }
+        if (source.Build > -1)
+        {
+            return new(major: source.Major,
+                       minor: source.Minor,
+                       build: source.Build);
+        }
+        return new(major: source.Major,
+                   minor: source.Minor);
+    }
 }
 
 // Non-Public
