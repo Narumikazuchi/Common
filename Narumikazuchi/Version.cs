@@ -3,6 +3,7 @@
 /// <summary>
 /// Represents an immutable alpha-numeric version number.
 /// </summary>
+[DebuggerDisplay("{ToString()}")]
 public readonly partial struct Version
 {
     /// <summary>
@@ -209,6 +210,43 @@ public readonly partial struct Version
                       .GetHashCode();
 
         return result;
+    }
+
+    /// <inheritdoc/>
+    public override String ToString()
+    {
+        if (this._major is null)
+        {
+            return "0.0.0.0";
+        }
+
+        StringBuilder builder = new();
+        builder.Append(value: this._major);
+
+        if (this._minor is null)
+        {
+            return builder.ToString();
+        }
+
+        builder.Append(value: '.');
+        builder.Append(value: this._minor);
+
+        if (this._build is null)
+        {
+            return builder.ToString();
+        }
+
+        builder.Append(value: '.');
+        builder.Append(value: this._build);
+
+        if (this._revision is null)
+        {
+            return builder.ToString();
+        }
+
+        builder.Append(value: '.');
+        builder.Append(value: this._revision);
+        return builder.ToString();
     }
 
     /// <summary>
