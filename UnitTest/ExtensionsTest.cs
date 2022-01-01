@@ -56,7 +56,7 @@ namespace UnitTest
             {
                 var info = ExceptionHelpers.ExtractInformation(source: e);
                 Assert.AreEqual(info.CallStack.Count, 1);
-                Assert.AreEqual(info.CallStack[0].Line, 42);
+                Assert.AreEqual(info.CallStack[0].Line, 53);
                 Assert.AreEqual(info.Data.Count, 1);
                 Assert.AreEqual((String)info.Data["Typename"], typeof(Int64).FullName);
                 Assert.AreEqual(info.SourceType, typeof(ExtensionsTest));
