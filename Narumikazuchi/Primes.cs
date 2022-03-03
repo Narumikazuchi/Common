@@ -17,9 +17,9 @@ public static partial class Primes
             return false;
         }
 
-        if (candidate <= _known[^1])
+        if (candidate <= s_Known[^1])
         {
-            Int32 index = _known.BinarySearch(item: candidate);
+            Int32 index = s_Known.BinarySearch(item: candidate);
             if (index > -1)
             {
                 return true;
@@ -61,20 +61,20 @@ public static partial class Primes
         }
 
         Int32 index;
-        if (origin <= _known[^1])
+        if (origin <= s_Known[^1])
         {
             index = ApproachInRange(value: origin,
-                                    range: 0..(_known.Count - 1),
+                                    range: 0..(s_Known.Count - 1),
                                     reverse: true);
-            return _known[index];
+            return s_Known[index];
         }
 
         FillMissingPrimes(origin);
 
         index = ApproachInRange(value: origin,
-                                range: 0..(_known.Count - 1),
+                                range: 0..(s_Known.Count - 1),
                                 reverse: true);
-        return _known[index];
+        return s_Known[index];
     }
 
     /// <summary>
@@ -95,12 +95,12 @@ public static partial class Primes
         }
 
         Int32 index;
-        if (origin <= _known[^1])
+        if (origin <= s_Known[^1])
         {
             index = ApproachInRange(value: origin,
-                                    range: 0..(_known.Count - 1),
+                                    range: 0..(s_Known.Count - 1),
                                     reverse: false);
-            return _known[index];
+            return s_Known[index];
         }
 
 
@@ -116,9 +116,9 @@ public static partial class Primes
         }
 
         index = ApproachInRange(value: origin,
-                                range: 0..(_known.Count - 1),
+                                range: 0..(s_Known.Count - 1),
                                 reverse: false);
-        return _known[index];
+        return s_Known[index];
     }
 
     /// <summary>
@@ -142,24 +142,24 @@ public static partial class Primes
             (startPoint, endPoint) = (endPoint, startPoint);
         }
 
-        if (endPoint > _known[^1])
+        if (endPoint > s_Known[^1])
         {
             FillMissingPrimes(endPoint | 1);
         }
 
         for (Int32 i = 0; 
-             i < _known.Count; 
+             i < s_Known.Count; 
              i++)
         {
-            if (_known[i] < startPoint)
+            if (s_Known[i] < startPoint)
             {
                 continue;
             }
-            if (endPoint < _known[i])
+            if (endPoint < s_Known[i])
             {
                 yield break;
             }
-            yield return _known[i];
+            yield return s_Known[i];
         }
         yield break;
     }
@@ -176,20 +176,20 @@ partial class Primes
         {
             if (IsPrime(i))
             {
-                _known.Add(i);
+                s_Known.Add(i);
                 break;
             }
         }
         for (Int32 i = upperBound; 
-             i > _known[^1]; 
+             i > s_Known[^1]; 
              i -= 2)
         {
             if (IsPrime(i))
             {
-                _known.Add(i);
+                s_Known.Add(i);
             }
         }
-        _known.Sort();
+        s_Known.Sort();
     }
 
     private static Int32 ApproachInRange(in Int32 value,
@@ -206,15 +206,15 @@ partial class Primes
             return range.End.Value;
         }
         length = (length + 1) / 2;
-        if (value > _known[range.Start] &&
-            value <= _known[range.Start.Value + length])
+        if (value > s_Known[range.Start] &&
+            value <= s_Known[range.Start.Value + length])
         {
             return ApproachInRange(value: value,
                                    range: range.Start.Value..(range.Start.Value + length),
                                    reverse: reverse);
         }
-        if (value > _known[range.Start.Value + length] &&
-            value <= _known[range.End])
+        if (value > s_Known[range.Start.Value + length] &&
+            value <= s_Known[range.End])
         {
             return ApproachInRange(value: value,
                                    range: (range.Start.Value + length)..range.End,
@@ -227,7 +227,7 @@ partial class Primes
         return range.Start.Value;
     }
 
-    private static readonly List<Int32> _known = new()
+    private static readonly List<Int32> s_Known = new()
     {
         2,
         3,
@@ -400,8 +400,6 @@ partial class Primes
         997
     };
 
-#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NEGATIVE_NUMBERS_NOT_SUPPORTED = "The prime finding for negative numbers is not supported.";
-#pragma warning restore
 }

@@ -32,7 +32,7 @@ namespace UnitTest
         public void MultipleSingleton()
         {
             _ = Singleton<ValidSingleton>.Instance;
-            FieldInfo field = typeof(Singleton).GetField(name: "_initialized", 
+            FieldInfo field = typeof(Singleton).GetField(name: "s_Initialized", 
                                                          bindingAttr: BindingFlags.Static | BindingFlags.NonPublic);
             Collection<String> init = (Collection<String>)field.GetValue(obj: null);
             init.Add(typeof(ValidSingleton2).AssemblyQualifiedName);

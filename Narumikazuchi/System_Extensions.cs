@@ -15,13 +15,10 @@ public static class System_Extensions
     [Pure]
     [return: NotNull]
     public static T Clamp<T>(this T value, 
-                             [DisallowNull] T lowBound,
-                             [DisallowNull] T highBound) 
-        where T : IComparable<T>
+                             T lowBound,
+                             T highBound) 
+        where T : notnull, IComparable<T>
     {
-        ExceptionHelpers.ThrowIfArgumentNull(lowBound);
-        ExceptionHelpers.ThrowIfArgumentNull(highBound);
-
         if (value.CompareTo(lowBound) < 0)
         {
             return lowBound;
@@ -39,7 +36,7 @@ public static class System_Extensions
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
     [Pure]
     [return: NotNull]
-    public static String SanitizeForFilename(this String raw)
+    public static String SanitizeForFilename(this String raw!!)
     {
         IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()
                                         .Union(second: Path.GetInvalidPathChars());
@@ -58,6 +55,6 @@ public static class System_Extensions
     /// </summary>
     /// <returns><see langword="true"/> if this type is a <see cref="Singleton"/>; else, <see langword="false"/></returns>
     [Pure]
-    public static Boolean IsSingleton(this Type type) => 
+    public static Boolean IsSingleton(this Type type!!) => 
         type.IsAssignableTo(typeof(Singleton));
 }

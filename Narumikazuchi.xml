@@ -259,6 +259,11 @@
             Gets the revision version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
             </summary>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Implicit(System.Version)~Narumikazuchi.AlphanumericVersion">
+            <summary>
+            Implicit conversion from <see cref="T:System.Version"/> class.
+            </summary>
+        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
             <inheritdoc/>
         </member>
@@ -393,37 +398,73 @@
             Contains helpers for throwing exceptions.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.Object,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.Object,System.String,System.String)">
             <summary>
-            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
+            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
             </summary>
             <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="varName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.NullReferenceException" />
+            <remarks>
+            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
+            will be filled with the name of the variable by this method.
+            </remarks>
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.Object,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.String,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
+            </summary>
+            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="varName">The name of the parameter.</param>
+            <exception cref="T:System.NullReferenceException" />
+            <remarks>
+            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
+            will be filled with the name of the variable by this method.
+            </remarks>
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.Object,System.String,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
             </summary>
             <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentNullException" />
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.String,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.String,System.String,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
             </summary>
             <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentNullException" />
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
             <summary>
-            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null or completely made of whitespace.
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
             </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="source">The source to check against the <paramref name="lowBound"/> and <paramref name="highBound"/>.</param>
+            <param name="lowBound">The low bound to check against.</param>
+            <param name="highBound">The high bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNotCastable``2(``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.InvalidCastException"/> if the source parameter can't be cast to the generic type parameter <typeparamref name="TResult"/>.
+            </summary>
+            <param name="source">The source to cast to type <typeparamref name="TResult"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.InvalidCastException" />
+            <remarks>
+            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
+            will be filled with the name of the parameter and the '{1}' placeholder will be filled with the name of the type the method failed to cast the object to.
+            </remarks>
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
             <summary>

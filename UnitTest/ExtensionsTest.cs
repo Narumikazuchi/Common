@@ -32,7 +32,7 @@ namespace UnitTest
         [TestMethod]
         public void ThrowOnNull()
         {
-            ExceptionHelpers.ThrowIfNullOrEmpty(source: "Test");
+            ExceptionHelpers.ThrowIfNull(source: "Test");
             Assert.ThrowsException<NullReferenceException>(() => ExceptionHelpers.ThrowIfNull(source: null));
         }
 
@@ -47,14 +47,14 @@ namespace UnitTest
         {
             try
             {
-                Exception exception = new(message: "Somethinng went wrong!");
+                Exception exception = new(message: "Something went wrong!");
                 exception.Data.Add(key: "Typename",
                                    value: typeof(Int64).FullName);
                 throw exception;
             }
             catch (Exception e)
             {
-                var info = ExceptionHelpers.ExtractInformation(source: e);
+                ExceptionInformation info = ExceptionHelpers.ExtractInformation(source: e);
                 Assert.AreEqual(info.CallStack.Count, 1);
                 Assert.AreEqual(info.CallStack[0].Line, 53);
                 Assert.AreEqual(info.Data.Count, 1);

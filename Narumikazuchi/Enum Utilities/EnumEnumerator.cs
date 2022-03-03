@@ -22,7 +22,7 @@ public static class EnumEnumerator
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in the input value.</returns>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TEnum> EnumerateFlags<TEnum>([DisallowNull] TEnum enumValue) 
+    public static IEnumerable<TEnum> EnumerateFlags<TEnum>([DisallowNull] TEnum enumValue!!)
         where TEnum : Enum
     {
         ExceptionHelpers.ThrowIfArgumentNull(enumValue);

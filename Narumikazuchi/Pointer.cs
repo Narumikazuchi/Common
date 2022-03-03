@@ -8,13 +8,18 @@ public unsafe partial struct Pointer<T>
     /// <summary>
     /// Initializes a new instance of the <see cref="Pointer{T}"/> struct.
     /// </summary>
-    public Pointer(void* pointer) => 
-        this._pointer = pointer;
+    public Pointer(void* pointer)
+    {
+        this.m_Pointer = pointer;
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Pointer{T}"/> struct.
     /// </summary>
-    public Pointer(IntPtr pointer) => 
-        this._pointer = pointer.ToPointer();
+    public Pointer(IntPtr pointer)
+    {
+        m_Pointer = pointer.ToPointer();
+    }
 
     /// <inheritdoc/>
     [Pure]
@@ -28,9 +33,9 @@ public unsafe partial struct Pointer<T>
     /// </summary>
     public T this[Int32 index]
     {
-        get => Unsafe.Read<T>(source: Offset(pointer: this._pointer, 
+        get => Unsafe.Read<T>(source: Offset(pointer: m_Pointer, 
                                              index: index));
-        set => Unsafe.Write(destination: Offset(pointer: this._pointer, 
+        set => Unsafe.Write(destination: Offset(pointer: m_Pointer, 
                                                 index: index), 
                             value: value);
     }
@@ -40,7 +45,7 @@ public unsafe partial struct Pointer<T>
     /// </summary>
     [Pure]
     public IntPtr Address =>
-        (IntPtr)this._pointer;
+        (IntPtr)m_Pointer;
 
     /// <summary>
     /// Gets or sets the value of where the pointer currently points at.
@@ -48,8 +53,8 @@ public unsafe partial struct Pointer<T>
     [MaybeNull]
     public T? Value
     {
-        get => Unsafe.Read<T>(this._pointer);
-        set => Unsafe.Write(destination: this._pointer, 
+        get => Unsafe.Read<T>(m_Pointer);
+        set => Unsafe.Write(destination: m_Pointer, 
                             value: value);
     }
 }
@@ -59,15 +64,15 @@ unsafe partial struct Pointer<T>
 {
     private Pointer<T> Increment(Int64 amount)
     {
-        this._pointer = Offset(pointer: this._pointer, 
-                               index: amount);
+        m_Pointer = Offset(pointer: m_Pointer, 
+                           index: amount);
         return this;
     }
 
     private Pointer<T> Decrement(Int64 amount)
     {
-        this._pointer = Offset(pointer: this._pointer,
-                               index: -amount);
+        m_Pointer = Offset(pointer: m_Pointer,
+                           index: -amount);
         return this;
     }
 
@@ -75,11 +80,11 @@ unsafe partial struct Pointer<T>
                                 Int64 index)
     {
         Int64 offset = Unsafe.SizeOf<T>() * index;
-        return (void*)(((Int64)pointer) + offset);
+        return (void*)((Int64)pointer + offset);
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private void* _pointer;
+    private void* m_Pointer;
 }
 
 // Static

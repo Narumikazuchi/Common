@@ -9,7 +9,7 @@ public sealed class ConstructorNotFound : Exception
     /// Initializes a new instance of the <see cref="ConstructorNotFound"/> class.
     /// </summary>
     public ConstructorNotFound([AllowNull] String? message,
-                               [DisallowNull] params (String key, String? value)[] stateInformation) : 
+                               [DisallowNull] params (String key, String? value)[] stateInformation!!) : 
         base(message: String.Format(format: "{0} - {1}", 
                                     arg0: MESSAGE, 
                                     arg1: message))
@@ -21,8 +21,6 @@ public sealed class ConstructorNotFound : Exception
         }
     }
 
-#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String MESSAGE = "Singleton derived types require a non-public parameterless constructor.";
-#pragma warning restore
 }

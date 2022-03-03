@@ -14,7 +14,7 @@ public readonly partial struct FunctionCallInformation
         builder.Append(value: this.Name);
         builder.Append(value: '(');
         builder.Append(value: String.Join(separator: ',',
-                                          values: this._parameters));
+                                          values: m_Parameters));
         builder.Append(value: ')');
         if (this.File is null ||
             this.Line == 0)
@@ -36,67 +36,68 @@ public readonly partial struct FunctionCallInformation
     /// </summary>
     public String? File
     {
-        get => this._filename;
-        init => this._filename = value;
+        get => m_Filename;
+        init => m_Filename = value;
     }
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
     public String? Target
     {
-        get => this._target;
-        init => this._target = value;
+        get => m_Target;
+        init => m_Target = value;
     }
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
     public String? Name
     {
-        get => this._name;
-        init => this._name = value;
+        get => m_Name;
+        init => m_Name = value;
     }
     /// <summary>
     /// Gets the line number in the file.
     /// </summary>
     public Int32 Line
     {
-        get => this._line;
-        init => this._line = value;
+        get => m_Line;
+        init => m_Line = value;
     }
     /// <summary>
     /// Gets the column in the line of the file.
     /// </summary>
     public Int32 Column
     {
-        get => this._column;
-        init => this._column = value;
+        get => m_Column;
+        init => m_Column = value;
     }
 }
 
 partial struct FunctionCallInformation
 {
-    internal FunctionCallInformation(StackFrame frame)
+    internal FunctionCallInformation(StackFrame frame!!)
     {
         MethodBase? method = frame.GetMethod();
-        this._filename = frame.GetFileName();
-        this._target = method?.DeclaringType?.FullName;
-        this._name = method?.Name;
-        this._line = frame.GetFileLineNumber();
-        this._column = frame.GetFileColumnNumber();
+        m_Filename = frame.GetFileName();
+        m_Target = method?.DeclaringType?.FullName;
+        m_Name = method?.Name;
+        m_Line = frame.GetFileLineNumber();
+        m_Column = frame.GetFileColumnNumber();
         if (method is null)
         {
             return;
         }
         foreach (ParameterInfo parameter in method.GetParameters())
         {
-            this._parameters.Add(parameter.ParameterType.FullName);
+            m_Parameters.Add(parameter.ParameterType
+                                      .FullName);
         }
     }
 
-    private readonly Int32 _line;
-    private readonly Int32 _column;
-    private readonly String? _filename;
-    private readonly String? _target;
-    private readonly String? _name;
-    private readonly List<String?> _parameters = new();
+    private readonly Int32 m_Line;
+    private readonly Int32 m_Column;
+    private readonly String? m_Filename;
+    private readonly String? m_Target;
+    private readonly String? m_Name;
+    private readonly List<String?> m_Parameters = new();
 }

@@ -21,8 +21,6 @@ public sealed class PublicConstructorFound : Exception
         }
     }
 
-#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String MESSAGE = "Singleton derived types do not allow public constructors.";
-#pragma warning restore
 }

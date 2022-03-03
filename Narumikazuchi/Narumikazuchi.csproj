@@ -4,8 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <ImplicitUsings>enable</ImplicitUsings>
-    <EnablePreviewFeatures>True</EnablePreviewFeatures>
     <Authors>Narumikazuchi</Authors>
     <Description>A small framework with generic classes that I need for my projects almost every time.
 A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.    </Description>
@@ -46,7 +46,9 @@ A detailed overview of the contents and their used can be found here https://git
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Runtime.Experimental" Version="6.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.1.0" />
+    <PackageReference Include="System.Runtime.Experimental" Version="6.0.2-mauipre.1.22102.15" />
   </ItemGroup>
 
 </Project>

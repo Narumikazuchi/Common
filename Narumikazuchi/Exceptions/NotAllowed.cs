@@ -32,7 +32,7 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation) :
+    public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
         base(message: MESSAGE)
     {
         foreach ((Object key, Object? value) kv in stateInformation)
@@ -46,7 +46,7 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
+                      [DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -63,7 +63,7 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
+                      [DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -79,7 +79,7 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+    public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
         base(message: MESSAGE)
     {
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
@@ -93,7 +93,7 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -110,7 +110,7 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
+                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -126,7 +126,7 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+    public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
         base(message: MESSAGE)
     {
         foreach (Tuple<Object, Object?> tuple in stateInformation)
@@ -140,7 +140,7 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
@@ -157,7 +157,7 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
+                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
@@ -171,8 +171,6 @@ public sealed class NotAllowed : Exception
         }
     }
 
-#pragma warning disable IDE1006
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String MESSAGE = "The operation is not allowed.";
-#pragma warning restore
 }
