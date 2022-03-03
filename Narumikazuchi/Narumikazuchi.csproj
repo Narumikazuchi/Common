@@ -17,25 +17,24 @@ A detailed overview of the contents and their used can be found here https://git
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
-    <PackageIcon>Narumikazuchi nuget.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageTags>Enum; Convertable; Range; Span; Attribute; Pointer; Singleton</PackageTags>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Narumikazuchi.xml</DocumentationFile>
+    <DocumentationFile>Narumikazuchi.xml</DocumentationFile>
     <PlatformTarget>x64</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\..\..\Managed Code Libraries\Custom\net5.0\Narumikazuchi.xml</DocumentationFile>
-    <OutputPath>..\..\..\Managed Code Libraries\Custom\</OutputPath>
+    <DocumentationFile>Narumikazuchi.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\Narumikazuchi nuget.png">
+    <None Include="..\logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
