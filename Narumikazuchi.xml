@@ -808,49 +808,6 @@
             <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
-        <member name="T:Narumikazuchi.ConstructorNotFound">
-            <summary>
-            Exception thrown by <see cref="T:Narumikazuchi.Singleton`1"/> when derived type does not contain a non-public default constructor.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ConstructorNotFound.#ctor(System.String,System.ValueTuple{System.String,System.String}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ConstructorNotFound"/> class.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.PublicConstructorFound">
-            <summary>
-            Exception thrown by <see cref="T:Narumikazuchi.Singleton`1"/> when derived type does contain one or more public constructors.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.PublicConstructorFound.#ctor(System.String,System.ValueTuple{System.String,System.String}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.PublicConstructorFound"/> class.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.Singleton">
-            <summary>
-            Provides derived classes with a way to force the singleton pattern.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Singleton.#ctor">
-            <summary>
-            Initializes a new <see cref="T:Narumikazuchi.Singleton"/>.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.Singleton`1">
-            <summary>
-            Gives access to the instance of an <see cref="T:Narumikazuchi.Singleton"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Singleton`1.Instance">
-            <summary>
-            Gets the singleton instance for the <typeparamref name="TClass"/> class.
-            </summary>
-            <exception cref="T:Narumikazuchi.ConstructorNotFound"/>
-            <exception cref="T:Narumikazuchi.NotAllowed"/>
-            <exception cref="T:Narumikazuchi.PublicConstructorFound"/>
-        </member>
         <member name="T:Narumikazuchi.System_Extensions">
             <summary>
             Contains extensions for the System namespace.
@@ -870,12 +827,6 @@
             Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
             </summary>
             <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
-        </member>
-        <member name="M:Narumikazuchi.System_Extensions.IsSingleton(System.Type)">
-            <summary>
-            Determines whether this type is a <see cref="T:Narumikazuchi.Singleton"/>.
-            </summary>
-            <returns><see langword="true"/> if this type is a <see cref="T:Narumikazuchi.Singleton"/>; else, <see langword="false"/></returns>
         </member>
     </members>
 </doc>

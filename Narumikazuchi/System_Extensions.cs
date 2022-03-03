@@ -49,12 +49,4 @@ public static class System_Extensions
         }
         return result;
     }
-
-    /// <summary>
-    /// Determines whether this type is a <see cref="Singleton"/>.
-    /// </summary>
-    /// <returns><see langword="true"/> if this type is a <see cref="Singleton"/>; else, <see langword="false"/></returns>
-    [Pure]
-    public static Boolean IsSingleton(this Type type!!) => 
-        type.IsAssignableTo(typeof(Singleton));
 }

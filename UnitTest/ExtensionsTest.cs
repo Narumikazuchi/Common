@@ -37,12 +37,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void IsSingletonFalse()
-        {
-            Assert.IsFalse(typeof(Int64).IsSingleton());
-        }
-
-        [TestMethod]
         public void ExceptionHelperTest()
         {
             try
