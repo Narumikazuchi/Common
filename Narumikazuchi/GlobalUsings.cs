@@ -1,14 +1,8 @@
-﻿global using Microsoft.CodeAnalysis;
-global using Microsoft.CodeAnalysis.CSharp;
-global using Microsoft.CodeAnalysis.CSharp.Syntax;
-global using Microsoft.CodeAnalysis.Text;
-global using System.Collections;
-global using System.Collections.ObjectModel;
+﻿global using System.Collections;
 global using System.Diagnostics;
 global using System.Diagnostics.CodeAnalysis;
 global using System.Diagnostics.Contracts;
 global using System.Reflection;
 global using System.Runtime.CompilerServices;
-global using System.Runtime.InteropServices;
 global using System.Text;
 global using System.Text.RegularExpressions;
