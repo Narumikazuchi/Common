@@ -7,18 +7,17 @@
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>Narumikazuchi</Authors>
-    <Description>Contains an enumerator for enum values and enum flags, a generic convertible interface, an attribute resolver and some minor extensions.
-A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.    </Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>Enum; Convertable; Attribute; Pointer</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -41,6 +40,10 @@ A detailed overview of the contents and their used can be found here https://git
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
