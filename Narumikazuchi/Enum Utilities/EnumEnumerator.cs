@@ -25,7 +25,6 @@ public static class EnumEnumerator
     public static IEnumerable<TEnum> EnumerateFlags<TEnum>([DisallowNull] TEnum enumValue!!)
         where TEnum : Enum
     {
-        ExceptionHelpers.ThrowIfArgumentNull(enumValue);
         if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
         {
             yield break;

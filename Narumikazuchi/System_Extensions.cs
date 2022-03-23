@@ -31,6 +31,14 @@ public static class System_Extensions
     }
 
     /// <summary>
+    /// Enumerates the flags, which are set in this value.
+    /// </summary>
+    /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
+    public static IEnumerable<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue!!)
+        where TEnum : Enum =>
+            EnumEnumerator.EnumerateFlags(enumValue);
+
+    /// <summary>
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
