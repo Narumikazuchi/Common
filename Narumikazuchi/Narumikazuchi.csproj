@@ -7,7 +7,7 @@
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>Narumikazuchi</Authors>
-    <Description>A small framework with generic classes that I need for my projects almost every time.
+    <Description>Contains an enumerator for enum values and enum flags, a generic convertible interface, an attribute resolver and some minor extensions.
 A detailed overview of the contents and their used can be found here https://github.com/Narumikazuchi/Common/wiki.    </Description>
     <Copyright>©2021 Narumikazuchi</Copyright>
     <RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
@@ -18,7 +18,7 @@ A detailed overview of the contents and their used can be found here https://git
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>Enum; Convertable; Range; Span; Attribute; Pointer; Singleton</PackageTags>
+    <PackageTags>Enum; Convertable; Attribute; Pointer</PackageTags>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
