@@ -543,62 +543,89 @@ public readonly partial struct AlphanumericVersion
         return result;
     }
 
-    /// <inheritdoc/>
-    public override String ToString()
+    /// <summary>
+    /// Transforms the <see cref="AlphanumericVersion"/> into a <see cref="String"/> according to the default format '#.#.#.#'.
+    /// </summary>
+    [return: NotNull]
+    public override String ToString() =>
+        this.ToString(null);
+
+    /// <summary>
+    /// Formats the output to be in a user specified format.
+    /// </summary>
+    /// <param name="format">The format in which to display the version. See the 'remarks'-section for more information.</param>
+    /// <remarks>
+    /// Remarks: When defining the format of the output use the following rules:
+    /// <list type="bullet">
+    ///     <item>
+    ///         Use '#' as placeholder for any of the segments. The method will replace the first '#' with the major version,
+    ///         the second with the minor version, the third with the build version and the fourth with the revision.
+    ///         Every instance of that symbol afterwards will be ignored.
+    ///     </item>
+    ///     <item>
+    ///         Every other character that is present in front, in between or after the '#' characters will be used as separators
+    ///         in the resulting output.
+    ///     </item>
+    /// </list>
+    /// Example: A format of '#.#-#-#' will result in the output 'MAJOR.MINOR-BUILD-REVISION', while a format of 'a#bc#bc#d#e'
+    /// will result in the output 'aMAJORbcMINORbcBUILDdREVISIONe', replacing each of the version segments with their respective values.
+    /// </remarks>
+    /// <returns>This instance formatted as a <see cref="String"/></returns>
+    [return: NotNull]
+    public String ToString([AllowNull] String? format)
     {
-        if (m_Major is null)
+        if (format is null)
         {
-            return "0.0.0.0";
+            format = "#.#.#.#";
         }
 
+        Int32 count = format.Count(x => x == '#')
+                            .Clamp(1, 4);
+        ReadOnlySpan<Char> working = format;
         StringBuilder builder = new();
-        builder.Append(value: m_Major);
 
-        if (m_Minor is null)
+        Int32 index;
+
+        for (Int32 i = 0;
+             i < count;
+             i++)
         {
-            return builder.ToString();
+            String current = i switch
+            {
+                0 => this.Major,
+                1 => this.Minor,
+                2 => this.Build,
+                3 => this.Revision,
+                _ => "0"
+            };
+            if (current == "-1")
+            {
+                working = "";
+                break;
+            }
+
+            index = working.IndexOf('#');
+            if (index > 0)
+            {
+                builder.Append(working[0..index]);
+            }
+
+            if (String.IsNullOrWhiteSpace(current))
+            {
+                builder.Append('0');
+            }
+            else
+            {
+                builder.Append(current);
+            }
+            working = working[++index..];
         }
 
-        if (Char.IsDigit(m_Minor[0]))
+        if (working.Length > 0)
         {
-            builder.Append(value: '.');
-        }
-        else
-        {
-            builder.Append(value: '-');
-        }
-        builder.Append(value: m_Minor);
-
-        if (m_Build is null)
-        {
-            return builder.ToString();
+            builder.Append(working);
         }
 
-        if (Char.IsDigit(m_Build[0]))
-        {
-            builder.Append(value: '.');
-        }
-        else
-        {
-            builder.Append(value: '-');
-        }
-        builder.Append(value: m_Build);
-
-        if (m_Revision is null)
-        {
-            return builder.ToString();
-        }
-
-
-        if (Char.IsDigit(m_Revision[0]))
-        {
-            builder.Append(value: '.');
-        }
-        else
-        {
-            builder.Append(value: '-');
-        }
-        builder.Append(value: m_Revision);
         return builder.ToString();
     }
 
