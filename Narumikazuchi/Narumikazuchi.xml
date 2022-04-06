@@ -859,5 +859,35 @@
             </summary>
             <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
         </member>
+        <member name="T:Narumikazuchi.TaskResult`1">
+            <summary>
+            Wraps the result of an async operation, where the result of the operation is a reference type.
+            </summary>
+            <remarks>
+            To prevent excessive <see langword="null"/>-checks in an asnyc application, this class will wrap
+            the result and allow you to check through the <see cref="P:Narumikazuchi.TaskResult`1.HasValue"/> property or <see cref="M:Narumikazuchi.TaskResult`1.TryGet(`0@)"/>
+            method instead of checking for null.
+            </remarks>
+        </member>
+        <member name="M:Narumikazuchi.TaskResult`1.TryGet(`0@)">
+            <summary>
+            Tries to retrieve the value of the result from the <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+            <param name="result">The result of the <see cref="T:System.Threading.Tasks.Task"/>.</param>
+            <returns><see langword="true"/> if the result is populated; otherwise, <see langword="false"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.TaskResult`1.Create(`0)">
+            <summary>
+            Creates a <see cref="T:Narumikazuchi.TaskResult`1"/> and populates it with a result. Pass in <see langword="null"/>
+            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
+            </summary>
+            <param name="result">The result of the <see cref="T:System.Threading.Tasks.Task"/>.</param>
+            <returns>A new <see cref="T:Narumikazuchi.TaskResult`1"/> which represents the result of a <see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="P:Narumikazuchi.TaskResult`1.HasValue">
+            <summary>
+            Gets whether the <see cref="T:System.Threading.Tasks.Task"/> has succeeded and resulted in a value.
+            </summary>
+        </member>
     </members>
 </doc>
