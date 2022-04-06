@@ -632,11 +632,13 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
+    [NotNull]
     public String Major => 
         m_Major;
     /// <summary>
     /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
+    [NotNull]
     public String Minor
     {
         get
@@ -651,6 +653,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
+    [NotNull]
     public String Build
     {
         get
@@ -665,6 +668,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
+    [NotNull]
     public String Revision
     {
         get

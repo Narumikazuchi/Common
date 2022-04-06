@@ -103,7 +103,6 @@ public static partial class Primes
             return s_Known[index];
         }
 
-
         for (Int32 i = origin | 1; 
              i < Int32.MaxValue; 
              i += 2)
@@ -126,6 +125,7 @@ public static partial class Primes
     /// </summary>
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
+    [return: NotNull]
     public static IEnumerable<Int32> ListUntil(in Range range) =>
         ListUntil(startPoint: range.Start.Value, 
                   endPoint: range.End.Value);
@@ -134,6 +134,7 @@ public static partial class Primes
     /// </summary>
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
+    [return: NotNull]
     public static IEnumerable<Int32> ListUntil(Int32 startPoint,
                                                Int32 endPoint)
     {

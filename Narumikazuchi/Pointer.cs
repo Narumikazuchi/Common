@@ -10,7 +10,7 @@ public unsafe partial struct Pointer<T>
     /// </summary>
     public Pointer(void* pointer)
     {
-        this.m_Pointer = pointer;
+        m_Pointer = pointer;
     }
 
     /// <summary>
