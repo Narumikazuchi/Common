@@ -16,7 +16,7 @@ public readonly partial struct FunctionCallInformation
         builder.Append(value: String.Join(separator: ',',
                                           values: m_Parameters));
         builder.Append(value: ')');
-        if (this.File is null ||
+        if (!this.File.HasValue ||
             this.Line == 0)
         {
             return builder.ToString();
@@ -34,7 +34,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the path to the file, where the function is defined.
     /// </summary>
-    public String? File
+    public ReferenceWrapper<String> File
     {
         get => m_Filename;
         init => m_Filename = value;
@@ -42,7 +42,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
-    public String? Target
+    public ReferenceWrapper<String> Target
     {
         get => m_Target;
         init => m_Target = value;
@@ -50,7 +50,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
-    public String? Name
+    public ReferenceWrapper<String> Name
     {
         get => m_Name;
         init => m_Name = value;
@@ -96,8 +96,8 @@ partial struct FunctionCallInformation
 
     private readonly Int32 m_Line;
     private readonly Int32 m_Column;
-    private readonly String? m_Filename;
-    private readonly String? m_Target;
-    private readonly String? m_Name;
+    private readonly ReferenceWrapper<String> m_Filename;
+    private readonly ReferenceWrapper<String> m_Target;
+    private readonly ReferenceWrapper<String> m_Name;
     private readonly List<String?> m_Parameters = new();
 }

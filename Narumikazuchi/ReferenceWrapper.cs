@@ -44,6 +44,16 @@ public readonly partial struct ReferenceWrapper<TReference>
         return true;
     }
 
+    /// <inheritdoc/>
+    public override String? ToString()
+    {
+        if (m_Reference is null)
+        {
+            return "null";
+        }
+        return m_Reference.ToString();
+    }
+
 #pragma warning disable CS1591
     public static implicit operator TReference?(ReferenceWrapper<TReference> wrapper)
     {

@@ -34,6 +34,8 @@ public static class System_Extensions
     /// Enumerates the flags, which are set in this value.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
+    [Pure]
+    [return: NotNull]
     public static IEnumerable<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue!!)
         where TEnum : Enum =>
             EnumEnumerator.EnumerateFlags(enumValue);

@@ -24,9 +24,14 @@ public unsafe partial struct Pointer<T>
     /// <inheritdoc/>
     [Pure]
     [return: MaybeNull]
-    public override String? ToString() => 
-        this.Value?
-            .ToString();
+    public override String ToString()
+    {
+        if (this.Value is null)
+        {
+            return String.Empty;
+        }
+        return this.Value.ToString();
+    }
 
     /// <summary>
     /// Gets or sets the value of where the pointer at the specified index points at.
