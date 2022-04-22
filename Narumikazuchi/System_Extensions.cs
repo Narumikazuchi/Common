@@ -36,7 +36,7 @@ public static class System_Extensions
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue!!)
+    public static IEnumerable<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
         where TEnum : Enum =>
             EnumEnumerator.EnumerateFlags(enumValue);
 
@@ -46,8 +46,10 @@ public static class System_Extensions
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
     [Pure]
     [return: NotNull]
-    public static String SanitizeForFilename(this String raw!!)
+    public static String SanitizeForFilename(this String raw)
     {
+        ArgumentNullException.ThrowIfNull(raw);
+
         IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()
                                         .Union(second: Path.GetInvalidPathChars());
         String result = raw;

@@ -29,10 +29,14 @@ partial class AttributeResolver
     /// <param name="assembly">The <see cref="Assembly"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly!!)
-        where TAttribute : Attribute => 
-            Attribute.IsDefined(element: assembly,
-                                attributeType: typeof(TAttribute));
+    public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(assembly);
+
+        return Attribute.IsDefined(element: assembly,
+                                   attributeType: typeof(TAttribute));
+    }
 
     /// <summary>
     /// Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="Assembly"/>.
@@ -41,9 +45,13 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly!!)
-        where TAttribute : Attribute => 
-            assembly.GetCustomAttributes<TAttribute>();
+    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(assembly);
+
+        return assembly.GetCustomAttributes<TAttribute>();
+    }
 
     /// <summary>
     /// Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="Assembly"/>.
@@ -53,9 +61,11 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] Assembly assembly!!)
+    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+        ArgumentNullException.ThrowIfNull(assembly);
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
@@ -81,10 +91,14 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="MemberInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info!!)
-        where TAttribute : Attribute => 
-            Attribute.IsDefined(element: info,
-                                attributeType: typeof(TAttribute));
+    public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(info);
+
+        return Attribute.IsDefined(element: info,
+                                   attributeType: typeof(TAttribute));
+    }
 
     /// <summary>
     /// Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="MemberInfo"/>.
@@ -93,9 +107,13 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info!!)
-        where TAttribute : Attribute => 
-            info.GetCustomAttributes<TAttribute>();
+    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(info);
+
+        return info.GetCustomAttributes<TAttribute>();
+    }
 
     /// <summary>
     /// Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="MemberInfo"/>.
@@ -105,9 +123,11 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] MemberInfo info!!)
+    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+        ArgumentNullException.ThrowIfNull(info);
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
@@ -133,10 +153,14 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="ParameterInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info!!)
-        where TAttribute : Attribute => 
-            Attribute.IsDefined(element: info,
-                                attributeType: typeof(TAttribute));
+    public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(info);
+
+        return Attribute.IsDefined(element: info,
+                                   attributeType: typeof(TAttribute));
+    }
 
     /// <summary>
     /// Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="ParameterInfo"/>.
@@ -145,9 +169,13 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info!!)
-        where TAttribute : Attribute => 
-            info.GetCustomAttributes<TAttribute>();
+    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
+        where TAttribute : Attribute
+    {
+        ArgumentNullException.ThrowIfNull(info);
+
+        return info.GetCustomAttributes<TAttribute>();
+    }
 
     /// <summary>
     /// Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="ParameterInfo"/>.
@@ -157,9 +185,11 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] ParameterInfo info!!)
+    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
+        ArgumentNullException.ThrowIfNull(info);
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,

@@ -4,7 +4,7 @@
 /// Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
 /// </summary>
 public readonly partial struct ReferenceWrapper<TReference>
-        where TReference : class
+    where TReference : class
 {
     /// <summary>
     /// Creates a new <see cref="ReferenceWrapper{TReference}"/> and populates it with a result. Pass in <see langword="null"/>

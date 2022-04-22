@@ -11,8 +11,10 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!)
+    public AlphanumericVersion([DisallowNull] String major)
     {
+        ArgumentNullException.ThrowIfNull(major);
+
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
@@ -41,9 +43,12 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!)
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor)
     {
+        ArgumentNullException.ThrowIfNull(major);
+        ArgumentNullException.ThrowIfNull(minor);
+
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
@@ -73,7 +78,7 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor) :
         this(major: major,
              minor: minor.ToString())
@@ -84,7 +89,7 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!) :
+                               [DisallowNull] String minor) :
         this(major: major.ToString(),
              minor: minor.ToString())
     { }
@@ -103,10 +108,14 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!)
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build)
     {
+        ArgumentNullException.ThrowIfNull(major);
+        ArgumentNullException.ThrowIfNull(minor);
+        ArgumentNullException.ThrowIfNull(build);
+
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
@@ -145,8 +154,8 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
                                in Int64 build) :
         this(major: major,
              minor: minor,
@@ -157,9 +166,9 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
-                               [DisallowNull] String build!!) :
+                               [DisallowNull] String build) :
         this(major: major,
              minor: minor.ToString(),
              build: build)
@@ -170,8 +179,8 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!) :
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build) :
         this(major: major.ToString(),
              minor: minor,
              build: build)
@@ -181,7 +190,7 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
                                in Int64 build) :
         this(major: major,
@@ -194,7 +203,7 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
+                               [DisallowNull] String minor,
                                in Int64 build) :
         this(major: major.ToString(),
              minor: minor,
@@ -207,7 +216,7 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor,
-                               [DisallowNull] String build!!) :
+                               [DisallowNull] String build) :
         this(major: major.ToString(),
              minor: minor.ToString(),
              build: build)
@@ -229,11 +238,16 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!,
-                               [DisallowNull] String revision!!)
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build,
+                               [DisallowNull] String revision)
     {
+        ArgumentNullException.ThrowIfNull(major);
+        ArgumentNullException.ThrowIfNull(minor);
+        ArgumentNullException.ThrowIfNull(build);
+        ArgumentNullException.ThrowIfNull(revision);
+
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
@@ -281,9 +295,9 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!,
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build,
                                in Int64 revision) :
         this(major: major,
              minor: minor,
@@ -295,10 +309,10 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
                                in Int64 build,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String revision) :
         this(major: major,
              minor: minor,
              build: build.ToString(),
@@ -309,10 +323,10 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
-                               [DisallowNull] String build!!,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String build,
+                               [DisallowNull] String revision) :
         this(major: major,
              minor: minor.ToString(),
              build: build,
@@ -324,9 +338,9 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build,
+                               [DisallowNull] String revision) :
         this(major: major.ToString(),
              minor: minor,
              build: build,
@@ -337,8 +351,8 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
-                               [DisallowNull] String minor!!,
+    public AlphanumericVersion([DisallowNull] String major,
+                               [DisallowNull] String minor,
                                in Int64 build,
                                in Int64 revision) :
         this(major: major,
@@ -351,9 +365,9 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
-                               [DisallowNull] String build!!,
+                               [DisallowNull] String build,
                                in Int64 revision) :
         this(major: major,
              minor: minor.ToString(),
@@ -366,8 +380,8 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
-                               [DisallowNull] String build!!,
+                               [DisallowNull] String minor,
+                               [DisallowNull] String build,
                                in Int64 revision) :
         this(major: major.ToString(),
              minor: minor,
@@ -379,10 +393,10 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
                                in Int64 build,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String revision) :
         this(major: major,
              minor: minor.ToString(),
              build: build.ToString(),
@@ -394,9 +408,9 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
+                               [DisallowNull] String minor,
                                in Int64 build,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String revision) :
         this(major: major.ToString(),
              minor: minor,
              build: build.ToString(),
@@ -409,8 +423,8 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor,
-                               [DisallowNull] String build!!,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String build,
+                               [DisallowNull] String revision) :
         this(major: major.ToString(),
              minor: minor.ToString(),
              build: build,
@@ -421,7 +435,7 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major!!,
+    public AlphanumericVersion([DisallowNull] String major,
                                in Int64 minor,
                                in Int64 build,
                                in Int64 revision) :
@@ -436,7 +450,7 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor!!,
+                               [DisallowNull] String minor,
                                in Int64 build,
                                in Int64 revision) :
         this(major: major.ToString(),
@@ -451,7 +465,7 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor,
-                               [DisallowNull] String build!!,
+                               [DisallowNull] String build,
                                in Int64 revision) :
         this(major: major.ToString(),
              minor: minor.ToString(),
@@ -466,7 +480,7 @@ public readonly partial struct AlphanumericVersion
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor,
                                in Int64 build,
-                               [DisallowNull] String revision!!) :
+                               [DisallowNull] String revision) :
         this(major: major.ToString(),
              minor: minor.ToString(),
              build: build.ToString(),
@@ -490,7 +504,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Parses the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
-    public static AlphanumericVersion Parse([DisallowNull] String source!!) =>
+    public static AlphanumericVersion Parse([DisallowNull] String source) =>
         Parse(source: source, 
               provider: null);
 
@@ -498,7 +512,7 @@ public readonly partial struct AlphanumericVersion
     /// Tries to parse the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
     /// <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
-    public static Boolean TryParse([DisallowNull] String source!!,
+    public static Boolean TryParse([DisallowNull] String source,
                                    out AlphanumericVersion result) =>
         TryParse(source: source,
                  provider: null,
@@ -684,7 +698,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Implicit conversion from <see cref="Version"/> class.
     /// </summary>
-    public static implicit operator AlphanumericVersion(Version source!!)
+    public static implicit operator AlphanumericVersion([AllowNull] Version source)
     {
         if (source is null)
         {
@@ -865,9 +879,11 @@ partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
 partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
 {
     /// <inheritdoc/>
-    public static AlphanumericVersion Parse([DisallowNull] String source!!, 
+    public static AlphanumericVersion Parse([DisallowNull] String source, 
                                             [AllowNull] IFormatProvider? provider)
     {
+        ArgumentNullException.ThrowIfNull(source);
+
         String[] segments = source.Split(separator: '.', 
                                          options: StringSplitOptions.RemoveEmptyEntries);
         if (segments.Length is < 1
@@ -983,18 +999,31 @@ partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
 partial struct AlphanumericVersion : IStructuralComparable
 {
     Int32 IStructuralComparable.CompareTo([AllowNull] Object? other,
-                                          [DisallowNull] IComparer comparer!!) => 
-        comparer.Compare(x: this,
-                         y: other);
+                                          [DisallowNull] IComparer comparer)
+    {
+        ArgumentNullException.ThrowIfNull(comparer);
+
+        return comparer.Compare(x: this,
+                                y: other);
+    }
 }
 
 // IStructuralEquatable
 partial struct AlphanumericVersion : IStructuralEquatable
 {
     Boolean IStructuralEquatable.Equals([AllowNull] Object? other,
-                                        [DisallowNull] IEqualityComparer comparer!!) => 
-        comparer.Equals(x: this,
-                        y: other);
-    Int32 IStructuralEquatable.GetHashCode([DisallowNull] IEqualityComparer comparer!!) => 
-        comparer.GetHashCode(this);
+                                        [DisallowNull] IEqualityComparer comparer)
+    {
+        ArgumentNullException.ThrowIfNull(comparer);
+
+        return comparer.Equals(x: this,
+                               y: other);
+    }
+
+    Int32 IStructuralEquatable.GetHashCode([DisallowNull] IEqualityComparer comparer)
+    {
+        ArgumentNullException.ThrowIfNull(comparer);
+
+        return comparer.GetHashCode(this);
+    }
 }

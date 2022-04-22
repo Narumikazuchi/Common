@@ -32,7 +32,7 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
+    public NotAllowed([DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: MESSAGE)
     {
         foreach ((Object key, Object? value) kv in stateInformation)
@@ -46,11 +46,13 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
+                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach ((Object key, Object? value) kv in stateInformation)
         {
             this.Data
@@ -63,12 +65,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params (Object key, Object? value)[] stateInformation!!) :
+                      [DisallowNull] params (Object key, Object? value)[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
              innerException: innerException)
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach ((Object key, Object? value) kv in stateInformation)
         {
             this.Data
@@ -79,9 +83,11 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
+    public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
             this.Data
@@ -93,11 +99,13 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
+                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
             this.Data
@@ -110,12 +118,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation!!) :
+                      [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
              innerException: innerException)
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
             this.Data
@@ -126,9 +136,11 @@ public sealed class NotAllowed : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
-    public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
+    public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
             this.Data
@@ -140,11 +152,13 @@ public sealed class NotAllowed : Exception
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
+                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
             this.Data
@@ -157,12 +171,14 @@ public sealed class NotAllowed : Exception
     /// </summary>
     public NotAllowed([AllowNull] String? message,
                       [AllowNull] Exception? innerException,
-                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation!!) :
+                      [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: String.Format(format: "{0} - {1}",
                                     arg0: MESSAGE,
                                     arg1: message),
              innerException: innerException)
     {
+        ArgumentNullException.ThrowIfNull(stateInformation);
+
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
             this.Data

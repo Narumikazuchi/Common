@@ -16,35 +16,9 @@ public static class ExceptionHelpers
     /// The custom message will be formatted using <see cref="String.Format(String, Object?)"/>. If you provide a custom message, the '{0}' placeholder 
     /// will be filled with the name of the variable by this method.
     /// </remarks>
-    public static void ThrowIfNull(this Object? source,
-                                   [AllowNull] String? message = null,
-                                   [CallerArgumentExpression("source")] String? varName = "")
-    {
-        if (source == null)
-        {
-            if (message is null)
-            {
-                throw new NullReferenceException(message: String.Format(format: NULLREF_MESSAGE,
-                                                                        arg0: varName));
-            }
-            throw new NullReferenceException(message: String.Format(format: message,
-                                                                    arg0: varName));
-        }
-    }
-    /// <summary>
-    /// Throws an <see cref="NullReferenceException"/> if the source parameter is null.
-    /// </summary>
-    /// <param name="source">The source to check against <see langword="null"/>.</param>
-    /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
-    /// <param name="varName">The name of the parameter.</param>
-    /// <exception cref="NullReferenceException" />
-    /// <remarks>
-    /// The custom message will be formatted using <see cref="String.Format(String, Object?)"/>. If you provide a custom message, the '{0}' placeholder 
-    /// will be filled with the name of the variable by this method.
-    /// </remarks>
-    public static void ThrowIfNull(this String? source,
-                                   [AllowNull] String? message = null,
-                                   [CallerArgumentExpression("source")] String? varName = "")
+    public static void ThrowIfNullOrEmpty(this String? source,
+                                          [AllowNull] String? message = null,
+                                          [CallerArgumentExpression("source")] String? varName = "")
     {
         if (String.IsNullOrWhiteSpace(source))
         {
@@ -55,49 +29,6 @@ public static class ExceptionHelpers
             }
             throw new NullReferenceException(message: String.Format(format: message,
                                                                     arg0: varName));
-        }
-    }
-
-    /// <summary>
-    /// Throws an <see cref="ArgumentNullException"/> if the source parameter is null.
-    /// </summary>
-    /// <param name="source">The source to check against <see langword="null"/>.</param>
-    /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    /// <exception cref="ArgumentNullException" />
-    public static void ThrowIfArgumentNull(this Object? source,
-                                           [AllowNull] String? message = null,
-                                           [CallerArgumentExpression("source")] String? paramName = "")
-    {
-        if (source == null)
-        {
-            if (message is null)
-            {
-                throw new ArgumentNullException(paramName: paramName);
-            }
-            throw new ArgumentNullException(message: message,
-                                            paramName: paramName);
-        }
-    }
-    /// <summary>
-    /// Throws an <see cref="ArgumentNullException"/> if the source parameter is null.
-    /// </summary>
-    /// <param name="source">The source to check against <see langword="null"/>.</param>
-    /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    /// <exception cref="ArgumentNullException" />
-    public static void ThrowIfArgumentNull(this String? source,
-                                           [AllowNull] String? message = null,
-                                           [CallerArgumentExpression("source")] String? paramName = "")
-    {
-        if (String.IsNullOrWhiteSpace(source))
-        {
-            if (message is null)
-            {
-                throw new ArgumentNullException(paramName: paramName);
-            }
-            throw new ArgumentNullException(message: message,
-                                            paramName: paramName);
         }
     }
 
@@ -166,9 +97,10 @@ public static class ExceptionHelpers
     /// </summary>
     /// <param name="source">The exception to extract data from.</param>
     /// <returns>An information object, containing detailed data on the exception</returns>
-    public static ExceptionInformation ExtractInformation(this Exception source!!)
+    public static ExceptionInformation ExtractInformation(this Exception source)
     {
-        ThrowIfArgumentNull(source);
+        ArgumentNullException.ThrowIfNull(source);
+
         return new(source: source);
     }
 

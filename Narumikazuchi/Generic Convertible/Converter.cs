@@ -13,7 +13,7 @@ public static partial class Converter
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
     [Pure]
     [return: NotNull]
-    public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible!!) 
+    public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible) 
         where TConvertible : IConvertible<TType> =>
             ToTypeInternal<TConvertible, TType>(convertible: convertible, 
                                                 provider: null);
@@ -27,8 +27,8 @@ public static partial class Converter
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
     [Pure]
     [return: NotNull]
-    public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible!!, 
-                                                    [DisallowNull] IFormatProvider provider!!)
+    public static TType ToType<TConvertible, TType>([DisallowNull] TConvertible convertible, 
+                                                    [DisallowNull] IFormatProvider provider)
         where TConvertible : IConvertible<TType> =>
             ToTypeInternal<TConvertible, TType>(convertible: convertible,
                                                 provider: provider);
@@ -40,6 +40,10 @@ partial class Converter
     [return: NotNull]
     private static TType ToTypeInternal<TConvertible, TType>(TConvertible convertible,
                                                              IFormatProvider? provider)
-        where TConvertible : IConvertible<TType> =>
-            convertible.ToType(provider);
+        where TConvertible : IConvertible<TType>
+    {
+        ArgumentNullException.ThrowIfNull(convertible);
+
+        return convertible.ToType(provider);
+    }
 }

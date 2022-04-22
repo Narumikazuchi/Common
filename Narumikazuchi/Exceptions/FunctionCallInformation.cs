@@ -75,7 +75,7 @@ public readonly partial struct FunctionCallInformation
 
 partial struct FunctionCallInformation
 {
-    internal FunctionCallInformation(StackFrame frame!!)
+    internal FunctionCallInformation(StackFrame frame)
     {
         MethodBase? method = frame.GetMethod();
         m_Filename = frame.GetFileName();
