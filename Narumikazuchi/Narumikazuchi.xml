@@ -423,7 +423,7 @@
             Contains helpers for throwing exceptions.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.Object,System.String,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.String)">
             <summary>
             Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
             </summary>
@@ -435,37 +435,6 @@
             The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
             will be filled with the name of the variable by this method.
             </remarks>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNull(System.String,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
-            </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="varName">The name of the parameter.</param>
-            <exception cref="T:System.NullReferenceException" />
-            <remarks>
-            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
-            will be filled with the name of the variable by this method.
-            </remarks>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.Object,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
-            </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfArgumentNull(System.String,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentNullException"/> if the source parameter is null.
-            </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
             <summary>
@@ -833,6 +802,49 @@
             <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
+        <member name="T:Narumikazuchi.ReferenceWrapper`1">
+            <summary>
+            Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0)">
+            <summary>
+            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
+            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
+            </summary>
+            <param name="reference">The reference to wrap.</param>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0,System.Boolean@)">
+            <summary>
+            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
+            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
+            </summary>
+            <param name="reference">The reference to wrap.</param>
+            <param name="throwIfTryGetNull">Whether the struct is supposed to throw a <see cref="T:System.NullReferenceException"/> upon trying to access a <see langword="null"/> reference.</param>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.TryGet(`0@)">
+            <summary>
+            Tries to retrieve the reference.
+            </summary>
+            <param name="reference">The wrapped reference.</param>
+            <returns><see langword="true"/> if the reference is not <see langword="null"/>; otherwise, <see langword="false"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.ReferenceWrapper`1.HasValue">
+            <summary>
+            Gets whether the reference is set to anything else but <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.ReferenceWrapper`1.NoValue">
+            <summary>
+            Gets a wrapper for a <see langword="null"/> reference.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(Narumikazuchi.ReferenceWrapper{`0})">
+            <inheritdoc/>
+        </member>
         <member name="T:Narumikazuchi.System_Extensions">
             <summary>
             Contains extensions for the System namespace.
@@ -858,36 +870,6 @@
             Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
             </summary>
             <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
-        </member>
-        <member name="T:Narumikazuchi.TaskResult`1">
-            <summary>
-            Wraps the result of an async operation, where the result of the operation is a reference type.
-            </summary>
-            <remarks>
-            To prevent excessive <see langword="null"/>-checks in an asnyc application, this class will wrap
-            the result and allow you to check through the <see cref="P:Narumikazuchi.TaskResult`1.HasValue"/> property or <see cref="M:Narumikazuchi.TaskResult`1.TryGet(`0@)"/>
-            method instead of checking for null.
-            </remarks>
-        </member>
-        <member name="M:Narumikazuchi.TaskResult`1.TryGet(`0@)">
-            <summary>
-            Tries to retrieve the value of the result from the <see cref="T:System.Threading.Tasks.Task"/>.
-            </summary>
-            <param name="result">The result of the <see cref="T:System.Threading.Tasks.Task"/>.</param>
-            <returns><see langword="true"/> if the result is populated; otherwise, <see langword="false"/></returns>
-        </member>
-        <member name="M:Narumikazuchi.TaskResult`1.Create(`0)">
-            <summary>
-            Creates a <see cref="T:Narumikazuchi.TaskResult`1"/> and populates it with a result. Pass in <see langword="null"/>
-            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
-            </summary>
-            <param name="result">The result of the <see cref="T:System.Threading.Tasks.Task"/>.</param>
-            <returns>A new <see cref="T:Narumikazuchi.TaskResult`1"/> which represents the result of a <see cref="T:System.Threading.Tasks.Task"/></returns>
-        </member>
-        <member name="P:Narumikazuchi.TaskResult`1.HasValue">
-            <summary>
-            Gets whether the <see cref="T:System.Threading.Tasks.Task"/> has succeeded and resulted in a value.
-            </summary>
         </member>
     </members>
 </doc>
