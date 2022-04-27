@@ -10,7 +10,7 @@
 		<Copyright>©2021 Narumikazuchi</Copyright>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.2.0</Version>
+		<Version>2.2.1</Version>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
@@ -18,6 +18,7 @@
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageTags>Enum; Convertable; Attribute; Pointer</PackageTags>
 		<PackageReadmeFile>README nuget.md</PackageReadmeFile>
+		<Description>This library contains some small utilities that wouldn't fit any other category other than 'commonly used'. For a detailed description of all the contents of the library and their usage visit the [wiki](https://github.com/Narumikazuchi/Common/wiki) page.</Description>
 	</PropertyGroup>
   
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
