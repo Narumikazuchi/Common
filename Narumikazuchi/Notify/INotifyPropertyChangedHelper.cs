@@ -10,5 +10,5 @@ public interface INotifyPropertyChangedHelper :
     /// Raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for the specified property.
     /// </summary>
     /// <param name="propertyName">The name of the property that changed.</param>
-    internal protected void OnPropertyChanged([DisallowNull] String propertyName);
+    public void OnPropertyChanged([DisallowNull] String propertyName);
 }
