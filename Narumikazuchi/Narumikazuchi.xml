@@ -720,6 +720,28 @@
             Gets the object mutex used to synchronize access to this <see cref="T:Narumikazuchi.ISynchronized"/>.
             </summary>
         </member>
+        <member name="T:Narumikazuchi.INotifyPropertyChangedHelper">
+            <summary>
+            Implements a way for extensions methods to raise the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.INotifyPropertyChangedHelper.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event for the specified property.
+            </summary>
+            <param name="propertyName">The name of the property that changed.</param>
+        </member>
+        <member name="T:Narumikazuchi.INotifyPropertyChangingHelper">
+            <summary>
+            Implements a way for extensions methods to raise the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging"/> event.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.INotifyPropertyChangingHelper.OnPropertyChanging(System.String)">
+            <summary>
+            Raises the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging"/> event for the specified property.
+            </summary>
+            <param name="propertyName">The name of the property that is changing.</param>
+        </member>
         <member name="T:Narumikazuchi.Pointer`1">
             <summary>
             Represents a reference to a struct or a reference to a reference for a class.
