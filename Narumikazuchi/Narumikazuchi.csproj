@@ -6,6 +6,10 @@
 		<LangVersion>preview</LangVersion>
 		<EnablePreviewFeatures>true</EnablePreviewFeatures>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PlatformTarget>x64</PlatformTarget>
+		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2021 Narumikazuchi</Copyright>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
@@ -19,18 +23,6 @@
 		<PackageTags>Enum; Convertable; Attribute; Pointer</PackageTags>
 		<PackageReadmeFile>README nuget.md</PackageReadmeFile>
 		<Description>This library contains some small utilities that wouldn't fit any other category other than 'commonly used'. For a detailed description of all the contents of the library and their usage visit the [wiki](https://github.com/Narumikazuchi/Common/wiki) page.</Description>
-	</PropertyGroup>
-  
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
-		<PlatformTarget>x64</PlatformTarget>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 
 	<ItemGroup>
