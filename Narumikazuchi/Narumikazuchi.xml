@@ -264,6 +264,12 @@
             </remarks>
             <returns>This instance formatted as a <see cref="T:System.String"/></returns>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String,System.IFormatProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,System.IFormatProvider,Narumikazuchi.AlphanumericVersion@)">
+            <inheritdoc/>
+        </member>
         <member name="P:Narumikazuchi.AlphanumericVersion.Major">
             <summary>
             Gets the major version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>.
@@ -289,25 +295,19 @@
             Implicit conversion from <see cref="T:System.Version"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.CompareTo(Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
             <inheritdoc/>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.CompareTo(Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String,System.IFormatProvider)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,System.IFormatProvider,Narumikazuchi.AlphanumericVersion@)">
             <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.AttributeResolver">
