@@ -13,7 +13,7 @@ public static class EnumEnumerator
     [return: NotNull]
     public static IEnumerable<TEnum> EnumerateValues<TEnum>() 
         where TEnum : Enum =>
-            __EnumChache<TEnum>.DefinedValues;
+            __EnumChache<TEnum>.DefinedValues.Value;
 
     /// <summary>
     /// Enumerates the flags, which are set in the input value.
@@ -29,17 +29,105 @@ public static class EnumEnumerator
 
         if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
         {
-            yield break;
+            return Array.Empty<TEnum>();
         }
-#pragma warning disable
-        foreach (TEnum value in Enum.GetValues(typeof(TEnum))
-                                    .Cast<TEnum>())
+        else
         {
-            if (enumValue.HasFlag(value))
+            return new __EnumEnumerator<TEnum>(enumValue);
+        }
+    }
+}
+
+internal partial struct __EnumEnumerator<TEnum>
+    where TEnum : Enum
+{
+    internal __EnumEnumerator(TEnum value)
+    {
+        m_Enumerator = __EnumChache<TEnum>.DefinedValues.Value.GetEnumerator();
+        m_Value = value;
+        m_Current = default;
+        m_State = null;
+    }
+
+    public __EnumEnumerator<TEnum> GetEnumerator()
+    {
+        if (m_State.HasValue)
+        {
+            return new(m_Value);
+        }
+        else
+        {
+            return this;
+        }
+    }
+
+    private readonly HashSet<TEnum>.Enumerator m_Enumerator;
+    private readonly TEnum m_Value;
+    private TEnum? m_Current;
+    private Boolean? m_State;
+}
+
+// IEnumerable
+partial struct __EnumEnumerator<TEnum> : IEnumerable
+{
+    IEnumerator IEnumerable.GetEnumerator() =>
+        this.GetEnumerator();
+}
+
+// IEnumerable<T>
+partial struct __EnumEnumerator<TEnum> : IEnumerable<TEnum>
+{
+    IEnumerator<TEnum> IEnumerable<TEnum>.GetEnumerator() =>
+        this.GetEnumerator();
+}
+
+// IEnumerator
+partial struct __EnumEnumerator<TEnum> : IEnumerator
+{
+    public Boolean MoveNext()
+    {
+        if (!m_State.HasValue)
+        {
+            m_State = true;
+        }
+
+        while (m_Enumerator.MoveNext())
+        {
+            TEnum current = m_Enumerator.Current;
+            if (m_Value.HasFlag(current))
             {
-                yield return value;
+                m_Current = current;
+                return true;
             }
         }
-#pragma warning restore
+
+        m_State = false;
+        return false;
+    }
+
+    void IDisposable.Dispose()
+    { }
+
+    void IEnumerator.Reset()
+    { }
+
+    Object? IEnumerator.Current =>
+        this.Current;
+}
+
+// IEnumerator<T>
+partial struct __EnumEnumerator<TEnum> : IEnumerator<TEnum>
+{
+    public TEnum Current
+    {
+        get
+        {
+            if (!m_State.HasValue ||
+                !m_State.Value)
+            {
+                throw new InvalidOperationException();
+            }
+            return m_Current!;
+        }
     }
 }
