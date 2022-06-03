@@ -15,9 +15,9 @@ public static partial class AttributeResolver
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String MULTIPLE_INSTANCES_ARE_ALLOWED = "This method is supposed to only work with Attributes that disallow multiple instances.";
+    private const String MULTIPLE_INSTANCES_ARE_DISALLOWED = "This method is supposed to only work with Attributes that disallow multiple instances.";
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "The specified Attribute has not been defined for the specified type.";
+    private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "The specified Attribute has not been defined for the specified target.";
 }
 
 // Assemblies
@@ -61,15 +61,16 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] Assembly assembly)
+    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(assembly);
 
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
-                                 ("Typename", typeof(TAttribute).FullName));
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
         TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
         if (attribute is null)
@@ -123,15 +124,16 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] MemberInfo info)
+    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(info);
 
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
-                                 ("Typename", typeof(TAttribute).FullName));
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
@@ -185,14 +187,14 @@ partial class AttributeResolver
     /// <exception cref="InvalidOperationException"/>
     [Pure]
     [return: NotNull]
-    public static TAttribute FetchOnlyAllowedAttribute<TAttribute>([DisallowNull] ParameterInfo info)
+    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(info);
 
         if (MultipleAllowed<TAttribute>())
         {
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_ALLOWED,
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  ("Typename", typeof(TAttribute).FullName));
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
