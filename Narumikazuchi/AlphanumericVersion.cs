@@ -643,6 +643,126 @@ public readonly partial struct AlphanumericVersion
         return builder.ToString();
     }
 
+#if !PREVIEW
+
+    /// <inheritdoc/>
+    public static AlphanumericVersion Parse([DisallowNull] String source,
+                                            [AllowNull] IFormatProvider? provider)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        String[] segments = source.Split(separator: '.',
+                                         options: StringSplitOptions.RemoveEmptyEntries);
+        if (segments.Length is < 1
+                            or > 4)
+        {
+            ArgumentException exception = new(message: SEGMENT_COUNT_OUT_OF_BOUNDS,
+                                              paramName: nameof(source));
+            exception.Data
+                     .Add(key: "Number of Segments",
+                          value: segments.Length);
+            throw exception;
+        }
+
+        for (Int32 i = 0;
+             i < segments.Length;
+             i++)
+        {
+            if (String.IsNullOrWhiteSpace(segments[i]) ||
+                !s_Regex.IsMatch(input: segments[i]))
+            {
+                FormatException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC);
+                exception.Data
+                         .Add(key: "Value",
+                              value: segments[i]);
+                throw exception;
+            }
+        }
+
+        if (segments.Length == 1)
+        {
+            return new(major: segments[0]);
+        }
+        if (segments.Length == 2)
+        {
+            return new(major: segments[0],
+                       minor: segments[1]);
+        }
+        if (segments.Length == 3)
+        {
+            return new(major: segments[0],
+                       minor: segments[1],
+                       build: segments[2]);
+        }
+        return new(major: segments[0],
+                   minor: segments[1],
+                   build: segments[2],
+                   revision: segments[3]);
+    }
+
+    /// <inheritdoc/>
+    public static Boolean TryParse([NotNullWhen(true)] String? source,
+                                   [AllowNull] IFormatProvider? provider,
+                                   out AlphanumericVersion result)
+    {
+        if (String.IsNullOrWhiteSpace(source))
+        {
+            result = default;
+            return false;
+        }
+
+        String[] segments = source!.Split(separator: '.',
+                                          options: StringSplitOptions.RemoveEmptyEntries);
+        if (segments.Length is < 1
+                            or > 4)
+        {
+            result = default;
+            return false;
+        }
+
+        for (Int32 i = 0;
+             i < segments.Length;
+             i++)
+        {
+            if (!s_Regex.IsMatch(input: segments[i]))
+            {
+                result = default;
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(segments[i]))
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        if (segments.Length == 1)
+        {
+            result = new(major: segments[0]);
+            return true;
+        }
+        if (segments.Length == 2)
+        {
+            result = new(major: segments[0],
+                         minor: segments[1]);
+            return true;
+        }
+        if (segments.Length == 3)
+        {
+            result = new(major: segments[0],
+                         minor: segments[1],
+                         build: segments[2]);
+            return true;
+        }
+        result = new(major: segments[0],
+                     minor: segments[1],
+                     build: segments[2],
+                     revision: segments[3]);
+        return true;
+    }
+
+#endif
+
     /// <summary>
     /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
@@ -721,6 +841,24 @@ public readonly partial struct AlphanumericVersion
         return new(major: source.Major,
                    minor: source.Minor);
     }
+
+#if !PREVIEW
+
+    /// <inheritdoc/>
+    public static Boolean operator ==(AlphanumericVersion left,
+                                      AlphanumericVersion right)
+    {
+        return left.CompareTo(right) == 0;
+    }
+
+    /// <inheritdoc/>
+    public static Boolean operator !=(AlphanumericVersion left,
+                                      AlphanumericVersion right)
+    {
+        return left.CompareTo(right) != 0;
+    }
+
+#endif
 }
 
 // Non-Public
@@ -849,6 +987,16 @@ partial struct AlphanumericVersion : IComparable<AlphanumericVersion>
     }
 }
 
+// IEquatable<T>
+partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
+{
+    /// <inheritdoc/>
+    public Boolean Equals(AlphanumericVersion other) =>
+        this.CompareTo(other) == 0;
+}
+
+#if PREVIEW
+
 // IEqualityOperators<T, U>
 partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, AlphanumericVersion>
 {
@@ -865,14 +1013,6 @@ partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, Alp
     {
         return left.CompareTo(right) != 0;
     }
-}
-
-// IEquatable<T>
-partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
-{
-    /// <inheritdoc/>
-    public Boolean Equals(AlphanumericVersion other) =>
-        this.CompareTo(other) == 0;
 }
 
 // IParseable<T>
@@ -994,6 +1134,8 @@ partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
         return true;
     }
 }
+
+#endif
 
 // IStructuralComparable
 partial struct AlphanumericVersion : IStructuralComparable

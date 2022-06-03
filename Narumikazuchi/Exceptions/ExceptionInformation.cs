@@ -18,17 +18,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the callstack from when the <see cref="Exception"/> occured.
     /// </summary>
-    public IReadOnlyList<FunctionCallInformation> CallStack
-    {
-        get
-        {
-            if (m_CallStack.Count == 0)
-            {
-                this.ParseStackTrace();
-            }
-            return m_CallStack;
-        }
-    }
+    public ReadOnlyCollection<FunctionCallInformation> CallStack =>
+        m_CallStack;
     /// <summary>
     /// Gets the type in which the <see cref="Exception"/> occured.
     /// </summary>
@@ -62,18 +53,18 @@ partial struct ExceptionInformation
     internal ExceptionInformation(Exception source)
     {
         m_Source = source;
-    }
 
-    private void ParseStackTrace()
-    {
+        List<FunctionCallInformation> infos = new();
         StackTrace st = new(e: m_Source,
                             fNeedFileInfo: true);
         foreach (StackFrame frame in st.GetFrames())
         {
-            m_CallStack.Add(new(frame: frame));
+            infos.Add(new(frame: frame));
         }
+
+        m_CallStack = infos.AsReadOnly();
     }
 
-    private readonly List<FunctionCallInformation> m_CallStack = new();
+    private readonly ReadOnlyCollection<FunctionCallInformation> m_CallStack;
     private readonly Exception m_Source;
 }

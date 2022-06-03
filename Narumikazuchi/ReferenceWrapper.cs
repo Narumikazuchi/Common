@@ -10,6 +10,14 @@ public readonly partial struct ReferenceWrapper<TReference>
     /// Creates a new <see cref="ReferenceWrapper{TReference}"/> and populates it with a result. Pass in <see langword="null"/>
     /// if the <see cref="Task"/> failed.
     /// </summary>
+    public ReferenceWrapper() :
+        this(reference: default,
+             throwIfTryGetNull: true)
+    { }
+    /// <summary>
+    /// Creates a new <see cref="ReferenceWrapper{TReference}"/> and populates it with a result. Pass in <see langword="null"/>
+    /// if the <see cref="Task"/> failed.
+    /// </summary>
     /// <param name="reference">The reference to wrap.</param>
     public ReferenceWrapper([AllowNull] TReference? reference) :
         this(reference: reference,
@@ -22,7 +30,7 @@ public readonly partial struct ReferenceWrapper<TReference>
     /// <param name="reference">The reference to wrap.</param>
     /// <param name="throwIfTryGetNull">Whether the struct is supposed to throw a <see cref="NullReferenceException"/> upon trying to access a <see langword="null"/> reference.</param>
     public ReferenceWrapper([AllowNull] TReference? reference,
-                            in Boolean throwIfTryGetNull)
+                            Boolean throwIfTryGetNull)
     {
         m_Reference = reference;
         m_Throw = throwIfTryGetNull;
@@ -45,6 +53,36 @@ public readonly partial struct ReferenceWrapper<TReference>
     }
 
     /// <inheritdoc/>
+    public override Int32 GetHashCode()
+    {
+        if (m_Reference is null)
+        {
+            return Int32.MaxValue;
+        }
+        else
+        {
+            return m_Reference.GetHashCode();
+        }
+    }
+
+    /// <inheritdoc/>
+    public override Boolean Equals(Object? obj)
+    {
+        if (obj is TReference other)
+        {
+            return other.Equals(m_Reference);
+        }
+        else if (obj is ReferenceWrapper<TReference> wrapper)
+        {
+            return this.Equals(wrapper);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /// <inheritdoc/>
     public override String? ToString()
     {
         if (m_Reference is null)
@@ -55,6 +93,16 @@ public readonly partial struct ReferenceWrapper<TReference>
     }
 
 #pragma warning disable CS1591
+    public static Boolean operator ==(ReferenceWrapper<TReference> left, ReferenceWrapper<TReference> right)
+    {
+        return left.Equals(right);
+    }
+
+    public static Boolean operator !=(ReferenceWrapper<TReference> left, ReferenceWrapper<TReference> right)
+    {
+        return !left.Equals(right);
+    }
+
     public static implicit operator TReference?(ReferenceWrapper<TReference> wrapper)
     {
         if (wrapper.TryGet(out TReference? reference))
@@ -84,7 +132,7 @@ public readonly partial struct ReferenceWrapper<TReference>
     /// <summary>
     /// Gets a wrapper for a <see langword="null"/> reference.
     /// </summary>
-    public static ReferenceWrapper<TReference> NoValue { get; } = new(reference: null);
+    public static ReferenceWrapper<TReference> NoValue { get; } = new(reference: default);
 }
 
 // Non-Public
