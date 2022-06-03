@@ -25,6 +25,14 @@
 		<Description>This library contains some small utilities that wouldn't fit any other category other than 'commonly used'. For a detailed description of all the contents of the library and their usage visit the [wiki](https://github.com/Narumikazuchi/Common/wiki) page.</Description>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);PREVIEW</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DefineConstants>$(DefineConstants);PREVIEW</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<None Include="..\logo.png">
 			<Pack>True</Pack>
