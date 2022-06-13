@@ -932,8 +932,15 @@ partial struct AlphanumericVersion
 // ICloneable
 partial struct AlphanumericVersion : ICloneable
 {
+    /// <summary>
+    /// Creates a new object that is an exact copy of this instance.
+    /// </summary>
+    /// <returns>A new object that is an exact copy of this instance.</returns>
+    public AlphanumericVersion Clone() =>
+        new(original: this);
+
     /// <inheritdoc/>
-    public Object Clone() =>
+    Object ICloneable.Clone() =>
         new AlphanumericVersion(original: this);
 }
 

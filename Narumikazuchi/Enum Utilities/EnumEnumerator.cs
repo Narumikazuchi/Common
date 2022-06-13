@@ -61,8 +61,8 @@ internal partial struct __EnumEnumerator<TEnum>
         }
     }
 
-    private readonly HashSet<TEnum>.Enumerator m_Enumerator;
     private readonly TEnum m_Value;
+    private HashSet<TEnum>.Enumerator m_Enumerator;
     private TEnum? m_Current;
     private Boolean? m_State;
 }

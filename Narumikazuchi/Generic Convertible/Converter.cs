@@ -3,7 +3,7 @@
 /// <summary>
 /// Converts types that implement the <see cref="IConvertible{TType}"/> interface.
 /// </summary>
-public static partial class Converter
+public static partial class Converter<TResult>
 {
     /// <summary>
     /// Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type. 
@@ -13,10 +13,10 @@ public static partial class Converter
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
     [Pure]
     [return: NotNull]
-    public static TResult ToType<TConvertible, TResult>([DisallowNull] TConvertible convertible) 
+    public static TResult ToType<TConvertible>([DisallowNull] TConvertible convertible) 
         where TConvertible : IConvertible<TResult> =>
-            ToTypeInternal<TConvertible, TResult>(convertible: convertible, 
-                                                provider: null);
+            ToTypeInternal(convertible: convertible, 
+                           provider: (IFormatProvider?)null);
     /// <summary>
     /// Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type 
     /// using the specified culture-specific formatting. 
@@ -27,20 +27,22 @@ public static partial class Converter
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
     [Pure]
     [return: NotNull]
-    public static TResult ToType<TConvertible, TResult>([DisallowNull] TConvertible convertible, 
-                                                        [DisallowNull] IFormatProvider provider)
-        where TConvertible : IConvertible<TResult> =>
-            ToTypeInternal<TConvertible, TResult>(convertible: convertible,
-                                                provider: provider);
+    public static TResult ToType<TConvertible, TFormat>([DisallowNull] TConvertible convertible, 
+                                                        [DisallowNull] TFormat provider)
+        where TConvertible : IConvertible<TResult>
+        where TFormat : IFormatProvider =>
+            ToTypeInternal(convertible: convertible,
+                           provider: provider);
 }
 
 // Non-Public
-partial class Converter
+partial class Converter<TResult>
 {
     [return: NotNull]
-    private static TResult ToTypeInternal<TConvertible, TResult>(TConvertible convertible,
-                                                                 IFormatProvider? provider)
+    private static TResult ToTypeInternal<TConvertible, TFormat>(TConvertible convertible,
+                                                                 TFormat? provider)
         where TConvertible : IConvertible<TResult>
+        where TFormat : IFormatProvider
     {
         ArgumentNullException.ThrowIfNull(convertible);
 

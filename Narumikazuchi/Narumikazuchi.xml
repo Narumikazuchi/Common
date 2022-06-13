@@ -302,6 +302,12 @@
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
+            <summary>
+            Creates a new object that is an exact copy of this instance.
+            </summary>
+            <returns>A new object that is an exact copy of this instance.</returns>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.System#ICloneable#Clone">
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.CompareTo(Narumikazuchi.AlphanumericVersion)">
@@ -329,7 +335,7 @@
             <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attributes from.</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchOnlyAllowedAttribute``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.Assembly)">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
             </summary>
@@ -351,7 +357,7 @@
             <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attributes from.</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchOnlyAllowedAttribute``1(System.Reflection.MemberInfo)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.MemberInfo)">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
             </summary>
@@ -373,7 +379,7 @@
             <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attributes from.</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchOnlyAllowedAttribute``1(System.Reflection.ParameterInfo)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.ParameterInfo)">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
             </summary>
@@ -670,27 +676,27 @@
             Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
             </summary>
         </member>
-        <member name="T:Narumikazuchi.Converter">
+        <member name="T:Narumikazuchi.Converter`1">
             <summary>
             Converts types that implement the <see cref="T:Narumikazuchi.IConvertible`1"/> interface.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.Converter.ToType``2(``0)">
+        <member name="M:Narumikazuchi.Converter`1.ToType``1(``0)">
             <summary>
-            Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TType"/> type. 
+            Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type. 
             </summary>
             <param name="convertible">The instance to convert.</param>
-            <returns>A new instance of <typeparamref name="TType"/> with the 
+            <returns>A new instance of <typeparamref name="TResult"/> with the 
             same value as the specified <typeparamref name="TConvertible"/></returns>
         </member>
-        <member name="M:Narumikazuchi.Converter.ToType``2(``0,System.IFormatProvider)">
+        <member name="M:Narumikazuchi.Converter`1.ToType``2(``0,``1)">
             <summary>
-            Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TType"/> type 
+            Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type 
             using the specified culture-specific formatting. 
             </summary>
             <param name="convertible">The instance to convert.</param>
             <param name="provider">An <see cref="T:System.IFormatProvider"/> implementation which provides culture-specific formatting.</param>
-            <returns>A new instance of <typeparamref name="TType"/> with the 
+            <returns>A new instance of <typeparamref name="TResult"/> with the 
             same value as the specified <typeparamref name="TConvertible"/></returns>
         </member>
         <member name="T:Narumikazuchi.IConvertible`1">
@@ -698,7 +704,7 @@
             Defines a method to convert the implementing type to the type <typeparamref name="TType"/>.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.IConvertible`1.ToType(System.IFormatProvider)">
+        <member name="M:Narumikazuchi.IConvertible`1.ToType``1(``0)">
             <summary>
             Converts this instance into a new instance of <typeparamref name="TType"/> with the same value using the specified culture-specific formatting.
             </summary>
@@ -829,6 +835,12 @@
             Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
             </summary>
         </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor">
+            <summary>
+            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
+            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
+            </summary>
+        </member>
         <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0)">
             <summary>
             Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
@@ -836,7 +848,7 @@
             </summary>
             <param name="reference">The reference to wrap.</param>
         </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0,System.Boolean@)">
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0,System.Boolean)">
             <summary>
             Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
             if the <see cref="T:System.Threading.Tasks.Task"/> failed.
@@ -850,6 +862,12 @@
             </summary>
             <param name="reference">The wrapped reference.</param>
             <returns><see langword="true"/> if the reference is not <see langword="null"/>; otherwise, <see langword="false"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(System.Object)">
+            <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.ReferenceWrapper`1.ToString">
             <inheritdoc/>
