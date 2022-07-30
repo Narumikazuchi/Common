@@ -34,7 +34,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the path to the file, where the function is defined.
     /// </summary>
-    public ReferenceWrapper<String> File
+    public Option<String> File
     {
         get => m_Filename;
         init => m_Filename = value;
@@ -42,7 +42,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
-    public ReferenceWrapper<String> Target
+    public Option<String> Target
     {
         get => m_Target;
         init => m_Target = value;
@@ -50,7 +50,7 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
-    public ReferenceWrapper<String> Name
+    public Option<String> Name
     {
         get => m_Name;
         init => m_Name = value;
@@ -96,8 +96,8 @@ partial struct FunctionCallInformation
 
     private readonly Int32 m_Line;
     private readonly Int32 m_Column;
-    private readonly ReferenceWrapper<String> m_Filename;
-    private readonly ReferenceWrapper<String> m_Target;
-    private readonly ReferenceWrapper<String> m_Name;
+    private readonly Option<String> m_Filename;
+    private readonly Option<String> m_Target;
+    private readonly Option<String> m_Name;
     private readonly List<String?> m_Parameters = new();
 }

@@ -748,6 +748,53 @@
             </summary>
             <param name="propertyName">The name of the property that is changing.</param>
         </member>
+        <member name="T:Narumikazuchi.Option`1">
+            <summary>
+            represents a monad approach to possibly unset values.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.Map``1(System.Func{`0,``0})">
+            <summary>
+            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
+            of type <typeparamref name="TResult"/>.
+            </summary>
+            <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
+            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.MapDirect``1(System.Func{`0,Narumikazuchi.Option{``0}})">
+            <summary>
+            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
+            of type <typeparamref name="TResult"/>.
+            </summary>
+            <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</param>
+            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.TryGetValue(`0@)">
+            <summary>
+            Gets the value wrapped in the <see cref="T:Narumikazuchi.Option`1"/>.
+            </summary>
+            <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.Option`1"/>.</param>
+            <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.Option`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="P:Narumikazuchi.Option`1.HasValue">
+            <summary>
+            Gets whether the <see cref="T:Narumikazuchi.Option`1"/> wraps an actual value.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.Equals(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.Equals(Narumikazuchi.Option{`0})">
+            <inheritdoc/>
+        </member>
         <member name="T:Narumikazuchi.Pointer`1">
             <summary>
             Represents a reference to a struct or a reference to a reference for a class.
@@ -881,6 +928,9 @@
             <summary>
             Gets a wrapper for a <see langword="null"/> reference.
             </summary>
+        </member>
+        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(`0)">
+            <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(Narumikazuchi.ReferenceWrapper{`0})">
             <inheritdoc/>

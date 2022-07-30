@@ -7,6 +7,6 @@ internal static class __EnumChache<TEnum>
         new(collection: Enum.GetValues(typeof(TEnum))
                             .Cast<TEnum>());
 
-    public static Lazy<HashSet<TEnum>> DefinedValues { get; } = new(valueFactory: EnumerateValues,
-                                                                    mode: LazyThreadSafetyMode.ExecutionAndPublication);
+    internal static Lazy<HashSet<TEnum>> DefinedValues { get; } = new(valueFactory: EnumerateValues,
+                                                                      mode: LazyThreadSafetyMode.ExecutionAndPublication);
 }

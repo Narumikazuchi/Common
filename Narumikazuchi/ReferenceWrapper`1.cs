@@ -3,6 +3,7 @@
 /// <summary>
 /// Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
 /// </summary>
+[Obsolete("Deprecated in favor of Option<T>.", true)]
 public readonly partial struct ReferenceWrapper<TReference>
     where TReference : class
 {
@@ -140,6 +141,27 @@ partial struct ReferenceWrapper<TReference>
 {
     private readonly TReference? m_Reference;
     private readonly Boolean m_Throw;
+}
+
+// IEquatable<T>
+partial struct ReferenceWrapper<TReference> : IEquatable<TReference>
+{
+    /// <inheritdoc/>
+    public Boolean Equals(TReference? other)
+    {
+        if (m_Reference is null &&
+            other is null)
+        {
+            return true;
+        }
+        if (m_Reference is null)
+        {
+            return false;
+        }
+
+        return ReferenceEquals(objA: m_Reference,
+                               objB: other);
+    }
 }
 
 // IEquatable<T>
