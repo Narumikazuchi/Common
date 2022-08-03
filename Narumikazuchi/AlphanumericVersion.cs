@@ -13,15 +13,14 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion([DisallowNull] String major)
     {
-        ArgumentNullException.ThrowIfNull(major);
+        major.ThrowIfNullOrEmpty(asArgumentException: true);
 
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
-            exception.Data
-                     .Add(key: "Value",
-                          value: major);
+            exception.Data.Add(key: "Value",
+                               value: major);
             throw exception;
         }
 
@@ -46,25 +45,23 @@ public readonly partial struct AlphanumericVersion
     public AlphanumericVersion([DisallowNull] String major,
                                [DisallowNull] String minor)
     {
-        ArgumentNullException.ThrowIfNull(major);
-        ArgumentNullException.ThrowIfNull(minor);
+        major.ThrowIfNullOrEmpty(asArgumentException: true);
+        minor.ThrowIfNullOrEmpty(asArgumentException: true);
 
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
-            exception.Data
-                     .Add(key: "Value",
-                          value: major);
+            exception.Data.Add(key: "Value",
+                               value: major);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: minor))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(minor));
-            exception.Data
-                     .Add(key: "Value",
-                          value: minor);
+            exception.Data.Add(key: "Value",
+                               value: minor);
             throw exception;
         }
 
@@ -112,35 +109,32 @@ public readonly partial struct AlphanumericVersion
                                [DisallowNull] String minor,
                                [DisallowNull] String build)
     {
-        ArgumentNullException.ThrowIfNull(major);
-        ArgumentNullException.ThrowIfNull(minor);
-        ArgumentNullException.ThrowIfNull(build);
+        major.ThrowIfNullOrEmpty(asArgumentException: true);
+        minor.ThrowIfNullOrEmpty(asArgumentException: true);
+        build.ThrowIfNullOrEmpty(asArgumentException: true);
 
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
-            exception.Data
-                     .Add(key: "Value",
-                          value: major);
+            exception.Data.Add(key: "Value",
+                               value: major);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: minor))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(minor));
-            exception.Data
-                     .Add(key: "Value",
-                          value: minor);
+            exception.Data.Add(key: "Value",
+                               value: minor);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: build))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(build));
-            exception.Data
-                     .Add(key: "Value",
-                          value: build);
+            exception.Data.Add(key: "Value",
+                               value: build);
             throw exception;
         }
 
@@ -243,45 +237,41 @@ public readonly partial struct AlphanumericVersion
                                [DisallowNull] String build,
                                [DisallowNull] String revision)
     {
-        ArgumentNullException.ThrowIfNull(major);
-        ArgumentNullException.ThrowIfNull(minor);
-        ArgumentNullException.ThrowIfNull(build);
-        ArgumentNullException.ThrowIfNull(revision);
+        major.ThrowIfNullOrEmpty(asArgumentException: true);
+        minor.ThrowIfNullOrEmpty(asArgumentException: true);
+        build.ThrowIfNullOrEmpty(asArgumentException: true);
+        revision.ThrowIfNullOrEmpty(asArgumentException: true);
 
         if (!s_Regex.IsMatch(input: major))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
-            exception.Data
-                     .Add(key: "Value",
-                          value: major);
+            exception.Data.Add(key: "Value",
+                               value: major);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: minor))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(minor));
-            exception.Data
-                     .Add(key: "Value",
-                          value: minor);
+            exception.Data.Add(key: "Value",
+                               value: minor);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: build))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(build));
-            exception.Data
-                     .Add(key: "Value",
-                          value: build);
+            exception.Data.Add(key: "Value",
+                               value: build);
             throw exception;
         }
         if (!s_Regex.IsMatch(input: revision))
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(revision));
-            exception.Data
-                     .Add(key: "Value",
-                          value: revision);
+            exception.Data.Add(key: "Value",
+                               value: revision);
             throw exception;
         }
 
@@ -501,12 +491,13 @@ public readonly partial struct AlphanumericVersion
              revision: revision.ToString())
     { }
 
+#if PREVIEW
+
     /// <summary>
     /// Parses the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
     public static AlphanumericVersion Parse([DisallowNull] String source) =>
-        Parse(source: source, 
-              provider: null);
+        Parse(source: source);
 
     /// <summary>
     /// Tries to parse the specified string into a new <see cref="AlphanumericVersion"/> object.
@@ -515,8 +506,9 @@ public readonly partial struct AlphanumericVersion
     public static Boolean TryParse([DisallowNull] String source,
                                    out AlphanumericVersion result) =>
         TryParse(source: source,
-                 provider: null,
                  result: out result);
+
+#endif
 
     /// <inheritdoc/>
     public override Boolean Equals([NotNullWhen(true)] Object? obj) =>
@@ -588,10 +580,7 @@ public readonly partial struct AlphanumericVersion
     [return: NotNull]
     public String ToString([AllowNull] String? format)
     {
-        if (format is null)
-        {
-            format = "#.#.#.#";
-        }
+        format ??= "#.#.#.#";
 
         Int32 count = format.Count(x => x == '#')
                             .Clamp(1, 4);
@@ -646,10 +635,9 @@ public readonly partial struct AlphanumericVersion
 #if !PREVIEW
 
     /// <inheritdoc/>
-    public static AlphanumericVersion Parse([DisallowNull] String source,
-                                            [AllowNull] IFormatProvider? provider)
+    public static AlphanumericVersion Parse([DisallowNull] String source)
     {
-        ArgumentNullException.ThrowIfNull(source);
+        source.ThrowIfNullOrEmpty(asArgumentException: true);
 
         String[] segments = source.Split(separator: '.',
                                          options: StringSplitOptions.RemoveEmptyEntries);
@@ -658,9 +646,8 @@ public readonly partial struct AlphanumericVersion
         {
             ArgumentException exception = new(message: SEGMENT_COUNT_OUT_OF_BOUNDS,
                                               paramName: nameof(source));
-            exception.Data
-                     .Add(key: "Number of Segments",
-                          value: segments.Length);
+            exception.Data.Add(key: "Number of Segments",
+                               value: segments.Length);
             throw exception;
         }
 
@@ -672,9 +659,8 @@ public readonly partial struct AlphanumericVersion
                 !s_Regex.IsMatch(input: segments[i]))
             {
                 FormatException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC);
-                exception.Data
-                         .Add(key: "Value",
-                              value: segments[i]);
+                exception.Data.Add(key: "Value",
+                                   value: segments[i]);
                 throw exception;
             }
         }
@@ -702,7 +688,6 @@ public readonly partial struct AlphanumericVersion
 
     /// <inheritdoc/>
     public static Boolean TryParse([NotNullWhen(true)] String? source,
-                                   [AllowNull] IFormatProvider? provider,
                                    out AlphanumericVersion result)
     {
         if (String.IsNullOrWhiteSpace(source))
@@ -769,6 +754,7 @@ public readonly partial struct AlphanumericVersion
     [NotNull]
     public String Major => 
         m_Major;
+
     /// <summary>
     /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
@@ -784,6 +770,7 @@ public readonly partial struct AlphanumericVersion
             return m_Minor;
         }
     }
+
     /// <summary>
     /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
@@ -799,6 +786,7 @@ public readonly partial struct AlphanumericVersion
             return m_Build;
         }
     }
+
     /// <summary>
     /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
@@ -1038,9 +1026,8 @@ partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
         {
             ArgumentException exception = new(message: SEGMENT_COUNT_OUT_OF_BOUNDS,
                                               paramName: nameof(source));
-            exception.Data
-                     .Add(key: "Number of Segments",
-                          value: segments.Length);
+            exception.Data.Add(key: "Number of Segments",
+                               value: segments.Length);
             throw exception;
         }
 
@@ -1052,9 +1039,8 @@ partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
                 !s_Regex.IsMatch(input: segments[i]))
             {
                 FormatException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC);
-                exception.Data
-                         .Add(key: "Value",
-                              value: segments[i]);
+                exception.Data.Add(key: "Value",
+                                   value: segments[i]);
                 throw exception;
             }
         }

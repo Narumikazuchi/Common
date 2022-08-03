@@ -219,17 +219,6 @@
             <exception cref="T:System.ArgumentException"></exception>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
-            <summary>
-            Parses the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
-            <summary>
-            Tries to parse the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
-            </summary>
-            <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
-        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -264,10 +253,10 @@
             </remarks>
             <returns>This instance formatted as a <see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String,System.IFormatProvider)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,System.IFormatProvider,Narumikazuchi.AlphanumericVersion@)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
             <inheritdoc/>
         </member>
         <member name="P:Narumikazuchi.AlphanumericVersion.Major">
@@ -415,32 +404,78 @@
             <summary>
             Enumerates through all values defined for the <typeparamref name="TEnum"/>.
             </summary>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
+            <remarks>
+            Technically already included in the core libary as <see cref="M:System.Enum.GetValues``1"/>.
+            Because of that, this is now deprecated.
+            </remarks>
+            <returns>An <see cref="T:Narumikazuchi.EnumValues`1"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
         </member>
         <member name="M:Narumikazuchi.EnumEnumerator.EnumerateFlags``1(``0)">
             <summary>
             Enumerates the flags, which are set in the input value.
             </summary>
             <param name="enumValue">The value to enumerate the flags of.</param>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in the input value.</returns>
+            <returns>An <see cref="T:Narumikazuchi.EnumValues`1"/> containing all flags that are set in the input value.</returns>
+        </member>
+        <member name="T:Narumikazuchi.EnumValues`1">
+            <summary>
+            Represents an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and <see cref="T:System.Collections.Generic.IEnumerator`1"/> of type
+            <typeparamref name="TEnum"/>.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.EnumValues`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.EnumValues`1.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+        </member>
+        <member name="M:Narumikazuchi.EnumValues`1.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.EnumValues`1.Current">
+            <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.ExceptionHelpers">
             <summary>
             Contains helpers for throwing exceptions.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.String)">
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.Boolean,System.String)">
             <summary>
             Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
             </summary>
             <param name="source">The source to check against <see langword="null"/>.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="asArgumentException">Whether the method should throw an <see cref="T:System.ArgumentNullException"/> or a <see cref="T:System.NullReferenceException"/>.</param>
             <param name="varName">The name of the parameter.</param>
             <exception cref="T:System.NullReferenceException" />
             <remarks>
             The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
             will be filled with the name of the variable by this method.
             </remarks>
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfLesserThan``1(``0,``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
+            </summary>
+            <param name="source">The source to check against the <paramref name="bound"/>.</param>
+            <param name="bound">The low bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfBiggerThan``1(``0,``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
+            </summary>
+            <param name="source">The source to check against the <paramref name="bound"/>.</param>
+            <param name="bound">The high bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException" />
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
             <summary>
@@ -452,19 +487,6 @@
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNotCastable``2(``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.InvalidCastException"/> if the source parameter can't be cast to the generic type parameter <typeparamref name="TResult"/>.
-            </summary>
-            <param name="source">The source to cast to type <typeparamref name="TResult"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.InvalidCastException" />
-            <remarks>
-            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
-            will be filled with the name of the parameter and the '{1}' placeholder will be filled with the name of the type the method failed to cast the object to.
-            </remarks>
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
             <summary>
@@ -759,6 +781,9 @@
         <member name="M:Narumikazuchi.Option`1.GetHashCode">
             <inheritdoc/>
         </member>
+        <member name="M:Narumikazuchi.Option`1.ToString">
+            <inheritdoc/>
+        </member>
         <member name="M:Narumikazuchi.Option`1.Map``1(System.Func{`0,``0})">
             <summary>
             Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
@@ -835,19 +860,36 @@
             <param name="t">The object to create a <see cref="T:Narumikazuchi.Pointer`1"/> of.</param>
             <returns>A <see cref="T:Narumikazuchi.Pointer`1"/> to the reference of <typeparamref name="T"/></returns>
         </member>
+        <member name="T:Narumikazuchi.PrimeEnumerator">
+            <summary>
+            Enumerates through a list of prime numbers
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.PrimeEnumerator.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+        </member>
+        <member name="M:Narumikazuchi.PrimeEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.PrimeEnumerator.Current">
+            <inheritdoc/>
+        </member>
         <member name="T:Narumikazuchi.Primes">
             <summary>
             Provides methods to generate primes or check for them.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.Primes.IsPrime(System.Int32@)">
+        <member name="M:Narumikazuchi.Primes.IsPrime(System.Int64@)">
             <summary>
             Checks whether the specified candidate is a prime number.
             </summary>
             <param name="candidate">The candidate to check.</param>
             <returns><see langword="true"/> if the specified candidate is a prime; otherwise <see langword="false"/></returns>
         </member>
-        <member name="M:Narumikazuchi.Primes.GetPrevious(System.Int32@)">
+        <member name="M:Narumikazuchi.Primes.GetPrevious(System.Int64@)">
             <summary>
             Returns the nearest prime that is smaller than or equal to the specified parameter.
             </summary>
@@ -855,7 +897,7 @@
             <returns>The nearest prime that is smaller than or equal to the specified parameter</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
-        <member name="M:Narumikazuchi.Primes.GetNext(System.Int32@)">
+        <member name="M:Narumikazuchi.Primes.GetNext(System.Int64@)">
             <summary>
             Returns the nearest prime that is greater than or equal to the specified parameter.
             </summary>
@@ -870,7 +912,7 @@
             <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
-        <member name="M:Narumikazuchi.Primes.ListUntil(System.Int32,System.Int32)">
+        <member name="M:Narumikazuchi.Primes.ListUntil(System.Int64,System.Int64)">
             <summary>
             Enumerates all primes in the range specified by the specified starting point to the specified end point.
             </summary>

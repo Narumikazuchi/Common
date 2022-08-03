@@ -10,6 +10,7 @@ public interface ISynchronized
     /// </summary>
     [Pure]
     public Boolean IsSynchronized { get; }
+
     /// <summary>
     /// Gets the object mutex used to synchronize access to this <see cref="ISynchronized"/>.
     /// </summary>

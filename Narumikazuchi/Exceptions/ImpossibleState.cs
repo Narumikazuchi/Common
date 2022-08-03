@@ -39,9 +39,8 @@ public sealed class ImpossibleState : Exception
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.key,
-                     value: kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
@@ -57,9 +56,8 @@ public sealed class ImpossibleState : Exception
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.key,
-                     value: kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
@@ -77,9 +75,8 @@ public sealed class ImpossibleState : Exception
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.key,
-                     value: kv.value);
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
@@ -92,9 +89,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.Key,
-                     value: kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
@@ -110,9 +106,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.Key,
-                     value: kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
@@ -130,9 +125,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            this.Data
-                .Add(key: kv.Key,
-                     value: kv.Value);
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
         }
     }
     /// <summary>
@@ -145,9 +139,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data
-                .Add(key: tuple.Item1,
-                     value: tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
     /// <summary>
@@ -163,9 +156,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data
-                .Add(key: tuple.Item1,
-                     value: tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
     /// <summary>
@@ -183,9 +175,8 @@ public sealed class ImpossibleState : Exception
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
-            this.Data
-                .Add(key: tuple.Item1,
-                     value: tuple.Item2);
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
 

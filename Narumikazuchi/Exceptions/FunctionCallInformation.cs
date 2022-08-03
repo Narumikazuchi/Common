@@ -39,6 +39,7 @@ public readonly partial struct FunctionCallInformation
         get => m_Filename;
         init => m_Filename = value;
     }
+
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
@@ -47,6 +48,7 @@ public readonly partial struct FunctionCallInformation
         get => m_Target;
         init => m_Target = value;
     }
+
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
@@ -55,6 +57,7 @@ public readonly partial struct FunctionCallInformation
         get => m_Name;
         init => m_Name = value;
     }
+
     /// <summary>
     /// Gets the line number in the file.
     /// </summary>
@@ -63,6 +66,7 @@ public readonly partial struct FunctionCallInformation
         get => m_Line;
         init => m_Line = value;
     }
+
     /// <summary>
     /// Gets the column in the line of the file.
     /// </summary>
@@ -89,8 +93,7 @@ partial struct FunctionCallInformation
         }
         foreach (ParameterInfo parameter in method.GetParameters())
         {
-            m_Parameters.Add(parameter.ParameterType
-                                      .FullName);
+            m_Parameters.Add(parameter.ParameterType.FullName);
         }
     }
 

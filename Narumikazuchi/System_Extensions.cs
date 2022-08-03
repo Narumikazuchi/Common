@@ -17,7 +17,7 @@ public static class System_Extensions
     public static T Clamp<T>(this T value, 
                              T lowBound,
                              T highBound) 
-        where T : notnull, IComparable<T>
+        where T : IComparable<T>
     {
         if (value.CompareTo(lowBound) < 0)
         {
@@ -36,8 +36,8 @@ public static class System_Extensions
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
-        where TEnum : Enum =>
+    public static EnumValues<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
+        where TEnum : struct, Enum =>
             EnumEnumerator.EnumerateFlags(enumValue);
 
     /// <summary>
@@ -50,8 +50,9 @@ public static class System_Extensions
     {
         ArgumentNullException.ThrowIfNull(raw);
 
-        IEnumerable<Char> invalid = Path.GetInvalidFileNameChars()
-                                        .Union(second: Path.GetInvalidPathChars());
+        Char[] invalid = Path.GetInvalidFileNameChars()
+                             .Union(second: Path.GetInvalidPathChars())
+                             .ToArray();
         String result = raw;
         foreach (Char c in invalid)
         {

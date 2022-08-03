@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System;
+
+namespace Narumikazuchi;
 
 /// <summary>
 /// Provides methods to generate primes or check for them.
@@ -10,16 +12,16 @@ public static partial class Primes
     /// </summary>
     /// <param name="candidate">The candidate to check.</param>
     /// <returns><see langword="true"/> if the specified candidate is a prime; otherwise <see langword="false"/></returns>
-    public static Boolean IsPrime(in Int32 candidate)
+    public static Boolean IsPrime(in Int64 candidate)
     {
         if (candidate < 0)
         {
             return false;
         }
 
-        if (candidate <= s_Known[^1])
+        if (candidate <= Known[^1])
         {
-            Int32 index = s_Known.BinarySearch(item: candidate);
+            Int32 index = Known.BinarySearch(item: candidate);
             if (index > -1)
             {
                 return true;
@@ -28,8 +30,8 @@ public static partial class Primes
 
         if ((candidate & 1) != 0)
         {
-            Int32 max = (Int32)Math.Sqrt(candidate);
-            for (Int32 i = 3; 
+            Int64 max = (Int64)Math.Sqrt(candidate);
+            for (Int64 i = 3; 
                  i <= max; 
                  i += 2)
             {
@@ -38,6 +40,8 @@ public static partial class Primes
                     return false;
                 }
             }
+            Known.Add(candidate);
+            Known.Sort();
             return true;
         }
         return candidate == 2;
@@ -49,32 +53,35 @@ public static partial class Primes
     /// <param name="origin">The origin from where to start.</param>
     /// <returns>The nearest prime that is smaller than or equal to the specified parameter</returns>
     /// <exception cref="ArgumentException"/>
-    public static Int32 GetPrevious(in Int32 origin)
+    public static Int64 GetPrevious(in Int64 origin)
     {
         if (origin < 0)
         {
             ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
-            exception.Data
-                     .Add(key: "origin",
-                          value: origin);
+            exception.Data.Add(key: "origin",
+                               value: origin);
             throw exception;
         }
 
         Int32 index;
-        if (origin <= s_Known[^1])
+        if (origin <= Known[^1])
         {
             index = ApproachInRange(value: origin,
-                                    range: 0..(s_Known.Count - 1),
+                                    range: 0..(Known.Count - 1),
                                     reverse: true);
-            return s_Known[index];
+            return Known[index];
         }
 
-        FillMissingPrimes(origin);
+        Int64 next = Known[^1];
+        while (next < origin)
+        {
+            next = FindNextPrime();
+        }
 
         index = ApproachInRange(value: origin,
-                                range: 0..(s_Known.Count - 1),
+                                range: 0..(Known.Count - 1),
                                 reverse: true);
-        return s_Known[index];
+        return Known[index];
     }
 
     /// <summary>
@@ -83,41 +90,35 @@ public static partial class Primes
     /// <param name="origin">The origin from where to start.</param>
     /// <returns>The nearest prime that is greater than or equal to the specified parameter</returns>
     /// <exception cref="ArgumentException"/>
-    public static Int32 GetNext(in Int32 origin)
+    public static Int64 GetNext(in Int64 origin)
     {
         if (origin < 0)
         {
             ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
-            exception.Data
-                     .Add(key: "origin",
-                          value: origin);
+            exception.Data.Add(key: "origin",
+                               value: origin);
             throw exception;
         }
 
         Int32 index;
-        if (origin <= s_Known[^1])
+        if (origin <= Known[^1])
         {
             index = ApproachInRange(value: origin,
-                                    range: 0..(s_Known.Count - 1),
+                                    range: 0..(Known.Count - 1),
                                     reverse: false);
-            return s_Known[index];
+            return Known[index];
         }
 
-        for (Int32 i = origin | 1; 
-             i < Int32.MaxValue; 
-             i += 2)
+        Int64 next = Known[^1];
+        while (next < origin)
         {
-            if (IsPrime(i))
-            {
-                FillMissingPrimes(i);
-                break;
-            }
+            next = FindNextPrime();
         }
 
         index = ApproachInRange(value: origin,
-                                range: 0..(s_Known.Count - 1),
+                                range: 0..(Known.Count - 1),
                                 reverse: false);
-        return s_Known[index];
+        return Known[index];
     }
 
     /// <summary>
@@ -126,7 +127,7 @@ public static partial class Primes
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
     [return: NotNull]
-    public static IEnumerable<Int32> ListUntil(in Range range) =>
+    public static PrimeEnumerator ListUntil(in Range range) =>
         ListUntil(startPoint: range.Start.Value, 
                   endPoint: range.End.Value);
     /// <summary>
@@ -135,65 +136,38 @@ public static partial class Primes
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
     [return: NotNull]
-    public static IEnumerable<Int32> ListUntil(Int32 startPoint,
-                                               Int32 endPoint)
+    public static PrimeEnumerator ListUntil(Int64 startPoint,
+                                            Int64 endPoint)
     {
+        if (startPoint < 0)
+        {
+            ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
+            exception.Data.Add(key: "startPoint",
+                               value: startPoint);
+            throw exception;
+        }
+        if (endPoint < 0)
+        {
+            ArgumentException exception = new(message: NEGATIVE_NUMBERS_NOT_SUPPORTED);
+            exception.Data.Add(key: "endPoint",
+                               value: endPoint);
+            throw exception;
+        }
+
         if (startPoint > endPoint)
         {
             (startPoint, endPoint) = (endPoint, startPoint);
         }
 
-        if (endPoint > s_Known[^1])
-        {
-            FillMissingPrimes(endPoint | 1);
-        }
-
-        for (Int32 i = 0; 
-             i < s_Known.Count; 
-             i++)
-        {
-            if (s_Known[i] < startPoint)
-            {
-                continue;
-            }
-            if (endPoint < s_Known[i])
-            {
-                yield break;
-            }
-            yield return s_Known[i];
-        }
-        yield break;
+        return new(startPoint: startPoint,
+                   endPoint: endPoint);
     }
 }
 
 // Non-Public
 partial class Primes
 {
-    private static void FillMissingPrimes(in Int32 upperBound)
-    {
-        for (Int32 i = upperBound; 
-             i < Int32.MaxValue; 
-             i += 2)
-        {
-            if (IsPrime(i))
-            {
-                s_Known.Add(i);
-                break;
-            }
-        }
-        for (Int32 i = upperBound; 
-             i > s_Known[^1]; 
-             i -= 2)
-        {
-            if (IsPrime(i))
-            {
-                s_Known.Add(i);
-            }
-        }
-        s_Known.Sort();
-    }
-
-    private static Int32 ApproachInRange(in Int32 value,
+    private static Int32 ApproachInRange(in Int64 value,
                                          in Range range,
                                          in Boolean reverse)
     {
@@ -207,15 +181,15 @@ partial class Primes
             return range.End.Value;
         }
         length = (length + 1) / 2;
-        if (value > s_Known[range.Start] &&
-            value <= s_Known[range.Start.Value + length])
+        if (value > Known[range.Start] &&
+            value <= Known[range.Start.Value + length])
         {
             return ApproachInRange(value: value,
                                    range: range.Start.Value..(range.Start.Value + length),
                                    reverse: reverse);
         }
-        if (value > s_Known[range.Start.Value + length] &&
-            value <= s_Known[range.End])
+        if (value > Known[range.Start.Value + length] &&
+            value <= Known[range.End])
         {
             return ApproachInRange(value: value,
                                    range: (range.Start.Value + length)..range.End,
@@ -228,7 +202,19 @@ partial class Primes
         return range.Start.Value;
     }
 
-    private static readonly List<Int32> s_Known = new()
+    internal static Int64 FindNextPrime()
+    {
+        Int64 last = Known[^1];
+        do
+        {
+            last += 2;
+        } while (!IsPrime(last));
+
+        return last;
+    }
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    internal static List<Int64> Known { get; } = new()
     {
         2,
         3,

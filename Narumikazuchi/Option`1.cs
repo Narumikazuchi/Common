@@ -41,6 +41,10 @@ public readonly partial struct Option<T>
         }
     }
 
+    /// <inheritdoc/>
+    public override String? ToString() =>
+        m_Value?.ToString();
+
     /// <summary>
     /// Maps the value of the <see cref="Option{T}"/> from it's type <typeparamref name="T"/> to a new <see cref="Option{T}"/>
     /// of type <typeparamref name="TResult"/>.

@@ -45,12 +45,13 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly)
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(assembly);
 
-        return assembly.GetCustomAttributes<TAttribute>();
+        return assembly.GetCustomAttributes<TAttribute>()
+                       .ToImmutableArray();
     }
 
     /// <summary>
@@ -108,12 +109,13 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(info);
 
-        return info.GetCustomAttributes<TAttribute>();
+        return info.GetCustomAttributes<TAttribute>()
+                   .ToImmutableArray();
     }
 
     /// <summary>
@@ -171,12 +173,12 @@ partial class AttributeResolver
     /// <exception cref="ArgumentNullException"/>
     [Pure]
     [return: NotNull]
-    public static IEnumerable<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(info);
-
-        return info.GetCustomAttributes<TAttribute>();
+        return info.GetCustomAttributes<TAttribute>()
+                   .ToImmutableArray();
     }
 
     /// <summary>

@@ -12,6 +12,6 @@ public interface IConvertible<TType>
     /// <returns>A new instance of <typeparamref name="TType"/> with the same value as this instance</returns>
     [Pure]
     [return: NotNull]
-    internal protected TType ToType<TFormat>([AllowNull] TFormat? provider)
+    public TType ToType<TFormat>([AllowNull] TFormat? provider)
         where TFormat : IFormatProvider;
 }
