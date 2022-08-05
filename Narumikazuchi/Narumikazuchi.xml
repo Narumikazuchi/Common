@@ -802,6 +802,14 @@
             <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
+        <member name="M:Narumikazuchi.Option`1.Interact(System.Action{`0})">
+            <summary>
+            Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="P:Narumikazuchi.Option`1.HasValue"/> is <see langword="true"/>.
+            Otherwise, nothing will happen.
+            </summary>
+            <param name="interaction">The interaction to execute.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
         <member name="M:Narumikazuchi.Option`1.TryGetValue(`0@)">
             <summary>
             Gets the value wrapped in the <see cref="T:Narumikazuchi.Option`1"/>.

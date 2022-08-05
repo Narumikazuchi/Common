@@ -92,6 +92,23 @@ public readonly partial struct Option<T>
     }
 
     /// <summary>
+    /// Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="HasValue"/> is <see langword="true"/>.
+    /// Otherwise, nothing will happen.
+    /// </summary>
+    /// <param name="interaction">The interaction to execute.</param>
+    /// <exception cref="ArgumentNullException"/>
+    [Pure]
+    public void Interact([DisallowNull] Action<T> interaction)
+    {
+        ArgumentNullException.ThrowIfNull(interaction);
+
+        if (m_HasValue)
+        {
+            interaction.Invoke(m_Value!);
+        }
+    }
+
+    /// <summary>
     /// Gets the value wrapped in the <see cref="Option{T}"/>.
     /// </summary>
     /// <param name="value">The value wrapped in the <see cref="Option{T}"/>.</param>
@@ -160,6 +177,22 @@ public readonly partial struct Option<T>
                                       T? right)
     {
         return !left.Equals(right);
+    }
+
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator ==(T? left,
+                                      Option<T> right)
+    {
+        return right.Equals(left);
+    }
+
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator !=(T? left,
+                                      Option<T> right)
+    {
+        return !right.Equals(left);
     }
 #pragma warning restore
 
