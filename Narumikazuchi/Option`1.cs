@@ -56,7 +56,7 @@ public readonly partial struct Option<T>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Option<TResult> Map<TResult>(
@@ -91,7 +91,7 @@ public readonly partial struct Option<T>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Option<TResult> MapDirect<TResult>(
@@ -151,7 +151,7 @@ public readonly partial struct Option<T>
     /// </summary>
     /// <param name="value">The value wrapped in the <see cref="Option{T}"/>.</param>
     /// <returns><see langword="true"/> if the <see cref="Option{T}"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean TryGetValue(
@@ -189,7 +189,7 @@ public readonly partial struct Option<T>
         }
     }
 
-#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
+#if !NET7_0_OR_GREATER
     [Pure]
     public static Boolean operator ==(Option<T> left,
                                       Option<T> right)
@@ -219,7 +219,7 @@ public readonly partial struct Option<T>
     }
 #endif
 
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean operator ==(T? left,
@@ -228,7 +228,7 @@ public readonly partial struct Option<T>
         return right.Equals(left);
     }
 
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean operator !=(T? left,
@@ -241,7 +241,7 @@ public readonly partial struct Option<T>
     /// <summary>
     /// Gets whether the <see cref="Option{T}"/> wraps an actual value.
     /// </summary>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean HasValue =>
@@ -297,7 +297,7 @@ partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>, Boolean>
 partial struct Option<T> : IEquatable<T>
 {
     /// <inheritdoc/>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean Equals(T? other)
@@ -321,7 +321,7 @@ partial struct Option<T> : IEquatable<T>
 partial struct Option<T> : IEquatable<Option<T>>
 {
     /// <inheritdoc/>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean Equals(Option<T> other)

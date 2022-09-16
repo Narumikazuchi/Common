@@ -8,7 +8,7 @@ public interface ISynchronized
     /// <summary>
     /// Gets a value indicating whether access to this <see cref="ISynchronized"/> is synchronized (thread safe).
     /// </summary>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean IsSynchronized { get; }
@@ -16,7 +16,7 @@ public interface ISynchronized
     /// <summary>
     /// Gets the object mutex used to synchronize access to this <see cref="ISynchronized"/>.
     /// </summary>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER

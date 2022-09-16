@@ -17,7 +17,7 @@ public static class EnumEnumerator
         where TEnum : struct, Enum =>
             new(mode: 1);
 
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+#if NET47_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     /// <summary>
     /// Enumerates the flags, which are set in the input value.
     /// </summary>

@@ -10,7 +10,7 @@ public interface IConvertible<TType>
     /// </summary>
     /// <param name="provider">An <see cref="IFormatProvider"/> implementation which provides culture-specific formatting.</param>
     /// <returns>A new instance of <typeparamref name="TType"/> with the same value as this instance</returns>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER

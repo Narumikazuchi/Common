@@ -12,7 +12,7 @@ public static class System_Extensions
     /// <param name="lowBound">Low-bound for the clamping</param>
     /// <param name="highBound">High-bound for the clamping</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -34,12 +34,12 @@ public static class System_Extensions
         return value;
     }
 
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+#if NET47_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     /// <summary>
     /// Enumerates the flags, which are set in this value.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -54,7 +54,7 @@ public static class System_Extensions
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
-#if NET40 || NET5_0_OR_GREATER
+#if NET47_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER

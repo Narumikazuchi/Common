@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net40;net47;net471;net472;net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net47;net471;net472;net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -17,7 +17,7 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2022 Narumikazuchi</Copyright>
-		<Version>4.1.2</Version>
+		<Version>4.1.3</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>

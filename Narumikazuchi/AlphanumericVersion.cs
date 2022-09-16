@@ -868,14 +868,30 @@ public readonly partial struct AlphanumericVersion
         return builder.ToString();
     }
 
-#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
+#if !NET7_0_OR_GREATER
     /// <inheritdoc/>
-    public static AlphanumericVersion Parse([DisallowNull] String source)
+    public static AlphanumericVersion Parse(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String source)
     {
+#if NETCOREAPP3_0_OR_GREATER
         source.ThrowIfNullOrEmpty(asArgumentException: true);
+#else
+        if (String.IsNullOrWhiteSpace(source))
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+#endif
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
         String[] segments = source.Split(separator: '.',
                                          options: StringSplitOptions.RemoveEmptyEntries);
+#else
+        String[] segments = source.Split(separator: new Char[] { '.' },
+                                         options: StringSplitOptions.RemoveEmptyEntries);
+#endif
         if (segments.Length is < 1
                             or > 4)
         {
@@ -922,8 +938,12 @@ public readonly partial struct AlphanumericVersion
     }
 
     /// <inheritdoc/>
-    public static Boolean TryParse([NotNullWhen(true)] String? source,
-                                   out AlphanumericVersion result)
+    public static Boolean TryParse(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        String? source,
+        out AlphanumericVersion result)
     {
         if (String.IsNullOrWhiteSpace(source))
         {
@@ -931,8 +951,14 @@ public readonly partial struct AlphanumericVersion
             return false;
         }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
         String[] segments = source!.Split(separator: '.',
+                                         options: StringSplitOptions.RemoveEmptyEntries);
+#else
+        String[] segments = source!.Split(separator: new Char[] { '.' },
                                           options: StringSplitOptions.RemoveEmptyEntries);
+#endif
+
         if (segments.Length is < 1
                             or > 4)
         {
@@ -982,9 +1008,9 @@ public readonly partial struct AlphanumericVersion
     }
 #endif
 
-    /// <summary>
-    /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
-    /// </summary>
+        /// <summary>
+        /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
+        /// </summary>
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
 #endif
@@ -1076,7 +1102,7 @@ public readonly partial struct AlphanumericVersion
                    minor: source.Minor);
     }
 
-#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
+#if !NET7_0_OR_GREATER
     /// <inheritdoc/>
     public static Boolean operator ==(AlphanumericVersion left,
                                       AlphanumericVersion right)
