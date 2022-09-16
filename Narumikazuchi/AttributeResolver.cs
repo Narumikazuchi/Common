@@ -32,7 +32,14 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
+#else
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
 
         return Attribute.IsDefined(element: assembly,
                                    attributeType: typeof(TAttribute));
@@ -48,7 +55,14 @@ partial class AttributeResolver
     public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
+#else
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
 
         return assembly.GetCustomAttributes<TAttribute>()
                        .ToImmutableArray();
@@ -65,7 +79,14 @@ partial class AttributeResolver
     public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
+#else
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
 
         if (MultipleAllowed<TAttribute>())
         {
@@ -96,7 +117,14 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
 
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
@@ -112,7 +140,14 @@ partial class AttributeResolver
     public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
 
         return info.GetCustomAttributes<TAttribute>()
                    .ToImmutableArray();
@@ -129,7 +164,14 @@ partial class AttributeResolver
     public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
 
         if (MultipleAllowed<TAttribute>())
         {
@@ -160,7 +202,14 @@ partial class AttributeResolver
     public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
 
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
@@ -176,7 +225,15 @@ partial class AttributeResolver
     public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
         return info.GetCustomAttributes<TAttribute>()
                    .ToImmutableArray();
     }
@@ -192,7 +249,14 @@ partial class AttributeResolver
     public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] ParameterInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
 
         if (MultipleAllowed<TAttribute>())
         {

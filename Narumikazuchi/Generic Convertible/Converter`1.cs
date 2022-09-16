@@ -44,7 +44,14 @@ partial class Converter<TResult>
         where TConvertible : IConvertible<TResult>
         where TFormat : IFormatProvider
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(convertible);
+#else
+        if (convertible is null)
+        {
+            throw new ArgumentNullException(nameof(convertible));
+        }
+#endif
 
         return convertible.ToType(provider);
     }

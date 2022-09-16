@@ -30,8 +30,6 @@ public static class EnumEnumerator
     public static EnumValues<TEnum> EnumerateFlags<TEnum>(TEnum enumValue)
         where TEnum : struct, Enum
     {
-        ArgumentNullException.ThrowIfNull(enumValue);
-
         if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
         {
             return new(mode: 0);

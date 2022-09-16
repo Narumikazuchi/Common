@@ -56,7 +56,14 @@ public readonly partial struct Option<T>
     [return: NotNull]
     public Option<TResult> Map<TResult>([DisallowNull] Func<T, TResult> map)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(map);
+#else
+        if (map is null)
+        {
+            throw new ArgumentNullException(nameof(map));
+        }
+#endif
 
         if (!m_HasValue)
         {
@@ -79,7 +86,14 @@ public readonly partial struct Option<T>
     [return: NotNull]
     public Option<TResult> MapDirect<TResult>([DisallowNull] Func<T, Option<TResult>> map)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(map);
+#else
+        if (map is null)
+        {
+            throw new ArgumentNullException(nameof(map));
+        }
+#endif
 
         if (!m_HasValue)
         {
@@ -100,7 +114,14 @@ public readonly partial struct Option<T>
     [Pure]
     public void Interact([DisallowNull] Action<T> interaction)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(interaction);
+#else
+        if (interaction is null)
+        {
+            throw new ArgumentNullException(nameof(interaction));
+        }
+#endif
 
         if (m_HasValue)
         {
@@ -147,6 +168,7 @@ public readonly partial struct Option<T>
         }
     }
 
+#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
     [Pure]
     [return: NotNull]
     public static Boolean operator ==(Option<T> left,
@@ -178,6 +200,7 @@ public readonly partial struct Option<T>
     {
         return !left.Equals(right);
     }
+#endif
 
     [Pure]
     [return: NotNull]
@@ -207,6 +230,52 @@ public readonly partial struct Option<T>
     private readonly Boolean m_HasValue;
     private readonly T? m_Value;
 }
+
+#if NET7_0_OR_GREATER
+// IEqualityOperators<Option<T>, T>
+partial struct Option<T> : IEqualityOperators<Option<T>, T>
+{
+#pragma warning disable CS1591 // Missing comments
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator ==(Option<T> left,
+                                      T? right)
+    {
+        return left.Equals(right);
+    }
+
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator !=(Option<T> left,
+                                      T? right)
+    {
+        return !left.Equals(right);
+    }
+#pragma warning restore
+}
+
+// IEqualityOperators<Option<T>, Option<T>>
+partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>>
+{
+#pragma warning disable CS1591 // Missing comments
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator ==(Option<T> left,
+                                      Option<T> right)
+    {
+        return left.Equals(right);
+    }
+
+    [Pure]
+    [return: NotNull]
+    public static Boolean operator !=(Option<T> left,
+                                      Option<T> right)
+    {
+        return !left.Equals(right);
+    }
+#pragma warning restore
+}
+#endif
 
 // IEquatable<T>
 partial struct Option<T> : IEquatable<T>

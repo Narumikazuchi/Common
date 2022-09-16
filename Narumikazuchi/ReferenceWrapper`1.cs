@@ -1,5 +1,6 @@
 ﻿namespace Narumikazuchi;
 
+#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
 /// <summary>
 /// Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
 /// </summary>
@@ -184,3 +185,4 @@ partial struct ReferenceWrapper<TReference> : IEquatable<ReferenceWrapper<TRefer
                                objB: other.m_Reference);
     }
 }
+#endif

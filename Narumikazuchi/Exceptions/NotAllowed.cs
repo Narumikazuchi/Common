@@ -50,7 +50,14 @@ public sealed class NotAllowed : Exception
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
@@ -69,7 +76,14 @@ public sealed class NotAllowed : Exception
                                     arg1: message),
              innerException: innerException)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
@@ -83,7 +97,14 @@ public sealed class NotAllowed : Exception
     public NotAllowed([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
@@ -100,7 +121,14 @@ public sealed class NotAllowed : Exception
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
@@ -119,7 +147,14 @@ public sealed class NotAllowed : Exception
                                     arg1: message),
              innerException: innerException)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
@@ -133,7 +168,14 @@ public sealed class NotAllowed : Exception
     public NotAllowed([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
         base(message: MESSAGE)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
@@ -150,7 +192,14 @@ public sealed class NotAllowed : Exception
                                     arg0: MESSAGE,
                                     arg1: message))
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {
@@ -169,7 +218,14 @@ public sealed class NotAllowed : Exception
                                     arg1: message),
              innerException: innerException)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {

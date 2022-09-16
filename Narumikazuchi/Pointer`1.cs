@@ -1,7 +1,5 @@
 ﻿namespace Narumikazuchi;
 
-#if !PREVIEW
-
 /// <summary>
 /// Represents a reference to a struct or a reference to a reference for a class.
 /// </summary>
@@ -130,5 +128,3 @@ unsafe partial struct Pointer<T>
         new(pointer: pointer);
 #pragma warning restore
 }
-
-#endif

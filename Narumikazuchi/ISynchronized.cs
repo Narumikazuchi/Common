@@ -16,5 +16,5 @@ public interface ISynchronized
     /// </summary>
     [Pure]
     [NotNull]
-    public Object SyncRoot { get; }
+    public Mutex SyncRoot { get; }
 }

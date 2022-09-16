@@ -14,7 +14,7 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the inner <see cref="Exception"/>.
     /// </summary>
-    public Exception? InnerException => 
+    public Option<Exception> InnerException => 
         m_Source.InnerException;
 
     /// <summary>
@@ -26,32 +26,26 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the type in which the <see cref="Exception"/> occured.
     /// </summary>
-    public Type? SourceType => 
-        m_Source.TargetSite?
-                .DeclaringType;
+    public Option<Type> SourceType => 
+        m_Source.TargetSite?.DeclaringType;
 
     /// <summary>
     /// Gets the library where the <see cref="SourceType"/> is declared.
     /// </summary>
-    public String? SourceLibrary => 
-        m_Source.TargetSite?
-                .Module
-                .FullyQualifiedName;
+    public Option<String> SourceLibrary => 
+        m_Source.TargetSite?.Module.FullyQualifiedName;
 
     /// <summary>
     /// Gets the member who caused the <see cref="Exception"/>.
     /// </summary>
-    public String? SourceMember => 
-        m_Source.TargetSite?
-                .ToString();
+    public Option<String> SourceMember => 
+        m_Source.TargetSite?.ToString();
 
     /// <summary>
     /// Gets the member type of the <see cref="SourceMember"/>.
     /// </summary>
-    public String? SourceMemberType => 
-        m_Source.TargetSite?
-                .MemberType
-                .ToString();
+    public Option<String> SourceMemberType => 
+        m_Source.TargetSite?.MemberType.ToString();
 }
 
 partial struct ExceptionInformation

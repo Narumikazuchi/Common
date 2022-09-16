@@ -491,8 +491,7 @@ public readonly partial struct AlphanumericVersion
              revision: revision.ToString())
     { }
 
-#if PREVIEW
-
+#if NET7_0_OR_GREATER
     /// <summary>
     /// Parses the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
@@ -507,7 +506,6 @@ public readonly partial struct AlphanumericVersion
                                    out AlphanumericVersion result) =>
         TryParse(source: source,
                  result: out result);
-
 #endif
 
     /// <inheritdoc/>
@@ -632,8 +630,7 @@ public readonly partial struct AlphanumericVersion
         return builder.ToString();
     }
 
-#if !PREVIEW
-
+#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
     /// <inheritdoc/>
     public static AlphanumericVersion Parse([DisallowNull] String source)
     {
@@ -745,7 +742,6 @@ public readonly partial struct AlphanumericVersion
                      revision: segments[3]);
         return true;
     }
-
 #endif
 
     /// <summary>
@@ -830,8 +826,7 @@ public readonly partial struct AlphanumericVersion
                    minor: source.Minor);
     }
 
-#if !PREVIEW
-
+#if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
     /// <inheritdoc/>
     public static Boolean operator ==(AlphanumericVersion left,
                                       AlphanumericVersion right)
@@ -845,7 +840,6 @@ public readonly partial struct AlphanumericVersion
     {
         return left.CompareTo(right) != 0;
     }
-
 #endif
 }
 
@@ -990,8 +984,7 @@ partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
         this.CompareTo(other) == 0;
 }
 
-#if PREVIEW
-
+#if NET7_0_OR_GREATER
 // IEqualityOperators<T, U>
 partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, AlphanumericVersion>
 {
@@ -1010,8 +1003,8 @@ partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, Alp
     }
 }
 
-// IParseable<T>
-partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
+// IParsable<T>
+partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
 {
     /// <inheritdoc/>
     public static AlphanumericVersion Parse([DisallowNull] String source, 
@@ -1127,7 +1120,6 @@ partial struct AlphanumericVersion : IParseable<AlphanumericVersion>
         return true;
     }
 }
-
 #endif
 
 // IStructuralComparable
@@ -1136,7 +1128,14 @@ partial struct AlphanumericVersion : IStructuralComparable
     Int32 IStructuralComparable.CompareTo([AllowNull] Object? other,
                                           [DisallowNull] IComparer comparer)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);
+#else
+        if (comparer == null)
+        {
+            throw new ArgumentNullException(nameof(comparer));
+        }
+#endif
 
         return comparer.Compare(x: this,
                                 y: other);
@@ -1149,7 +1148,14 @@ partial struct AlphanumericVersion : IStructuralEquatable
     Boolean IStructuralEquatable.Equals([AllowNull] Object? other,
                                         [DisallowNull] IEqualityComparer comparer)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);
+#else
+        if (comparer == null)
+        {
+            throw new ArgumentNullException(nameof(comparer));
+        }
+#endif
 
         return comparer.Equals(x: this,
                                y: other);
@@ -1157,7 +1163,14 @@ partial struct AlphanumericVersion : IStructuralEquatable
 
     Int32 IStructuralEquatable.GetHashCode([DisallowNull] IEqualityComparer comparer)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);
+#else
+        if (comparer == null)
+        {
+            throw new ArgumentNullException(nameof(comparer));
+        }
+#endif
 
         return comparer.GetHashCode(this);
     }

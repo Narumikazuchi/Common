@@ -149,7 +149,14 @@ public static class ExceptionHelpers
     /// <returns>An information object, containing detailed data on the exception</returns>
     public static ExceptionInformation ExtractInformation(this Exception source)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(source);
+#else
+        if (source is null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+#endif
 
         return new(source: source);
     }

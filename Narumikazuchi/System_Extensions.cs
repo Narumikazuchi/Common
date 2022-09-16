@@ -48,7 +48,14 @@ public static class System_Extensions
     [return: NotNull]
     public static String SanitizeForFilename(this String raw)
     {
+#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(raw);
+#else
+        if (raw is null)
+        {
+            throw new ArgumentNullException(nameof(raw));
+        }
+#endif
 
         Char[] invalid = Path.GetInvalidFileNameChars()
                              .Union(second: Path.GetInvalidPathChars())
