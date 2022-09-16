@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Provides methods to generate primes or check for them.
@@ -19,7 +17,11 @@ public static partial class Primes
             return false;
         }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         if (candidate <= Known[^1])
+#else
+        if (candidate <= Known.Last())
+#endif
         {
             Int32 index = Known.BinarySearch(item: candidate);
             if (index > -1)
@@ -64,6 +66,8 @@ public static partial class Primes
         }
 
         Int32 index;
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         if (origin <= Known[^1])
         {
             index = ApproachInRange(value: origin,
@@ -81,6 +85,28 @@ public static partial class Primes
         index = ApproachInRange(value: origin,
                                 range: 0..(Known.Count - 1),
                                 reverse: true);
+#else
+        if (origin <= Known.Last())
+        {
+            index = ApproachInRange(value: origin,
+                                    start: 0,
+                                    end: Known.Count - 1,
+                                    reverse: true);
+            return Known[index];
+        }
+
+        Int64 next = Known.Last();
+        while (next < origin)
+        {
+            next = FindNextPrime();
+        }
+
+        index = ApproachInRange(value: origin,
+                                start: 0,
+                                end: Known.Count - 1,
+                                reverse: true);
+#endif
+
         return Known[index];
     }
 
@@ -101,6 +127,8 @@ public static partial class Primes
         }
 
         Int32 index;
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         if (origin <= Known[^1])
         {
             index = ApproachInRange(value: origin,
@@ -118,24 +146,46 @@ public static partial class Primes
         index = ApproachInRange(value: origin,
                                 range: 0..(Known.Count - 1),
                                 reverse: false);
+#else
+        if (origin <= Known.Last())
+        {
+            index = ApproachInRange(value: origin,
+                                    start: 0,
+                                    end: Known.Count - 1,
+                                    reverse: false);
+            return Known[index];
+        }
+
+        Int64 next = Known.Last();
+        while (next < origin)
+        {
+            next = FindNextPrime();
+        }
+
+        index = ApproachInRange(value: origin,
+                                start: 0,
+                                end: Known.Count - 1,
+                                reverse: false);
+#endif
+
         return Known[index];
     }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// Enumerates all primes in the specified range.
     /// </summary>
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
-    [return: NotNull]
     public static PrimeEnumerator ListUntil(in Range range) =>
         ListUntil(startPoint: range.Start.Value, 
                   endPoint: range.End.Value);
+#endif
     /// <summary>
     /// Enumerates all primes in the range specified by the specified starting point to the specified end point.
     /// </summary>
     /// <returns>The list of primes contained in the specified range</returns>
     /// <exception cref="ArgumentException"/>
-    [return: NotNull]
     public static PrimeEnumerator ListUntil(Int64 startPoint,
                                             Int64 endPoint)
     {
@@ -156,7 +206,13 @@ public static partial class Primes
 
         if (startPoint > endPoint)
         {
+#if NET47_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
             (startPoint, endPoint) = (endPoint, startPoint);
+#else
+            Int64 temp = startPoint;
+            startPoint = endPoint;
+            endPoint = temp;
+#endif
         }
 
         return new(startPoint: startPoint,
@@ -167,6 +223,7 @@ public static partial class Primes
 // Non-Public
 partial class Primes
 {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     private static Int32 ApproachInRange(in Int64 value,
                                          in Range range,
                                          in Boolean reverse)
@@ -201,10 +258,53 @@ partial class Primes
         }
         return range.Start.Value;
     }
+#else
+    private static Int32 ApproachInRange(in Int64 value,
+                                         in Int32 start,
+                                         in Int32 end,
+                                         in Boolean reverse)
+    {
+        Int32 length = start - end;
+        if (length == 1)
+        {
+            if (reverse)
+            {
+                return start;
+            }
+            return end;
+        }
+        length = (length + 1) / 2;
+        if (value > Known[start] &&
+            value <= Known[start + length])
+        {
+            return ApproachInRange(value: value,
+                                   start: start,
+                                   end: start + length,
+                                   reverse: reverse);
+        }
+        if (value > Known[start + length] &&
+            value <= Known[end])
+        {
+            return ApproachInRange(value: value,
+                                   start: start + length,
+                                   end: end,
+                                   reverse: reverse);
+        }
+        if (reverse)
+        {
+            return end;
+        }
+        return start;
+    }
+#endif
 
     internal static Int64 FindNextPrime()
     {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         Int64 last = Known[^1];
+#else
+        Int64 last = Known.Last();
+#endif
         do
         {
             last += 2;

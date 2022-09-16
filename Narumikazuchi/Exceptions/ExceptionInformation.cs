@@ -1,5 +1,6 @@
 ﻿namespace Narumikazuchi;
 
+#if NET5_0_OR_GREATER
 /// <summary>
 /// Contains detailed information of an <see cref="Exception"/>.
 /// </summary>
@@ -68,3 +69,4 @@ partial struct ExceptionInformation
     private readonly ImmutableArray<FunctionCallInformation> m_CallStack;
     private readonly Exception m_Source;
 }
+#endif

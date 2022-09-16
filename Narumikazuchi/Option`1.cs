@@ -12,7 +12,11 @@ public readonly partial struct Option<T>
     }
 
     /// <inheritdoc/>
-    public override Boolean Equals([NotNullWhen(true)] Object? obj)
+    public override Boolean Equals(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        Object? obj)
     {
         if (obj is T value)
         {
@@ -52,9 +56,14 @@ public readonly partial struct Option<T>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public Option<TResult> Map<TResult>([DisallowNull] Func<T, TResult> map)
+#endif
+    public Option<TResult> Map<TResult>(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        Func<T, TResult> map)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(map);
@@ -82,9 +91,14 @@ public readonly partial struct Option<T>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public Option<TResult> MapDirect<TResult>([DisallowNull] Func<T, Option<TResult>> map)
+#endif
+    public Option<TResult> MapDirect<TResult>(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        Func<T, Option<TResult>> map)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(map);
@@ -111,8 +125,11 @@ public readonly partial struct Option<T>
     /// </summary>
     /// <param name="interaction">The interaction to execute.</param>
     /// <exception cref="ArgumentNullException"/>
-    [Pure]
-    public void Interact([DisallowNull] Action<T> interaction)
+    public void Interact(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        Action<T> interaction)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(interaction);
@@ -134,16 +151,20 @@ public readonly partial struct Option<T>
     /// </summary>
     /// <param name="value">The value wrapped in the <see cref="Option{T}"/>.</param>
     /// <returns><see langword="true"/> if the <see cref="Option{T}"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public Boolean TryGetValue([NotNullWhen(true)] out T? value)
+#endif
+    public Boolean TryGetValue(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        out T? value)
     {
         value = m_Value;
         return m_HasValue;
     }
 
 #pragma warning disable CS1591 // Missing comments
-    [return: NotNull]
     public static implicit operator Option<T>(T? value)
     {
         if (value is null)
@@ -170,7 +191,6 @@ public readonly partial struct Option<T>
 
 #if (NET5_0 || NET6_0) && !NET7_0_OR_GREATER
     [Pure]
-    [return: NotNull]
     public static Boolean operator ==(Option<T> left,
                                       Option<T> right)
     {
@@ -178,7 +198,6 @@ public readonly partial struct Option<T>
     }
 
     [Pure]
-    [return: NotNull]
     public static Boolean operator !=(Option<T> left,
                                       Option<T> right)
     {
@@ -186,7 +205,6 @@ public readonly partial struct Option<T>
     }
 
     [Pure]
-    [return: NotNull]
     public static Boolean operator ==(Option<T> left,
                                       T? right)
     {
@@ -194,7 +212,6 @@ public readonly partial struct Option<T>
     }
 
     [Pure]
-    [return: NotNull]
     public static Boolean operator !=(Option<T> left,
                                       T? right)
     {
@@ -202,16 +219,18 @@ public readonly partial struct Option<T>
     }
 #endif
 
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
+#endif
     public static Boolean operator ==(T? left,
                                       Option<T> right)
     {
         return right.Equals(left);
     }
 
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
+#endif
     public static Boolean operator !=(T? left,
                                       Option<T> right)
     {
@@ -222,8 +241,9 @@ public readonly partial struct Option<T>
     /// <summary>
     /// Gets whether the <see cref="Option{T}"/> wraps an actual value.
     /// </summary>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [NotNull]
+#endif
     public Boolean HasValue =>
         m_HasValue;
 
@@ -233,11 +253,10 @@ public readonly partial struct Option<T>
 
 #if NET7_0_OR_GREATER
 // IEqualityOperators<Option<T>, T>
-partial struct Option<T> : IEqualityOperators<Option<T>, T>
+partial struct Option<T> : IEqualityOperators<Option<T>, T, Boolean>
 {
 #pragma warning disable CS1591 // Missing comments
     [Pure]
-    [return: NotNull]
     public static Boolean operator ==(Option<T> left,
                                       T? right)
     {
@@ -245,7 +264,6 @@ partial struct Option<T> : IEqualityOperators<Option<T>, T>
     }
 
     [Pure]
-    [return: NotNull]
     public static Boolean operator !=(Option<T> left,
                                       T? right)
     {
@@ -255,11 +273,10 @@ partial struct Option<T> : IEqualityOperators<Option<T>, T>
 }
 
 // IEqualityOperators<Option<T>, Option<T>>
-partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>>
+partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>, Boolean>
 {
 #pragma warning disable CS1591 // Missing comments
     [Pure]
-    [return: NotNull]
     public static Boolean operator ==(Option<T> left,
                                       Option<T> right)
     {
@@ -267,7 +284,6 @@ partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>>
     }
 
     [Pure]
-    [return: NotNull]
     public static Boolean operator !=(Option<T> left,
                                       Option<T> right)
     {
@@ -281,8 +297,9 @@ partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>>
 partial struct Option<T> : IEquatable<T>
 {
     /// <inheritdoc/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
+#endif
     public Boolean Equals(T? other)
     {
         if (m_Value is null &&
@@ -295,8 +312,8 @@ partial struct Option<T> : IEquatable<T>
             return false;
         }
 
-        return EqualityComparer<T>.Default.Equals(x: m_Value,
-                                                  y: other);
+        return EqualityComparer<T?>.Default.Equals(x: m_Value,
+                                                   y: other);
     }
 }
 
@@ -304,8 +321,9 @@ partial struct Option<T> : IEquatable<T>
 partial struct Option<T> : IEquatable<Option<T>>
 {
     /// <inheritdoc/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
+#endif
     public Boolean Equals(Option<T> other)
     {
         if (m_Value is null &&
@@ -318,7 +336,7 @@ partial struct Option<T> : IEquatable<Option<T>>
             return false;
         }
 
-        return EqualityComparer<T>.Default.Equals(x: m_Value,
-                                                  y: other.m_Value);
+        return EqualityComparer<T?>.Default.Equals(x: m_Value,
+                                                   y: other.m_Value);
     }
 }

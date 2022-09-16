@@ -12,8 +12,12 @@ public static class System_Extensions
     /// <param name="lowBound">Low-bound for the clamping</param>
     /// <param name="highBound">High-bound for the clamping</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public static T Clamp<T>(this T value, 
                              T lowBound,
                              T highBound) 
@@ -30,22 +34,32 @@ public static class System_Extensions
         return value;
     }
 
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     /// <summary>
     /// Enumerates the flags, which are set in this value.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public static EnumValues<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
         where TEnum : struct, Enum =>
             EnumEnumerator.EnumerateFlags(enumValue);
+#endif
 
     /// <summary>
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public static String SanitizeForFilename(this String raw)
     {
 #if NET6_0_OR_GREATER
@@ -64,8 +78,11 @@ public static class System_Extensions
         foreach (Char c in invalid)
         {
             result = result.Replace(oldValue: c.ToString(), 
-                                    newValue: String.Empty,
-                                    comparisonType: StringComparison.InvariantCultureIgnoreCase);
+                                    newValue: String.Empty
+#if NETCOREAPP2_0_OR_GREATER || NET5_0_OR_GREATER
+                                    ,comparisonType: StringComparison.InvariantCultureIgnoreCase
+#endif
+                                    );
         }
         return result;
     }

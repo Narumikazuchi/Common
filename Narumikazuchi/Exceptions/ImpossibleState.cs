@@ -14,26 +14,38 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message))
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message))
     { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message,
-                           [AllowNull] Exception? innerException) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message),
-             innerException: innerException)
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        Exception? innerException) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message),
+                 innerException: innerException)
     { }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
     public ImpossibleState([DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(message: MESSAGE)
+            base(message: MESSAGE)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -55,9 +67,9 @@ public sealed class ImpossibleState : Exception
     /// </summary>
     public ImpossibleState([AllowNull] String? message,
                            [DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message))
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message))
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -80,10 +92,10 @@ public sealed class ImpossibleState : Exception
     public ImpossibleState([AllowNull] String? message,
                            [AllowNull] Exception? innerException,
                            [DisallowNull] params (Object key, Object? value)[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message),
-             innerException: innerException)
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message),
+                 innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -100,11 +112,16 @@ public sealed class ImpossibleState : Exception
                           value: kv.value);
         }
     }
+#endif
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(message: MESSAGE)
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params KeyValuePair<Object, Object?>[] stateInformation) :
+            base(message: MESSAGE)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -124,11 +141,18 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message,
-                           [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message))
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params KeyValuePair<Object, Object?>[] stateInformation) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message))
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -148,13 +172,23 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message,
-                           [AllowNull] Exception? innerException,
-                           [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message),
-             innerException: innerException)
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        Exception? innerException,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params KeyValuePair<Object, Object?>[] stateInformation) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message),
+                 innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -174,8 +208,12 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(message: MESSAGE)
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params Tuple<Object, Object?>[] stateInformation) :
+            base(message: MESSAGE)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -195,11 +233,18 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message,
-                           [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message))
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params Tuple<Object, Object?>[] stateInformation) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message))
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -219,13 +264,23 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] String? message,
-                           [AllowNull] Exception? innerException,
-                           [DisallowNull] params Tuple<Object, Object?>[] stateInformation) :
-        base(message: String.Format(format: "{0} - {1}",
-                                    arg0: MESSAGE,
-                                    arg1: message),
-             innerException: innerException)
+    public ImpossibleState(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? message,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        Exception? innerException,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        params Tuple<Object, Object?>[] stateInformation) :
+            base(message: String.Format(format: "{0} - {1}",
+                                        arg0: MESSAGE,
+                                        arg1: message),
+                 innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);

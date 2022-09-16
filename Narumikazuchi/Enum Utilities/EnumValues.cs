@@ -9,7 +9,9 @@ public partial struct EnumValues<TEnum>
     where TEnum : struct, Enum
 {
     /// <inheritdoc/>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public override String ToString()
     {
         if (m_Mode is 0)
@@ -34,7 +36,9 @@ public partial struct EnumValues<TEnum>
     /// Gets the <see cref="IEnumerator{T}"/> for this <see cref="IEnumerable{T}"/>.
     /// </summary>
     /// <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public EnumValues<TEnum> GetEnumerator()
     {
         if (m_State.HasValue)
@@ -101,11 +105,23 @@ partial struct EnumValues<TEnum>
         }
     }
 
+#if !NET5_0_OR_GREATER
+    private static TEnum[] GetValues() =>
+        Enum.GetValues(typeof(TEnum))
+            .Cast<TEnum>()
+            .ToArray();
+#endif
+
     private static Option<String> Typename =>
         typeof(TEnum).FullName;
 
+#if NET5_0_OR_GREATER
     private static readonly Lazy<TEnum[]> s_Values = new(valueFactory: Enum.GetValues<TEnum>,
                                                          mode: LazyThreadSafetyMode.ExecutionAndPublication);
+#else
+    private static readonly Lazy<TEnum[]> s_Values = new(valueFactory: GetValues,
+                                                         mode: LazyThreadSafetyMode.ExecutionAndPublication);
+#endif
 
     // Modes: 0 = nothing, 1 = Enum Values, 2 = Enum Set Bits in Flag
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -123,7 +139,9 @@ partial struct EnumValues<TEnum>
 // IEnumerable
 partial struct EnumValues<TEnum> : IEnumerable
 {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();
 }
@@ -131,7 +149,9 @@ partial struct EnumValues<TEnum> : IEnumerable
 // IEnumerable<T>
 partial struct EnumValues<TEnum> : IEnumerable<TEnum>
 {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     IEnumerator<TEnum> IEnumerable<TEnum>.GetEnumerator() =>
         this.GetEnumerator();
 }
@@ -140,7 +160,9 @@ partial struct EnumValues<TEnum> : IEnumerable<TEnum>
 partial struct EnumValues<TEnum> : IEnumerator
 {
     /// <inheritdoc/>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public Boolean MoveNext()
     {
         if (m_State.HasValue &&

@@ -5,6 +5,7 @@
 /// </summary>
 public static class ExceptionHelpers
 {
+#if NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// Throws an <see cref="NullReferenceException"/> if the source parameter is null.
     /// </summary>
@@ -141,7 +142,9 @@ public static class ExceptionHelpers
             }
         }
     }
+#endif
 
+#if NET5_0_OR_GREATER
     /// <summary>
     /// Extracts precise Inforamtion from the specified <see cref="Exception"/>.
     /// </summary>
@@ -160,6 +163,7 @@ public static class ExceptionHelpers
 
         return new(source: source);
     }
+#endif
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NULLREF_MESSAGE = "The specified variable with the name {0} is null.";

@@ -1,5 +1,6 @@
 ﻿namespace Narumikazuchi;
 
+#if NET5_0_OR_GREATER
 /// <summary>
 /// Contains the information for a function call on the call stack.
 /// </summary>
@@ -104,3 +105,4 @@ partial struct FunctionCallInformation
     private readonly Option<String> m_Name;
     private readonly List<String?> m_Parameters = new();
 }
+#endif

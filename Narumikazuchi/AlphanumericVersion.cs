@@ -11,9 +11,20 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major)
     {
+#if NETCOREAPP3_0_OR_GREATER
         major.ThrowIfNullOrEmpty(asArgumentException: true);
+#else
+        if (String.IsNullOrWhiteSpace(major))
+        {
+            throw new ArgumentNullException(nameof(major));
+        }
+#endif
 
         if (!s_Regex.IsMatch(input: major))
         {
@@ -42,11 +53,29 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor)
     {
+#if NETCOREAPP3_0_OR_GREATER
         major.ThrowIfNullOrEmpty(asArgumentException: true);
         minor.ThrowIfNullOrEmpty(asArgumentException: true);
+#else
+        if (String.IsNullOrWhiteSpace(major))
+        {
+            throw new ArgumentNullException(nameof(major));
+        }
+        if (String.IsNullOrWhiteSpace(minor))
+        {
+            throw new ArgumentNullException(nameof(minor));
+        }
+#endif
 
         if (!s_Regex.IsMatch(input: major))
         {
@@ -75,10 +104,14 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor) :
-        this(major: major,
-             minor: minor.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor) :
+            this(major: major,
+                 minor: minor.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -86,9 +119,12 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor) :
-        this(major: major.ToString(),
-             minor: minor.ToString())
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor) :
+            this(major: major.ToString(),
+                 minor: minor.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -97,21 +133,46 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor) :
-        this(major: major.ToString(),
-             minor: minor.ToString())
+            this(major: major.ToString(),
+                 minor: minor.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build)
     {
+#if NETCOREAPP3_0_OR_GREATER
         major.ThrowIfNullOrEmpty(asArgumentException: true);
         minor.ThrowIfNullOrEmpty(asArgumentException: true);
         build.ThrowIfNullOrEmpty(asArgumentException: true);
+#else
+        if (String.IsNullOrWhiteSpace(major))
+        {
+            throw new ArgumentNullException(nameof(major));
+        }
+        if (String.IsNullOrWhiteSpace(minor))
+        {
+            throw new ArgumentNullException(nameof(minor));
+        }
+        if (String.IsNullOrWhiteSpace(build))
+        {
+            throw new ArgumentNullException(nameof(build));
+        }
+#endif
 
         if (!s_Regex.IsMatch(input: major))
         {
@@ -148,48 +209,38 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               in Int64 build) :
-        this(major: major,
-             minor: minor,
-             build: build.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build) :
+            this(major: major,
+                 minor: minor,
+                 build: build.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               [DisallowNull] String build) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               in Int64 build) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -197,11 +248,48 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               in Int64 build) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build.ToString())
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+        in Int64 build) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(in Int64 major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -210,10 +298,13 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
                                in Int64 minor,
-                               [DisallowNull] String build) :
-        this(major: major.ToString(),
-             minor: minor.ToString(),
-             build: build)
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build) :
+            this(major: major.ToString(),
+                 minor: minor.ToString(),
+                 build: build)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -232,15 +323,47 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build,
-                               [DisallowNull] String revision)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision)
     {
+#if NETCOREAPP3_0_OR_GREATER
         major.ThrowIfNullOrEmpty(asArgumentException: true);
         minor.ThrowIfNullOrEmpty(asArgumentException: true);
         build.ThrowIfNullOrEmpty(asArgumentException: true);
         revision.ThrowIfNullOrEmpty(asArgumentException: true);
+#else
+        if (String.IsNullOrWhiteSpace(major))
+        {
+            throw new ArgumentNullException(nameof(major));
+        }
+        if (String.IsNullOrWhiteSpace(minor))
+        {
+            throw new ArgumentNullException(nameof(minor));
+        }
+        if (String.IsNullOrWhiteSpace(build))
+        {
+            throw new ArgumentNullException(nameof(build));
+        }
+        if (String.IsNullOrWhiteSpace(revision))
+        {
+            throw new ArgumentNullException(nameof(revision));
+        }
+#endif
 
         if (!s_Regex.IsMatch(input: major))
         {
@@ -285,84 +408,72 @@ public readonly partial struct AlphanumericVersion
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build,
-                               in Int64 revision) :
-        this(major: major,
-             minor: minor,
-             build: build,
-             revision: revision.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+        in Int64 revision) :
+            this(major: major,
+                 minor: minor,
+                 build: build,
+                 revision: revision.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               in Int64 build,
-                               [DisallowNull] String revision) :
-        this(major: major,
-             minor: minor,
-             build: build.ToString(),
-             revision: revision)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+         String revision) :
+            this(major: major,
+                 minor: minor,
+                 build: build.ToString(),
+                 revision: revision)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               [DisallowNull] String build,
-                               [DisallowNull] String revision) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build,
-             revision: revision)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build,
-                               [DisallowNull] String revision) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build,
-             revision: revision)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               [DisallowNull] String minor,
-                               in Int64 build,
-                               in Int64 revision) :
-        this(major: major,
-             minor: minor,
-             build: build.ToString(),
-             revision: revision.ToString())
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               [DisallowNull] String build,
-                               in Int64 revision) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build,
-             revision: revision.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build,
+                 revision: revision)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -370,83 +481,64 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               [DisallowNull] String build,
-                               in Int64 revision) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build,
-             revision: revision.ToString())
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build,
+                 revision: revision)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               in Int64 build,
-                               [DisallowNull] String revision) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build.ToString(),
-             revision: revision)
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build,
+        in Int64 revision) :
+            this(major: major,
+                 minor: minor,
+                 build: build.ToString(),
+                 revision: revision.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               in Int64 build,
-                               [DisallowNull] String revision) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build.ToString(),
-             revision: revision)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(in Int64 major,
-                               in Int64 minor,
-                               [DisallowNull] String build,
-                               [DisallowNull] String revision) :
-        this(major: major.ToString(),
-             minor: minor.ToString(),
-             build: build,
-             revision: revision)
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion([DisallowNull] String major,
-                               in Int64 minor,
-                               in Int64 build,
-                               in Int64 revision) :
-        this(major: major,
-             minor: minor.ToString(),
-             build: build.ToString(),
-             revision: revision.ToString())
-    { }
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(in Int64 major,
-                               [DisallowNull] String minor,
-                               in Int64 build,
-                               in Int64 revision) :
-        this(major: major.ToString(),
-             minor: minor,
-             build: build.ToString(),
-             revision: revision.ToString())
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+        in Int64 revision) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build,
+                 revision: revision.ToString())
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -454,13 +546,40 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               in Int64 minor,
-                               [DisallowNull] String build,
-                               in Int64 revision) :
-        this(major: major.ToString(),
-             minor: minor.ToString(),
-             build: build,
-             revision: revision.ToString())
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+        in Int64 revision) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build,
+                 revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+        in Int64 build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build.ToString(),
+                 revision: revision)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -468,13 +587,108 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion(in Int64 major,
-                               in Int64 minor,
-                               in Int64 build,
-                               [DisallowNull] String revision) :
-        this(major: major.ToString(),
-             minor: minor.ToString(),
-             build: build.ToString(),
-             revision: revision)
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build.ToString(),
+                 revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(in Int64 major,
+        in Int64 minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major.ToString(),
+                 minor: minor.ToString(),
+                 build: build,
+                 revision: revision)
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String major,
+        in Int64 minor,
+        in Int64 build,
+        in Int64 revision) :
+            this(major: major,
+                 minor: minor.ToString(),
+                 build: build.ToString(),
+                 revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(in Int64 major,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String minor,
+        in Int64 build,
+        in Int64 revision) :
+            this(major: major.ToString(),
+                 minor: minor,
+                 build: build.ToString(),
+                 revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(in Int64 major,
+        in Int64 minor,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String build,
+        in Int64 revision) :
+            this(major: major.ToString(),
+                 minor: minor.ToString(),
+                 build: build,
+                 revision: revision.ToString())
+    { }
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion(in Int64 major,
+        in Int64 minor,
+        in Int64 build,
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        String revision) :
+            this(major: major.ToString(),
+                 minor: minor.ToString(),
+                 build: build.ToString(),
+                 revision: revision)
     { }
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
@@ -509,9 +723,13 @@ public readonly partial struct AlphanumericVersion
 #endif
 
     /// <inheritdoc/>
-    public override Boolean Equals([NotNullWhen(true)] Object? obj) =>
-        obj is AlphanumericVersion other &&
-        this.CompareTo(other) == 0;
+    public override Boolean Equals(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [NotNullWhen(true)]
+#endif
+        Object? obj) =>
+            obj is AlphanumericVersion other &&
+            this.CompareTo(other) == 0;
 
     /// <inheritdoc/>
     public override Int32 GetHashCode()
@@ -550,7 +768,9 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Transforms the <see cref="AlphanumericVersion"/> into a <see cref="String"/> according to the default format '#.#.#.#'.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     public override String ToString() =>
         this.ToString(null);
 
@@ -575,14 +795,24 @@ public readonly partial struct AlphanumericVersion
     /// will result in the output 'aMAJORbcMINORbcBUILDdREVISIONe', replacing each of the version segments with their respective values.
     /// </remarks>
     /// <returns>This instance formatted as a <see cref="String"/></returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-    public String ToString([AllowNull] String? format)
+#endif
+    public String ToString(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        String? format)
     {
         format ??= "#.#.#.#";
 
         Int32 count = format.Count(x => x == '#')
                             .Clamp(1, 4);
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
         ReadOnlySpan<Char> working = format;
+#else
+        String working = format;
+#endif
         StringBuilder builder = new();
 
         Int32 index;
@@ -608,7 +838,11 @@ public readonly partial struct AlphanumericVersion
             index = working.IndexOf('#');
             if (index > 0)
             {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
                 builder.Append(working[0..index]);
+#else
+                builder.Append(working.Substring(0, index));
+#endif
             }
 
             if (String.IsNullOrWhiteSpace(current))
@@ -619,7 +853,11 @@ public readonly partial struct AlphanumericVersion
             {
                 builder.Append(current);
             }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             working = working[++index..];
+#else
+            working = working.Substring(index + 1);
+#endif
         }
 
         if (working.Length > 0)
@@ -747,14 +985,18 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
+#endif
     public String Major => 
         m_Major;
 
     /// <summary>
     /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
+#endif
     public String Minor
     {
         get
@@ -770,7 +1012,9 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
+#endif
     public String Build
     {
         get
@@ -786,7 +1030,9 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
+#endif
     public String Revision
     {
         get
@@ -802,7 +1048,11 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Implicit conversion from <see cref="Version"/> class.
     /// </summary>
-    public static implicit operator AlphanumericVersion([AllowNull] Version source)
+    public static implicit operator AlphanumericVersion(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        Version? source)
     {
         if (source is null)
         {
@@ -929,7 +1179,11 @@ partial struct AlphanumericVersion : ICloneable
 // IComparable
 partial struct AlphanumericVersion : IComparable
 {
-    Int32 IComparable.CompareTo([AllowNull] Object? obj)
+    Int32 IComparable.CompareTo(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [AllowNull]
+#endif
+        Object? obj)
     {
         if (obj is AlphanumericVersion other)
         {
@@ -986,7 +1240,7 @@ partial struct AlphanumericVersion : IEquatable<AlphanumericVersion>
 
 #if NET7_0_OR_GREATER
 // IEqualityOperators<T, U>
-partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, AlphanumericVersion>
+partial struct AlphanumericVersion : IEqualityOperators<AlphanumericVersion, AlphanumericVersion, Boolean>
 {
     /// <inheritdoc/>
     public static Boolean operator ==(AlphanumericVersion left,
@@ -1125,8 +1379,8 @@ partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
 // IStructuralComparable
 partial struct AlphanumericVersion : IStructuralComparable
 {
-    Int32 IStructuralComparable.CompareTo([AllowNull] Object? other,
-                                          [DisallowNull] IComparer comparer)
+    Int32 IStructuralComparable.CompareTo(Object? other,
+                                          IComparer comparer)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);
@@ -1145,8 +1399,8 @@ partial struct AlphanumericVersion : IStructuralComparable
 // IStructuralEquatable
 partial struct AlphanumericVersion : IStructuralEquatable
 {
-    Boolean IStructuralEquatable.Equals([AllowNull] Object? other,
-                                        [DisallowNull] IEqualityComparer comparer)
+    Boolean IStructuralEquatable.Equals(Object? other,
+                                        IEqualityComparer comparer)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);
@@ -1161,7 +1415,7 @@ partial struct AlphanumericVersion : IStructuralEquatable
                                y: other);
     }
 
-    Int32 IStructuralEquatable.GetHashCode([DisallowNull] IEqualityComparer comparer)
+    Int32 IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(comparer);

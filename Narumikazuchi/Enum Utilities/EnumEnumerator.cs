@@ -8,25 +8,22 @@ public static class EnumEnumerator
     /// <summary>
     /// Enumerates through all values defined for the <typeparamref name="TEnum"/>.
     /// </summary>
-    /// <remarks>
-    /// Technically already included in the core libary as <see cref="Enum.GetValues{TEnum}"/>.
-    /// Because of that, this is now deprecated.
-    /// </remarks>
     /// <returns>An <see cref="EnumValues{T}"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
-    [Obsolete("Core library now has Enum.GetValues<TEnum> meaning this function will not be developed further.", false)]
+#if NET5_0_OR_GREATER
+    [Obsolete("Core library now has Enum.GetValues<TEnum> meaning this function will not be maintained further.", false)]
     [Pure]
-    [return: NotNull]
+#endif
     public static EnumValues<TEnum> EnumerateValues<TEnum>() 
         where TEnum : struct, Enum =>
             new(mode: 1);
 
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     /// <summary>
     /// Enumerates the flags, which are set in the input value.
     /// </summary>
     /// <param name="enumValue">The value to enumerate the flags of.</param>
     /// <returns>An <see cref="EnumValues{T}"/> containing all flags that are set in the input value.</returns>
     [Pure]
-    [return: NotNull]
     public static EnumValues<TEnum> EnumerateFlags<TEnum>(TEnum enumValue)
         where TEnum : struct, Enum
     {
@@ -40,4 +37,5 @@ public static class EnumEnumerator
                        mode: 2);
         }
     }
+#endif
 }

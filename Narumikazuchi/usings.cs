@@ -1,7 +1,9 @@
 ﻿global using System;
 global using System.Collections;
 global using System.Collections.Generic;
+#if NETCOREAPP3_0_OR_GREATER
 global using System.Collections.Immutable;
+#endif
 global using System.ComponentModel;
 global using System.Diagnostics;
 global using System.Diagnostics.CodeAnalysis;

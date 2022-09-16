@@ -10,5 +10,9 @@ public interface INotifyPropertyChangedHelper :
     /// Raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for the specified property.
     /// </summary>
     /// <param name="propertyName">The name of the property that changed.</param>
-    public void OnPropertyChanged([DisallowNull] String propertyName);
+    public void OnPropertyChanged(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+    String propertyName);
 }

@@ -10,7 +10,6 @@ public partial struct PrimeEnumerator
     /// Gets the <see cref="IEnumerator{T}"/> for this <see cref="IEnumerable{T}"/>.
     /// </summary>
     /// <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-    [return: NotNull]
     public PrimeEnumerator GetEnumerator()
     {
         if (m_State.HasValue)
@@ -48,7 +47,11 @@ partial struct PrimeEnumerator
             }
         }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         while (Primes.Known[^1] < startPoint)
+#else
+        while (Primes.Known.Last() < startPoint)
+#endif
         {
             Int64 next = Primes.FindNextPrime();
             if (next >= startPoint)
@@ -74,7 +77,9 @@ partial struct PrimeEnumerator
 // IEnumerable
 partial struct PrimeEnumerator : IEnumerable
 {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();
 }
@@ -82,7 +87,9 @@ partial struct PrimeEnumerator : IEnumerable
 // IEnumerable<T>
 partial struct PrimeEnumerator : IEnumerable<Int64>
 {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
+#endif
     IEnumerator<Int64> IEnumerable<Int64>.GetEnumerator() =>
         this.GetEnumerator();
 }
@@ -91,7 +98,6 @@ partial struct PrimeEnumerator : IEnumerable<Int64>
 partial struct PrimeEnumerator : IEnumerator
 {
     /// <inheritdoc/>
-    [return: NotNull]
     public Boolean MoveNext()
     {
         if (m_State.HasValue &&

@@ -219,6 +219,17 @@
             <exception cref="T:System.ArgumentException"></exception>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
+            <summary>
+            Parses the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
+            <summary>
+            Tries to parse the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
+            </summary>
+            <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
+        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -253,12 +264,6 @@
             </remarks>
             <returns>This instance formatted as a <see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
-            <inheritdoc/>
-        </member>
         <member name="P:Narumikazuchi.AlphanumericVersion.Major">
             <summary>
             Gets the major version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>.
@@ -284,12 +289,6 @@
             Implicit conversion from <see cref="T:System.Version"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
             <summary>
             Creates a new object that is an exact copy of this instance.
@@ -303,6 +302,18 @@
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String,System.IFormatProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,System.IFormatProvider,Narumikazuchi.AlphanumericVersion@)">
             <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.AttributeResolver">
@@ -404,10 +415,6 @@
             <summary>
             Enumerates through all values defined for the <typeparamref name="TEnum"/>.
             </summary>
-            <remarks>
-            Technically already included in the core libary as <see cref="M:System.Enum.GetValues``1"/>.
-            Because of that, this is now deprecated.
-            </remarks>
             <returns>An <see cref="T:Narumikazuchi.EnumValues`1"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
         </member>
         <member name="M:Narumikazuchi.EnumEnumerator.EnumerateFlags``1(``0)">
@@ -926,64 +933,6 @@
             </summary>
             <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
-        </member>
-        <member name="T:Narumikazuchi.ReferenceWrapper`1">
-            <summary>
-            Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor">
-            <summary>
-            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
-            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0)">
-            <summary>
-            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
-            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
-            </summary>
-            <param name="reference">The reference to wrap.</param>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.#ctor(`0,System.Boolean)">
-            <summary>
-            Creates a new <see cref="T:Narumikazuchi.ReferenceWrapper`1"/> and populates it with a result. Pass in <see langword="null"/>
-            if the <see cref="T:System.Threading.Tasks.Task"/> failed.
-            </summary>
-            <param name="reference">The reference to wrap.</param>
-            <param name="throwIfTryGetNull">Whether the struct is supposed to throw a <see cref="T:System.NullReferenceException"/> upon trying to access a <see langword="null"/> reference.</param>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.TryGet(`0@)">
-            <summary>
-            Tries to retrieve the reference.
-            </summary>
-            <param name="reference">The wrapped reference.</param>
-            <returns><see langword="true"/> if the reference is not <see langword="null"/>; otherwise, <see langword="false"/></returns>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.ReferenceWrapper`1.HasValue">
-            <summary>
-            Gets whether the reference is set to anything else but <see langword="null"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ReferenceWrapper`1.NoValue">
-            <summary>
-            Gets a wrapper for a <see langword="null"/> reference.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.ReferenceWrapper`1.Equals(Narumikazuchi.ReferenceWrapper{`0})">
-            <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.System_Extensions">
             <summary>

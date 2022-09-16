@@ -1,5 +1,6 @@
 ﻿namespace Narumikazuchi;
 
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 /// <summary>
 /// Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
 /// </summary>
@@ -10,6 +11,7 @@ public static partial class AttributeResolver
         where TAttribute : Attribute
     {
         AttributeUsageAttribute? usage = typeof(TAttribute).GetCustomAttribute<AttributeUsageAttribute>();
+
         return usage is not null &&
                usage.AllowMultiple;
     }
@@ -28,9 +30,15 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly)
-        where TAttribute : Attribute
+#endif
+    public static Boolean HasAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        Assembly assembly)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
@@ -50,10 +58,19 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] Assembly assembly)
-        where TAttribute : Attribute
+#endif
+#if NETCOREAPP1_0_OR_GREATER
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>(
+#else
+    public static TAttribute[] FetchAllAttributes<TAttribute>(
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        Assembly assembly)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
@@ -65,7 +82,11 @@ partial class AttributeResolver
 #endif
 
         return assembly.GetCustomAttributes<TAttribute>()
+#if NETCOREAPP1_0_OR_GREATER
                        .ToImmutableArray();
+#else
+                       .ToArray();
+#endif
     }
 
     /// <summary>
@@ -74,10 +95,18 @@ partial class AttributeResolver
     /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] Assembly assembly)
-        where TAttribute : Attribute
+#endif
+    public static TAttribute FetchSingleAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        Assembly assembly)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(assembly);
@@ -90,16 +119,28 @@ partial class AttributeResolver
 
         if (MultipleAllowed<TAttribute>())
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         return attribute;
     }
@@ -113,9 +154,15 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="MemberInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
-        where TAttribute : Attribute
+#endif
+    public static Boolean HasAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        MemberInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -135,10 +182,19 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] MemberInfo info)
-        where TAttribute : Attribute
+#endif
+#if NETCOREAPP1_0_OR_GREATER
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>(
+#else
+    public static TAttribute[] FetchAllAttributes<TAttribute>(
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        MemberInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -150,7 +206,11 @@ partial class AttributeResolver
 #endif
 
         return info.GetCustomAttributes<TAttribute>()
-                   .ToImmutableArray();
+#if NETCOREAPP1_0_OR_GREATER
+                       .ToImmutableArray();
+#else
+                       .ToArray();
+#endif
     }
 
     /// <summary>
@@ -159,10 +219,18 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] MemberInfo info)
-        where TAttribute : Attribute
+#endif
+    public static TAttribute FetchSingleAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        MemberInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -175,16 +243,28 @@ partial class AttributeResolver
 
         if (MultipleAllowed<TAttribute>())
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         return attribute;
     }
@@ -198,9 +278,15 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="ParameterInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    public static Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
-        where TAttribute : Attribute
+#endif
+    public static Boolean HasAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        ParameterInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -220,10 +306,19 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
-    [return: NotNull]
-    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>([DisallowNull] ParameterInfo info)
-        where TAttribute : Attribute
+#endif
+#if NETCOREAPP1_0_OR_GREATER
+    public static ImmutableArray<TAttribute> FetchAllAttributes<TAttribute>(
+#else
+    public static TAttribute[] FetchAllAttributes<TAttribute>(
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        ParameterInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -235,7 +330,11 @@ partial class AttributeResolver
 #endif
 
         return info.GetCustomAttributes<TAttribute>()
-                   .ToImmutableArray();
+#if NETCOREAPP1_0_OR_GREATER
+                       .ToImmutableArray();
+#else
+                       .ToArray();
+#endif
     }
 
     /// <summary>
@@ -244,10 +343,18 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
+#if NET40 || NET5_0_OR_GREATER
     [Pure]
+#endif
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-    public static TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] ParameterInfo info)
-        where TAttribute : Attribute
+#endif
+    public static TAttribute FetchSingleAttribute<TAttribute>(
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        [DisallowNull]
+#endif
+        ParameterInfo info)
+            where TAttribute : Attribute
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(info);
@@ -260,16 +367,30 @@ partial class AttributeResolver
 
         if (MultipleAllowed<TAttribute>())
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
-                                 ("Typename", typeof(TAttribute).FullName));
+                                 ("Typename", typeof(TAttribute).FullName),
+                                 ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
+#else
+            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
+                                 new KeyValuePair<Object, Object?>(key: "Typename", value: typeof(TAttribute).FullName),
+                                 new KeyValuePair<Object, Object?>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
+#endif
         }
         return attribute;
     }
 }
+#endif
