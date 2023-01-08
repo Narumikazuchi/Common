@@ -30,7 +30,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean HasAttribute<TAttribute>(
@@ -58,7 +58,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP1_0_OR_GREATER
@@ -95,7 +95,7 @@ partial class AttributeResolver
     /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -154,7 +154,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="MemberInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean HasAttribute<TAttribute>(
@@ -182,7 +182,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP1_0_OR_GREATER
@@ -219,7 +219,7 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -278,7 +278,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="ParameterInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean HasAttribute<TAttribute>(
@@ -306,7 +306,7 @@ partial class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attributes from.</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP1_0_OR_GREATER
@@ -343,7 +343,7 @@ partial class AttributeResolver
     /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER

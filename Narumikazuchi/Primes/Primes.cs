@@ -206,7 +206,7 @@ public static partial class Primes
 
         if (startPoint > endPoint)
         {
-#if NET47_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+#if NET48_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
             (startPoint, endPoint) = (endPoint, startPoint);
 #else
             Int64 temp = startPoint;

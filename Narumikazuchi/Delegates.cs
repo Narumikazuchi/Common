@@ -35,3 +35,31 @@ public delegate void EventHandler<TSender, TEventArgs>(
 /// </summary>
 public delegate Boolean EqualityComparison<TComparable>(TComparable first,
                                                         TComparable second);
+
+/// <summary>
+/// Maps an object of type <typeparamref name="TOrigin"/> to an object of type <typeparamref name="TResult"/>
+/// asynchronosly.
+/// </summary>
+/// <param name="origin">The object to map from.</param>
+/// <param name="cancellationToken"></param>
+/// <returns>The object that has been mapped to.</returns>
+public delegate Task<TResult> AsyncOptionMapping<TOrigin, TResult>(TOrigin origin,
+                                                                   CancellationToken cancellationToken = default);
+
+/// <summary>
+/// Maps an object of type <typeparamref name="TOrigin"/> to an <see cref="Option{T}"/> of type <typeparamref name="TResult"/>
+/// asynchronosly.
+/// </summary>
+/// <param name="origin">The object to map from.</param>
+/// <param name="cancellationToken"></param>
+/// <returns>The <see cref="Option{T}"/> that has been mapped to.</returns>
+public delegate Task<Option<TResult>> AsyncOptionDirectMapping<TOrigin, TResult>(TOrigin origin,
+                                                                                 CancellationToken cancellationToken = default);
+
+/// <summary>
+/// Asynchronosly performs an action on the object passed to the delegate.
+/// </summary>
+/// <param name="origin">The object to perform the action on.</param>
+/// <param name="cancellationToken"></param>
+public delegate Task AsyncOptionInteraction<T>(T origin,
+                                               CancellationToken cancellationToken = default);

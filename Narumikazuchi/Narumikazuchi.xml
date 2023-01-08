@@ -219,17 +219,6 @@
             <exception cref="T:System.ArgumentException"></exception>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
-            <summary>
-            Parses the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
-            <summary>
-            Tries to parse the specified string into a new <see cref="T:Narumikazuchi.AlphanumericVersion"/> object.
-            </summary>
-            <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
-        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -264,6 +253,12 @@
             </remarks>
             <returns>This instance formatted as a <see cref="T:System.String"/></returns>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
+            <inheritdoc/>
+        </member>
         <member name="P:Narumikazuchi.AlphanumericVersion.Major">
             <summary>
             Gets the major version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>.
@@ -289,6 +284,12 @@
             Implicit conversion from <see cref="T:System.Version"/> class.
             </summary>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
+            <inheritdoc/>
+        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
             <summary>
             Creates a new object that is an exact copy of this instance.
@@ -304,17 +305,22 @@
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(Narumikazuchi.AlphanumericVersion)">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
+        <member name="T:Narumikazuchi.AsyncOptionExtensions">
+            <summary>
+            Contains helpers for async operations involving <see cref="T:Narumikazuchi.Option`1"/>.
+            </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
+        <member name="M:Narumikazuchi.AsyncOptionExtensions.GetAwaiter(Narumikazuchi.Option{System.Threading.Tasks.Task})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String,System.IFormatProvider)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,System.IFormatProvider,Narumikazuchi.AlphanumericVersion@)">
-            <inheritdoc/>
+        <member name="M:Narumikazuchi.AsyncOptionExtensions.GetAwaiter``1(Narumikazuchi.Option{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
         </member>
         <member name="T:Narumikazuchi.AttributeResolver">
             <summary>
@@ -406,6 +412,31 @@
             Represents the method to compare two instances of the same type for equality.
             </summary>
         </member>
+        <member name="T:Narumikazuchi.AsyncOptionMapping`2">
+            <summary>
+            Maps an object of type <typeparamref name="TOrigin"/> to an object of type <typeparamref name="TResult"/>
+            asynchronosly.
+            </summary>
+            <param name="origin">The object to map from.</param>
+            <param name="cancellationToken"></param>
+            <returns>The object that has been mapped to.</returns>
+        </member>
+        <member name="T:Narumikazuchi.AsyncOptionDirectMapping`2">
+            <summary>
+            Maps an object of type <typeparamref name="TOrigin"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>
+            asynchronosly.
+            </summary>
+            <param name="origin">The object to map from.</param>
+            <param name="cancellationToken"></param>
+            <returns>The <see cref="T:Narumikazuchi.Option`1"/> that has been mapped to.</returns>
+        </member>
+        <member name="T:Narumikazuchi.AsyncOptionInteraction`1">
+            <summary>
+            Asynchronosly performs an action on the object passed to the delegate.
+            </summary>
+            <param name="origin">The object to perform the action on.</param>
+            <param name="cancellationToken"></param>
+        </member>
         <member name="T:Narumikazuchi.EnumEnumerator">
             <summary>
             Enumerates through enum values.
@@ -494,86 +525,6 @@
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
-            <summary>
-            Extracts precise Inforamtion from the specified <see cref="T:System.Exception"/>.
-            </summary>
-            <param name="source">The exception to extract data from.</param>
-            <returns>An information object, containing detailed data on the exception</returns>
-        </member>
-        <member name="T:Narumikazuchi.ExceptionInformation">
-            <summary>
-            Contains detailed information of an <see cref="T:System.Exception"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.Data">
-            <summary>
-            Gets the environment data from when the <see cref="T:System.Exception"/> has been thrown.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.InnerException">
-            <summary>
-            Gets the inner <see cref="T:System.Exception"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.CallStack">
-            <summary>
-            Gets the callstack from when the <see cref="T:System.Exception"/> occured.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.SourceType">
-            <summary>
-            Gets the type in which the <see cref="T:System.Exception"/> occured.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.SourceLibrary">
-            <summary>
-            Gets the library where the <see cref="P:Narumikazuchi.ExceptionInformation.SourceType"/> is declared.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.SourceMember">
-            <summary>
-            Gets the member who caused the <see cref="T:System.Exception"/>.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ExceptionInformation.SourceMemberType">
-            <summary>
-            Gets the member type of the <see cref="P:Narumikazuchi.ExceptionInformation.SourceMember"/>.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.FunctionCallInformation">
-            <summary>
-            Contains the information for a function call on the call stack.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.FunctionCallInformation.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.FunctionCallInformation.File">
-            <summary>
-            Gets the path to the file, where the function is defined.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.FunctionCallInformation.Target">
-            <summary>
-            Gets the name of the declaring type.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.FunctionCallInformation.Name">
-            <summary>
-            Gets the name of the function.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.FunctionCallInformation.Line">
-            <summary>
-            Gets the line number in the file.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.FunctionCallInformation.Column">
-            <summary>
-            Gets the column in the line of the file.
-            </summary>
         </member>
         <member name="T:Narumikazuchi.ImpossibleState">
             <summary>
@@ -800,6 +751,16 @@
             <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
+        <member name="M:Narumikazuchi.Option`1.MapAsync``1(Narumikazuchi.AsyncOptionMapping{`0,``0},System.Threading.CancellationToken)">
+            <summary>
+            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
+            of type <typeparamref name="TResult"/>.
+            </summary>
+            <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
         <member name="M:Narumikazuchi.Option`1.MapDirect``1(System.Func{`0,Narumikazuchi.Option{``0}})">
             <summary>
             Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
@@ -809,12 +770,31 @@
             <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
+        <member name="M:Narumikazuchi.Option`1.MapDirectAsync``1(Narumikazuchi.AsyncOptionDirectMapping{`0,``0},System.Threading.CancellationToken)">
+            <summary>
+            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
+            of type <typeparamref name="TResult"/>.
+            </summary>
+            <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</param>
+            <param name="cancellationToken"></param>
+            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
         <member name="M:Narumikazuchi.Option`1.Interact(System.Action{`0})">
             <summary>
             Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="P:Narumikazuchi.Option`1.HasValue"/> is <see langword="true"/>.
             Otherwise, nothing will happen.
             </summary>
             <param name="interaction">The interaction to execute.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.Option`1.InteractAsync(Narumikazuchi.AsyncOptionInteraction{`0},System.Threading.CancellationToken)">
+            <summary>
+            Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="P:Narumikazuchi.Option`1.HasValue"/> is <see langword="true"/>.
+            Otherwise, nothing will happen.
+            </summary>
+            <param name="interaction">The interaction to execute.</param>
+            <param name="cancellationToken"></param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Narumikazuchi.Option`1.TryGetValue(`0@)">

@@ -11,7 +11,7 @@ public static partial class Converter<TResult>
     /// <param name="convertible">The instance to convert.</param>
     /// <returns>A new instance of <typeparamref name="TResult"/> with the 
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -33,7 +33,7 @@ public static partial class Converter<TResult>
     /// <param name="provider">An <see cref="IFormatProvider"/> implementation which provides culture-specific formatting.</param>
     /// <returns>A new instance of <typeparamref name="TResult"/> with the 
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER

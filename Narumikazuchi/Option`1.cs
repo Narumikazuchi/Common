@@ -56,7 +56,7 @@ public readonly partial struct Option<T>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Option<TResult> Map<TResult>(
@@ -88,10 +88,48 @@ public readonly partial struct Option<T>
     /// Maps the value of the <see cref="Option{T}"/> from it's type <typeparamref name="T"/> to a new <see cref="Option{T}"/>
     /// of type <typeparamref name="TResult"/>.
     /// </summary>
+    /// <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
+    /// <exception cref="ArgumentNullException"/>
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
+    [Pure]
+#endif
+    public async Task<Option<TResult>> MapAsync<TResult>(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        AsyncOptionMapping<T, TResult> map,
+        CancellationToken cancellationToken = default)
+    {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(map);
+#else
+        if (map is null)
+        {
+            throw new ArgumentNullException(nameof(map));
+        }
+#endif
+
+        if (!m_HasValue)
+        {
+            return new();
+        }
+        else
+        {
+            return new(await map.Invoke(origin: m_Value!,
+                                        cancellationToken: cancellationToken));
+        }
+    }
+
+    /// <summary>
+    /// Maps the value of the <see cref="Option{T}"/> from it's type <typeparamref name="T"/> to a new <see cref="Option{T}"/>
+    /// of type <typeparamref name="TResult"/>.
+    /// </summary>
     /// <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</param>
     /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
     /// <exception cref="ArgumentNullException"/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Option<TResult> MapDirect<TResult>(
@@ -116,6 +154,44 @@ public readonly partial struct Option<T>
         else
         {
             return map.Invoke(m_Value!);
+        }
+    }
+
+    /// <summary>
+    /// Maps the value of the <see cref="Option{T}"/> from it's type <typeparamref name="T"/> to a new <see cref="Option{T}"/>
+    /// of type <typeparamref name="TResult"/>.
+    /// </summary>
+    /// <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>A new <see cref="Option{T}"/> of type <typeparamref name="TResult"/>.</returns>
+    /// <exception cref="ArgumentNullException"/>
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
+    [Pure]
+#endif
+    public async Task<Option<TResult>> MapDirectAsync<TResult>(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        AsyncOptionDirectMapping<T, TResult> map,
+        CancellationToken cancellationToken = default)
+    {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(map);
+#else
+        if (map is null)
+        {
+            throw new ArgumentNullException(nameof(map));
+        }
+#endif
+
+        if (!m_HasValue)
+        {
+            return new();
+        }
+        else
+        {
+            return await map.Invoke(origin: m_Value!,
+                                    cancellationToken: cancellationToken);
         }
     }
 
@@ -147,11 +223,45 @@ public readonly partial struct Option<T>
     }
 
     /// <summary>
+    /// Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="HasValue"/> is <see langword="true"/>.
+    /// Otherwise, nothing will happen.
+    /// </summary>
+    /// <param name="interaction">The interaction to execute.</param>
+    /// <param name="cancellationToken"></param>
+    /// <exception cref="ArgumentNullException"/>
+    public Task InteractAsync(
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        [DisallowNull]
+#endif
+        AsyncOptionInteraction<T> interaction,
+        CancellationToken cancellationToken = default)
+    {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(interaction);
+#else
+        if (interaction is null)
+        {
+            throw new ArgumentNullException(nameof(interaction));
+        }
+#endif
+
+        if (m_HasValue)
+        {
+            return interaction.Invoke(origin: m_Value!,
+                                      cancellationToken: cancellationToken);
+        }
+        else
+        {
+            return Task.CompletedTask;
+        }
+    }
+
+    /// <summary>
     /// Gets the value wrapped in the <see cref="Option{T}"/>.
     /// </summary>
     /// <param name="value">The value wrapped in the <see cref="Option{T}"/>.</param>
     /// <returns><see langword="true"/> if the <see cref="Option{T}"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean TryGetValue(
@@ -219,7 +329,7 @@ public readonly partial struct Option<T>
     }
 #endif
 
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean operator ==(T? left,
@@ -228,7 +338,7 @@ public readonly partial struct Option<T>
         return right.Equals(left);
     }
 
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public static Boolean operator !=(T? left,
@@ -241,7 +351,7 @@ public readonly partial struct Option<T>
     /// <summary>
     /// Gets whether the <see cref="Option{T}"/> wraps an actual value.
     /// </summary>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean HasValue =>
@@ -297,7 +407,7 @@ partial struct Option<T> : IEqualityOperators<Option<T>, Option<T>, Boolean>
 partial struct Option<T> : IEquatable<T>
 {
     /// <inheritdoc/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean Equals(T? other)
@@ -321,7 +431,7 @@ partial struct Option<T> : IEquatable<T>
 partial struct Option<T> : IEquatable<Option<T>>
 {
     /// <inheritdoc/>
-#if NET47_OR_GREATER || NET5_0_OR_GREATER
+#if NET48_OR_GREATER || NET5_0_OR_GREATER
     [Pure]
 #endif
     public Boolean Equals(Option<T> other)
