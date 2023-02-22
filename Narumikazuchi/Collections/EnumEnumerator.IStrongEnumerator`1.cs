@@ -3,9 +3,6 @@
 public partial struct EnumEnumerator<TEnum> : IStrongEnumerator<TEnum>
 {
     /// <inheritdoc/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-    [return: NotNull]
-#endif
     public Boolean MoveNext()
     {
         if (m_State.HasValue &&

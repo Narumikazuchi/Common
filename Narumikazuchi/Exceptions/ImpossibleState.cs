@@ -16,9 +16,9 @@ public sealed class ImpossibleState : Exception
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         [AllowNull]
 #endif
-        MaybeNull<Exception> innerException = default) :
-            base(message: $"{MESSAGE} - {message}",
-                 innerException: innerException)
+        MaybeNull<Exception> innerException = default)
+            : base(message: $"{MESSAGE} - {message}",
+                   innerException: innerException)
     { }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     /// <summary>
@@ -26,9 +26,9 @@ public sealed class ImpossibleState : Exception
     /// </summary>
     public ImpossibleState([AllowNull] MaybeNull<String> message = default,
                            [AllowNull] MaybeNull<Exception> innerException = default,
-                           [DisallowNull] params (Object key, MaybeNull<Object> value)[] stateInformation) :
-            base(message: $"{MESSAGE} - {message}",
-                 innerException: innerException)
+                           [DisallowNull] params (Object key, MaybeNull<Object> value)[] stateInformation)
+            : base(message: $"{MESSAGE} - {message}",
+                   innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -69,9 +69,9 @@ public sealed class ImpossibleState : Exception
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         [DisallowNull]
 #endif
-        params KeyValuePair<Object, MaybeNull<Object>>[] stateInformation) :
-            base($"{MESSAGE} - {message}",
-                 innerException: innerException)
+        params KeyValuePair<Object, MaybeNull<Object>>[] stateInformation)
+            : base(message: $"{MESSAGE} - {message}",
+                   innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -111,9 +111,9 @@ public sealed class ImpossibleState : Exception
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         [DisallowNull]
 #endif
-        params Tuple<Object, MaybeNull<Object>>[] stateInformation) :
-            base(message: $"{MESSAGE} - {message}",
-                 innerException: innerException)
+        params Tuple<Object, MaybeNull<Object>>[] stateInformation)
+            : base(message: $"{MESSAGE} - {message}",
+                   innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);

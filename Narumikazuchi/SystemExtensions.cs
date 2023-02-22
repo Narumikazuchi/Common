@@ -11,27 +11,24 @@ static public class SystemExtensions
     /// Returns the comparable clamped between the specified min and max value.
     /// </summary>
     /// <param name="value"></param>
-    /// <param name="lowBound">Low-bound for the clamping</param>
-    /// <param name="highBound">High-bound for the clamping</param>
+    /// <param name="lowerBoundary">Low-bound for the clamping</param>
+    /// <param name="higherBoundary">High-bound for the clamping</param>
     /// <exception cref="ArgumentNullException"/>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
 #endif
     static public T Clamp<T>(this T value, 
-                             NotNull<T> lowBound,
-                             NotNull<T> highBound) 
+                             NotNull<T> lowerBoundary,
+                             NotNull<T> higherBoundary) 
         where T : IComparable<T>
     {
-        if (value.CompareTo(lowBound) < 0)
+        if (value.CompareTo(lowerBoundary) < 0)
         {
-            return lowBound;
+            return lowerBoundary;
         }
-        else if (value.CompareTo(highBound) > 0)
+        else if (value.CompareTo(higherBoundary) > 0)
         {
-            return highBound;
+            return higherBoundary;
         }
         return value;
     }
@@ -41,12 +38,6 @@ static public class SystemExtensions
     /// Enumerates the flags, which are set in this value.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-    [return: NotNull]
-#endif
     static public EnumEnumerator<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
         where TEnum : struct, Enum
     {
@@ -66,9 +57,6 @@ static public class SystemExtensions
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
 #endif

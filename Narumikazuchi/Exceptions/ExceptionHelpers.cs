@@ -59,18 +59,18 @@ public static class ExceptionHelpers
     /// <summary>
     /// Throws an <see cref="ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
     /// </summary>
-    /// <param name="source">The source to check against the <paramref name="bound"/>.</param>
-    /// <param name="bound">The low bound to check against.</param>
+    /// <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+    /// <param name="boundary">The low bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfLesserThan<T>(this T source,
-                                            NotNull<T> bound,
+                                            [DisallowNull] NotNull<T> boundary,
                                             [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
-        if (source.CompareTo(bound) < 0)
+        if (source.CompareTo(boundary) < 0)
         {
             if (message.IsNull)
             {
@@ -87,18 +87,18 @@ public static class ExceptionHelpers
     /// <summary>
     /// Throws an <see cref="ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
     /// </summary>
-    /// <param name="source">The source to check against the <paramref name="bound"/>.</param>
-    /// <param name="bound">The high bound to check against.</param>
+    /// <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+    /// <param name="boundary">The high bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfBiggerThan<T>(this T source,
-                                            NotNull<T> bound,
+                                            [DisallowNull] NotNull<T> boundary,
                                             [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
-        if (source.CompareTo(bound) > 0)
+        if (source.CompareTo(boundary) > 0)
         {
             if (message.IsNull)
             {
@@ -115,21 +115,21 @@ public static class ExceptionHelpers
     /// <summary>
     /// Throws an <see cref="ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
     /// </summary>
-    /// <param name="source">The source to check against the <paramref name="lowBound"/> and <paramref name="highBound"/>.</param>
-    /// <param name="lowBound">The low bound to check against.</param>
-    /// <param name="highBound">The high bound to check against.</param>
+    /// <param name="source">The source to check against the <paramref name="lowerBoundary"/> and <paramref name="higherBoundary"/>.</param>
+    /// <param name="lowerBoundary">The low bound to check against.</param>
+    /// <param name="higherBoundary">The high bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfOutOfRange<T>(this T source,
-                                            NotNull<T> lowBound,
-                                            NotNull<T> highBound,
+                                            [DisallowNull] NotNull<T> lowerBoundary,
+                                            [DisallowNull] NotNull<T> higherBoundary,
                                             [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
-        if (source.CompareTo(lowBound) < 0 ||
-            source.CompareTo(highBound) > 0)
+        if (source.CompareTo(lowerBoundary) < 0 ||
+            source.CompareTo(higherBoundary) > 0)
         {
             if (message.IsNull)
             {

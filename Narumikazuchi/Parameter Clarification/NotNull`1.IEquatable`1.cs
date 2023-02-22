@@ -3,9 +3,6 @@
 public partial struct NotNull<T> : IEquatable<T>
 {
     /// <inheritdoc/>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     public readonly Boolean Equals(T? other)
     {
         if (other is null)
@@ -21,9 +18,6 @@ public partial struct NotNull<T> : IEquatable<T>
 public partial struct NotNull<T> : IEquatable<NotNull<T>>
 {
     /// <inheritdoc/>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     public readonly Boolean Equals(NotNull<T> other)
     {
         return EqualityComparer<T?>.Default.Equals(x: m_Value,

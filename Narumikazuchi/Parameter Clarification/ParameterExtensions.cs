@@ -30,7 +30,6 @@ static public class ParameterExtensions
     {
         return ((Task)value).GetAwaiter();
     }
-
     /// <summary>
     /// Gets an awaiter used to await this <see cref="Task{T}"/>.
     /// </summary>
@@ -79,7 +78,6 @@ static public class ParameterExtensions
     {
         return ((ValueTask)value).GetAwaiter();
     }
-
     /// <summary>
     /// Gets an awaiter used to await this <see cref="ValueTask{T}"/>.
     /// </summary>
@@ -105,6 +103,14 @@ static public class ParameterExtensions
     }
 #endif
 
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IEnumerator"/> object thatcan be used to iterate through the collection.</returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: NotNull]
+#endif
     static public IEnumerator GetEnumerator<TEnumerable>(this MaybeNullOrEmpty<TEnumerable> value)
         where TEnumerable : IEnumerable
     {
@@ -117,13 +123,27 @@ static public class ParameterExtensions
             return new EmptyEnumerator<Object>();
         }
     }
-
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IEnumerator"/> object thatcan be used to iterate through the collection.</returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: NotNull]
+#endif
     static public IEnumerator GetEnumerator<TEnumerable>(this NotNullOrEmpty<TEnumerable> value)
         where TEnumerable : IEnumerable
     {
         return ((TEnumerable)value!).GetEnumerator();
     }
-
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IEnumerator{T}"/> object thatcan be used to iterate through the collection.</returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: NotNull]
+#endif
     static public IEnumerator<TElement> GetEnumerator<TEnumerable, TElement>(this MaybeNullOrEmpty<TEnumerable> value)
         where TEnumerable : IEnumerable<TElement>
     {
@@ -136,13 +156,24 @@ static public class ParameterExtensions
             return new EmptyEnumerator<TElement>();
         }
     }
-
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IEnumerator{T}"/> object thatcan be used to iterate through the collection.</returns>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: NotNull]
+#endif
     static public IEnumerator<TElement> GetEnumerator<TEnumerable, TElement>(this NotNullOrEmpty<TEnumerable> value)
         where TEnumerable : IEnumerable<TElement>
     {
         return ((TEnumerable)value!).GetEnumerator();
     }
-
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IStrongEnumerator{TElement}"/> object thatcan be used to iterate through the collection.</returns>
     static public TEnumerator GetEnumerator<TEnumerable, TElement, TEnumerator>(this MaybeNullOrEmpty<TEnumerable> value)
         where TEnumerable : IStrongEnumerable<TElement, TEnumerator>
         where TEnumerator : struct, IStrongEnumerator<TElement>
@@ -156,7 +187,11 @@ static public class ParameterExtensions
             return default;
         }
     }
-
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>An <see cref="IStrongEnumerator{TElement}"/> object thatcan be used to iterate through the collection.</returns>
     static public TEnumerator GetEnumerator<TEnumerable, TElement, TEnumerator>(this NotNullOrEmpty<TEnumerable> value)
         where TEnumerable : IStrongEnumerable<TElement, TEnumerator>
         where TEnumerator : struct, IStrongEnumerator<TElement>

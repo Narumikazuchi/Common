@@ -68,13 +68,12 @@ public unsafe partial struct Pointer<T>
     }
 
     /// <inheritdoc/>
-    [Pure]
     [return: MaybeNull]
-    public override String ToString()
+    public override String? ToString()
     {
         if (this.Value.IsNull)
         {
-            return String.Empty;
+            return null;
         }
 
         return this.Value.ToString();
@@ -101,7 +100,6 @@ public unsafe partial struct Pointer<T>
     /// <summary>
     /// Gets the current address of this pointer.
     /// </summary>
-    [Pure]
     public IntPtr Address
     {
         get
@@ -123,7 +121,7 @@ public unsafe partial struct Pointer<T>
         set
         {
             Unsafe.Write(destination: m_Pointer,
-                         value: value);
+                         value: (T?)value);
         }
     }
 }

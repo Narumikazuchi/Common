@@ -3,18 +3,12 @@
 #pragma warning disable CS1591 // Missing comments
 public partial struct NotNullOrEmpty<T>
 {
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     static public Boolean operator ==(T? left,
                                       NotNullOrEmpty<T> right)
     {
         return right.Equals(left);
     }
 
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     static public Boolean operator !=(T? left,
                                       NotNullOrEmpty<T> right)
     {
@@ -25,14 +19,12 @@ public partial struct NotNullOrEmpty<T>
 #if NET7_0_OR_GREATER
 public partial struct NotNullOrEmpty<T> : IEqualityOperators<NotNullOrEmpty<T>, T, Boolean>
 {
-    [Pure]
     static public Boolean operator ==(NotNullOrEmpty<T> left,
                                       T? right)
     {
         return left.Equals(right);
     }
 
-    [Pure]
     static public Boolean operator !=(NotNullOrEmpty<T> left,
                                       T? right)
     {
@@ -42,14 +34,12 @@ public partial struct NotNullOrEmpty<T> : IEqualityOperators<NotNullOrEmpty<T>, 
 
 public partial struct NotNullOrEmpty<T> : IEqualityOperators<NotNullOrEmpty<T>, NotNullOrEmpty<T>, Boolean>
 {
-    [Pure]
     static public Boolean operator ==(NotNullOrEmpty<T> left,
                                       NotNullOrEmpty<T> right)
     {
         return left.Equals(right);
     }
 
-    [Pure]
     static public Boolean operator !=(NotNullOrEmpty<T> left,
                                       NotNullOrEmpty<T> right)
     {
@@ -59,28 +49,24 @@ public partial struct NotNullOrEmpty<T> : IEqualityOperators<NotNullOrEmpty<T>, 
 #else
 public partial struct NotNullOrEmpty<T>
 {
-    [Pure]
     static public Boolean operator ==(NotNullOrEmpty<T> left,
                                       NotNullOrEmpty<T> right)
     {
         return left.Equals(right);
     }
 
-    [Pure]
     static public Boolean operator !=(NotNullOrEmpty<T> left,
                                       NotNullOrEmpty<T> right)
     {
         return !left.Equals(right);
     }
 
-    [Pure]
     static public Boolean operator ==(NotNullOrEmpty<T> left,
                                       T? right)
     {
         return left.Equals(right);
     }
 
-    [Pure]
     static public Boolean operator !=(NotNullOrEmpty<T> left,
                                       T? right)
     {

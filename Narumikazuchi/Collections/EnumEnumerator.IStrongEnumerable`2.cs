@@ -6,9 +6,6 @@ public partial struct EnumEnumerator<TEnum> : IStrongEnumerable<TEnum, EnumEnume
     /// Gets the <see cref="IEnumerator{T}"/> for this <see cref="IEnumerable{T}"/>.
     /// </summary>
     /// <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-    [return: NotNull]
-#endif
     public EnumEnumerator<TEnum> GetEnumerator()
     {
         if (m_State.HasValue)
@@ -16,7 +13,7 @@ public partial struct EnumEnumerator<TEnum> : IStrongEnumerable<TEnum, EnumEnume
             if (m_Mode is 0
                        or 1)
             {
-                return new(mode: m_Mode);
+                return new(m_Mode);
             }
             else if (m_Mode is 2)
             {

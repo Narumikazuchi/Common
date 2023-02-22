@@ -1,7 +1,7 @@
 ﻿namespace Narumikazuchi.Collections;
 
 /// <summary>
-/// Represents an <see cref="IEnumerable{T}"/> and <see cref="IEnumerator{T}"/> of type
+/// Represents an <see cref="IStrongEnumerable{TElement, TEnumerator}"/> and <see cref="IStrongEnumerator{TElement}"/> of type
 /// <typeparamref name="TEnum"/>.
 /// </summary>
 [DebuggerDisplay("{Typename}[]")]

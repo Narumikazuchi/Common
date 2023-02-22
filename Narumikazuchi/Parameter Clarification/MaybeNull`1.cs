@@ -1,5 +1,8 @@
 ﻿namespace Narumikazuchi;
 
+/// <summary>
+/// Represents a method parameter that allows <see langword="null"/> to be passed to it.
+/// </summary>
 public readonly partial struct MaybeNull<T>
 {
 #pragma warning disable CS1591 // Missing comments
@@ -14,6 +17,10 @@ public readonly partial struct MaybeNull<T>
     }
 #pragma warning restore
 
+    /// <summary>
+    /// Initializes a new instance of type <see cref="MaybeNull{T}"/>.
+    /// </summary>
+    /// <param name="value">The value this instance will be based on.</param>
     public MaybeNull(
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [AllowNull]
@@ -58,6 +65,9 @@ public readonly partial struct MaybeNull<T>
     }
 
     /// <inheritdoc/>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: MaybeNull]
+#endif
     public readonly override String? ToString()
     {
         if (m_Value is String value)
@@ -74,6 +84,11 @@ public readonly partial struct MaybeNull<T>
         }
     }
 
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> when this instance represents <see langword="null"/>.
+    /// </summary>
+    /// <param name="action">The action to perform.</param>
+    /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNull(NotNull<Action> action)
     {
         if (m_Value is null)
@@ -85,6 +100,12 @@ public readonly partial struct MaybeNull<T>
         return this;
     }
 
+    /// <summary>
+    /// Performs the specified <paramref name="transform"/> when this instance represents <see langword="null"/>.
+    /// </summary>
+    /// <param name="transform">The transform to perform.</param>
+    /// <param name="result">The result of the <paramref name="transform"/>.</param>
+    /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNull<TResult>(
         NotNull<Func<TResult>> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
@@ -105,6 +126,11 @@ public readonly partial struct MaybeNull<T>
         return this;
     }
 
+    /// <summary>
+    /// Performs the specified <paramref name="action"/> when this instance does not represent <see langword="null"/>.
+    /// </summary>
+    /// <param name="action">The action to perform.</param>
+    /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNotNull(NotNull<Action<T>> action)
     {
         if (m_Value is not null)
@@ -116,6 +142,12 @@ public readonly partial struct MaybeNull<T>
         return this;
     }
 
+    /// <summary>
+    /// Performs the specified <paramref name="transform"/> when this instance does not represent <see langword="null"/>.
+    /// </summary>
+    /// <param name="transform">The transform to perform.</param>
+    /// <param name="result">The result of the <paramref name="transform"/>.</param>
+    /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNotNull<TResult>(
         NotNull<Func<T, TResult>> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
@@ -141,9 +173,6 @@ public readonly partial struct MaybeNull<T>
     /// </summary>
     /// <param name="value">The value wrapped in the <see cref="MaybeNull{T}"/>.</param>
     /// <returns><see langword="true"/> if the <see cref="MaybeNull{T}"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     public readonly Boolean TryGetValue(
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
@@ -154,6 +183,9 @@ public readonly partial struct MaybeNull<T>
         return m_Value is not null;
     }
 
+    /// <summary>
+    /// Gets whether this instance represents <see langword="null"/>.
+    /// </summary>
     public Boolean IsNull
     {
         get

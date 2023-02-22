@@ -15,7 +15,9 @@ public interface IStrongEnumerator<out TElement> :
 {
 #if NETCOREAPP3_1_OR_GREATER
     void IDisposable.Dispose()
-    { }
+    {
+        GC.SuppressFinalize(this);
+    }
 
     void IEnumerator.Reset()
     { }

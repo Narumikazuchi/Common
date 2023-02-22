@@ -49,15 +49,15 @@ public readonly partial struct AlphanumericVersion
 #endif
         NotNullOrEmpty<String> major,
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
+        [AllowNull]
 #endif
         MaybeNullOrEmpty<String> minor = default,
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
+        [AllowNull]
 #endif
         MaybeNullOrEmpty<String> build = default,
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
+        [AllowNull]
 #endif
         MaybeNullOrEmpty<String> revision = default)
     {

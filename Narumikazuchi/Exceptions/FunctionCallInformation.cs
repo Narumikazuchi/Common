@@ -7,7 +7,10 @@ namespace Narumikazuchi;
 public readonly partial struct FunctionCallInformation
 {
     /// <inheritdoc/>
-    public override String ToString()
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [return: NotNull]
+#endif
+    public readonly override String ToString()
     {
         StringBuilder builder = new();
         builder.Append(value: this.Target);
@@ -36,6 +39,9 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the path to the file, where the function is defined.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> File
     {
         get
@@ -51,6 +57,9 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> Target
     {
         get
@@ -66,6 +75,9 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> Name
     {
         get
@@ -120,16 +132,22 @@ public readonly partial struct FunctionCallInformation
         {
             return;
         }
+
         foreach (ParameterInfo parameter in method.GetParameters())
         {
             m_Parameters.Add(parameter.ParameterType.FullName);
         }
     }
 
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Int32 m_Line;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Int32 m_Column;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly MaybeNull<String> m_Filename;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly MaybeNull<String> m_Target;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly MaybeNull<String> m_Name;
     private readonly List<String?> m_Parameters = new();
 }

@@ -9,6 +9,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the environment data from when the <see cref="Exception"/> has been thrown.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [NotNull]
+#endif
     public IDictionary Data
     {
         get
@@ -20,6 +23,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the inner <see cref="Exception"/>.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<Exception> InnerException
     {
         get
@@ -42,6 +48,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the type in which the <see cref="Exception"/> occured.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<Type> SourceType
     {
         get
@@ -53,6 +62,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the library where the <see cref="SourceType"/> is declared.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> SourceLibrary
     {
         get
@@ -64,6 +76,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the member who caused the <see cref="Exception"/>.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> SourceMember
     {
         get
@@ -75,6 +90,9 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the member type of the <see cref="SourceMember"/>.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+    [MaybeNull]
+#endif
     public MaybeNull<String> SourceMemberType
     {
         get
@@ -98,6 +116,7 @@ public readonly partial struct ExceptionInformation
         m_CallStack = infos.ToImmutableArray();
     }
 
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ImmutableArray<FunctionCallInformation> m_CallStack;
     private readonly Exception m_Source;
 }

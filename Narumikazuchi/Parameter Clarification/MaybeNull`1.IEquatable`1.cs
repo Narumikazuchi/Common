@@ -3,9 +3,6 @@
 public partial struct MaybeNull<T> : IEquatable<T>
 {
     /// <inheritdoc/>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     public readonly Boolean Equals(T? other)
     {
         if (m_Value is null &&
@@ -26,9 +23,6 @@ public partial struct MaybeNull<T> : IEquatable<T>
 public partial struct MaybeNull<T> : IEquatable<MaybeNull<T>>
 {
     /// <inheritdoc/>
-#if NET48_OR_GREATER || NET5_0_OR_GREATER
-    [Pure]
-#endif
     public readonly Boolean Equals(MaybeNull<T> other)
     {
         if (m_Value is null &&

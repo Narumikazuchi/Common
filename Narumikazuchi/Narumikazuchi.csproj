@@ -17,14 +17,16 @@
 	<PropertyGroup>
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
-		<Copyright>©2022 Narumikazuchi</Copyright>
-		<Version>4.2.0</Version>
+		<Copyright>©2023 Narumikazuchi</Copyright>
+		<Version>5.0.0-prerelease</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReleaseNotes>ReferenceWrapper&lt;T&gt; struct has been deprecated and superceded by the Option&lt;T&gt; struct, which is effectively an monad. 4.1.0 also added a new method 'Interact' to the Option&lt;T&gt; struct.</PackageReleaseNotes>
+		<PackageReleaseNotes>Inclusion of parameter clarifiers that improve API readability. 'MaybeNull&lt;T&gt;' will replace 'Option&lt;T&gt;' in this context.
+Major refactor using the new parameter clarifiers.
+The interfaces 'IStrongEnumerable&lt;TElement, TEnumerator&gt;' and 'IStrongEnumerator&lt;TElement&gt;' have been moved here from the 'Narumikazuchi.Collections' package.</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 		<PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
