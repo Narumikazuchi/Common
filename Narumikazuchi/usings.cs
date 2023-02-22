@@ -10,6 +10,3 @@ global using System.Diagnostics.CodeAnalysis;
 #if NET7_0_OR_GREATER
 global using System.Numerics;
 #endif
-#if NET5_0_OR_GREATER && !NET7_0_OR_GREATER
-global using System.Threading.Tasks;
-#endif

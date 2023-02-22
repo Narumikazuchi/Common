@@ -4,7 +4,7 @@
 /// <summary>
 /// Wraps the value of a reference type, to minimize the use of <see langword="null"/>.
 /// </summary>
-[Obsolete("Deprecated in favor of Option<T>.", false)]
+[Obsolete("Deprecated in favor of MaybeNull<T>, NotNull<T> and the empty versions of these structs.", false)]
 public readonly partial struct ReferenceWrapper<TReference>
     where TReference : class
 {

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -11,6 +11,7 @@
 	<PropertyGroup>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 		<WarningsNotAsErrors>1591</WarningsNotAsErrors>
+		<NoWarn>NU1803;1701;1702,0282</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -54,19 +55,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="System"/>
-		<Using Include="System.Collections"/>
-		<Using Include="System.Collections.Generic"/>
-		<Using Include="System.ComponentModel"/>
-		<Using Include="System.Diagnostics"/>
-		<Using Include="System.Diagnostics.Contracts"/>
-		<Using Include="System.IO"/>
-		<Using Include="System.Linq"/>
-		<Using Include="System.Reflection"/>
-		<Using Include="System.Runtime.CompilerServices"/>
-		<Using Include="System.Text"/>
-		<Using Include="System.Text.RegularExpressions"/>
-		<Using Include="System.Threading"/>
-		<Using Include="System.Threading.Tasks"/>
+		<Using Include="System" />
+		<Using Include="System.Collections" />
+		<Using Include="System.Collections.Generic" />
+		<Using Include="System.ComponentModel" />
+		<Using Include="System.Diagnostics" />
+		<Using Include="System.Diagnostics.Contracts" />
+		<Using Include="System.IO" />
+		<Using Include="System.Linq" />
+		<Using Include="System.Reflection" />
+		<Using Include="System.Runtime.CompilerServices" />
+		<Using Include="System.Text" />
+		<Using Include="System.Text.RegularExpressions" />
+		<Using Include="System.Threading" />
+		<Using Include="System.Threading.Tasks" />
 	</ItemGroup>
 </Project>

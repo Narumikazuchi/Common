@@ -7,6 +7,51 @@
 public unsafe partial struct Pointer<T>
 {
     /// <summary>
+    /// Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
+    /// </summary>
+    /// <param name="t">The object to create a <see cref="Pointer{T}"/> of.</param>
+    /// <returns>A <see cref="Pointer{T}"/> to the reference of <typeparamref name="T"/></returns>
+    static public Pointer<T> AddressOf(ref T t)
+    {
+        TypedReference tr = __makeref(t);
+        return new(pointer: *(IntPtr*)&tr);
+    }
+
+#pragma warning disable CS1591 // Missing comments
+    static public Pointer<T> operator ++(Pointer<T> pointer)
+    {
+        return pointer.Increment(1);
+    }
+
+    static public Pointer<T> operator --(Pointer<T> pointer)
+    {
+        return pointer.Decrement(1);
+    }
+
+    static public Pointer<T> operator +(Pointer<T> pointer,
+                                        Int64 amount)
+    {
+        return pointer.Increment(amount);
+    }
+
+    static public Pointer<T> operator -(Pointer<T> pointer,
+                                        Int64 amount)
+    {
+        return pointer.Decrement(amount);
+    }
+
+    static public implicit operator Pointer<T>(IntPtr pointer)
+    {
+        return new(pointer: pointer);
+    }
+
+    static public implicit operator Pointer<T>(void* pointer)
+    {
+        return new(pointer: pointer);
+    }
+#pragma warning restore
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="Pointer{T}"/> struct.
     /// </summary>
     public Pointer(void* pointer)
@@ -27,10 +72,11 @@ public unsafe partial struct Pointer<T>
     [return: MaybeNull]
     public override String ToString()
     {
-        if (this.Value is null)
+        if (this.Value.IsNull)
         {
             return String.Empty;
         }
+
         return this.Value.ToString();
     }
 
@@ -39,94 +85,46 @@ public unsafe partial struct Pointer<T>
     /// </summary>
     public T this[Int32 index]
     {
-        get => Unsafe.Read<T>(source: Offset(pointer: m_Pointer, 
-                                             index: index));
-        set => Unsafe.Write(destination: Offset(pointer: m_Pointer, 
-                                                index: index), 
-                            value: value);
+        get
+        {
+            return Unsafe.Read<T>(Offset(pointer: m_Pointer,
+                                         index: index));
+        }
+        set
+        {
+            Unsafe.Write(destination: Offset(pointer: m_Pointer,
+                                             index: index),
+                         value: value);
+        }
     }
 
     /// <summary>
     /// Gets the current address of this pointer.
     /// </summary>
     [Pure]
-    public IntPtr Address =>
-        (IntPtr)m_Pointer;
+    public IntPtr Address
+    {
+        get
+        {
+            return (IntPtr)m_Pointer;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the value of where the pointer currently points at.
     /// </summary>
     [MaybeNull]
-    public T? Value
+    public MaybeNull<T> Value
     {
-        get => Unsafe.Read<T>(m_Pointer);
-        set => Unsafe.Write(destination: m_Pointer, 
-                            value: value);
+        get
+        {
+            return Unsafe.Read<T>(m_Pointer);
+        }
+        set
+        {
+            Unsafe.Write(destination: m_Pointer,
+                         value: value);
+        }
     }
-}
-
-// Non-Public
-unsafe partial struct Pointer<T>
-{
-    private Pointer<T> Increment(Int64 amount)
-    {
-        m_Pointer = Offset(pointer: m_Pointer, 
-                           index: amount);
-        return this;
-    }
-
-    private Pointer<T> Decrement(Int64 amount)
-    {
-        m_Pointer = Offset(pointer: m_Pointer,
-                           index: -amount);
-        return this;
-    }
-
-    private static void* Offset(void* pointer,
-                                Int64 index)
-    {
-        Int64 offset = Unsafe.SizeOf<T>() * index;
-        return (void*)((Int64)pointer + offset);
-    }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private void* m_Pointer;
-}
-
-// Static
-unsafe partial struct Pointer<T>
-{
-    /// <summary>
-    /// Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
-    /// </summary>
-    /// <param name="t">The object to create a <see cref="Pointer{T}"/> of.</param>
-    /// <returns>A <see cref="Pointer{T}"/> to the reference of <typeparamref name="T"/></returns>
-    public static Pointer<T> AddressOf(ref T t)
-    {
-        TypedReference tr = __makeref(t);
-        return new(pointer: *(IntPtr*)&tr);
-    }
-
-#pragma warning disable
-    public static Pointer<T> operator ++(Pointer<T> pointer) =>
-        pointer.Increment(1);
-
-    public static Pointer<T> operator --(Pointer<T> pointer) =>
-        pointer.Decrement(1);
-
-    public static Pointer<T> operator +(Pointer<T> pointer, 
-                                        Int64 amount) =>
-        pointer.Increment(amount);
-
-    public static Pointer<T> operator -(Pointer<T> pointer, 
-                                        Int64 amount) =>
-        pointer.Decrement(amount);
-
-    public static implicit operator Pointer<T>(IntPtr pointer) =>
-        new(pointer: pointer);
-
-    public static implicit operator Pointer<T>(void* pointer) =>
-        new(pointer: pointer);
-#pragma warning restore
 }
 #endif

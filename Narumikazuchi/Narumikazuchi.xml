@@ -9,210 +9,12 @@
             Represents an immutable alphanumeric version number.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.op_Implicit(System.Version)~Narumikazuchi.AlphanumericVersion">
             <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
+            Implicit conversion from <see cref="T:System.Version"/> class.
             </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.String,System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.String,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.String,System.Int64@,System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.String,System.Int64@,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.String,System.Int64@)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.Int64@,System.String)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
-            </summary>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(System.Int64@,System.Int64@,System.Int64@,System.Int64@)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(Narumikazuchi.NotNullOrEmpty{System.String},Narumikazuchi.MaybeNullOrEmpty{System.String},Narumikazuchi.MaybeNullOrEmpty{System.String},Narumikazuchi.MaybeNullOrEmpty{System.String})">
             <summary>
             Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
             </summary>
@@ -230,7 +32,7 @@
             Transforms the <see cref="T:Narumikazuchi.AlphanumericVersion"/> into a <see cref="T:System.String"/> according to the default format '#.#.#.#'.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.ToString(System.String)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.ToString(Narumikazuchi.MaybeNullOrEmpty{System.String})">
             <summary>
             Formats the output to be in a user specified format.
             </summary>
@@ -253,12 +55,6 @@
             </remarks>
             <returns>This instance formatted as a <see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(System.String,Narumikazuchi.AlphanumericVersion@)">
-            <inheritdoc/>
-        </member>
         <member name="P:Narumikazuchi.AlphanumericVersion.Major">
             <summary>
             Gets the major version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>.
@@ -279,17 +75,6 @@
             Gets the revision version component of this <see cref="T:Narumikazuchi.AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Implicit(System.Version)~Narumikazuchi.AlphanumericVersion">
-            <summary>
-            Implicit conversion from <see cref="T:System.Version"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Equality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.op_Inequality(Narumikazuchi.AlphanumericVersion,Narumikazuchi.AlphanumericVersion)">
-            <inheritdoc/>
-        </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.Clone">
             <summary>
             Creates a new object that is an exact copy of this instance.
@@ -305,43 +90,60 @@
         <member name="M:Narumikazuchi.AlphanumericVersion.Equals(Narumikazuchi.AlphanumericVersion)">
             <inheritdoc/>
         </member>
-        <member name="T:Narumikazuchi.AsyncOptionExtensions">
-            <summary>
-            Contains helpers for async operations involving <see cref="T:Narumikazuchi.Option`1"/>.
-            </summary>
+        <member name="M:Narumikazuchi.AlphanumericVersion.Parse(Narumikazuchi.NotNullOrEmpty{System.String})">
+            <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.AsyncOptionExtensions.GetAwaiter(Narumikazuchi.Option{System.Threading.Tasks.Task})">
-            <summary>
-            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/>.
-            </summary>
-            <returns>An awaiter instance.</returns>
-        </member>
-        <member name="M:Narumikazuchi.AsyncOptionExtensions.GetAwaiter``1(Narumikazuchi.Option{System.Threading.Tasks.Task{``0}})">
-            <summary>
-            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/>.
-            </summary>
-            <returns>An awaiter instance.</returns>
+        <member name="M:Narumikazuchi.AlphanumericVersion.TryParse(Narumikazuchi.MaybeNullOrEmpty{System.String},Narumikazuchi.AlphanumericVersion@)">
+            <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.AttributeResolver">
             <summary>
             Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(Narumikazuchi.NotNull{System.Reflection.Assembly})">
             <summary>
             Checks if the specified <see cref="T:System.Reflection.Assembly"/> has at least one <typeparamref name="TAttribute"/> defined.
             </summary>
             <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to check.</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(Narumikazuchi.NotNull{System.Reflection.MemberInfo})">
+            <summary>
+            Checks if the specified <see cref="T:System.Reflection.MemberInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to check.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(Narumikazuchi.NotNull{System.Reflection.ParameterInfo})">
+            <summary>
+            Checks if the specified <see cref="T:System.Reflection.ParameterInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to check.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(Narumikazuchi.NotNull{System.Reflection.Assembly})">
             <summary>
             Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
             </summary>
             <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attributes from.</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(Narumikazuchi.NotNull{System.Reflection.MemberInfo})">
+            <summary>
+            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attributes from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(Narumikazuchi.NotNull{System.Reflection.ParameterInfo})">
+            <summary>
+            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attributes from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(Narumikazuchi.NotNull{System.Reflection.Assembly})">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
             </summary>
@@ -349,21 +151,7 @@
             <exception cref="T:System.ArgumentNullException"/>
             <exception cref="T:System.InvalidOperationException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.MemberInfo)">
-            <summary>
-            Checks if the specified <see cref="T:System.Reflection.MemberInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
-            </summary>
-            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to check.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.MemberInfo)">
-            <summary>
-            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
-            </summary>
-            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attributes from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.MemberInfo)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(Narumikazuchi.NotNull{System.Reflection.MemberInfo})">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
             </summary>
@@ -371,21 +159,7 @@
             <exception cref="T:System.ArgumentNullException"/>
             <exception cref="T:System.InvalidOperationException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.ParameterInfo)">
-            <summary>
-            Checks if the specified <see cref="T:System.Reflection.ParameterInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
-            </summary>
-            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to check.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.ParameterInfo)">
-            <summary>
-            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
-            </summary>
-            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attributes from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.ParameterInfo)">
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(Narumikazuchi.NotNull{System.Reflection.ParameterInfo})">
             <summary>
             Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
             </summary>
@@ -393,12 +167,75 @@
             <exception cref="T:System.ArgumentNullException"/>
             <exception cref="T:System.InvalidOperationException"/>
         </member>
+        <member name="T:Narumikazuchi.Collections.EnumEnumerator`1">
+            <summary>
+            Represents an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and <see cref="T:System.Collections.Generic.IEnumerator`1"/> of type
+            <typeparamref name="TEnum"/>.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+        </member>
+        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Collections.EnumEnumerator`1.Current">
+            <inheritdoc/>
+        </member>
+        <member name="T:Narumikazuchi.Collections.IStrongEnumerable`2">
+            <summary>
+            Allows for the implementing object to optimize the generated IL code by
+            providing a specific type instead of an interface for the <see cref="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator"/>
+            method. Using this interface will reduce the delegation cost of virtual IL calls
+            and therefore improve iteration times of <see langword="foreach"/>-loops.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:Narumikazuchi.Collections.IStrongEnumerator`1">
+            <summary>
+            Allows for the implementing object to optimize the generated IL code by
+            providing a specific type instead of an interface for the 
+            <see cref="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator"/> method. 
+            Using this interface will reduce the delegation cost of virtual IL calls
+            and therefore improve iteration times of <see langword="foreach"/>-loops.
+            This interface also removes the requirement of the implementation of the
+            <see cref="M:System.IDisposable.Dispose"/> method, making the resulting type 
+            even more memory efficient.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Collections.PrimeEnumerator">
+            <summary>
+            Enumerates through a list of prime numbers
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Collections.PrimeEnumerator.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+        </member>
+        <member name="M:Narumikazuchi.Collections.PrimeEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Collections.PrimeEnumerator.Current">
+            <inheritdoc/>
+        </member>
         <member name="T:Narumikazuchi.EventHandler`1">
             <summary>
             Represents the method that will handle an event without event data.
             </summary>
             <param name="sender">The object which raised the event.</param>
-            <param name="eventArgs">The event data for the raised event.</param>
         </member>
         <member name="T:Narumikazuchi.EventHandler`2">
             <summary>
@@ -412,181 +249,22 @@
             Represents the method to compare two instances of the same type for equality.
             </summary>
         </member>
-        <member name="T:Narumikazuchi.AsyncOptionMapping`2">
-            <summary>
-            Maps an object of type <typeparamref name="TOrigin"/> to an object of type <typeparamref name="TResult"/>
-            asynchronosly.
-            </summary>
-            <param name="origin">The object to map from.</param>
-            <param name="cancellationToken"></param>
-            <returns>The object that has been mapped to.</returns>
-        </member>
-        <member name="T:Narumikazuchi.AsyncOptionDirectMapping`2">
-            <summary>
-            Maps an object of type <typeparamref name="TOrigin"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>
-            asynchronosly.
-            </summary>
-            <param name="origin">The object to map from.</param>
-            <param name="cancellationToken"></param>
-            <returns>The <see cref="T:Narumikazuchi.Option`1"/> that has been mapped to.</returns>
-        </member>
-        <member name="T:Narumikazuchi.AsyncOptionInteraction`1">
-            <summary>
-            Asynchronosly performs an action on the object passed to the delegate.
-            </summary>
-            <param name="origin">The object to perform the action on.</param>
-            <param name="cancellationToken"></param>
-        </member>
-        <member name="T:Narumikazuchi.EnumEnumerator">
-            <summary>
-            Enumerates through enum values.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.EnumEnumerator.EnumerateValues``1">
-            <summary>
-            Enumerates through all values defined for the <typeparamref name="TEnum"/>.
-            </summary>
-            <returns>An <see cref="T:Narumikazuchi.EnumValues`1"/> containing all values defined for the <typeparamref name="TEnum"/>.</returns>
-        </member>
-        <member name="M:Narumikazuchi.EnumEnumerator.EnumerateFlags``1(``0)">
-            <summary>
-            Enumerates the flags, which are set in the input value.
-            </summary>
-            <param name="enumValue">The value to enumerate the flags of.</param>
-            <returns>An <see cref="T:Narumikazuchi.EnumValues`1"/> containing all flags that are set in the input value.</returns>
-        </member>
-        <member name="T:Narumikazuchi.EnumValues`1">
-            <summary>
-            Represents an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and <see cref="T:System.Collections.Generic.IEnumerator`1"/> of type
-            <typeparamref name="TEnum"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.EnumValues`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.EnumValues`1.GetEnumerator">
-            <summary>
-            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
-            </summary>
-            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-        </member>
-        <member name="M:Narumikazuchi.EnumValues`1.MoveNext">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.EnumValues`1.Current">
-            <inheritdoc/>
-        </member>
-        <member name="T:Narumikazuchi.ExceptionHelpers">
-            <summary>
-            Contains helpers for throwing exceptions.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.Boolean,System.String)">
-            <summary>
-            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
-            </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="asArgumentException">Whether the method should throw an <see cref="T:System.ArgumentNullException"/> or a <see cref="T:System.NullReferenceException"/>.</param>
-            <param name="varName">The name of the parameter.</param>
-            <exception cref="T:System.NullReferenceException" />
-            <remarks>
-            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
-            will be filled with the name of the variable by this method.
-            </remarks>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfLesserThan``1(``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="bound"/>.</param>
-            <param name="bound">The low bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfBiggerThan``1(``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="bound"/>.</param>
-            <param name="bound">The high bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="lowBound"/> and <paramref name="highBound"/>.</param>
-            <param name="lowBound">The low bound to check against.</param>
-            <param name="highBound">The high bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
         <member name="T:Narumikazuchi.ImpossibleState">
             <summary>
             Exception thrown when an impossible state is reached inside an object.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor">
+        <member name="M:Narumikazuchi.ImpossibleState.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception})">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String)">
+        <member name="M:Narumikazuchi.ImpossibleState.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception},System.Collections.Generic.KeyValuePair{System.Object,Narumikazuchi.MaybeNull{System.Object}}[])">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Exception,System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Exception,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.Tuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Tuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ImpossibleState.#ctor(System.String,System.Exception,System.Tuple{System.Object,System.Object}[])">
+        <member name="M:Narumikazuchi.ImpossibleState.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception},System.Tuple{System.Object,Narumikazuchi.MaybeNull{System.Object}}[])">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
             </summary>
@@ -596,62 +274,17 @@
             Exception thrown when an unallowed action is about to be performed.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor">
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception},System.Collections.Generic.KeyValuePair{System.Object,Narumikazuchi.MaybeNull{System.Object}}[])">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.ValueTuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.Tuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Tuple{System.Object,System.Object}[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.Tuple{System.Object,System.Object}[])">
+        <member name="M:Narumikazuchi.NotAllowed.#ctor(Narumikazuchi.MaybeNull{System.String},Narumikazuchi.MaybeNull{System.Exception},System.Tuple{System.Object,Narumikazuchi.MaybeNull{System.Object}}[])">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
             </summary>
@@ -661,7 +294,7 @@
             Converts types that implement the <see cref="T:Narumikazuchi.IConvertible`1"/> interface.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.Converter`1.ToType``1(``0)">
+        <member name="M:Narumikazuchi.Converter`1.ToType``1(Narumikazuchi.NotNull{``0})">
             <summary>
             Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type. 
             </summary>
@@ -669,7 +302,7 @@
             <returns>A new instance of <typeparamref name="TResult"/> with the 
             same value as the specified <typeparamref name="TConvertible"/></returns>
         </member>
-        <member name="M:Narumikazuchi.Converter`1.ToType``2(``0,``1)">
+        <member name="M:Narumikazuchi.Converter`1.ToType``2(Narumikazuchi.NotNull{``0},Narumikazuchi.MaybeNull{``1})">
             <summary>
             Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type 
             using the specified culture-specific formatting. 
@@ -684,34 +317,19 @@
             Defines a method to convert the implementing type to the type <typeparamref name="TType"/>.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.IConvertible`1.ToType``1(``0)">
+        <member name="M:Narumikazuchi.IConvertible`1.ToType``1(Narumikazuchi.MaybeNull{``0})">
             <summary>
             Converts this instance into a new instance of <typeparamref name="TType"/> with the same value using the specified culture-specific formatting.
             </summary>
             <param name="provider">An <see cref="T:System.IFormatProvider"/> implementation which provides culture-specific formatting.</param>
             <returns>A new instance of <typeparamref name="TType"/> with the same value as this instance</returns>
         </member>
-        <member name="T:Narumikazuchi.ISynchronized">
-            <summary>
-            Represents an object that is synchronized (thread safe).
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ISynchronized.IsSynchronized">
-            <summary>
-            Gets a value indicating whether access to this <see cref="T:Narumikazuchi.ISynchronized"/> is synchronized (thread safe).
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.ISynchronized.SyncRoot">
-            <summary>
-            Gets the object mutex used to synchronize access to this <see cref="T:Narumikazuchi.ISynchronized"/>.
-            </summary>
-        </member>
         <member name="T:Narumikazuchi.INotifyPropertyChangedHelper">
             <summary>
             Implements a way for extensions methods to raise the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.INotifyPropertyChangedHelper.OnPropertyChanged(System.String)">
+        <member name="M:Narumikazuchi.INotifyPropertyChangedHelper.OnPropertyChanged(Narumikazuchi.NotNull{System.String})">
             <summary>
             Raises the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event for the specified property.
             </summary>
@@ -722,169 +340,128 @@
             Implements a way for extensions methods to raise the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging"/> event.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.INotifyPropertyChangingHelper.OnPropertyChanging(System.String)">
+        <member name="M:Narumikazuchi.INotifyPropertyChangingHelper.OnPropertyChanging(Narumikazuchi.NotNull{System.String})">
             <summary>
             Raises the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging"/> event for the specified property.
             </summary>
             <param name="propertyName">The name of the property that is changing.</param>
         </member>
-        <member name="T:Narumikazuchi.Option`1">
-            <summary>
-            represents a monad approach to possibly unset values.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.Equals(System.Object)">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(System.Object)">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.Option`1.GetHashCode">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.GetHashCode">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.Option`1.ToString">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.ToString">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.Option`1.Map``1(System.Func{`0,``0})">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.TryGetValue(`0@)">
             <summary>
-            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
-            of type <typeparamref name="TResult"/>.
+            Gets the value wrapped in the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>.
             </summary>
-            <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
-            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"/>
+            <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>.</param>
+            <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
         </member>
-        <member name="M:Narumikazuchi.Option`1.MapAsync``1(Narumikazuchi.AsyncOptionMapping{`0,``0},System.Threading.CancellationToken)">
-            <summary>
-            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
-            of type <typeparamref name="TResult"/>.
-            </summary>
-            <param name="map">The function used to map from type <typeparamref name="T"/> to type <typeparamref name="TResult"/>.</param>
-            <param name="cancellationToken"></param>
-            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.MapDirect``1(System.Func{`0,Narumikazuchi.Option{``0}})">
-            <summary>
-            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
-            of type <typeparamref name="TResult"/>.
-            </summary>
-            <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</param>
-            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.MapDirectAsync``1(Narumikazuchi.AsyncOptionDirectMapping{`0,``0},System.Threading.CancellationToken)">
-            <summary>
-            Maps the value of the <see cref="T:Narumikazuchi.Option`1"/> from it's type <typeparamref name="T"/> to a new <see cref="T:Narumikazuchi.Option`1"/>
-            of type <typeparamref name="TResult"/>.
-            </summary>
-            <param name="map">The function used to map from type <typeparamref name="T"/> to an <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</param>
-            <param name="cancellationToken"></param>
-            <returns>A new <see cref="T:Narumikazuchi.Option`1"/> of type <typeparamref name="TResult"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.Interact(System.Action{`0})">
-            <summary>
-            Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="P:Narumikazuchi.Option`1.HasValue"/> is <see langword="true"/>.
-            Otherwise, nothing will happen.
-            </summary>
-            <param name="interaction">The interaction to execute.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.InteractAsync(Narumikazuchi.AsyncOptionInteraction{`0},System.Threading.CancellationToken)">
-            <summary>
-            Performs the specified <paramref name="interaction"/> on the optional value, if <see cref="P:Narumikazuchi.Option`1.HasValue"/> is <see langword="true"/>.
-            Otherwise, nothing will happen.
-            </summary>
-            <param name="interaction">The interaction to execute.</param>
-            <param name="cancellationToken"></param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.TryGetValue(`0@)">
-            <summary>
-            Gets the value wrapped in the <see cref="T:Narumikazuchi.Option`1"/>.
-            </summary>
-            <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.Option`1"/>.</param>
-            <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.Option`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
-        </member>
-        <member name="P:Narumikazuchi.Option`1.HasValue">
-            <summary>
-            Gets whether the <see cref="T:Narumikazuchi.Option`1"/> wraps an actual value.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Option`1.Equals(`0)">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.Option`1.Equals(Narumikazuchi.Option{`0})">
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(Narumikazuchi.MaybeNullOrEmpty{`0})">
             <inheritdoc/>
         </member>
-        <member name="T:Narumikazuchi.Pointer`1">
-            <summary>
-            Represents a reference to a struct or a reference to a reference for a class.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Pointer`1.#ctor(System.Void*)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Pointer`1.#ctor(System.IntPtr)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Pointer`1.ToString">
+        <member name="M:Narumikazuchi.MaybeNull`1.Equals(System.Object)">
             <inheritdoc/>
         </member>
-        <member name="P:Narumikazuchi.Pointer`1.Item(System.Int32)">
-            <summary>
-            Gets or sets the value of where the pointer at the specified index points at.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Pointer`1.Address">
-            <summary>
-            Gets the current address of this pointer.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Pointer`1.Value">
-            <summary>
-            Gets or sets the value of where the pointer currently points at.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Pointer`1.AddressOf(`0@)">
-            <summary>
-            Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
-            </summary>
-            <param name="t">The object to create a <see cref="T:Narumikazuchi.Pointer`1"/> of.</param>
-            <returns>A <see cref="T:Narumikazuchi.Pointer`1"/> to the reference of <typeparamref name="T"/></returns>
-        </member>
-        <member name="T:Narumikazuchi.PrimeEnumerator">
-            <summary>
-            Enumerates through a list of prime numbers
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.PrimeEnumerator.GetEnumerator">
-            <summary>
-            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
-            </summary>
-            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-        </member>
-        <member name="M:Narumikazuchi.PrimeEnumerator.MoveNext">
+        <member name="M:Narumikazuchi.MaybeNull`1.GetHashCode">
             <inheritdoc/>
         </member>
-        <member name="P:Narumikazuchi.PrimeEnumerator.Current">
+        <member name="M:Narumikazuchi.MaybeNull`1.ToString">
             <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.TryGetValue(`0@)">
+            <summary>
+            Gets the value wrapped in the <see cref="T:Narumikazuchi.MaybeNull`1"/>.
+            </summary>
+            <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.MaybeNull`1"/>.</param>
+            <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.MaybeNull`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.Equals(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.Equals(Narumikazuchi.MaybeNull{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.Equals(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.Equals(Narumikazuchi.NotNullOrEmpty{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.Equals(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.Equals(Narumikazuchi.NotNull{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Narumikazuchi.ParameterExtensions">
+            <summary>
+            Contains helpers for the parameter clarifiers (<see cref="T:Narumikazuchi.MaybeNull`1"/>, <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>, <see cref="T:Narumikazuchi.NotNull`1"/>, <see cref="T:Narumikazuchi.NotNullOrEmpty`1"/>).
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetAwaiter(Narumikazuchi.MaybeNull{System.Threading.Tasks.Task})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetAwaiter(Narumikazuchi.NotNull{System.Threading.Tasks.Task})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetAwaiter``1(Narumikazuchi.MaybeNull{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetAwaiter``1(Narumikazuchi.NotNull{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </summary>
+            <returns>An awaiter instance.</returns>
         </member>
         <member name="T:Narumikazuchi.Primes">
             <summary>
             Provides methods to generate primes or check for them.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.Primes.IsPrime(System.Int64@)">
+        <member name="M:Narumikazuchi.Primes.IsPrime(System.Int64)">
             <summary>
             Checks whether the specified candidate is a prime number.
             </summary>
             <param name="candidate">The candidate to check.</param>
             <returns><see langword="true"/> if the specified candidate is a prime; otherwise <see langword="false"/></returns>
         </member>
-        <member name="M:Narumikazuchi.Primes.GetPrevious(System.Int64@)">
+        <member name="M:Narumikazuchi.Primes.GetPrevious(System.Int64)">
             <summary>
             Returns the nearest prime that is smaller than or equal to the specified parameter.
             </summary>
@@ -892,19 +469,12 @@
             <returns>The nearest prime that is smaller than or equal to the specified parameter</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
-        <member name="M:Narumikazuchi.Primes.GetNext(System.Int64@)">
+        <member name="M:Narumikazuchi.Primes.GetNext(System.Int64)">
             <summary>
             Returns the nearest prime that is greater than or equal to the specified parameter.
             </summary>
             <param name="origin">The origin from where to start.</param>
             <returns>The nearest prime that is greater than or equal to the specified parameter</returns>
-            <exception cref="T:System.ArgumentException"/>
-        </member>
-        <member name="M:Narumikazuchi.Primes.ListUntil(System.Range@)">
-            <summary>
-            Enumerates all primes in the specified range.
-            </summary>
-            <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
         <member name="M:Narumikazuchi.Primes.ListUntil(System.Int64,System.Int64)">
@@ -914,12 +484,12 @@
             <returns>The list of primes contained in the specified range</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
-        <member name="T:Narumikazuchi.System_Extensions">
+        <member name="T:Narumikazuchi.SystemExtensions">
             <summary>
             Contains extensions for the System namespace.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.System_Extensions.Clamp``1(``0,``0,``0)">
+        <member name="M:Narumikazuchi.SystemExtensions.Clamp``1(``0,Narumikazuchi.NotNull{``0},Narumikazuchi.NotNull{``0})">
             <summary>
             Returns the comparable clamped between the specified min and max value.
             </summary>
@@ -928,13 +498,13 @@
             <param name="highBound">High-bound for the clamping</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.System_Extensions.EnumerateFlags``1(``0)">
+        <member name="M:Narumikazuchi.SystemExtensions.EnumerateFlags``1(``0)">
             <summary>
             Enumerates the flags, which are set in this value.
             </summary>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in this value.</returns>
         </member>
-        <member name="M:Narumikazuchi.System_Extensions.SanitizeForFilename(System.String)">
+        <member name="M:Narumikazuchi.SystemExtensions.SanitizeForFilename(System.String)">
             <summary>
             Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
             </summary>

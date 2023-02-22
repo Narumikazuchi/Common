@@ -14,5 +14,5 @@ public interface INotifyPropertyChangingHelper :
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         [DisallowNull]
 #endif
-    String propertyName);
+        NotNull<String> propertyName);
 }

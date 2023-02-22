@@ -1,11 +1,11 @@
-﻿namespace Narumikazuchi;
+﻿#if NETCOREAPP3_0_OR_GREATER
+namespace Narumikazuchi;
 
 /// <summary>
 /// Contains helpers for throwing exceptions.
 /// </summary>
 public static class ExceptionHelpers
 {
-#if NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// Throws an <see cref="NullReferenceException"/> if the source parameter is null.
     /// </summary>
@@ -19,13 +19,13 @@ public static class ExceptionHelpers
     /// will be filled with the name of the variable by this method.
     /// </remarks>
     public static void ThrowIfNullOrEmpty(this String? source,
-                                          [AllowNull] String? message = null,
+                                          [AllowNull] MaybeNull<String> message = default,
                                           Boolean asArgumentException = default,
                                           [CallerArgumentExpression("source")] String? varName = "")
     {
         if (String.IsNullOrWhiteSpace(source))
         {
-            if (message is null)
+            if (message.IsNull)
             {
                 if (asArgumentException)
                 {
@@ -44,12 +44,12 @@ public static class ExceptionHelpers
                 if (asArgumentException)
                 {
                     throw new ArgumentNullException(paramName: varName,
-                                                    message: String.Format(format: message,
-                                                                            arg0: varName));
+                                                    message: String.Format(format: message!,
+                                                                           arg0: varName));
                 }
                 else
                 {
-                    throw new NullReferenceException(message: String.Format(format: message,
+                    throw new NullReferenceException(message: String.Format(format: message!,
                                                                             arg0: varName));
                 }
             }
@@ -65,14 +65,14 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfLesserThan<T>(this T source,
-                                            T bound,
-                                            [AllowNull] String? message = null,
+                                            NotNull<T> bound,
+                                            [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
         if (source.CompareTo(bound) < 0)
         {
-            if (message is null)
+            if (message.IsNull)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }
@@ -93,14 +93,14 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfBiggerThan<T>(this T source,
-                                            T bound,
-                                            [AllowNull] String? message = null,
+                                            NotNull<T> bound,
+                                            [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
         if (source.CompareTo(bound) > 0)
         {
-            if (message is null)
+            if (message.IsNull)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }
@@ -122,16 +122,16 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfOutOfRange<T>(this T source,
-                                            T lowBound,
-                                            T highBound,
-                                            [AllowNull] String? message = null,
+                                            NotNull<T> lowBound,
+                                            NotNull<T> highBound,
+                                            [AllowNull] MaybeNull<String> message = default,
                                             [CallerArgumentExpression("source")] String? paramName = "")
         where T : IComparable<T>
     {
         if (source.CompareTo(lowBound) < 0 ||
             source.CompareTo(highBound) > 0)
         {
-            if (message is null)
+            if (message.IsNull)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }
@@ -142,7 +142,6 @@ public static class ExceptionHelpers
             }
         }
     }
-#endif
 
 #if NET5_0_OR_GREATER
     /// <summary>
@@ -168,3 +167,4 @@ public static class ExceptionHelpers
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NULLREF_MESSAGE = "The specified variable with the name {0} is null.";
 }
+#endif

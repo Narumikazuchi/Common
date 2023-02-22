@@ -1,6 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿#if NET5_0_OR_GREATER
+namespace Narumikazuchi;
 
-#if NET5_0_OR_GREATER
 /// <summary>
 /// Contains the information for a function call on the call stack.
 /// </summary>
@@ -17,11 +17,12 @@ public readonly partial struct FunctionCallInformation
         builder.Append(value: String.Join(separator: ',',
                                           values: m_Parameters));
         builder.Append(value: ')');
-        if (!this.File.HasValue ||
+        if (this.File.IsNull ||
             this.Line == 0)
         {
             return builder.ToString();
         }
+
         builder.Append(value: '\n');
         builder.Append(value: "at ");
         builder.Append(value: this.File);
@@ -35,28 +36,46 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the path to the file, where the function is defined.
     /// </summary>
-    public Option<String> File
+    public MaybeNull<String> File
     {
-        get => m_Filename;
-        init => m_Filename = value;
+        get
+        {
+            return m_Filename;
+        }
+        init
+        {
+            m_Filename = value;
+        }
     }
 
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
-    public Option<String> Target
+    public MaybeNull<String> Target
     {
-        get => m_Target;
-        init => m_Target = value;
+        get
+        {
+            return m_Target;
+        }
+        init
+        {
+            m_Target = value;
+        }
     }
 
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
-    public Option<String> Name
+    public MaybeNull<String> Name
     {
-        get => m_Name;
-        init => m_Name = value;
+        get
+        {
+            return m_Name;
+        }
+        init
+        {
+            m_Name = value;
+        }
     }
 
     /// <summary>
@@ -64,8 +83,14 @@ public readonly partial struct FunctionCallInformation
     /// </summary>
     public Int32 Line
     {
-        get => m_Line;
-        init => m_Line = value;
+        get
+        {
+            return m_Line;
+        }
+        init
+        {
+            m_Line = value;
+        }
     }
 
     /// <summary>
@@ -73,13 +98,16 @@ public readonly partial struct FunctionCallInformation
     /// </summary>
     public Int32 Column
     {
-        get => m_Column;
-        init => m_Column = value;
+        get
+        {
+            return m_Column;
+        }
+        init
+        {
+            m_Column = value;
+        }
     }
-}
 
-partial struct FunctionCallInformation
-{
     internal FunctionCallInformation(StackFrame frame)
     {
         MethodBase? method = frame.GetMethod();
@@ -100,9 +128,9 @@ partial struct FunctionCallInformation
 
     private readonly Int32 m_Line;
     private readonly Int32 m_Column;
-    private readonly Option<String> m_Filename;
-    private readonly Option<String> m_Target;
-    private readonly Option<String> m_Name;
+    private readonly MaybeNull<String> m_Filename;
+    private readonly MaybeNull<String> m_Target;
+    private readonly MaybeNull<String> m_Name;
     private readonly List<String?> m_Parameters = new();
 }
 #endif

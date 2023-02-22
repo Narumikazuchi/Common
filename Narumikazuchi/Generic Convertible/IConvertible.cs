@@ -20,6 +20,6 @@ public interface IConvertible<TType>
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         [AllowNull]
 #endif
-        TFormat? provider)
+        MaybeNull<TFormat> provider)
             where TFormat : IFormatProvider;
 }

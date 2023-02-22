@@ -1,9 +1,11 @@
-﻿namespace Narumikazuchi;
+﻿using Narumikazuchi.Collections;
+
+namespace Narumikazuchi;
 
 /// <summary>
 /// Contains extensions for the System namespace.
 /// </summary>
-public static class System_Extensions
+static public class SystemExtensions
 {
     /// <summary>
     /// Returns the comparable clamped between the specified min and max value.
@@ -18,9 +20,9 @@ public static class System_Extensions
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
 #endif
-    public static T Clamp<T>(this T value, 
-                             T lowBound,
-                             T highBound) 
+    static public T Clamp<T>(this T value, 
+                             NotNull<T> lowBound,
+                             NotNull<T> highBound) 
         where T : IComparable<T>
     {
         if (value.CompareTo(lowBound) < 0)
@@ -45,9 +47,19 @@ public static class System_Extensions
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
 #endif
-    public static EnumValues<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
-        where TEnum : struct, Enum =>
-            EnumEnumerator.EnumerateFlags(enumValue);
+    static public EnumEnumerator<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
+        where TEnum : struct, Enum
+    {
+        if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
+        {
+            return new(0);
+        }
+        else
+        {
+            return new(value: enumValue,
+                       mode: 2);
+        }
+    }
 #endif
 
     /// <summary>
@@ -60,7 +72,7 @@ public static class System_Extensions
 #if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
 #endif
-    public static String SanitizeForFilename(this String raw)
+    static public String SanitizeForFilename(this String raw)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(raw);
@@ -72,7 +84,7 @@ public static class System_Extensions
 #endif
 
         Char[] invalid = Path.GetInvalidFileNameChars()
-                             .Union(second: Path.GetInvalidPathChars())
+                             .Union(Path.GetInvalidPathChars())
                              .ToArray();
         String result = raw;
         foreach (Char c in invalid)
@@ -84,6 +96,7 @@ public static class System_Extensions
 #endif
                                     );
         }
+
         return result;
     }
 }
