@@ -208,11 +208,11 @@ public readonly partial struct AlphanumericVersion
 
         Int32 index;
 
-        for (Int32 i = 0;
-             i < count;
-             i++)
+        for (Int32 counter = 0;
+             counter < count;
+             counter++)
         {
-            String current = i switch
+            String current = counter switch
             {
                 0 => this.Major,
                 1 => this.Minor,

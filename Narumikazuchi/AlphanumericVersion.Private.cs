@@ -13,6 +13,7 @@ public partial struct AlphanumericVersion
             }
             return -1;
         }
+
         if (other is null)
         {
             return 1;
@@ -27,19 +28,20 @@ public partial struct AlphanumericVersion
             return -1;
         }
 
-        for (Int32 i = 0;
-             i < me.Length;
-             i++)
+        for (Int32 index = 0;
+             index < me.Length;
+             index++)
         {
-            if (me[i] > other[i])
+            if (me[index] > other[index])
             {
                 return 1;
             }
-            if (me[i] < other[i])
+            if (me[index] < other[index])
             {
                 return -1;
             }
         }
+
         return 0;
     }
 

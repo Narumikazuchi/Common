@@ -14,13 +14,13 @@ public partial struct PrimeEnumerator
         m_Index = -1;
         m_State = default;
 
-        for (Int32 i = 0;
-             i < Primes.Known.Count;
-             i++)
+        for (Int32 index = 0;
+             index < Primes.Known.Count;
+             index++)
         {
-            if (Primes.Known[i] >= startPoint)
+            if (Primes.Known[index] >= startPoint)
             {
-                m_Index = i - 1;
+                m_Index = index - 1;
                 return;
             }
         }

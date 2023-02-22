@@ -21,16 +21,16 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
             throw exception;
         }
 
-        for (Int32 i = 0;
-             i < segments.Length;
-             i++)
+        for (Int32 index = 0;
+             index < segments.Length;
+             index++)
         {
-            if (String.IsNullOrWhiteSpace(segments[i]) ||
-                !s_Regex.IsMatch(input: segments[i]))
+            if (String.IsNullOrWhiteSpace(segments[index]) ||
+                !s_Regex.IsMatch(input: segments[index]))
             {
                 FormatException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC);
                 exception.Data.Add(key: "Value",
-                                   value: segments[i]);
+                                   value: segments[index]);
                 throw exception;
             }
         }
@@ -76,16 +76,16 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
             return false;
         }
 
-        for (Int32 i = 0;
-             i < segments.Length;
-             i++)
+        for (Int32 index = 0;
+             index < segments.Length;
+             index++)
         {
-            if (!s_Regex.IsMatch(input: segments[i]))
+            if (!s_Regex.IsMatch(input: segments[index]))
             {
                 result = default;
                 return false;
             }
-            if (String.IsNullOrWhiteSpace(segments[i]))
+            if (String.IsNullOrWhiteSpace(segments[index]))
             {
                 result = default;
                 return false;
@@ -166,16 +166,16 @@ public partial struct AlphanumericVersion
             throw exception;
         }
 
-        for (Int32 i = 0;
-             i < segments.Length;
-             i++)
+        for (Int32 index = 0;
+             index < segments.Length;
+             index++)
         {
-            if (String.IsNullOrWhiteSpace(segments[i]) ||
-                !s_Regex.IsMatch(input: segments[i]))
+            if (String.IsNullOrWhiteSpace(segments[index]) ||
+                !s_Regex.IsMatch(input: segments[index]))
             {
                 FormatException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC);
                 exception.Data.Add(key: "Value",
-                                   value: segments[i]);
+                                   value: segments[index]);
                 throw exception;
             }
         }
@@ -232,16 +232,16 @@ public partial struct AlphanumericVersion
             return false;
         }
 
-        for (Int32 i = 0;
-             i < segments.Length;
-             i++)
+        for (Int32 index = 0;
+             index < segments.Length;
+             index++)
         {
-            if (!s_Regex.IsMatch(input: segments[i]))
+            if (!s_Regex.IsMatch(input: segments[index]))
             {
                 result = default;
                 return false;
             }
-            if (String.IsNullOrWhiteSpace(segments[i]))
+            if (String.IsNullOrWhiteSpace(segments[index]))
             {
                 result = default;
                 return false;

@@ -18,7 +18,7 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>5.0.0-prerelease</Version>
+		<Version>5.0.1-prerelease</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>

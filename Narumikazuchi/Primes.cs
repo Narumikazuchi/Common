@@ -35,15 +35,16 @@ static public partial class Primes
         if ((candidate & 1) != 0)
         {
             Int64 max = (Int64)Math.Sqrt(candidate);
-            for (Int64 i = 3; 
-                 i <= max; 
-                 i += 2)
+            for (Int64 potentialPrime = 3; 
+                 potentialPrime <= max; 
+                 potentialPrime += 2)
             {
-                if (candidate % i == 0)
+                if (candidate % potentialPrime == 0)
                 {
                     return false;
                 }
             }
+
             Known.Add(candidate);
             Known.Sort();
             return true;
