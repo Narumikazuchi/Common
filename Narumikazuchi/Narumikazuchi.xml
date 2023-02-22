@@ -167,9 +167,21 @@
             <exception cref="T:System.ArgumentNullException"/>
             <exception cref="T:System.InvalidOperationException"/>
         </member>
+        <member name="T:Narumikazuchi.Collections.EmptyEnumerator`1">
+            <summary>
+            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> for a collection without any elements.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Collections.EmptyEnumerator`1.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Collections.EmptyEnumerator`1.Current">
+            <inheritdoc/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
         <member name="T:Narumikazuchi.Collections.EnumEnumerator`1">
             <summary>
-            Represents an <see cref="T:System.Collections.Generic.IEnumerable`1"/> and <see cref="T:System.Collections.Generic.IEnumerator`1"/> of type
+            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerable`2"/> and <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> of type
             <typeparamref name="TEnum"/>.
             </summary>
         </member>
@@ -272,8 +284,8 @@
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
             </summary>
-            <param name="source">The source to check against the <paramref name="bound"/>.</param>
-            <param name="bound">The low bound to check against.</param>
+            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+            <param name="boundary">The low bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentOutOfRangeException" />
@@ -282,8 +294,8 @@
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
             </summary>
-            <param name="source">The source to check against the <paramref name="bound"/>.</param>
-            <param name="bound">The high bound to check against.</param>
+            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+            <param name="boundary">The high bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentOutOfRangeException" />
@@ -292,9 +304,9 @@
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
             </summary>
-            <param name="source">The source to check against the <paramref name="lowBound"/> and <paramref name="highBound"/>.</param>
-            <param name="lowBound">The low bound to check against.</param>
-            <param name="highBound">The high bound to check against.</param>
+            <param name="source">The source to check against the <paramref name="lowerBoundary"/> and <paramref name="higherBoundary"/>.</param>
+            <param name="lowerBoundary">The low bound to check against.</param>
+            <param name="higherBoundary">The high bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
             <exception cref="T:System.ArgumentOutOfRangeException" />
@@ -486,6 +498,17 @@
             </summary>
             <param name="propertyName">The name of the property that is changing.</param>
         </member>
+        <member name="T:Narumikazuchi.MaybeNullOrEmpty`1">
+            <summary>
+            Represents a method parameter that allows <see langword="null"/> or an empty <see cref="T:System.Collections.IEnumerable"/> to be passed to it.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of type <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>.
+            </summary>
+            <param name="value">The value this instance will be based on.</param>
+        </member>
         <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -495,6 +518,66 @@
         <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.ToString">
             <inheritdoc/>
         </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNull(Narumikazuchi.NotNull{System.Action})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance represents <see langword="null"/>.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNull``1(Narumikazuchi.NotNull{System.Func{``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance represents <see langword="null"/>.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenEmpty(Narumikazuchi.NotNull{System.Action})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance does not contain any elements.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenEmpty``1(Narumikazuchi.NotNull{System.Func{``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance does not contains any elements.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNotNull(Narumikazuchi.NotNull{System.Action{`0}})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance does not represent <see langword="null"/>.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNotNull``1(Narumikazuchi.NotNull{System.Func{`0,``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance does not represent <see langword="null"/>.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNotEmpty(Narumikazuchi.NotNull{System.Action{`0}})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance does contain any element.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.WhenNotEmpty``1(Narumikazuchi.NotNull{System.Func{`0,``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance does contain any element.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
         <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.TryGetValue(`0@)">
             <summary>
             Gets the value wrapped in the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>.
@@ -502,11 +585,32 @@
             <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/>.</param>
             <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.MaybeNullOrEmpty`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
         </member>
+        <member name="P:Narumikazuchi.MaybeNullOrEmpty`1.IsNull">
+            <summary>
+            Gets whether this instance represents <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.MaybeNullOrEmpty`1.IsEmpty">
+            <summary>
+            Gets whether this instance has elements.
+            </summary>
+        </member>
         <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(`0)">
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.MaybeNullOrEmpty`1.Equals(Narumikazuchi.MaybeNullOrEmpty{`0})">
             <inheritdoc/>
+        </member>
+        <member name="T:Narumikazuchi.MaybeNull`1">
+            <summary>
+            Represents a method parameter that allows <see langword="null"/> to be passed to it.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of type <see cref="T:Narumikazuchi.MaybeNull`1"/>.
+            </summary>
+            <param name="value">The value this instance will be based on.</param>
         </member>
         <member name="M:Narumikazuchi.MaybeNull`1.Equals(System.Object)">
             <inheritdoc/>
@@ -517,6 +621,36 @@
         <member name="M:Narumikazuchi.MaybeNull`1.ToString">
             <inheritdoc/>
         </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.WhenNull(Narumikazuchi.NotNull{System.Action})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance represents <see langword="null"/>.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.WhenNull``1(Narumikazuchi.NotNull{System.Func{``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance represents <see langword="null"/>.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.WhenNotNull(Narumikazuchi.NotNull{System.Action{`0}})">
+            <summary>
+            Performs the specified <paramref name="action"/> when this instance does not represent <see langword="null"/>.
+            </summary>
+            <param name="action">The action to perform.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
+        <member name="M:Narumikazuchi.MaybeNull`1.WhenNotNull``1(Narumikazuchi.NotNull{System.Func{`0,``0}},``0@)">
+            <summary>
+            Performs the specified <paramref name="transform"/> when this instance does not represent <see langword="null"/>.
+            </summary>
+            <param name="transform">The transform to perform.</param>
+            <param name="result">The result of the <paramref name="transform"/>.</param>
+            <returns>Itself to fluently chain 'When*'-calls.</returns>
+        </member>
         <member name="M:Narumikazuchi.MaybeNull`1.TryGetValue(`0@)">
             <summary>
             Gets the value wrapped in the <see cref="T:Narumikazuchi.MaybeNull`1"/>.
@@ -524,11 +658,29 @@
             <param name="value">The value wrapped in the <see cref="T:Narumikazuchi.MaybeNull`1"/>.</param>
             <returns><see langword="true"/> if the <see cref="T:Narumikazuchi.MaybeNull`1"/> wraps a valid value; otherwise, <see langword="false"/>.</returns>
         </member>
+        <member name="P:Narumikazuchi.MaybeNull`1.IsNull">
+            <summary>
+            Gets whether this instance represents <see langword="null"/>.
+            </summary>
+        </member>
         <member name="M:Narumikazuchi.MaybeNull`1.Equals(`0)">
             <inheritdoc/>
         </member>
         <member name="M:Narumikazuchi.MaybeNull`1.Equals(Narumikazuchi.MaybeNull{`0})">
             <inheritdoc/>
+        </member>
+        <member name="T:Narumikazuchi.NotNullOrEmpty`1">
+            <summary>
+            Represents a method parameter that neither allows <see langword="null"/> nor an empty <see cref="T:System.Collections.IEnumerable"/> to be passed to it.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotNullOrEmpty`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of type <see cref="T:Narumikazuchi.NotNullOrEmpty`1"/>.
+            </summary>
+            <param name="value">The value this instance will be based on.</param>
+            <exception cref="T:System.ArgumentException"/>
+            <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Narumikazuchi.NotNullOrEmpty`1.Equals(System.Object)">
             <inheritdoc/>
@@ -544,6 +696,18 @@
         </member>
         <member name="M:Narumikazuchi.NotNullOrEmpty`1.Equals(Narumikazuchi.NotNullOrEmpty{`0})">
             <inheritdoc/>
+        </member>
+        <member name="T:Narumikazuchi.NotNull`1">
+            <summary>
+            Represents a method parameter that does not allow <see langword="null"/> to be passed to it.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.NotNull`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of type <see cref="T:Narumikazuchi.NotNull`1"/>.
+            </summary>
+            <param name="value">The value this instance will be based on.</param>
+            <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Narumikazuchi.NotNull`1.Equals(System.Object)">
             <inheritdoc/>
@@ -612,6 +776,48 @@
             Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.ValueTask`1"/>.
             </summary>
             <returns>An awaiter instance.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``1(Narumikazuchi.MaybeNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> object thatcan be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``1(Narumikazuchi.NotNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> object thatcan be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``2(Narumikazuchi.MaybeNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/> object thatcan be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``2(Narumikazuchi.NotNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/> object thatcan be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``3(Narumikazuchi.MaybeNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> object thatcan be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:Narumikazuchi.ParameterExtensions.GetEnumerator``3(Narumikazuchi.NotNullOrEmpty{``0})">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <param name="value"></param>
+            <returns>An <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> object thatcan be used to iterate through the collection.</returns>
         </member>
         <member name="T:Narumikazuchi.Pointer`1">
             <summary>
@@ -763,8 +969,8 @@
             Returns the comparable clamped between the specified min and max value.
             </summary>
             <param name="value"></param>
-            <param name="lowBound">Low-bound for the clamping</param>
-            <param name="highBound">High-bound for the clamping</param>
+            <param name="lowerBoundary">Low-bound for the clamping</param>
+            <param name="higherBoundary">High-bound for the clamping</param>
             <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Narumikazuchi.SystemExtensions.EnumerateFlags``1(``0)">
