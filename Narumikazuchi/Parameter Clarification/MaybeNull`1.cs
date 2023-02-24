@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System;
+
+namespace Narumikazuchi;
 
 /// <summary>
 /// Represents a method parameter that allows <see langword="null"/> to be passed to it.
@@ -89,8 +91,13 @@ public readonly partial struct MaybeNull<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNull<T> WhenNull(NotNull<Action> action)
+    public readonly MaybeNull<T> WhenNull(Action action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is null)
         {
             Action value = action;
@@ -107,12 +114,17 @@ public readonly partial struct MaybeNull<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNull<TResult>(
-        NotNull<Func<TResult>> transform,
+        Func<TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is null)
         {
             Func<TResult> value = transform;
@@ -131,8 +143,13 @@ public readonly partial struct MaybeNull<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNull<T> WhenNotNull(NotNull<Action<T>> action)
+    public readonly MaybeNull<T> WhenNotNull(Action<T> action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is not null)
         {
             Action<T> value = action;
@@ -149,12 +166,17 @@ public readonly partial struct MaybeNull<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNull<T> WhenNotNull<TResult>(
-        NotNull<Func<T, TResult>> transform,
+        Func<T, TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is not null)
         {
             Func<T, TResult> value = transform;

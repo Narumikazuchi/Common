@@ -86,8 +86,13 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNullOrEmpty<T> WhenNull(NotNull<Action> action)
+    public readonly MaybeNullOrEmpty<T> WhenNull(Action action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is null)
         {
             Action value = action;
@@ -104,12 +109,17 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNullOrEmpty<T> WhenNull<TResult>(
-        NotNull<Func<TResult>> transform,
+        Func<TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is null)
         {
             Func<TResult> value = transform;
@@ -128,8 +138,13 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNullOrEmpty<T> WhenEmpty(NotNull<Action> action)
+    public readonly MaybeNullOrEmpty<T> WhenEmpty(Action action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is null)
         {
             Action value = action;
@@ -155,12 +170,17 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNullOrEmpty<T> WhenEmpty<TResult>(
-        NotNull<Func<TResult>> transform,
+        Func<TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is null)
         {
             Func<TResult> value = transform;
@@ -188,8 +208,13 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNullOrEmpty<T> WhenNotNull(NotNull<Action<T>> action)
+    public readonly MaybeNullOrEmpty<T> WhenNotNull(Action<T> action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is not null)
         {
             Action<T> value = action;
@@ -206,12 +231,17 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNullOrEmpty<T> WhenNotNull<TResult>(
-        NotNull<Func<T, TResult>> transform,
+        Func<T, TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is not null)
         {
             Func<T, TResult> value = transform;
@@ -230,8 +260,13 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// </summary>
     /// <param name="action">The action to perform.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
-    public readonly MaybeNullOrEmpty<T> WhenNotEmpty(NotNull<Action<T>> action)
+    public readonly MaybeNullOrEmpty<T> WhenNotEmpty(Action<T> action)
     {
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
         if (m_Value is not null)
         {
             IEnumerator enumerator = m_Value.GetEnumerator();
@@ -252,12 +287,17 @@ public readonly partial struct MaybeNullOrEmpty<T>
     /// <param name="result">The result of the <paramref name="transform"/>.</param>
     /// <returns>Itself to fluently chain 'When*'-calls.</returns>
     public readonly MaybeNullOrEmpty<T> WhenNotEmpty<TResult>(
-        NotNull<Func<T, TResult>> transform,
+        Func<T, TResult> transform,
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         [NotNullWhen(true)]
 #endif
         out TResult? result)
     {
+        if (transform is null)
+        {
+            throw new ArgumentNullException(nameof(transform));
+        }
+
         if (m_Value is not null)
         {
             IEnumerator enumerator = m_Value.GetEnumerator();

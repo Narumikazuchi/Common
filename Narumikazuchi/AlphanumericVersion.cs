@@ -38,6 +38,77 @@ public readonly partial struct AlphanumericVersion
                    minor: source.Minor.ToString());
     }
 
+#if NETCOREAPP3_1_OR_GREATER
+    /// <summary>
+    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
+    /// </summary>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public AlphanumericVersion([DisallowNull] StringOrUnsignedInt major,
+                               [AllowNull] StringOrUnsignedInt minor = default,
+                               [AllowNull] StringOrUnsignedInt build = default,
+                               [AllowNull] StringOrUnsignedInt revision = default)
+    {
+        if (!major.HasValue)
+        {
+            throw new ArgumentNullException(nameof(major));
+        }
+
+        String majorString = major.ToString();
+        if (!s_Regex.IsMatch(majorString))
+        {
+            ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
+                                              paramName: nameof(major));
+            exception.Data.Add(key: "Value",
+                               value: majorString);
+            throw exception;
+        }
+
+        if (minor.HasValue)
+        {
+            String minorString = minor.ToString();
+            if (!s_Regex.IsMatch(minorString))
+            {
+                ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
+                                                  paramName: nameof(minor));
+                exception.Data.Add(key: "Value",
+                                   value: minorString);
+                throw exception;
+            }
+        }
+
+        if (build.HasValue)
+        {
+            String buildString = build.ToString();
+            if (!s_Regex.IsMatch(buildString))
+            {
+                ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
+                                                  paramName: nameof(build));
+                exception.Data.Add(key: "Value",
+                                   value: buildString);
+                throw exception;
+            }
+        }
+
+        if (revision.HasValue)
+        {
+            String revisionString = revision.ToString();
+            if (!s_Regex.IsMatch(revisionString))
+            {
+                ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
+                                                  paramName: nameof(revision));
+                exception.Data.Add(key: "Value",
+                                   value: revisionString);
+                throw exception;
+            }
+        }
+
+        m_Major = majorString;
+        m_Minor = minor.HasValue ? minor.ToString() : null;
+        m_Build = build.HasValue ? build.ToString() : null;
+        m_Revision = revision.HasValue ? revision.ToString() : null;
+    }
+#else
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
@@ -105,6 +176,7 @@ public readonly partial struct AlphanumericVersion
         m_Build = build;
         m_Revision = revision;
     }
+#endif
 
     /// <inheritdoc/>
     public override Boolean Equals(

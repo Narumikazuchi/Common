@@ -18,7 +18,7 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>5.0.1-prerelease</Version>
+		<Version>2023.02.24.1-prerelease</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -54,6 +54,10 @@ The interfaces 'IStrongEnumerable&lt;TElement, TEnumerator&gt;' and 'IStrongEnum
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Narumikazuchi.TypeExtensions" Version="2023.2.24.1-prerelease" />
 	</ItemGroup>
 
 	<ItemGroup>
