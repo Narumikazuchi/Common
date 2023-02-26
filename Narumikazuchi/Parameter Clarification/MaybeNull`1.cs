@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Represents a method parameter that allows <see langword="null"/> to be passed to it.
@@ -11,6 +9,11 @@ public readonly partial struct MaybeNull<T>
     static public implicit operator MaybeNull<T>(T? value)
     {
         return new(value);
+    }
+
+    static public implicit operator MaybeNull<T>(NotNull<T> value)
+    {
+        return new((T)value);
     }
 
     static public implicit operator T?(MaybeNull<T> value)

@@ -12,6 +12,11 @@ public readonly partial struct MaybeNullOrEmpty<T>
         return new(value);
     }
 
+    static public implicit operator MaybeNullOrEmpty<T>(NotNullOrEmpty<T> value)
+    {
+        return new((T)value);
+    }
+
     static public implicit operator T?(MaybeNullOrEmpty<T> value)
     {
         return value.m_Value;

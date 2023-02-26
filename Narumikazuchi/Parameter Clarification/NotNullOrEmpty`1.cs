@@ -16,6 +16,11 @@ public readonly partial struct NotNullOrEmpty<T>
         return new(value);
     }
 
+    static public implicit operator MaybeNull<T>(NotNullOrEmpty<T> value)
+    {
+        return new((T)value);
+    }
+
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     [return: NotNull]
 # endif
