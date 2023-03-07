@@ -1,12 +1,10 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 public partial struct AlphanumericVersion : IComparable
 {
-    Int32 IComparable.CompareTo(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        Object? obj)
+    Int32 IComparable.CompareTo([AllowNull] Object? obj)
     {
         if (obj is AlphanumericVersion other)
         {

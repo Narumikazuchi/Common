@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 #if NET7_0_OR_GREATER
 public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
@@ -120,7 +122,7 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
     /// <summary>
     /// Parses the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
-    static public AlphanumericVersion Parse([DisallowNull] NotNull<String> source)
+    static public AlphanumericVersion Parse([DisallowNull] String source)
     {
         return Parse(source: source,
                      provider: null);
@@ -130,7 +132,7 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
     /// Tries to parse the specified string into a new <see cref="AlphanumericVersion"/> object.
     /// </summary>
     /// <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
-    static public Boolean TryParse([DisallowNull] NotNullOrEmpty<String> source,
+    static public Boolean TryParse([DisallowNull] String source,
                                    out AlphanumericVersion result)
     {
         return TryParse(source: source,
@@ -142,20 +144,10 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
 public partial struct AlphanumericVersion
 {
     /// <inheritdoc/>
-    public static AlphanumericVersion Parse(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNullOrEmpty<String> source)
+    public static AlphanumericVersion Parse([DisallowNull] String source)
     {
-        String toParse = source;
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-        String[] segments = toParse.Split(separator: '.',
-                                          options: StringSplitOptions.RemoveEmptyEntries);
-#else
-        String[] segments = toParse.Split(separator: new Char[] { '.' },
-                                          options: StringSplitOptions.RemoveEmptyEntries);
-#endif
+        String[] segments = source.Split(separator: '.',
+                                         options: StringSplitOptions.RemoveEmptyEntries);
         if (segments.Length is < 1
                             or > 4)
         {
@@ -202,28 +194,17 @@ public partial struct AlphanumericVersion
     }
 
     /// <inheritdoc/>
-    public static Boolean TryParse(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [NotNullWhen(true)]
-#endif
-        MaybeNullOrEmpty<String> source,
+    public static Boolean TryParse([NotNullWhen(true)] String? source,
         out AlphanumericVersion result)
     {
-        if (source.IsNull ||
-            source.IsEmpty)
+        if (String.IsNullOrWhiteSpace(source))
         {
             result = default;
             return false;
         }
 
-        String toParse = source!;
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-        String[] segments = toParse.Split(separator: '.',
+        String[] segments = source.Split(separator: '.',
                                           options: StringSplitOptions.RemoveEmptyEntries);
-#else
-        String[] segments = toParse.Split(separator: new Char[] { '.' },
-                                          options: StringSplitOptions.RemoveEmptyEntries);
-#endif
 
         if (segments.Length is < 1
                             or > 4)

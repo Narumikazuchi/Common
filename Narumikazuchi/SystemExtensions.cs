@@ -1,4 +1,5 @@
 ﻿using Narumikazuchi.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi;
 
@@ -14,13 +15,11 @@ static public class SystemExtensions
     /// <param name="lowerBoundary">Low-bound for the clamping</param>
     /// <param name="higherBoundary">High-bound for the clamping</param>
     /// <exception cref="ArgumentNullException"/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
-    static public T Clamp<T>(this T value, 
-                             NotNull<T> lowerBoundary,
-                             NotNull<T> higherBoundary) 
-        where T : IComparable<T>
+    static public TComparable Clamp<TComparable>(this TComparable value, 
+                                                 TComparable lowerBoundary,
+                                                 TComparable higherBoundary) 
+        where TComparable : IComparable<TComparable>
     {
         if (value.CompareTo(lowerBoundary) < 0)
         {
@@ -33,7 +32,6 @@ static public class SystemExtensions
         return value;
     }
 
-#if NET48_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     /// <summary>
     /// Enumerates the flags, which are set in this value.
     /// </summary>
@@ -51,15 +49,12 @@ static public class SystemExtensions
                        mode: 2);
         }
     }
-#endif
 
     /// <summary>
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
     static public String SanitizeForFilename(this String raw)
     {
 #if NET6_0_OR_GREATER

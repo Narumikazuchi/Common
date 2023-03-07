@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi.Collections;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi.Collections;
 
 /// <summary>
 /// Represents an <see cref="IStrongEnumerable{TElement, TEnumerator}"/> and <see cref="IStrongEnumerator{TElement}"/> of type
@@ -9,9 +11,7 @@ public partial struct EnumEnumerator<TEnum>
     where TEnum : struct, Enum
 {
     /// <inheritdoc/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
     public override String ToString()
     {
         if (m_Mode is 0)

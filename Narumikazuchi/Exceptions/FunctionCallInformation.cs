@@ -1,4 +1,6 @@
 ﻿#if NET5_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+
 namespace Narumikazuchi;
 
 /// <summary>
@@ -7,9 +9,7 @@ namespace Narumikazuchi;
 public readonly partial struct FunctionCallInformation
 {
     /// <inheritdoc/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
     public readonly override String ToString()
     {
         StringBuilder builder = new();
@@ -20,7 +20,7 @@ public readonly partial struct FunctionCallInformation
         builder.Append(value: String.Join(separator: ',',
                                           values: m_Parameters));
         builder.Append(value: ')');
-        if (this.File.IsNull ||
+        if (this.File is null ||
             this.Line == 0)
         {
             return builder.ToString();
@@ -39,10 +39,8 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the path to the file, where the function is defined.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> File
+    public String? File
     {
         get
         {
@@ -57,10 +55,8 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the declaring type.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> Target
+    public String? Target
     {
         get
         {
@@ -75,10 +71,8 @@ public readonly partial struct FunctionCallInformation
     /// <summary>
     /// Gets the name of the function.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> Name
+    public String? Name
     {
         get
         {
@@ -144,11 +138,11 @@ public readonly partial struct FunctionCallInformation
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Int32 m_Column;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly MaybeNull<String> m_Filename;
+    private readonly String? m_Filename;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly MaybeNull<String> m_Target;
+    private readonly String? m_Target;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly MaybeNull<String> m_Name;
+    private readonly String? m_Name;
     private readonly List<String?> m_Parameters = new();
 }
 #endif

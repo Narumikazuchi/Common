@@ -1,4 +1,6 @@
 ﻿#if NET5_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+
 namespace Narumikazuchi;
 
 /// <summary>
@@ -9,9 +11,7 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the environment data from when the <see cref="Exception"/> has been thrown.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public IDictionary Data
     {
         get
@@ -23,10 +23,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the inner <see cref="Exception"/>.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<Exception> InnerException
+    public Exception? InnerException
     {
         get
         {
@@ -48,10 +46,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the type in which the <see cref="Exception"/> occured.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<Type> SourceType
+    public Type? SourceType
     {
         get
         {
@@ -62,10 +58,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the library where the <see cref="SourceType"/> is declared.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> SourceLibrary
+    public String? SourceLibrary
     {
         get
         {
@@ -76,10 +70,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the member who caused the <see cref="Exception"/>.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> SourceMember
+    public String? SourceMember
     {
         get
         {
@@ -90,10 +82,8 @@ public readonly partial struct ExceptionInformation
     /// <summary>
     /// Gets the member type of the <see cref="SourceMember"/>.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [MaybeNull]
-#endif
-    public MaybeNull<String> SourceMemberType
+    public String? SourceMemberType
     {
         get
         {

@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 /// <summary>
 /// Exception thrown when an impossible state is reached inside an object.
@@ -8,25 +10,17 @@ public sealed class ImpossibleState : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<String> message = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<Exception> innerException = default)
-            : base(message: $"{MESSAGE} - {message}",
-                   innerException: innerException)
+    public ImpossibleState([AllowNull] String? message = default,
+                           [AllowNull] Exception? innerException = default)
+        : base(message: $"{MESSAGE} - {message}",
+                innerException: innerException)
     { }
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState([AllowNull] MaybeNull<String> message = default,
-                           [AllowNull] MaybeNull<Exception> innerException = default,
-                           [DisallowNull] params (Object key, MaybeNull<Object> value)[] stateInformation)
+    public ImpossibleState([AllowNull] String? message = default,
+                           [AllowNull] Exception? innerException = default,
+                           [DisallowNull] params (Object key, Object? value)[] stateInformation)
             : base(message: $"{MESSAGE} - {message}",
                    innerException: innerException)
     {
@@ -39,81 +33,20 @@ public sealed class ImpossibleState : Exception
         }
 #endif
 
-        foreach ((Object key, MaybeNull<Object> value) kv in stateInformation)
+        foreach ((Object key, Object? value) kv in stateInformation)
         {
-            if (kv.value.TryGetValue(out Object? embedded))
-            {
-                this.Data.Add(key: kv.key,
-                              value: embedded);
-            }
-            else
-            {
-                this.Data.Add(key: kv.key,
-                              value: null);
-            }
-        }
-    }
-#endif
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
-    /// </summary>
-    public ImpossibleState(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<String> message = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<Exception> innerException = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        params KeyValuePair<Object, MaybeNull<Object>>[] stateInformation)
-            : base(message: $"{MESSAGE} - {message}",
-                   innerException: innerException)
-    {
-#if NET6_0_OR_GREATER
-        ArgumentNullException.ThrowIfNull(stateInformation);
-#else
-        if (stateInformation is null)
-        {
-            throw new ArgumentNullException(nameof(stateInformation));
-        }
-#endif
-
-        foreach (KeyValuePair<Object, MaybeNull<Object>> kv in stateInformation)
-        {
-            if (kv.Value.TryGetValue(out Object? embedded))
-            {
-                this.Data.Add(key: kv.Key,
-                              value: embedded);
-            }
-            else
-            {
-                this.Data.Add(key: kv.Key,
-                              value: null);
-            }
+            this.Data.Add(key: kv.key,
+                          value: kv.value);
         }
     }
     /// <summary>
     /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
     /// </summary>
-    public ImpossibleState(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<String> message = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNull<Exception> innerException = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        params Tuple<Object, MaybeNull<Object>>[] stateInformation)
-            : base(message: $"{MESSAGE} - {message}",
-                   innerException: innerException)
+    public ImpossibleState([AllowNull] String? message = default,
+                           [AllowNull] Exception? innerException = default,
+                           [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation)
+        : base(message: $"{MESSAGE} - {message}",
+                innerException: innerException)
     {
 #if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
@@ -124,18 +57,34 @@ public sealed class ImpossibleState : Exception
         }
 #endif
 
-        foreach (Tuple<Object, MaybeNull<Object>> tuple in stateInformation)
+        foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
-            if (tuple.Item2.TryGetValue(out Object? embedded))
-            {
-                this.Data.Add(key: tuple.Item1,
-                              value: embedded);
-            }
-            else
-            {
-                this.Data.Add(key: tuple.Item1,
-                              value: null);
-            }
+            this.Data.Add(key: kv.Key,
+                          value: kv.Value);
+        }
+    }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
+    /// </summary>
+    public ImpossibleState([AllowNull] String? message = default,
+                           [AllowNull] Exception? innerException = default,
+                           [DisallowNull] params Tuple<Object, Object?>[] stateInformation)
+        : base(message: $"{MESSAGE} - {message}",
+                innerException: innerException)
+    {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(stateInformation);
+#else
+        if (stateInformation is null)
+        {
+            throw new ArgumentNullException(nameof(stateInformation));
+        }
+#endif
+
+        foreach (Tuple<Object, Object?> tuple in stateInformation)
+        {
+            this.Data.Add(key: tuple.Item1,
+                          value: tuple.Item2);
         }
     }
 

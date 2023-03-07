@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 #if NETCOREAPP3_0_OR_GREATER
 /// <summary>
@@ -71,7 +73,7 @@ public unsafe partial struct Pointer<T>
     [return: MaybeNull]
     public override String? ToString()
     {
-        if (this.Value.IsNull)
+        if (this.Value is null)
         {
             return null;
         }
@@ -112,7 +114,7 @@ public unsafe partial struct Pointer<T>
     /// Gets or sets the value of where the pointer currently points at.
     /// </summary>
     [MaybeNull]
-    public MaybeNull<T> Value
+    public T? Value
     {
         get
         {
@@ -121,7 +123,7 @@ public unsafe partial struct Pointer<T>
         set
         {
             Unsafe.Write(destination: m_Pointer,
-                         value: (T?)value);
+                         value: value);
         }
     }
 }

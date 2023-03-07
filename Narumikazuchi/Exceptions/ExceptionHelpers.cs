@@ -1,4 +1,6 @@
 ﻿#if NETCOREAPP3_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+
 namespace Narumikazuchi;
 
 /// <summary>
@@ -19,13 +21,13 @@ public static class ExceptionHelpers
     /// will be filled with the name of the variable by this method.
     /// </remarks>
     public static void ThrowIfNullOrEmpty(this String? source,
-                                          [AllowNull] MaybeNull<String> message = default,
+                                          [AllowNull] String message = default,
                                           Boolean asArgumentException = default,
-                                          [CallerArgumentExpression("source")] String? varName = "")
+                                          [CallerArgumentExpression(nameof(source))] String? varName = "")
     {
         if (String.IsNullOrWhiteSpace(source))
         {
-            if (message.IsNull)
+            if (message is null)
             {
                 if (asArgumentException)
                 {
@@ -64,15 +66,15 @@ public static class ExceptionHelpers
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfLesserThan<T>(this T source,
-                                            [DisallowNull] NotNull<T> boundary,
-                                            [AllowNull] MaybeNull<String> message = default,
-                                            [CallerArgumentExpression("source")] String? paramName = "")
-        where T : IComparable<T>
+    public static void ThrowIfLesserThan<TComparable>(this TComparable source,
+                                                      [DisallowNull] TComparable boundary,
+                                                      [AllowNull] String message = default,
+                                                      [CallerArgumentExpression(nameof(source))] String? paramName = "")
+        where TComparable : IComparable<TComparable>
     {
         if (source.CompareTo(boundary) < 0)
         {
-            if (message.IsNull)
+            if (message is null)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }
@@ -92,15 +94,15 @@ public static class ExceptionHelpers
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfBiggerThan<T>(this T source,
-                                            [DisallowNull] NotNull<T> boundary,
-                                            [AllowNull] MaybeNull<String> message = default,
-                                            [CallerArgumentExpression("source")] String? paramName = "")
-        where T : IComparable<T>
+    public static void ThrowIfBiggerThan<TComparable>(this TComparable source,
+                                                      [DisallowNull] TComparable boundary,
+                                                      [AllowNull] String message = default,
+                                                      [CallerArgumentExpression(nameof(source))] String? paramName = "")
+        where TComparable : IComparable<TComparable>
     {
         if (source.CompareTo(boundary) > 0)
         {
-            if (message.IsNull)
+            if (message is null)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }
@@ -121,17 +123,17 @@ public static class ExceptionHelpers
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfOutOfRange<T>(this T source,
-                                            [DisallowNull] NotNull<T> lowerBoundary,
-                                            [DisallowNull] NotNull<T> higherBoundary,
-                                            [AllowNull] MaybeNull<String> message = default,
-                                            [CallerArgumentExpression("source")] String? paramName = "")
-        where T : IComparable<T>
+    public static void ThrowIfOutOfRange<TComparable>(this TComparable source,
+                                                      [DisallowNull] TComparable lowerBoundary,
+                                                      [DisallowNull] TComparable higherBoundary,
+                                                      [AllowNull] String message = default,
+                                                      [CallerArgumentExpression(nameof(source))] String? paramName = "")
+        where TComparable : IComparable<TComparable>
     {
         if (source.CompareTo(lowerBoundary) < 0 ||
             source.CompareTo(higherBoundary) > 0)
         {
-            if (message.IsNull)
+            if (message is null)
             {
                 throw new ArgumentOutOfRangeException(paramName: paramName);
             }

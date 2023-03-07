@@ -25,11 +25,7 @@ public partial struct PrimeEnumerator
             }
         }
 
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         while (Primes.Known[^1] < startPoint)
-#else
-        while (Primes.Known.Last() < startPoint)
-#endif
         {
             Int64 next = Primes.FindNextPrime();
             if (next >= startPoint)

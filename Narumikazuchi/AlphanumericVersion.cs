@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 /// <summary>
 /// Represents an immutable alphanumeric version number.
@@ -9,11 +11,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Implicit conversion from <see cref="Version"/> class.
     /// </summary>
-    static public implicit operator AlphanumericVersion(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        Version? source)
+    static public implicit operator AlphanumericVersion([AllowNull] Version? source)
     {
         if (source is null)
         {
@@ -38,7 +36,6 @@ public readonly partial struct AlphanumericVersion
                    minor: source.Minor.ToString());
     }
 
-#if NETCOREAPP3_1_OR_GREATER
     /// <summary>
     /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
     /// </summary>
@@ -108,82 +105,9 @@ public readonly partial struct AlphanumericVersion
         m_Build = build.HasValue ? build.ToString() : null;
         m_Revision = revision.HasValue ? revision.ToString() : null;
     }
-#else
-    /// <summary>
-    /// Creates a new instance of the <see cref="AlphanumericVersion"/> struct.
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public AlphanumericVersion(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNullOrEmpty<String> major,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNullOrEmpty<String> minor = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNullOrEmpty<String> build = default,
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNullOrEmpty<String> revision = default)
-    {
-        if (!s_Regex.IsMatch(major))
-        {
-            ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
-                                              paramName: nameof(major));
-            exception.Data.Add(key: "Value",
-                               value: major);
-            throw exception;
-        }
-
-        if (!minor.IsNull &&
-            !s_Regex.IsMatch(minor!))
-        {
-            ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
-                                              paramName: nameof(minor));
-            exception.Data.Add(key: "Value",
-                               value: minor);
-            throw exception;
-        }
-
-        if (!build.IsNull &&
-            !s_Regex.IsMatch(build!))
-        {
-            ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
-                                              paramName: nameof(build));
-            exception.Data.Add(key: "Value",
-                               value: build);
-            throw exception;
-        }
-
-        if (!revision.IsNull &&
-            !s_Regex.IsMatch(revision!))
-        {
-            ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
-                                              paramName: nameof(revision));
-            exception.Data.Add(key: "Value",
-                               value: revision);
-            throw exception;
-        }
-
-        m_Major = major;
-        m_Minor = minor;
-        m_Build = build;
-        m_Revision = revision;
-    }
-#endif
 
     /// <inheritdoc/>
-    public override Boolean Equals(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [NotNullWhen(true)]
-#endif
-        Object? obj)
+    public override Boolean Equals([NotNullWhen(true)] Object? obj)
     {
         return obj is AlphanumericVersion other &&
                this.CompareTo(other) == 0;
@@ -226,9 +150,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Transforms the <see cref="AlphanumericVersion"/> into a <see cref="String"/> according to the default format '#.#.#.#'.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
     public override String ToString()
     {
         return this.ToString(null);
@@ -255,27 +177,17 @@ public readonly partial struct AlphanumericVersion
     /// will result in the output 'aMAJORbcMINORbcBUILDdREVISIONe', replacing each of the version segments with their respective values.
     /// </remarks>
     /// <returns>This instance formatted as a <see cref="String"/></returns>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
-    public String ToString(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [AllowNull]
-#endif
-        MaybeNullOrEmpty<String> format)
+    public String ToString([AllowNull] String? format)
     {
-        if (!format.TryGetValue(out String? formatter))
+        if (String.IsNullOrWhiteSpace(format))
         {
-            formatter = "#.#.#.#";
+            format = "#.#.#.#";
         }
 
-        Int32 count = formatter.Count(x => x == '#')
-                               .Clamp(1, 4);
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
-        ReadOnlySpan<Char> working = formatter;
-#else
-        String working = formatter!;
-#endif
+        Int32 count = format.Count(x => x == '#')
+                            .Clamp(1, 4);
+        ReadOnlySpan<Char> working = format;
         StringBuilder builder = new();
 
         Int32 index;
@@ -301,11 +213,7 @@ public readonly partial struct AlphanumericVersion
             index = working.IndexOf('#');
             if (index > 0)
             {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
                 builder.Append(working[0..index]);
-#else
-                builder.Append(working.Substring(0, index));
-#endif
             }
 
             if (String.IsNullOrWhiteSpace(current))
@@ -316,11 +224,8 @@ public readonly partial struct AlphanumericVersion
             {
                 builder.Append(current);
             }
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+
             working = working[++index..];
-#else
-            working = working.Substring(index + 1);
-#endif
         }
 
         if (working.Length > 0)
@@ -334,9 +239,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public String Major
     {
         get
@@ -348,9 +251,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public String Minor
     {
         get
@@ -367,9 +268,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public String Build
     {
         get
@@ -386,9 +285,7 @@ public readonly partial struct AlphanumericVersion
     /// <summary>
     /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public String Revision
     {
         get

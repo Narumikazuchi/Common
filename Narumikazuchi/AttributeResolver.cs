@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi;
 
 #if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 /// <summary>
@@ -11,12 +13,8 @@ static public class AttributeResolver
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-    static public Boolean HasAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<Assembly> assembly)
-            where TAttribute : Attribute
+    static public Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly)
+        where TAttribute : Attribute
     {
         return Attribute.IsDefined(element: assembly,
                                    attributeType: typeof(TAttribute));
@@ -26,12 +24,8 @@ static public class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="MemberInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-    static public Boolean HasAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<MemberInfo> info)
-            where TAttribute : Attribute
+    static public Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
+        where TAttribute : Attribute
     {
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
@@ -41,12 +35,8 @@ static public class AttributeResolver
     /// </summary>
     /// <param name="info">The <see cref="ParameterInfo"/> to check.</param>
     /// <exception cref="ArgumentNullException"/>
-    static public Boolean HasAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<ParameterInfo> info)
-            where TAttribute : Attribute
+    static public Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
+         where TAttribute : Attribute
     {
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
@@ -62,10 +52,7 @@ static public class AttributeResolver
 #else
     static public TAttribute[] FetchAllAttributes<TAttribute>(
 #endif
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<Assembly> assembly)
+        [DisallowNull] Assembly assembly)
             where TAttribute : Attribute
     {
         Assembly value = assembly;
@@ -86,10 +73,7 @@ static public class AttributeResolver
 #else
     static public TAttribute[] FetchAllAttributes<TAttribute>(
 #endif
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<MemberInfo> info)
+        [DisallowNull] MemberInfo info)
             where TAttribute : Attribute
     {
         MemberInfo value = info;
@@ -110,10 +94,7 @@ static public class AttributeResolver
 #else
     static public TAttribute[] FetchAllAttributes<TAttribute>(
 #endif
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<ParameterInfo> info)
+        [DisallowNull] ParameterInfo info)
             where TAttribute : Attribute
     {
         ParameterInfo value = info;
@@ -131,47 +112,28 @@ static public class AttributeResolver
     /// <param name="assembly">The <see cref="Assembly"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
-    static public TAttribute FetchSingleAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<Assembly> assembly)
-            where TAttribute : Attribute
+    static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] Assembly assembly)
+        where TAttribute : Attribute
     {
         if (MultipleAllowed<TAttribute>())
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
 
         Assembly value = assembly;
         TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
+
         return attribute;
     }
     /// <summary>
@@ -180,47 +142,28 @@ static public class AttributeResolver
     /// <param name="info">The <see cref="MemberInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
-    static public TAttribute FetchSingleAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<MemberInfo> info)
+    static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] MemberInfo info)
             where TAttribute : Attribute
     {
         if (MultipleAllowed<TAttribute>())
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
 
         MemberInfo value = info;
         TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
+
         return attribute;
     }
     /// <summary>
@@ -229,47 +172,28 @@ static public class AttributeResolver
     /// <param name="info">The <see cref="ParameterInfo"/> to retrieve the attribute from.</param>
     /// <exception cref="ArgumentNullException"/>
     /// <exception cref="InvalidOperationException"/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [return: NotNull]
-#endif
-    static public TAttribute FetchSingleAttribute<TAttribute>(
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        [DisallowNull]
-#endif
-        NotNull<ParameterInfo> info)
+    static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] ParameterInfo info)
             where TAttribute : Attribute
     {
         if (MultipleAllowed<TAttribute>())
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
 
         ParameterInfo value = info;
         TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
                                  innerException: null,
                                  ("Typename", typeof(TAttribute).FullName),
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
-#else
-            throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
-                                 innerException: null,
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Typename", value: typeof(TAttribute).FullName),
-                                 new KeyValuePair<Object, MaybeNull<Object>>(key: "Assembly", value: typeof(TAttribute).AssemblyQualifiedName));
-#endif
         }
+
         return attribute;
     }
 

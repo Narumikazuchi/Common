@@ -1,4 +1,6 @@
-﻿namespace Narumikazuchi.Collections;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Narumikazuchi.Collections;
 
 /// <summary>
 /// Represents an <see cref="IStrongEnumerator{TElement}"/> for a collection without any elements.
@@ -13,9 +15,7 @@ public struct EmptyEnumerator<TElement> : IStrongEnumerator<TElement>
 
     /// <inheritdoc/>
     /// <exception cref="InvalidOperationException"/>
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     [NotNull]
-#endif
     public TElement Current
     {
         get
