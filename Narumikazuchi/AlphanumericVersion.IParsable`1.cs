@@ -146,6 +146,15 @@ public partial struct AlphanumericVersion
     /// <inheritdoc/>
     public static AlphanumericVersion Parse([DisallowNull] String source)
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(source);
+#else
+        if (String.IsNullOrWhiteSpace(source))
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+#endif
+
         String[] segments = source.Split(separator: '.',
                                          options: StringSplitOptions.RemoveEmptyEntries);
         if (segments.Length is < 1
@@ -195,7 +204,7 @@ public partial struct AlphanumericVersion
 
     /// <inheritdoc/>
     public static Boolean TryParse([NotNullWhen(true)] String? source,
-        out AlphanumericVersion result)
+                                   out AlphanumericVersion result)
     {
         if (String.IsNullOrWhiteSpace(source))
         {

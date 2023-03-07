@@ -2,7 +2,6 @@
 
 namespace Narumikazuchi;
 
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 /// <summary>
 /// Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
 /// </summary>
@@ -16,6 +15,15 @@ static public class AttributeResolver
     static public Boolean HasAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(assembly);
+#else
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
+
         return Attribute.IsDefined(element: assembly,
                                    attributeType: typeof(TAttribute));
     }
@@ -27,6 +35,15 @@ static public class AttributeResolver
     static public Boolean HasAttribute<TAttribute>([DisallowNull] MemberInfo info)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
     }
@@ -38,6 +55,15 @@ static public class AttributeResolver
     static public Boolean HasAttribute<TAttribute>([DisallowNull] ParameterInfo info)
          where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
         return Attribute.IsDefined(element: info,
                                    attributeType: typeof(TAttribute));
     }
@@ -55,12 +81,20 @@ static public class AttributeResolver
         [DisallowNull] Assembly assembly)
             where TAttribute : Attribute
     {
-        Assembly value = assembly;
-        return value.GetCustomAttributes<TAttribute>()
-#if NETCOREAPP1_0_OR_GREATER
-                    .ToImmutableArray();
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(assembly);
 #else
-                    .ToArray();
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
+
+        return assembly.GetCustomAttributes<TAttribute>()
+#if NETCOREAPP1_0_OR_GREATER
+                       .ToImmutableArray();
+#else
+                       .ToArray();
 #endif
     }
     /// <summary>
@@ -76,12 +110,20 @@ static public class AttributeResolver
         [DisallowNull] MemberInfo info)
             where TAttribute : Attribute
     {
-        MemberInfo value = info;
-        return value.GetCustomAttributes<TAttribute>()
-#if NETCOREAPP1_0_OR_GREATER
-                    .ToImmutableArray();
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
 #else
-                    .ToArray();
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
+        return info.GetCustomAttributes<TAttribute>()
+#if NETCOREAPP1_0_OR_GREATER
+                   .ToImmutableArray();
+#else
+                   .ToArray();
 #endif
     }
     /// <summary>
@@ -97,12 +139,20 @@ static public class AttributeResolver
         [DisallowNull] ParameterInfo info)
             where TAttribute : Attribute
     {
-        ParameterInfo value = info;
-        return value.GetCustomAttributes<TAttribute>()
-#if NETCOREAPP1_0_OR_GREATER
-                    .ToImmutableArray();
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
 #else
-                    .ToArray();
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
+        return info.GetCustomAttributes<TAttribute>()
+#if NETCOREAPP1_0_OR_GREATER
+                   .ToImmutableArray();
+#else
+                   .ToArray();
 #endif
     }
 
@@ -116,6 +166,15 @@ static public class AttributeResolver
     static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] Assembly assembly)
         where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(assembly);
+#else
+        if (assembly is null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+#endif
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
@@ -124,8 +183,7 @@ static public class AttributeResolver
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
 
-        Assembly value = assembly;
-        TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
+        TAttribute? attribute = assembly.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
@@ -146,6 +204,15 @@ static public class AttributeResolver
     static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] MemberInfo info)
             where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
@@ -154,8 +221,7 @@ static public class AttributeResolver
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
 
-        MemberInfo value = info;
-        TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
+        TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
@@ -176,6 +242,15 @@ static public class AttributeResolver
     static public TAttribute FetchSingleAttribute<TAttribute>([DisallowNull] ParameterInfo info)
             where TAttribute : Attribute
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(info);
+#else
+        if (info is null)
+        {
+            throw new ArgumentNullException(nameof(info));
+        }
+#endif
+
         if (MultipleAllowed<TAttribute>())
         {
             throw new NotAllowed(message: MULTIPLE_INSTANCES_ARE_DISALLOWED,
@@ -184,8 +259,7 @@ static public class AttributeResolver
                                  ("Assembly", typeof(TAttribute).AssemblyQualifiedName));
         }
 
-        ParameterInfo value = info;
-        TAttribute? attribute = value.GetCustomAttribute<TAttribute>();
+        TAttribute? attribute = info.GetCustomAttribute<TAttribute>();
         if (attribute is null)
         {
             throw new NotAllowed(message: ATTRIBUTE_NOT_DEFINED_FOR_TARGET,
@@ -211,4 +285,3 @@ static public class AttributeResolver
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String ATTRIBUTE_NOT_DEFINED_FOR_TARGET = "The specified Attribute has not been defined for the specified target.";
 }
-#endif

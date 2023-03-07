@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP3_0_OR_GREATER
+﻿#if NET6_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi;
@@ -72,6 +72,9 @@ public static class ExceptionHelpers
                                                       [CallerArgumentExpression(nameof(source))] String? paramName = "")
         where TComparable : IComparable<TComparable>
     {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(boundary);
+
         if (source.CompareTo(boundary) < 0)
         {
             if (message is null)
@@ -100,6 +103,9 @@ public static class ExceptionHelpers
                                                       [CallerArgumentExpression(nameof(source))] String? paramName = "")
         where TComparable : IComparable<TComparable>
     {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(boundary);
+
         if (source.CompareTo(boundary) > 0)
         {
             if (message is null)
@@ -130,6 +136,10 @@ public static class ExceptionHelpers
                                                       [CallerArgumentExpression(nameof(source))] String? paramName = "")
         where TComparable : IComparable<TComparable>
     {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(lowerBoundary);
+        ArgumentNullException.ThrowIfNull(higherBoundary);
+
         if (source.CompareTo(lowerBoundary) < 0 ||
             source.CompareTo(higherBoundary) > 0)
         {

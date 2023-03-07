@@ -21,6 +21,15 @@ static public class SystemExtensions
                                                  TComparable higherBoundary) 
         where TComparable : IComparable<TComparable>
     {
+#if NET6_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(value);
+#else
+        if (value is null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+#endif
+
         if (value.CompareTo(lowerBoundary) < 0)
         {
             return lowerBoundary;
