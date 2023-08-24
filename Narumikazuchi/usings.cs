@@ -5,6 +5,6 @@ global using System.Collections.Immutable;
 global using System.Numerics;
 #endif
 
-using Narumikazuchi.TypeExtensions;
+using Narumikazuchi.Generators.TaggedUnions;
 
-[assembly: UnionOf(typeof(String), typeof(SByte), typeof(UInt16), typeof(UInt32), typeof(UInt64), Typename = "StringOrUnsignedInt")]
+[assembly: UnionOf(typeof(String), typeof(Byte), typeof(UInt16), typeof(UInt32), typeof(UInt64), Typename = "StringOrUnsignedInt")]

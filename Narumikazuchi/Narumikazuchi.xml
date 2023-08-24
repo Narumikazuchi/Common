@@ -14,7 +14,7 @@
             Implicit conversion from <see cref="T:System.Version"/> class.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(StringOrUnsignedInt,StringOrUnsignedInt,StringOrUnsignedInt,StringOrUnsignedInt)">
+        <member name="M:Narumikazuchi.AlphanumericVersion.#ctor(Narumikazuchi.Generated.StringOrUnsignedInt,Narumikazuchi.Generated.StringOrUnsignedInt,Narumikazuchi.Generated.StringOrUnsignedInt,Narumikazuchi.Generated.StringOrUnsignedInt)">
             <summary>
             Creates a new instance of the <see cref="T:Narumikazuchi.AlphanumericVersion"/> struct.
             </summary>
@@ -631,9 +631,39 @@
             </summary>
             <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
         </member>
-        <member name="T:StringOrUnsignedInt">
+        <member name="T:Narumikazuchi.Unsigned31BitInteger">
             <summary>
-            A type that can be assigned either of these types: <code><see cref="T:System.String"/> | <see cref="T:System.SByte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
+            Represents a 31-bit integer positive range, basically representing a non-negative integer in the range of <code>0-2'147'483'647</code>. 
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Implicit(Narumikazuchi.Unsigned31BitInteger)~System.Int32">
+            <summary>
+            Implicit conversion to <see cref="T:System.Int32"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Explicit(Narumikazuchi.Unsigned31BitInteger)~System.UInt32">
+            <summary>
+            Explicit conversion to <see cref="T:System.UInt32"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Implicit(System.Int32)~Narumikazuchi.Unsigned31BitInteger">
+            <summary>
+            Implicit conversion from <see cref="T:System.Int32"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Explicit(System.UInt32)~Narumikazuchi.Unsigned31BitInteger">
+            <summary>
+            Explicit conversion from <see cref="T:System.UInt32"/> struct.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Unsigned31BitInteger.Value">
+            <summary>
+            Gets the actual value of the struct.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Generated.StringOrUnsignedInt">
+            <summary>
+            A type that can be assigned either of these types: <code><see cref="T:System.String"/> | <see cref="T:System.Byte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
             </summary>
         </member>
     </members>

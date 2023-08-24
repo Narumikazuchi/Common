@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Narumikazuchi.Generated;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi;
 

@@ -18,7 +18,7 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>2023.3.7.2-prerelease</Version>
+		<Version>5.1.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -57,7 +57,7 @@ The interfaces 'IStrongEnumerable&lt;TElement, TEnumerator&gt;' and 'IStrongEnum
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Narumikazuchi.TypeExtensions.Roslyn" Version="2023.3.7.4-prerelease" />
+	  <PackageReference Include="Narumikazuchi.Generators.TaggedUnions" Version="2023.4.20.1-prerelease" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -3,6 +3,7 @@
 namespace Narumikazuchi;
 
 #if NETCOREAPP3_0_OR_GREATER
+#pragma warning disable CS8500
 /// <summary>
 /// Represents a reference to a struct or a reference to a reference for a class.
 /// </summary>
