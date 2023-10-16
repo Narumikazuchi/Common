@@ -5,9 +5,9 @@ namespace Narumikazuchi;
 #if NETCOREAPP3_0_OR_GREATER
 #pragma warning disable CS8500
 /// <summary>
-/// Represents a reference to a struct or a reference to a reference for a class.
+/// Represents a reference to a struct or a reference to a reference for a class. Can be used in a safe context unlike regular pointers.
 /// </summary>
-public unsafe partial struct Pointer<T>
+public unsafe readonly partial struct Pointer<T>
 {
     /// <summary>
     /// Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
@@ -45,12 +45,12 @@ public unsafe partial struct Pointer<T>
 
     static public implicit operator Pointer<T>(IntPtr pointer)
     {
-        return new(pointer: pointer);
+        return new(pointer);
     }
 
     static public implicit operator Pointer<T>(void* pointer)
     {
-        return new(pointer: pointer);
+        return new(pointer);
     }
 #pragma warning restore
 

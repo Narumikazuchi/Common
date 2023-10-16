@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Defines a method to convert the implementing type to the type <typeparamref name="TType"/>.

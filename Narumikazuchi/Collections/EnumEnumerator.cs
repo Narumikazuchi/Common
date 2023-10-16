@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi.Collections;
+﻿namespace Narumikazuchi.Collections;
 
 /// <summary>
 /// Represents an <see cref="IStrongEnumerable{TElement, TEnumerator}"/> and <see cref="IStrongEnumerator{TElement}"/> of type
@@ -12,7 +10,7 @@ public partial struct EnumEnumerator<TEnum>
 {
     /// <inheritdoc/>
     [return: NotNull]
-    public override String ToString()
+    public override readonly String ToString()
     {
         if (m_Mode is 0)
         {

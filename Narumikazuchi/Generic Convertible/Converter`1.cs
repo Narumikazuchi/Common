@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
+﻿
 namespace Narumikazuchi;
 
 /// <summary>
@@ -15,10 +14,9 @@ static public class Converter<TResult>
     /// same value as the specified <typeparamref name="TConvertible"/></returns>
     [return: NotNull]
     static public TResult ToType<TConvertible>([DisallowNull] TConvertible convertible)
-            where TConvertible : IConvertible<TResult>
+        where TConvertible : IConvertible<TResult>
     {
-        TConvertible value = convertible;
-        return value.ToType(default(IFormatProvider));
+        return convertible.ToType(default(IFormatProvider));
     }
     /// <summary>
     /// Converts the specified <typeparamref name="TConvertible"/> into the <typeparamref name="TResult"/> type 
@@ -34,7 +32,6 @@ static public class Converter<TResult>
         where TConvertible : IConvertible<TResult>
         where TFormat : IFormatProvider
     {
-        TConvertible value = convertible;
-        return value.ToType(provider);
+        return convertible.ToType(provider);
     }
 }

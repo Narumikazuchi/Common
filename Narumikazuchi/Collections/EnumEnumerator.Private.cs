@@ -20,15 +20,6 @@ public partial struct EnumEnumerator<TEnum>
         m_State = null;
     }
 
-#if !NET5_0_OR_GREATER
-    static private TEnum[] GetValues()
-    {
-        return Enum.GetValues(typeof(TEnum))
-                   .Cast<TEnum>()
-                   .ToArray();
-    }
-#endif
-
     private Boolean EvaluateItem(TEnum item)
     {
         if (m_Mode is 1)
@@ -56,13 +47,8 @@ public partial struct EnumEnumerator<TEnum>
         }
     }
 
-#if NET5_0_OR_GREATER
     static private readonly Lazy<TEnum[]> s_Values = new(valueFactory: Enum.GetValues<TEnum>,
                                                          mode: LazyThreadSafetyMode.ExecutionAndPublication);
-#else
-    static private readonly Lazy<TEnum[]> s_Values = new(valueFactory: GetValues,
-                                                         mode: LazyThreadSafetyMode.ExecutionAndPublication);
-#endif
 
     // Modes: 0 = nothing, 1 = Enum Values, 2 = Enum Set Bits in Flag
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

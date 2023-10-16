@@ -1,7 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Contains helpers for throwing exceptions.
@@ -15,6 +12,7 @@ public static class ExceptionHelpers
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="asArgumentException">Whether the method should throw an <see cref="ArgumentNullException"/> or a <see cref="NullReferenceException"/>.</param>
     /// <param name="varName">The name of the parameter.</param>
+    /// <exception cref="ArgumentNullException" />
     /// <exception cref="NullReferenceException" />
     /// <remarks>
     /// The custom message will be formatted using <see cref="String.Format(String, Object?)"/>. If you provide a custom message, the '{0}' placeholder 
@@ -33,7 +31,7 @@ public static class ExceptionHelpers
                 {
                     throw new ArgumentNullException(paramName: varName,
                                                     message: String.Format(format: NULLREF_MESSAGE,
-                                                                            arg0: varName));
+                                                                           arg0: varName));
                 }
                 else
                 {
@@ -65,6 +63,7 @@ public static class ExceptionHelpers
     /// <param name="boundary">The low bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
+    /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfLesserThan<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable boundary,
@@ -96,6 +95,7 @@ public static class ExceptionHelpers
     /// <param name="boundary">The high bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
+    /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfBiggerThan<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable boundary,
@@ -128,6 +128,7 @@ public static class ExceptionHelpers
     /// <param name="higherBoundary">The high bound to check against.</param>
     /// <param name="message">An optional message for the <see cref="Exception"/> that will be thrown.</param>
     /// <param name="paramName">The name of the parameter.</param>
+    /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
     public static void ThrowIfOutOfRange<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable lowerBoundary,
@@ -155,28 +156,19 @@ public static class ExceptionHelpers
         }
     }
 
-#if NET5_0_OR_GREATER
     /// <summary>
     /// Extracts precise Inforamtion from the specified <see cref="Exception"/>.
     /// </summary>
     /// <param name="source">The exception to extract data from.</param>
     /// <returns>An information object, containing detailed data on the exception</returns>
+    /// <exception cref="ArgumentNullException" />
     public static ExceptionInformation ExtractInformation(this Exception source)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(source);
-#else
-        if (source is null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-#endif
 
         return new(source: source);
     }
-#endif
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private const String NULLREF_MESSAGE = "The specified variable with the name {0} is null.";
 }
-#endif

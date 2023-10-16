@@ -43,9 +43,9 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion([DisallowNull] StringOrUnsignedInt major,
-                               [AllowNull] StringOrUnsignedInt minor = default,
-                               [AllowNull] StringOrUnsignedInt build = default,
-                               [AllowNull] StringOrUnsignedInt revision = default)
+                               [DisallowNull] StringOrUnsignedInt minor = default,
+                               [DisallowNull] StringOrUnsignedInt build = default,
+                               [DisallowNull] StringOrUnsignedInt revision = default)
     {
         if (!major.HasValue)
         {
@@ -53,7 +53,11 @@ public readonly partial struct AlphanumericVersion
         }
 
         String majorString = major.ToString();
-        if (!s_Regex.IsMatch(majorString))
+        if (s_Regex.IsMatch(majorString))
+        {
+            m_Major = majorString;
+        }
+        else
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
@@ -65,7 +69,11 @@ public readonly partial struct AlphanumericVersion
         if (minor.HasValue)
         {
             String minorString = minor.ToString();
-            if (!s_Regex.IsMatch(minorString))
+            if (s_Regex.IsMatch(minorString))
+            {
+                m_Minor = minor.ToString();
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(minor));
@@ -78,7 +86,11 @@ public readonly partial struct AlphanumericVersion
         if (build.HasValue)
         {
             String buildString = build.ToString();
-            if (!s_Regex.IsMatch(buildString))
+            if (s_Regex.IsMatch(buildString))
+            {
+                m_Build = build.ToString();
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(build));
@@ -91,7 +103,11 @@ public readonly partial struct AlphanumericVersion
         if (revision.HasValue)
         {
             String revisionString = revision.ToString();
-            if (!s_Regex.IsMatch(revisionString))
+            if (s_Regex.IsMatch(revisionString))
+            {
+                m_Revision = revision.ToString();
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(revision));
@@ -100,11 +116,6 @@ public readonly partial struct AlphanumericVersion
                 throw exception;
             }
         }
-
-        m_Major = majorString;
-        m_Minor = minor.HasValue ? minor.ToString() : null;
-        m_Build = build.HasValue ? build.ToString() : null;
-        m_Revision = revision.HasValue ? revision.ToString() : null;
     }
 
     /// <inheritdoc/>

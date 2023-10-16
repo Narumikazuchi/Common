@@ -16,7 +16,6 @@ public interface IStrongEnumerable<out TElement, out TEnumerator> :
     /// <returns>An enumerator that can be used to iterate through the collection.</returns>
     public new TEnumerator GetEnumerator();
 
-#if NETCOREAPP3_1_OR_GREATER
     IEnumerator IEnumerable.GetEnumerator()
     {
         return this.GetEnumerator();
@@ -26,5 +25,4 @@ public interface IStrongEnumerable<out TElement, out TEnumerator> :
     {
         return this.GetEnumerator();
     }
-#endif
 }

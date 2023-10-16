@@ -79,9 +79,9 @@ static public class SystemExtensions
                              .Union(Path.GetInvalidPathChars())
                              .ToArray();
         String result = raw;
-        foreach (Char c in invalid)
+        foreach (Char character in invalid)
         {
-            result = result.Replace(oldValue: c.ToString(), 
+            result = result.Replace(oldValue: character.ToString(), 
                                     newValue: String.Empty
 #if NETCOREAPP2_0_OR_GREATER || NET5_0_OR_GREATER
                                     ,comparisonType: StringComparison.InvariantCultureIgnoreCase

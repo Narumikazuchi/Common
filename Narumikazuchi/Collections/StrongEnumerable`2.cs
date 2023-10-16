@@ -8,16 +8,4 @@ public abstract class StrongEnumerable<TElement, TEnumerator> : IStrongEnumerabl
 {
     /// <inheritdoc/>
     public abstract TEnumerator GetEnumerator();
-
-#if !NETCOREAPP3_1_OR_GREATER
-    IEnumerator<TElement> IEnumerable<TElement>.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-#endif
 }

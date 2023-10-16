@@ -45,6 +45,20 @@ public partial struct AlphanumericVersion
         return 0;
     }
 
+#if NET7_0_OR_GREATER
+    [GeneratedRegex("^[a-zA-Z0-9\\-]*$")]
+    static private partial Regex VersionRegex();
+
+    static private readonly Regex s_Regex = VersionRegex();
+#else
+    static private readonly Regex s_Regex = new(@"^[a-zA-Z0-9\-]*$");
+#endif
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private const String SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC = "The specifier for the version component needs to be alphanumeric.";
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private const String SEGMENT_COUNT_OUT_OF_BOUNDS = "The number of version components is out of the allowed bounds (min: 1, max: 4).";
+
     private AlphanumericVersion(AlphanumericVersion original)
     {
         m_Major = original.m_Major;
@@ -52,8 +66,6 @@ public partial struct AlphanumericVersion
         m_Build = original.m_Build;
         m_Revision = original.m_Revision;
     }
-
-    private static readonly Regex s_Regex = new(@"^[a-zA-Z0-9\-]*$");
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly String m_Major;
@@ -63,9 +75,4 @@ public partial struct AlphanumericVersion
     private readonly String? m_Build;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly String? m_Revision;
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC = "The specifier for the version component needs to be alphanumeric.";
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private const String SEGMENT_COUNT_OUT_OF_BOUNDS = "The number of version components is out of the allowed bounds (min: 1, max: 4).";
 }
