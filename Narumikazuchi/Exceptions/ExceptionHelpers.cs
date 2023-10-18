@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains helpers for throwing exceptions.
 /// </summary>
-public static class ExceptionHelpers
+static public class ExceptionHelpers
 {
     /// <summary>
     /// Throws an <see cref="NullReferenceException"/> if the source parameter is null.
@@ -18,7 +18,7 @@ public static class ExceptionHelpers
     /// The custom message will be formatted using <see cref="String.Format(String, Object?)"/>. If you provide a custom message, the '{0}' placeholder 
     /// will be filled with the name of the variable by this method.
     /// </remarks>
-    public static void ThrowIfNullOrEmpty(this String? source,
+    static public void ThrowIfNullOrEmpty(this String? source,
                                           [AllowNull] String message = default,
                                           Boolean asArgumentException = default,
                                           [CallerArgumentExpression(nameof(source))] String? varName = "")
@@ -65,7 +65,7 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfLesserThan<TComparable>(this TComparable source,
+    static public void ThrowIfLesserThan<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable boundary,
                                                       [AllowNull] String message = default,
                                                       [CallerArgumentExpression(nameof(source))] String? paramName = "")
@@ -97,7 +97,7 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfBiggerThan<TComparable>(this TComparable source,
+    static public void ThrowIfBiggerThan<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable boundary,
                                                       [AllowNull] String message = default,
                                                       [CallerArgumentExpression(nameof(source))] String? paramName = "")
@@ -130,7 +130,7 @@ public static class ExceptionHelpers
     /// <param name="paramName">The name of the parameter.</param>
     /// <exception cref="ArgumentNullException" />
     /// <exception cref="ArgumentOutOfRangeException" />
-    public static void ThrowIfOutOfRange<TComparable>(this TComparable source,
+    static public void ThrowIfOutOfRange<TComparable>(this TComparable source,
                                                       [DisallowNull] TComparable lowerBoundary,
                                                       [DisallowNull] TComparable higherBoundary,
                                                       [AllowNull] String message = default,
@@ -162,6 +162,7 @@ public static class ExceptionHelpers
     /// <param name="source">The exception to extract data from.</param>
     /// <returns>An information object, containing detailed data on the exception</returns>
     /// <exception cref="ArgumentNullException" />
+    [Obsolete($"The feature of '{nameof(ExceptionInformation)}' will be removed in future releases.")]
     public static ExceptionInformation ExtractInformation(this Exception source)
     {
         ArgumentNullException.ThrowIfNull(source);

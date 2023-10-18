@@ -5,6 +5,7 @@
 /// <typeparamref name="TEnum"/>.
 /// </summary>
 [DebuggerDisplay("{Typename}[]")]
+[Obsolete($"This type has been superceded by the '{nameof(FlagEnumerator<TEnum>)}' struct.")]
 public partial struct EnumEnumerator<TEnum>
     where TEnum : struct, Enum
 {

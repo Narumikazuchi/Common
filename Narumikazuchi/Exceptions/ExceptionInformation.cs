@@ -3,6 +3,7 @@
 /// <summary>
 /// Contains detailed information of an <see cref="Exception"/>.
 /// </summary>
+[Obsolete($"The feature of '{nameof(ExceptionInformation)}' will be removed in future releases.")]
 public readonly partial struct ExceptionInformation
 {
     /// <summary>

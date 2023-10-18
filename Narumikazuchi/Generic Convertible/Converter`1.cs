@@ -4,6 +4,7 @@ namespace Narumikazuchi;
 /// <summary>
 /// Converts types that implement the <see cref="IConvertible{TType}"/> interface.
 /// </summary>
+[Obsolete($"The generic convertible feature is superceded by a source generator in the 'Narumikazuchi.Generators.Convertibles' package.")]
 static public class Converter<TResult>
 {
     /// <summary>
