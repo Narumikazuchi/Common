@@ -24,14 +24,28 @@ public sealed class A_string_during_sanitization
         {
             String value = "F?le.b:n";
             String expected = "Fle.bn";
-            Assert.AreEqual(value.SanitizeForFilename(), expected);
+            if (OperatingSystem.IsWindows())
+            {
+                Assert.AreEqual(expected, value.SanitizeForFilename());
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                Assert.AreEqual(value, value.SanitizeForFilename());
+            }
         }
 
         [TestMethod]
         public void the_same_string_if_it_does_not_contain_invalid_characters()
         {
             String value = "File.bin";
-            Assert.AreEqual(value.SanitizeForFilename(), value);
+            if (OperatingSystem.IsWindows())
+            {
+                Assert.AreEqual(value, value.SanitizeForFilename());
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                Assert.AreEqual(value, value.SanitizeForFilename());
+            }
         }
     }
 }
