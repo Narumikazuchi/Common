@@ -1,5 +1,4 @@
 ﻿using Narumikazuchi.Generated;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi;
 
@@ -16,10 +15,9 @@ public readonly partial struct AlphanumericVersion
     {
         if (source is null)
         {
-            return new();
+            return default;
         }
-
-        if (source.Revision > -1)
+        else if (source.Revision > -1)
         {
             return new(major: source.Major.ToString(),
                        minor: source.Minor.ToString(),
@@ -32,9 +30,11 @@ public readonly partial struct AlphanumericVersion
                        minor: source.Minor.ToString(),
                        build: source.Build.ToString());
         }
-
-        return new(major: source.Major.ToString(),
-                   minor: source.Minor.ToString());
+        else
+        {
+            return new(major: source.Major.ToString(),
+                       minor: source.Minor.ToString());
+        }
     }
 
     /// <summary>
@@ -43,17 +43,22 @@ public readonly partial struct AlphanumericVersion
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="ArgumentNullException"></exception>
     public AlphanumericVersion([DisallowNull] StringOrUnsignedInt major,
-                               [AllowNull] StringOrUnsignedInt minor = default,
-                               [AllowNull] StringOrUnsignedInt build = default,
-                               [AllowNull] StringOrUnsignedInt revision = default)
+                               [DisallowNull] StringOrUnsignedInt minor = default,
+                               [DisallowNull] StringOrUnsignedInt build = default,
+                               [DisallowNull] StringOrUnsignedInt revision = default)
     {
         if (!major.HasValue)
         {
             throw new ArgumentNullException(nameof(major));
         }
 
+        StringBuilder builder = new();
         String majorString = major.ToString();
-        if (!s_Regex.IsMatch(majorString))
+        if (s_Regex.IsMatch(majorString))
+        {
+            builder.Append(majorString);
+        }
+        else
         {
             ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                               paramName: nameof(major));
@@ -65,7 +70,13 @@ public readonly partial struct AlphanumericVersion
         if (minor.HasValue)
         {
             String minorString = minor.ToString();
-            if (!s_Regex.IsMatch(minorString))
+            if (s_Regex.IsMatch(minorString))
+            {
+                builder.Append('.');
+                m_Minor = builder.Length;
+                builder.Append(minorString);
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(minor));
@@ -78,7 +89,13 @@ public readonly partial struct AlphanumericVersion
         if (build.HasValue)
         {
             String buildString = build.ToString();
-            if (!s_Regex.IsMatch(buildString))
+            if (s_Regex.IsMatch(buildString))
+            {
+                builder.Append('.');
+                m_Build = builder.Length;
+                builder.Append(buildString);
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(build));
@@ -91,7 +108,13 @@ public readonly partial struct AlphanumericVersion
         if (revision.HasValue)
         {
             String revisionString = revision.ToString();
-            if (!s_Regex.IsMatch(revisionString))
+            if (s_Regex.IsMatch(revisionString))
+            {
+                builder.Append('.');
+                m_Revision = builder.Length;
+                builder.Append(revisionString);
+            }
+            else
             {
                 ArgumentException exception = new(message: SPECIFIER_NEEDS_TO_BE_ALPHANUMERIC,
                                                   paramName: nameof(revision));
@@ -101,10 +124,7 @@ public readonly partial struct AlphanumericVersion
             }
         }
 
-        m_Major = majorString;
-        m_Minor = minor.HasValue ? minor.ToString() : null;
-        m_Build = build.HasValue ? build.ToString() : null;
-        m_Revision = revision.HasValue ? revision.ToString() : null;
+        m_Value = builder.ToString();
     }
 
     /// <inheritdoc/>
@@ -117,35 +137,14 @@ public readonly partial struct AlphanumericVersion
     /// <inheritdoc/>
     public override Int32 GetHashCode()
     {
-        if (m_Major is null)
+        if (m_Value is null)
         {
             return Int32.MaxValue;
         }
-
-        Int32 result = m_Major.GetHashCode();
-
-        if (m_Minor is null)
+        else
         {
-            return result;
+            return m_Value.GetHashCode();
         }
-
-        result ^= m_Minor.GetHashCode();
-
-        if (m_Build is null)
-        {
-            return result;
-        }
-
-        result ^= m_Build.GetHashCode();
-
-        if (m_Revision is null)
-        {
-            return result;
-        }
-
-        result ^= m_Revision.GetHashCode();
-
-        return result;
     }
 
     /// <summary>
@@ -181,6 +180,11 @@ public readonly partial struct AlphanumericVersion
     [return: NotNull]
     public String ToString([AllowNull] String? format)
     {
+        if (m_Value is null)
+        {
+            throw new FailedInitialization();
+        }
+
         if (String.IsNullOrWhiteSpace(format))
         {
             format = "#.#.#.#";
@@ -197,7 +201,7 @@ public readonly partial struct AlphanumericVersion
              counter < count;
              counter++)
         {
-            String current = counter switch
+            ReadOnlySpan<Char> current = counter switch
             {
                 0 => this.Major,
                 1 => this.Minor,
@@ -205,7 +209,7 @@ public readonly partial struct AlphanumericVersion
                 3 => this.Revision,
                 _ => "0"
             };
-            if (current == "-1")
+            if (current.Length is 0)
             {
                 working = "";
                 break;
@@ -214,18 +218,10 @@ public readonly partial struct AlphanumericVersion
             index = working.IndexOf('#');
             if (index > 0)
             {
-                builder.Append(working[0..index]);
+                builder.Append(working[..index]);
             }
 
-            if (String.IsNullOrWhiteSpace(current))
-            {
-                builder.Append('0');
-            }
-            else
-            {
-                builder.Append(current);
-            }
-
+            builder.Append(current);
             working = working[++index..];
         }
 
@@ -241,11 +237,22 @@ public readonly partial struct AlphanumericVersion
     /// Gets the major version component of this <see cref="AlphanumericVersion"/>.
     /// </summary>
     [NotNull]
-    public String Major
+    public ReadOnlySpan<Char> Major
     {
         get
         {
-            return m_Major;
+            if (m_Value is null)
+            {
+                throw new FailedInitialization();
+            }
+            else if (m_Minor is > 0)
+            {
+                return m_Value.AsSpan()[..(m_Minor - 1)];
+            }
+            else
+            {
+                return m_Value;
+            }
         }
     }
 
@@ -253,16 +260,26 @@ public readonly partial struct AlphanumericVersion
     /// Gets the minor version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no minor version component is specified.
     /// </summary>
     [NotNull]
-    public String Minor
+    public ReadOnlySpan<Char> Minor
     {
         get
         {
-            if (m_Minor is null)
+            if (m_Value is null)
             {
-                return "-1";
+                throw new FailedInitialization();
             }
-
-            return m_Minor;
+            else if (m_Minor is 0)
+            {
+                return default;
+            }
+            else if (m_Build is > 0)
+            {
+                return m_Value.AsSpan()[m_Minor..(m_Build - 1)];
+            }
+            else
+            {
+                return m_Value.AsSpan()[m_Minor..];
+            }
         }
     }
 
@@ -270,16 +287,26 @@ public readonly partial struct AlphanumericVersion
     /// Gets the build version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no build version component is specified.
     /// </summary>
     [NotNull]
-    public String Build
+    public ReadOnlySpan<Char> Build
     {
         get
         {
-            if (m_Build is null)
+            if (m_Value is null)
             {
-                return "-1";
+                throw new FailedInitialization();
             }
-
-            return m_Build;
+            else if (m_Build is 0)
+            {
+                return default;
+            }
+            else if (m_Revision is > 0)
+            {
+                return m_Value.AsSpan()[m_Build..(m_Revision - 1)];
+            }
+            else
+            {
+                return m_Value.AsSpan()[m_Build..];
+            }
         }
     }
 
@@ -287,16 +314,22 @@ public readonly partial struct AlphanumericVersion
     /// Gets the revision version component of this <see cref="AlphanumericVersion"/>. Returns -1 if no revision  version component is specified.
     /// </summary>
     [NotNull]
-    public String Revision
+    public ReadOnlySpan<Char> Revision
     {
         get
         {
-            if (m_Revision is null)
+            if (m_Value is null)
             {
-                return "-1";
+                throw new FailedInitialization();
             }
-
-            return m_Revision;
+            else if (m_Revision is 0)
+            {
+                return default;
+            }
+            else
+            {
+                return m_Value.AsSpan()[m_Revision..];
+            }
         }
     }
 }

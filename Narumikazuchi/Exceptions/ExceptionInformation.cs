@@ -1,11 +1,9 @@
-﻿#if NET5_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Contains detailed information of an <see cref="Exception"/>.
 /// </summary>
+[Obsolete($"The feature of '{nameof(ExceptionInformation)}' will be removed in future releases.")]
 public readonly partial struct ExceptionInformation
 {
     /// <summary>
@@ -96,9 +94,9 @@ public readonly partial struct ExceptionInformation
         m_Source = source;
 
         List<FunctionCallInformation> infos = new();
-        StackTrace st = new(e: m_Source,
-                            fNeedFileInfo: true);
-        foreach (StackFrame frame in st.GetFrames())
+        StackTrace stackTrace = new(e: m_Source,
+                                    fNeedFileInfo: true);
+        foreach (StackFrame frame in stackTrace.GetFrames())
         {
             infos.Add(new(frame: frame));
         }
@@ -110,4 +108,3 @@ public readonly partial struct ExceptionInformation
     private readonly ImmutableArray<FunctionCallInformation> m_CallStack;
     private readonly Exception m_Source;
 }
-#endif

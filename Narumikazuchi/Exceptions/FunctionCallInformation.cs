@@ -1,7 +1,4 @@
-﻿#if NET5_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Contains the information for a function call on the call stack.
@@ -145,4 +142,3 @@ public readonly partial struct FunctionCallInformation
     private readonly String? m_Name;
     private readonly List<String?> m_Parameters = new();
 }
-#endif

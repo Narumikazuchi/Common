@@ -13,7 +13,6 @@
 public interface IStrongEnumerator<out TElement> :
     IEnumerator<TElement>
 {
-#if NETCOREAPP3_1_OR_GREATER
     void IDisposable.Dispose()
     {
         GC.SuppressFinalize(this);
@@ -29,5 +28,4 @@ public interface IStrongEnumerator<out TElement> :
             return this.Current;
         }
     }
-#endif
 }

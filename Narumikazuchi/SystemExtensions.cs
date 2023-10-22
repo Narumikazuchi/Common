@@ -1,5 +1,4 @@
 ﻿using Narumikazuchi.Collections;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Narumikazuchi;
 
@@ -21,14 +20,7 @@ static public class SystemExtensions
                                                  TComparable higherBoundary) 
         where TComparable : IComparable<TComparable>
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(value);
-#else
-        if (value is null)
-        {
-            throw new ArgumentNullException(nameof(value));
-        }
-#endif
 
         if (value.CompareTo(lowerBoundary) < 0)
         {
@@ -38,57 +30,56 @@ static public class SystemExtensions
         {
             return higherBoundary;
         }
-        return value;
+        else
+        {
+            return value;
+        }
     }
 
     /// <summary>
     /// Enumerates the flags, which are set in this value.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
-    static public EnumEnumerator<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
+    static public FlagEnumerator<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
         where TEnum : struct, Enum
     {
-        if (!AttributeResolver.HasAttribute<FlagsAttribute>(typeof(TEnum)))
-        {
-            return new(0);
-        }
-        else
-        {
-            return new(value: enumValue,
-                       mode: 2);
-        }
+        return new(enumValue);
     }
 
     /// <summary>
     /// Sanitizes this <see cref="String"/> to be able to use as valid filename.
     /// </summary>
+    /// <remarks>
+    /// Do not confuse a filename for a filepath, since this method will also remove
+    /// valid path characters like ':' or '/', which are commonly used in paths.
+    /// </remarks>
     /// <returns>Another <see cref="String"/> which represents a valid filename.</returns>
     [return: NotNull]
     static public String SanitizeForFilename(this String raw)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(raw);
-#else
-        if (raw is null)
-        {
-            throw new ArgumentNullException(nameof(raw));
-        }
-#endif
 
-        Char[] invalid = Path.GetInvalidFileNameChars()
-                             .Union(Path.GetInvalidPathChars())
-                             .ToArray();
-        String result = raw;
-        foreach (Char c in invalid)
+        ImmutableArray<Char> invalidCharacters = s_InvalidPathCharacters.Value;
+        StringBuilder result = new(raw.Length);
+        foreach (Char character in raw)
         {
-            result = result.Replace(oldValue: c.ToString(), 
-                                    newValue: String.Empty
-#if NETCOREAPP2_0_OR_GREATER || NET5_0_OR_GREATER
-                                    ,comparisonType: StringComparison.InvariantCultureIgnoreCase
-#endif
-                                    );
+            if (!invalidCharacters.Contains(character))
+            {
+                result.Append(character);
+            }
         }
 
-        return result;
+        return result.ToString();
     }
+
+    static private ImmutableArray<Char> GetInvalidPathCharacters()
+    {
+        return Path.GetInvalidFileNameChars()
+                   .Union(Path.GetInvalidPathChars())
+                   .OrderBy(character => character)
+                   .ToImmutableArray();
+    }
+
+    static private readonly Lazy<ImmutableArray<Char>> s_InvalidPathCharacters = new(valueFactory: GetInvalidPathCharacters,
+                                                                                     mode: LazyThreadSafetyMode.ExecutionAndPublication);
 }

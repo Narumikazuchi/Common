@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Implements a way for extensions methods to raise the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.

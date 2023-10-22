@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -11,14 +11,14 @@
 	<PropertyGroup>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 		<WarningsNotAsErrors>1591</WarningsNotAsErrors>
-		<NoWarn>NU1803;1701;1702,0282</NoWarn>
+		<NoWarn>NU1803;1701;1702,0282;CS0618</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>5.1.0</Version>
+		<Version>6.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -64,14 +64,17 @@ The interfaces 'IStrongEnumerable&lt;TElement, TEnumerator&gt;' and 'IStrongEnum
 		<Using Include="System" />
 		<Using Include="System.Collections" />
 		<Using Include="System.Collections.Generic" />
+		<Using Include="System.Collections.Immutable" />
 		<Using Include="System.ComponentModel" />
 		<Using Include="System.Diagnostics" />
 		<Using Include="System.Diagnostics.CodeAnalysis" />
 		<Using Include="System.Diagnostics.Contracts" />
+		<Using Include="System.Globalization" />
 		<Using Include="System.IO" />
 		<Using Include="System.Linq" />
 		<Using Include="System.Reflection" />
 		<Using Include="System.Runtime.CompilerServices" />
+		<Using Include="System.Runtime.InteropServices" />
 		<Using Include="System.Text" />
 		<Using Include="System.Text.RegularExpressions" />
 		<Using Include="System.Threading" />

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 #if NET7_0_OR_GREATER
 public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
@@ -144,16 +142,9 @@ public partial struct AlphanumericVersion : IParsable<AlphanumericVersion>
 public partial struct AlphanumericVersion
 {
     /// <inheritdoc/>
-    public static AlphanumericVersion Parse([DisallowNull] String source)
+    static public AlphanumericVersion Parse([DisallowNull] String source)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(source);
-#else
-        if (String.IsNullOrWhiteSpace(source))
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
-#endif
 
         String[] segments = source.Split(separator: '.',
                                          options: StringSplitOptions.RemoveEmptyEntries);
@@ -185,25 +176,28 @@ public partial struct AlphanumericVersion
         {
             return new(segments[0]);
         }
-        if (segments.Length == 2)
+        else if (segments.Length == 2)
         {
             return new(major: segments[0],
                        minor: segments[1]);
         }
-        if (segments.Length == 3)
+        else if (segments.Length == 3)
         {
             return new(major: segments[0],
                        minor: segments[1],
                        build: segments[2]);
         }
-        return new(major: segments[0],
-                   minor: segments[1],
-                   build: segments[2],
-                   revision: segments[3]);
+        else
+        {
+            return new(major: segments[0],
+                       minor: segments[1],
+                       build: segments[2],
+                       revision: segments[3]);
+        }
     }
 
     /// <inheritdoc/>
-    public static Boolean TryParse([NotNullWhen(true)] String? source,
+    static public Boolean TryParse([NotNullWhen(true)] String? source,
                                    out AlphanumericVersion result)
     {
         if (String.IsNullOrWhiteSpace(source))
@@ -213,7 +207,7 @@ public partial struct AlphanumericVersion
         }
 
         String[] segments = source.Split(separator: '.',
-                                          options: StringSplitOptions.RemoveEmptyEntries);
+                                         options: StringSplitOptions.RemoveEmptyEntries);
 
         if (segments.Length is < 1
                             or > 4)
@@ -231,7 +225,7 @@ public partial struct AlphanumericVersion
                 result = default;
                 return false;
             }
-            if (String.IsNullOrWhiteSpace(segments[index]))
+            else if (String.IsNullOrWhiteSpace(segments[index]))
             {
                 result = default;
                 return false;
@@ -243,24 +237,27 @@ public partial struct AlphanumericVersion
             result = new(major: segments[0]);
             return true;
         }
-        if (segments.Length == 2)
+        else if (segments.Length == 2)
         {
             result = new(major: segments[0],
                          minor: segments[1]);
             return true;
         }
-        if (segments.Length == 3)
+        else if (segments.Length == 3)
         {
             result = new(major: segments[0],
                          minor: segments[1],
                          build: segments[2]);
             return true;
         }
-        result = new(major: segments[0],
-                     minor: segments[1],
-                     build: segments[2],
-                     revision: segments[3]);
-        return true;
+        else
+        {
+            result = new(major: segments[0],
+                         minor: segments[1],
+                         build: segments[2],
+                         revision: segments[3]);
+            return true;
+        }
     }
 }
 #endif

@@ -50,20 +50,4 @@ public partial struct EnumEnumerator<TEnum> : IStrongEnumerator<TEnum>
             return m_Current!.Value;
         }
     }
-
-#if !NETCOREAPP3_1_OR_GREATER
-    void IDisposable.Dispose()
-    { }
-
-    void IEnumerator.Reset()
-    { }
-
-    Object? IEnumerator.Current
-    {
-        get
-        {
-            return this.Current;
-        }
-    }
-#endif
 }

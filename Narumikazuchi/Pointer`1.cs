@@ -1,13 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace Narumikazuchi;
 
-namespace Narumikazuchi;
-
-#if NETCOREAPP3_0_OR_GREATER
 #pragma warning disable CS8500
 /// <summary>
-/// Represents a reference to a struct or a reference to a reference for a class.
+/// Represents a reference to a struct or a reference to a reference for a class. Can be used in a safe context unlike regular pointers.
 /// </summary>
-public unsafe partial struct Pointer<T>
+public unsafe readonly struct Pointer<T>
 {
     /// <summary>
     /// Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
@@ -17,7 +14,7 @@ public unsafe partial struct Pointer<T>
     static public Pointer<T> AddressOf(ref T t)
     {
         TypedReference tr = __makeref(t);
-        return new(pointer: *(IntPtr*)&tr);
+        return new(*(IntPtr*)&tr);
     }
 
 #pragma warning disable CS1591 // Missing comments
@@ -45,12 +42,34 @@ public unsafe partial struct Pointer<T>
 
     static public implicit operator Pointer<T>(IntPtr pointer)
     {
-        return new(pointer: pointer);
+        return new(pointer);
+    }
+
+    static public implicit operator Pointer<T>(UIntPtr pointer)
+    {
+        return new(pointer);
     }
 
     static public implicit operator Pointer<T>(void* pointer)
     {
-        return new(pointer: pointer);
+        return new(pointer);
+    }
+
+    static public implicit operator IntPtr(Pointer<T> pointer)
+    {
+#pragma warning disable CA2020 // No need to check for overflow here
+        return (IntPtr)(Int64)pointer.Address;
+#pragma warning restore CA2020
+    }
+
+    static public implicit operator UIntPtr(Pointer<T> pointer)
+    {
+        return pointer.Address;
+    }
+
+    static public implicit operator void*(Pointer<T> pointer)
+    {
+        return pointer.Address.ToPointer();
     }
 #pragma warning restore
 
@@ -70,13 +89,21 @@ public unsafe partial struct Pointer<T>
         m_Pointer = pointer.ToPointer();
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Pointer{T}"/> struct.
+    /// </summary>
+    public Pointer(UIntPtr pointer)
+    {
+        m_Pointer = pointer.ToPointer();
+    }
+
     /// <inheritdoc/>
     [return: MaybeNull]
     public override String? ToString()
     {
         if (this.Value is null)
         {
-            return null;
+            return "null";
         }
 
         return this.Value.ToString();
@@ -103,19 +130,19 @@ public unsafe partial struct Pointer<T>
     /// <summary>
     /// Gets the current address of this pointer.
     /// </summary>
-    public IntPtr Address
+    public UIntPtr Address
     {
         get
         {
-            return (IntPtr)m_Pointer;
+            return (UIntPtr)m_Pointer;
         }
     }
 
     /// <summary>
     /// Gets or sets the value of where the pointer currently points at.
     /// </summary>
-    [MaybeNull]
-    public T? Value
+    /// <exception cref="NullReferenceException"/>
+    public T Value
     {
         get
         {
@@ -127,5 +154,26 @@ public unsafe partial struct Pointer<T>
                          value: value);
         }
     }
+
+    static private void* Offset(void* pointer,
+                                Int64 index)
+    {
+        Int64 offset = Unsafe.SizeOf<T>() * index;
+        return (void*)((Int64)pointer + offset);
+    }
+
+    private readonly Pointer<T> Increment(Int64 amount)
+    {
+        return new(Offset(pointer: m_Pointer,
+                          index: amount));
+    }
+
+    private readonly Pointer<T> Decrement(Int64 amount)
+    {
+        return new(Offset(pointer: m_Pointer,
+                          index: -amount));
+    }
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly void* m_Pointer;
 }
-#endif

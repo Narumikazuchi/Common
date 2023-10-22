@@ -6,7 +6,7 @@ public partial struct EnumEnumerator<TEnum> : IStrongEnumerable<TEnum, EnumEnume
     /// Gets the <see cref="IEnumerator{T}"/> for this <see cref="IEnumerable{T}"/>.
     /// </summary>
     /// <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-    public EnumEnumerator<TEnum> GetEnumerator()
+    public readonly EnumEnumerator<TEnum> GetEnumerator()
     {
         if (m_State.HasValue)
         {
@@ -30,16 +30,4 @@ public partial struct EnumEnumerator<TEnum> : IStrongEnumerable<TEnum, EnumEnume
             return this;
         }
     }
-
-#if !NETCOREAPP3_1_OR_GREATER
-    IEnumerator<TEnum> IEnumerable<TEnum>.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-#endif
 }

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Exception thrown when an unallowed action is about to be performed.
@@ -8,12 +6,12 @@ namespace Narumikazuchi;
 public sealed class NotAllowed : Exception
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
+    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message = default,
                       [AllowNull] Exception? innerException = default)
         : base(message: $"{MESSAGE} - {message}",
-                innerException: innerException)
+               innerException: innerException)
     { }
     /// <summary>
     /// Initializes a new instance of the <see cref="NotAllowed"/> class.
@@ -24,14 +22,7 @@ public sealed class NotAllowed : Exception
         : base(message: $"{MESSAGE} - {message}",
                innerException: innerException)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
-#else
-        if (stateInformation is null)
-        {
-            throw new ArgumentNullException(nameof(stateInformation));
-        }
-#endif
 
         foreach ((Object key, Object? value) kv in stateInformation)
         {
@@ -46,16 +37,9 @@ public sealed class NotAllowed : Exception
                       [AllowNull] Exception? innerException = default,
                       [DisallowNull] params KeyValuePair<Object, Object?>[] stateInformation)
         : base(message: $"{MESSAGE} - {message}",
-                innerException: innerException)
+               innerException: innerException)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
-#else
-        if (stateInformation is null)
-        {
-            throw new ArgumentNullException(nameof(stateInformation));
-        }
-#endif
 
         foreach (KeyValuePair<Object, Object?> kv in stateInformation)
         {
@@ -70,16 +54,9 @@ public sealed class NotAllowed : Exception
                       [AllowNull] Exception? innerException = default,
                       [DisallowNull] params Tuple<Object, Object?>[] stateInformation)
         : base(message: $"{MESSAGE} - {message}",
-                innerException: innerException)
+               innerException: innerException)
     {
-#if NET6_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(stateInformation);
-#else
-        if (stateInformation is null)
-        {
-            throw new ArgumentNullException(nameof(stateInformation));
-        }
-#endif
 
         foreach (Tuple<Object, Object?> tuple in stateInformation)
         {

@@ -1,18 +1,17 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi.Collections;
+﻿namespace Narumikazuchi.Collections;
 
 /// <summary>
 /// Represents an <see cref="IStrongEnumerable{TElement, TEnumerator}"/> and <see cref="IStrongEnumerator{TElement}"/> of type
 /// <typeparamref name="TEnum"/>.
 /// </summary>
 [DebuggerDisplay("{Typename}[]")]
+[Obsolete($"This type has been superceded by the '{nameof(FlagEnumerator<TEnum>)}' struct.")]
 public partial struct EnumEnumerator<TEnum>
     where TEnum : struct, Enum
 {
     /// <inheritdoc/>
     [return: NotNull]
-    public override String ToString()
+    public override readonly String ToString()
     {
         if (m_Mode is 0)
         {

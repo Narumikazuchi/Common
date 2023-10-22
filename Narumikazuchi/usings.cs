@@ -1,7 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-global using System.Collections.Immutable;
-#endif
-#if NET7_0_OR_GREATER
+﻿#if NET7_0_OR_GREATER
 global using System.Numerics;
 #endif
 

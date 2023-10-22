@@ -1,10 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Defines a method to convert the implementing type to the type <typeparamref name="TType"/>.
 /// </summary>
+[Obsolete($"The generic convertible feature is superceded by a source generator in the 'Narumikazuchi.Generators.Convertibles' package.")]
 public interface IConvertible<TType>
 {
     /// <summary>
