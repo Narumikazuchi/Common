@@ -6,7 +6,7 @@
 public sealed class NotAllowed : Exception
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ImpossibleState"/> class.
+    /// Initializes a new instance of the <see cref="NotAllowed"/> class.
     /// </summary>
     public NotAllowed([AllowNull] String? message = default,
                       [AllowNull] Exception? innerException = default)

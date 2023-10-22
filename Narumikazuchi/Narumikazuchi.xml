@@ -113,6 +113,16 @@
             </summary>
             <returns><see langword="true"/> if the parsing succeeded; otherwise, <see langword="false"/></returns>
         </member>
+        <member name="M:Narumikazuchi.AlphanumericVersion.VersionRegex">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ Match if at the beginning of the string.<br/>
+            ○ Match a character in the set [-0-9A-Za-z] atomically any number of times.<br/>
+            ○ Match if at the end of the string or if before an ending newline.<br/>
+            </code>
+            </remarks>
+        </member>
         <member name="T:Narumikazuchi.AttributeResolver">
             <summary>
             Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
@@ -217,6 +227,33 @@
         <member name="P:Narumikazuchi.Collections.EnumEnumerator`1.Current">
             <inheritdoc/>
         </member>
+        <member name="T:Narumikazuchi.Collections.FlagEnumerator`1">
+            <summary>
+            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerable`2"/> and <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> of type
+            <typeparamref name="TEnum"/>.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.#ctor(`0)">
+            <summary>
+            Creates a new instance of the <see cref="T:Narumikazuchi.Collections.FlagEnumerator`1"/> struct.
+            </summary>
+            <param name="value">The value to enumerate the flags of.</param>
+        </member>
+        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.GetEnumerator">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
+        </member>
+        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Collections.FlagEnumerator`1.Current">
+            <inheritdoc/>
+        </member>
         <member name="T:Narumikazuchi.Collections.IStrongEnumerable`2">
             <summary>
             Allows for the implementing object to optimize the generated IL code by
@@ -242,23 +279,6 @@
             <see cref="M:System.IDisposable.Dispose"/> method, making the resulting type 
             even more memory efficient.
             </summary>
-        </member>
-        <member name="T:Narumikazuchi.Collections.PrimeEnumerator">
-            <summary>
-            Enumerates through a list of prime numbers
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.PrimeEnumerator.GetEnumerator">
-            <summary>
-            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
-            </summary>
-            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-        </member>
-        <member name="M:Narumikazuchi.Collections.PrimeEnumerator.MoveNext">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.Collections.PrimeEnumerator.Current">
-            <inheritdoc/>
         </member>
         <member name="T:Narumikazuchi.Collections.StrongEnumerable`2">
             <summary>
@@ -299,6 +319,7 @@
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="asArgumentException">Whether the method should throw an <see cref="T:System.ArgumentNullException"/> or a <see cref="T:System.NullReferenceException"/>.</param>
             <param name="varName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
             <exception cref="T:System.NullReferenceException" />
             <remarks>
             The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
@@ -313,6 +334,7 @@
             <param name="boundary">The low bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
             <exception cref="T:System.ArgumentOutOfRangeException" />
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfBiggerThan``1(``0,``0,System.String,System.String)">
@@ -323,6 +345,7 @@
             <param name="boundary">The high bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
             <exception cref="T:System.ArgumentOutOfRangeException" />
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
@@ -334,6 +357,7 @@
             <param name="higherBoundary">The high bound to check against.</param>
             <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
             <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
             <exception cref="T:System.ArgumentOutOfRangeException" />
         </member>
         <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
@@ -342,6 +366,7 @@
             </summary>
             <param name="source">The exception to extract data from.</param>
             <returns>An information object, containing detailed data on the exception</returns>
+            <exception cref="T:System.ArgumentNullException" />
         </member>
         <member name="T:Narumikazuchi.ExceptionInformation">
             <summary>
@@ -381,6 +406,31 @@
         <member name="P:Narumikazuchi.ExceptionInformation.SourceMemberType">
             <summary>
             Gets the member type of the <see cref="P:Narumikazuchi.ExceptionInformation.SourceMember"/>.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.FailedInitialization">
+            <summary>
+            Exception thrown when an operation is attempted on an uninitialized struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.FailedInitialization.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.FailedInitialization"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.FailedInitialization.#ctor(System.String,System.Exception,System.ValueTuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.FailedInitialization"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.FailedInitialization.#ctor(System.String,System.Exception,System.Collections.Generic.KeyValuePair{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.FailedInitialization"/> class.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.FailedInitialization.#ctor(System.String,System.Exception,System.Tuple{System.Object,System.Object}[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.FailedInitialization"/> class.
             </summary>
         </member>
         <member name="T:Narumikazuchi.FunctionCallInformation">
@@ -448,7 +498,7 @@
         </member>
         <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Narumikazuchi.ImpossibleState"/> class.
+            Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
             </summary>
         </member>
         <member name="M:Narumikazuchi.NotAllowed.#ctor(System.String,System.Exception,System.ValueTuple{System.Object,System.Object}[])">
@@ -525,7 +575,7 @@
         </member>
         <member name="T:Narumikazuchi.Pointer`1">
             <summary>
-            Represents a reference to a struct or a reference to a reference for a class.
+            Represents a reference to a struct or a reference to a reference for a class. Can be used in a safe context unlike regular pointers.
             </summary>
         </member>
         <member name="M:Narumikazuchi.Pointer`1.AddressOf(`0@)">
@@ -541,6 +591,11 @@
             </summary>
         </member>
         <member name="M:Narumikazuchi.Pointer`1.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Pointer`1.#ctor(System.UIntPtr)">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
             </summary>
@@ -562,48 +617,7 @@
             <summary>
             Gets or sets the value of where the pointer currently points at.
             </summary>
-        </member>
-        <member name="T:Narumikazuchi.Primes">
-            <summary>
-            Provides methods to generate primes or check for them.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Primes.IsPrime(System.Int64)">
-            <summary>
-            Checks whether the specified candidate is a prime number.
-            </summary>
-            <param name="candidate">The candidate to check.</param>
-            <returns><see langword="true"/> if the specified candidate is a prime; otherwise <see langword="false"/></returns>
-        </member>
-        <member name="M:Narumikazuchi.Primes.GetPrevious(System.Int64)">
-            <summary>
-            Returns the nearest prime that is smaller than or equal to the specified parameter.
-            </summary>
-            <param name="origin">The origin from where to start.</param>
-            <returns>The nearest prime that is smaller than or equal to the specified parameter</returns>
-            <exception cref="T:System.ArgumentException"/>
-        </member>
-        <member name="M:Narumikazuchi.Primes.GetNext(System.Int64)">
-            <summary>
-            Returns the nearest prime that is greater than or equal to the specified parameter.
-            </summary>
-            <param name="origin">The origin from where to start.</param>
-            <returns>The nearest prime that is greater than or equal to the specified parameter</returns>
-            <exception cref="T:System.ArgumentException"/>
-        </member>
-        <member name="M:Narumikazuchi.Primes.ListUntil(System.Range)">
-            <summary>
-            Enumerates all primes in the specified range.
-            </summary>
-            <returns>The list of primes contained in the specified range</returns>
-            <exception cref="T:System.ArgumentException"/>
-        </member>
-        <member name="M:Narumikazuchi.Primes.ListUntil(System.Int64,System.Int64)">
-            <summary>
-            Enumerates all primes in the range specified by the specified starting point to the specified end point.
-            </summary>
-            <returns>The list of primes contained in the specified range</returns>
-            <exception cref="T:System.ArgumentException"/>
+            <exception cref="T:System.NullReferenceException"/>
         </member>
         <member name="T:Narumikazuchi.SystemExtensions">
             <summary>
@@ -629,42 +643,57 @@
             <summary>
             Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
             </summary>
+            <remarks>
+            Do not confuse a filename for a filepath, since this method will also remove
+            valid path characters like ':' or '/', which are commonly used in paths.
+            </remarks>
             <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
-        </member>
-        <member name="T:Narumikazuchi.Unsigned31BitInteger">
-            <summary>
-            Represents a 31-bit integer positive range, basically representing a non-negative integer in the range of <code>0-2'147'483'647</code>. 
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Implicit(Narumikazuchi.Unsigned31BitInteger)~System.Int32">
-            <summary>
-            Implicit conversion to <see cref="T:System.Int32"/> struct.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Explicit(Narumikazuchi.Unsigned31BitInteger)~System.UInt32">
-            <summary>
-            Explicit conversion to <see cref="T:System.UInt32"/> struct.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Implicit(System.Int32)~Narumikazuchi.Unsigned31BitInteger">
-            <summary>
-            Implicit conversion from <see cref="T:System.Int32"/> struct.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Unsigned31BitInteger.op_Explicit(System.UInt32)~Narumikazuchi.Unsigned31BitInteger">
-            <summary>
-            Explicit conversion from <see cref="T:System.UInt32"/> struct.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Unsigned31BitInteger.Value">
-            <summary>
-            Gets the actual value of the struct.
-            </summary>
         </member>
         <member name="T:Narumikazuchi.Generated.StringOrUnsignedInt">
             <summary>
             A type that can be assigned either of these types: <code><see cref="T:System.String"/> | <see cref="T:System.Byte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
             </summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the VersionRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.VersionRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
     </members>
 </doc>

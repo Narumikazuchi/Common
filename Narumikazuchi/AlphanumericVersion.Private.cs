@@ -2,49 +2,6 @@
 
 public partial struct AlphanumericVersion
 {
-    static private Int32 CompareComponent(String? me,
-                                          String? other)
-    {
-        if (me is null)
-        {
-            if (other is null)
-            {
-                return 0;
-            }
-            return -1;
-        }
-
-        if (other is null)
-        {
-            return 1;
-        }
-
-        if (me.Length > other.Length)
-        {
-            return 1;
-        }
-        if (me.Length < other.Length)
-        {
-            return -1;
-        }
-
-        for (Int32 index = 0;
-             index < me.Length;
-             index++)
-        {
-            if (me[index] > other[index])
-            {
-                return 1;
-            }
-            if (me[index] < other[index])
-            {
-                return -1;
-            }
-        }
-
-        return 0;
-    }
-
 #if NET7_0_OR_GREATER
     [GeneratedRegex("^[a-zA-Z0-9\\-]*$")]
     static private partial Regex VersionRegex();
@@ -61,18 +18,18 @@ public partial struct AlphanumericVersion
 
     private AlphanumericVersion(AlphanumericVersion original)
     {
-        m_Major = original.m_Major;
+        m_Value = original.m_Value;
         m_Minor = original.m_Minor;
         m_Build = original.m_Build;
         m_Revision = original.m_Revision;
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly String m_Major;
+    private readonly String m_Value;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly String? m_Minor;
+    private readonly Int32 m_Minor;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly String? m_Build;
+    private readonly Int32 m_Build;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly String? m_Revision;
+    private readonly Int32 m_Revision;
 }

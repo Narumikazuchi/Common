@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 public partial struct AlphanumericVersion : IComparable
 {
@@ -10,7 +8,10 @@ public partial struct AlphanumericVersion : IComparable
         {
             return this.CompareTo(other);
         }
-        return 1;
+        else
+        {
+            return 1;
+        }
     }
 }
 
@@ -19,33 +20,20 @@ public partial struct AlphanumericVersion : IComparable<AlphanumericVersion>
     /// <inheritdoc/>
     public Int32 CompareTo(AlphanumericVersion other)
     {
-        Int32 result = CompareComponent(me: m_Major,
-                                        other: other.m_Major);
-
-        if (result != 0)
+        if (m_Value is null)
         {
-            return result;
+            if (other.m_Value is null)
+            {
+                return 0;
+            }
+            else
+            {
+                throw new FailedInitialization();
+            }
         }
-
-        result = CompareComponent(me: m_Minor,
-                                  other: other.m_Minor);
-
-        if (result != 0)
+        else
         {
-            return result;
+            return m_Value.CompareTo(other.m_Value);
         }
-
-        result = CompareComponent(me: m_Build,
-                                  other: other.m_Build);
-
-        if (result != 0)
-        {
-            return result;
-        }
-
-        result = CompareComponent(me: m_Revision,
-                                  other: other.m_Revision);
-
-        return result;
     }
 }
