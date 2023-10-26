@@ -1,6 +1,4 @@
-﻿using Narumikazuchi.Collections;
-
-namespace Narumikazuchi;
+﻿namespace Narumikazuchi;
 
 /// <summary>
 /// Contains extensions for the System namespace.
@@ -34,16 +32,6 @@ static public class SystemExtensions
         {
             return value;
         }
-    }
-
-    /// <summary>
-    /// Enumerates the flags, which are set in this value.
-    /// </summary>
-    /// <returns>An <see cref="IEnumerable{T}"/> containing all flags that are set in this value.</returns>
-    static public FlagEnumerator<TEnum> EnumerateFlags<TEnum>(this TEnum enumValue)
-        where TEnum : struct, Enum
-    {
-        return new(enumValue);
     }
 
     /// <summary>
