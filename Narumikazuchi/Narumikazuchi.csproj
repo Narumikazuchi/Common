@@ -18,15 +18,13 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>6.0.1</Version>
+		<Version>6.0.2</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReleaseNotes>Inclusion of parameter clarifiers that improve API readability. 'MaybeNull&lt;T&gt;' will replace 'Option&lt;T&gt;' in this context.
-Major refactor using the new parameter clarifiers.
-The interfaces 'IStrongEnumerable&lt;TElement, TEnumerator&gt;' and 'IStrongEnumerator&lt;TElement&gt;' have been moved here from the 'Narumikazuchi.Collections' package.</PackageReleaseNotes>
+		<PackageReleaseNotes>Moved enumerators back to Narumikazuchi.Collections. Also moved some stuff to the new Narumikazuchi.Math and deprecated some functionality, converting and cloning, that will be handled by a source generator.</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 		<PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
