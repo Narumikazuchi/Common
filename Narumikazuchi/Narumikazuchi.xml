@@ -194,100 +194,6 @@
             <exception cref="T:System.ArgumentNullException"/>
             <exception cref="T:System.InvalidOperationException"/>
         </member>
-        <member name="T:Narumikazuchi.Collections.EmptyEnumerator`1">
-            <summary>
-            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> for a collection without any elements.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.EmptyEnumerator`1.MoveNext">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.Collections.EmptyEnumerator`1.Current">
-            <inheritdoc/>
-            <exception cref="T:System.InvalidOperationException"/>
-        </member>
-        <member name="T:Narumikazuchi.Collections.EnumEnumerator`1">
-            <summary>
-            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerable`2"/> and <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> of type
-            <typeparamref name="TEnum"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.GetEnumerator">
-            <summary>
-            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
-            </summary>
-            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-        </member>
-        <member name="M:Narumikazuchi.Collections.EnumEnumerator`1.MoveNext">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.Collections.EnumEnumerator`1.Current">
-            <inheritdoc/>
-        </member>
-        <member name="T:Narumikazuchi.Collections.FlagEnumerator`1">
-            <summary>
-            Represents an <see cref="T:Narumikazuchi.Collections.IStrongEnumerable`2"/> and <see cref="T:Narumikazuchi.Collections.IStrongEnumerator`1"/> of type
-            <typeparamref name="TEnum"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.#ctor(`0)">
-            <summary>
-            Creates a new instance of the <see cref="T:Narumikazuchi.Collections.FlagEnumerator`1"/> struct.
-            </summary>
-            <param name="value">The value to enumerate the flags of.</param>
-        </member>
-        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.GetEnumerator">
-            <summary>
-            Gets the <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
-            </summary>
-            <returns>Itself, if the enumeration has not yet started; else a clone of itself.</returns>
-        </member>
-        <member name="M:Narumikazuchi.Collections.FlagEnumerator`1.MoveNext">
-            <inheritdoc/>
-        </member>
-        <member name="P:Narumikazuchi.Collections.FlagEnumerator`1.Current">
-            <inheritdoc/>
-        </member>
-        <member name="T:Narumikazuchi.Collections.IStrongEnumerable`2">
-            <summary>
-            Allows for the implementing object to optimize the generated IL code by
-            providing a specific type instead of an interface for the <see cref="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator"/>
-            method. Using this interface will reduce the delegation cost of virtual IL calls
-            and therefore improve iteration times of <see langword="foreach"/>-loops.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the collection.
-            </summary>
-            <returns>An enumerator that can be used to iterate through the collection.</returns>
-        </member>
-        <member name="T:Narumikazuchi.Collections.IStrongEnumerator`1">
-            <summary>
-            Allows for the implementing object to optimize the generated IL code by
-            providing a specific type instead of an interface for the 
-            <see cref="M:Narumikazuchi.Collections.IStrongEnumerable`2.GetEnumerator"/> method. 
-            Using this interface will reduce the delegation cost of virtual IL calls
-            and therefore improve iteration times of <see langword="foreach"/>-loops.
-            This interface also removes the requirement of the implementation of the
-            <see cref="M:System.IDisposable.Dispose"/> method, making the resulting type 
-            even more memory efficient.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.Collections.StrongEnumerable`2">
-            <summary>
-            Represents the base class for an <see cref="T:Narumikazuchi.Collections.IStrongEnumerable`2"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Collections.StrongEnumerable`2.GetEnumerator">
-            <inheritdoc/>
-        </member>
         <member name="T:Narumikazuchi.EventHandler`1">
             <summary>
             Represents the method that will handle an event without event data.
@@ -632,12 +538,6 @@
             <param name="lowerBoundary">Low-bound for the clamping</param>
             <param name="higherBoundary">High-bound for the clamping</param>
             <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.SystemExtensions.EnumerateFlags``1(``0)">
-            <summary>
-            Enumerates the flags, which are set in this value.
-            </summary>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing all flags that are set in this value.</returns>
         </member>
         <member name="M:Narumikazuchi.SystemExtensions.SanitizeForFilename(System.String)">
             <summary>
