@@ -19,10 +19,6 @@
 		<NoWarn>NU1803;CS8785</NoWarn>
 	</PropertyGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-		<Exec Command="&quot;$(DevEnvDir)devenv&quot; &quot;$(SolutionDir)Solution.sln&quot; /Build $(Configuration) /Project &quot;$(SolutionDir)Narumikazuchi.Analyzers\Narumikazuchi.Analyzers.csproj&quot;" />
-	</Target>
-
 	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<None Include="..\Narumikazuchi.Analyzers\bin\Debug\netstandard2.0\Narumikazuchi.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<None Update="..\Narumikazuchi.Analyzers\tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools\%(Filename)%(Extension)" />
