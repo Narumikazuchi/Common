@@ -214,10 +214,15 @@ dotnet run --project **YOUR_SOLUTION_LOCATION**/Benchmarks/Benchmarks.csproj
 ```
 
 ## Roadmap
-The following actions are planned for the upcoming version ```6.1.0```:  
-- Add a ```StaticEventHandler<TEventArgs>``` delegate for static classes or just events where the sender is irrelevant
+### Latest Changelog 6.1.3
+- Added a ```StaticEventHandler<TEventArgs>``` delegate for static classes or just events where the sender is irrelevant
+- Added an overload for ```SanitizeForFilename(this String raw)``` where you can pass in the ```System.Char``` that replaces invalid characters instead of just omitting them
+- Added a ```FilePath``` type which checks and replaces invalid characters in a string directly 
+- Added a ```ConstrainToImplementationAttribute``` which can mark a type parameter in an interface to force it's implementation as type argument
+- Added an ```IInlineArray<TSelf, TElement>``` interface and a ```InlineArray<TElement>``` helper class for use with inline arrays (this is just the bare minimum, this will be expanded upon)
+- Added rust-like monad types ```Optional<TAny>```, ```Result<TResult>```, ```Result<TResult, TError>``` for better code quality
+
+### Roadmap for 6.2.x
+The following actions are planned for the upcoming version ```6.2.x```:  
 - Implement more granular versions of the ```ThrowIfNullOrEmpty``` extension method for ```System.String```
 - Check for performance improvements in ```SanitizeForFilename(this String raw)``` and ```AttributeResolver```
-- Add an overload for ```SanitizeForFilename(this String raw)``` where you can pass in the ```System.Char``` that should replace invalid characters instead of just omitting them
-- Adding a ```FilePath``` type which checks and replaces invalid characters in a string directly (might also get moved to ```Narumikazuchi.InputOutput```)
-- Incase ```FilePath``` will put into ```Narumikazuchi.InputOutput``` -> also move ```SanitizeForFilename(this String raw)```
