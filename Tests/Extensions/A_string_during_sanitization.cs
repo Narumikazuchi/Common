@@ -24,14 +24,7 @@ public sealed class A_string_during_sanitization
         {
             String value = "F?le.b:n";
             String expected = "Fle.bn";
-            if (OperatingSystem.IsWindows())
-            {
-                Assert.AreEqual(expected, value.SanitizeForFilename());
-            }
-            else if (OperatingSystem.IsLinux())
-            {
-                Assert.AreEqual(value, value.SanitizeForFilename());
-            }
+            Assert.AreEqual(expected, value.SanitizeForFilename());
         }
 
         [TestMethod]
