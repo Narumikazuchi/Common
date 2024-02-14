@@ -115,7 +115,9 @@
         </member>
         <member name="M:Narumikazuchi.AlphanumericVersion.VersionRegex">
             <remarks>
-            Pattern explanation:<br/>
+            Pattern:<br/>
+            <code>^[a-zA-Z0-9\\-]*$</code><br/>
+            Explanation:<br/>
             <code>
             ○ Match if at the beginning of the string.<br/>
             ○ Match a character in the set [-0-9A-Za-z] atomically any number of times.<br/>
@@ -123,76 +125,361 @@
             </code>
             </remarks>
         </member>
-        <member name="T:Narumikazuchi.AttributeResolver">
+        <member name="T:Narumikazuchi.ConstrainToImplementationAttribute">
             <summary>
-            Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
+            Constraints a type parameter for an <see langword="interface"/> to only allow the implementing type.
+            </summary>
+            <remarks>
+            Since there is no <see langword="self"/> or anything equivalent in C#, we usually do something like this:
+            <code>public interface IExample&lt;TSelf&gt; where TSelf : IExample&lt;TSelf&gt;</code> While this is 
+            already good enough for most people, you can still assign a class as type argument, that comes from 
+            anywhere else in the inheritance chain or even from a different inheritance chain. Using this attribute
+            fully constraints this behavior and guarantees, that the implementing type will always be assigned to
+            the <i>TSelf</i> type parameter. Basically enforcing the following behavior.
+            <code>public interface IExample&lt;[ConstrainToSelf] TSelf&gt; ...
+            public class Example : IExample&lt;Example&gt; &lt;--- Type Argument can only be Example and nothing else</code>
+            </remarks>
+        </member>
+        <member name="T:Narumikazuchi.Extensions">
+            <summary>
+            Contains common extensions.
             </summary>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.Extensions.IsNullOrDefault``1(``0)">
             <summary>
-            Checks if the specified <see cref="T:System.Reflection.Assembly"/> has at least one <typeparamref name="TAttribute"/> defined.
+            Checks whether the <paramref name="instance"/> is <see langword="null"/> or in case of a value type <see langword="default"/>.
             </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to check.</param>
-            <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.MemberInfo)">
+        <member name="M:Narumikazuchi.Extensions.IsNotNullOrDefault``1(``0)">
             <summary>
-            Checks if the specified <see cref="T:System.Reflection.MemberInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            Checks whether the <paramref name="instance"/> is not <see langword="null"/> or in case of a value type not <see langword="default"/>.
             </summary>
-            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to check.</param>
-            <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.ParameterInfo)">
+        <member name="T:Narumikazuchi.FilePath">
             <summary>
-            Checks if the specified <see cref="T:System.Reflection.ParameterInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            Represents a directory or file path.
             </summary>
-            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to check.</param>
-            <exception cref="T:System.ArgumentNullException"/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.Assembly)">
+        <member name="M:Narumikazuchi.FilePath.#ctor(Narumikazuchi.Optional{System.String})">
             <summary>
-            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.FilePath"/> struct.
             </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attributes from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
+            <param name="path">The path that the instance should represent.</param>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.MemberInfo)">
+        <member name="M:Narumikazuchi.FilePath.Append(System.String)">
             <summary>
-            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
+            Appends the given <paramref name="other"/> string as path to this instance value and returns a new <see cref="T:Narumikazuchi.FilePath"/> where the paths are concatenated.
             </summary>
-            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attributes from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
+            <param name="other">The path to append to this instance.</param>
+            <returns>A new <see cref="T:Narumikazuchi.FilePath"/> where the paths are concatenated</returns>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.ParameterInfo)">
+        <member name="M:Narumikazuchi.FilePath.Append(Narumikazuchi.FilePath)">
             <summary>
-            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
+            Appends the given <paramref name="other"/> string as path to this instance value and returns a new <see cref="T:Narumikazuchi.FilePath"/> where the paths are concatenated.
             </summary>
-            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attributes from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
+            <param name="other">The path to append to this instance.</param>
+            <returns>A new <see cref="T:Narumikazuchi.FilePath"/> where the paths are concatenated</returns>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.Assembly)">
-            <summary>
-            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
-            </summary>
-            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attribute from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-            <exception cref="T:System.InvalidOperationException"/>
+        <member name="M:Narumikazuchi.FilePath.Equals(Narumikazuchi.FilePath)">
+            <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.MemberInfo)">
-            <summary>
-            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
-            </summary>
-            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attribute from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-            <exception cref="T:System.InvalidOperationException"/>
+        <member name="M:Narumikazuchi.FilePath.Equals(System.Object)">
+            <inheritdoc/>
         </member>
-        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.ParameterInfo)">
+        <member name="M:Narumikazuchi.FilePath.GetEnumerator">
             <summary>
-            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
+            Returns an enumerator that can iterate through the characters in this path.
             </summary>
-            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attribute from.</param>
-            <exception cref="T:System.ArgumentNullException"/>
-            <exception cref="T:System.InvalidOperationException"/>
+            <returns>An enumerator</returns>
+        </member>
+        <member name="M:Narumikazuchi.FilePath.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.FilePath.Replace(System.String,System.String,System.StringComparison)">
+            <summary>
+            Replaces all occurences of <paramref name="oldValue"/> with the value of <paramref name="newValue"/>.
+            </summary>
+            <param name="oldValue">The string to replace.</param>
+            <param name="newValue">The new string to replace <paramref name="oldValue"/> with.</param>
+            <param name="comparison">The comparision style to use when looking for <paramref name="oldValue"/>.</param>
+            <returns>A new <see cref="T:Narumikazuchi.FilePath"/> where all occurences of <paramref name="oldValue"/> were replaced by <paramref name="newValue"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.FilePath.SharesCommonPathWith(Narumikazuchi.FilePath)">
+            <summary>
+            Determines whether the specified path is a part of this path.
+            </summary>
+            <param name="path">The path to check for in the current instance.</param>
+            <returns><see langword="true"/> if the <paramref name="path"/> is part of this instance; otherwise, <see langword="false"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.FilePath.GetParent">
+            <summary>
+            Returns the <see cref="T:Narumikazuchi.FilePath"/> to the parent directory, if it exists.
+            </summary>
+            <returns>The path to the parent directory.</returns>
+        </member>
+        <member name="M:Narumikazuchi.FilePath.ToString">
+            <summary>
+            Returns this path in string form.
+            </summary>
+            <returns>This path as string.</returns>
+        </member>
+        <member name="P:Narumikazuchi.FilePath.Extension">
+            <summary>
+            Gets the extension of the file represented by this path. If the path does not represent a file or the file has no extension this returns an empty string.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FilePath.Name">
+            <summary>
+            Gets the extension of the file or directory represented by this path.Returns an empty string when the path is empty.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FilePath.IsEmpty">
+            <summary>
+            Gets whether or not this instance has a value.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.FilePath.Root">
+            <summary>
+            Gets the path to the root for this instance. Returns an empty string if this path is empty.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.IInlineArray`2">
+            <summary>
+            Identifies a struct as an inline array for use with generics.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.InlineArray`1">
+            <summary>
+            Provides helper method for inline arrays.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.InlineArray`1.AsSpan``1(``0@,System.Int32)">
+            <summary>
+            Returns a <see cref="T:System.Span`1"/> representing the <paramref name="inlineArray"/>.
+            </summary>
+            <param name="inlineArray">The array to represent as a span.</param>
+            <param name="arraySize">The size of the span. -1 will default to the length of the array.</param>
+            <returns>A <see cref="T:System.Span`1"/> that represents the <paramref name="inlineArray"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.InlineArray`1.AsReadOnlySpan``1(``0@,System.Int32)">
+            <summary>
+            Returns a <see cref="T:System.ReadOnlySpan`1"/> representing the <paramref name="inlineArray"/>.
+            </summary>
+            <param name="inlineArray">The array to represent as a span.</param>
+            <param name="arraySize">The size of the span. -1 will default to the length of the array.</param>
+            <returns>A <see cref="T:System.ReadOnlySpan`1"/> that represents the <paramref name="inlineArray"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.InlineArray`1.AsSpanUnsafe``1(``0@,System.Int32)">
+            <summary>
+            Returns a <see cref="T:System.Span`1"/> representing the <paramref name="inlineArray"/>.
+            </summary>
+            <remarks>
+            This method does not enforce the use of the <see cref="T:System.Runtime.CompilerServices.InlineArrayAttribute"/>. This might therefore fail if used on a struct that is not an inline array.
+            Worst case would be the resulting span reading into unchecked memory.
+            </remarks>
+            <param name="inlineArray">The array to represent as a span.</param>
+            <param name="arraySize">The size of the span. -1 will default to the length of the array.</param>
+            <returns>A <see cref="T:System.Span`1"/> that represents the <paramref name="inlineArray"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.InlineArray`1.AsReadOnlySpanUnsafe``1(``0@,System.Int32)">
+            <summary>
+            Returns a <see cref="T:System.ReadOnlySpan`1"/> representing the <paramref name="inlineArray"/>.
+            </summary>
+            <remarks>
+            This method does not enforce the use of the <see cref="T:System.Runtime.CompilerServices.InlineArrayAttribute"/>. This might therefore fail if used on a struct that is not an inline array.
+            Worst case would be the resulting span reading into unchecked memory.
+            </remarks>
+            <param name="inlineArray">The array to represent as a span.</param>
+            <param name="arraySize">The size of the span. -1 will default to the length of the array.</param>
+            <returns>A <see cref="T:System.ReadOnlySpan`1"/> that represents the <paramref name="inlineArray"/></returns>
+        </member>
+        <member name="T:Narumikazuchi.Optional`1">
+            <summary>
+            Represents a value that might or might not be set.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Optional`1.#ctor(`0,System.Nullable{System.Boolean})">
+            <summary>
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.Optional`1"/> struct.
+            </summary>
+            <param name="value">The value to with this instance.</param>
+            <param name="overrideHasValue">Whether or not the <see cref="P:Narumikazuchi.Optional`1.HasValue"/> will be set to <see langword="true"/></param>
+        </member>
+        <member name="M:Narumikazuchi.Optional`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Optional`1.Map``1(System.Func{`0,``0})">
+            <summary>
+            Transforms this instance into an instance of another type. The <paramref name="transformer"/> will only be called
+            if this instance actually holds a value.
+            </summary>
+            <param name="transformer">The transformation function to map from <typeparamref name="TAny"/> to <typeparamref name="TOther"/>.</param>
+            <returns>An <see cref="T:Narumikazuchi.Optional`1"/> of type <typeparamref name="TOther"/> depending on whether this instance has a value or not</returns>
+        </member>
+        <member name="M:Narumikazuchi.Optional`1.UseFor(System.Action{`0})">
+            <summary>
+            Executes the <paramref name="action"/> with the value wrapped in this instance as parameter, but only if this
+            instance actually holds a value.
+            </summary>
+            <param name="action">The action to perform on the wrapped value.</param>
+        </member>
+        <member name="M:Narumikazuchi.Optional`1.UnwrapOr(`0)">
+            <summary>
+            If this instance holds a value it gets returned, otherwise the <paramref name="defaultValue"/> will get returned.
+            </summary>
+            <param name="defaultValue">The value to return if this instance doesn't hold a value.</param>
+            <returns>The value wrapped in this instance or <paramref name="defaultValue"/> if this instance does not hold a value</returns>
+        </member>
+        <member name="P:Narumikazuchi.Optional`1.HasValue">
+            <summary>
+            Gets whether or not this instance holds a value.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Optional`1.Value">
+            <summary>
+            Gets the value wrapped in this instance.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Result`1">
+            <summary>
+            Represents a result where the functioncall can fail and actually return an <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.#ctor(`0)">
+            <summary>
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`1"/> struct.
+            </summary>
+            <param name="value">The value to wrap in this instance.</param>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.#ctor(System.Exception)">
+            <summary>
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`1"/> struct.
+            </summary>
+            <param name="error">The error to wrap in this instance.</param>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.AndThen``1(System.Func{`0,``0})">
+            <summary>
+            If this wraps a value then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
+            Otherwise the wrapped <see cref="T:System.Exception"/> will just get passed on.
+            </summary>
+            <param name="transformer">The transformation to apply to the wrapped value.</param>
+            <returns>A <see cref="T:Narumikazuchi.Result`1"/> wrapping the transformed value or wrapping the stored <see cref="T:System.Exception"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.OrElse``1(System.Func{System.Exception,``0})">
+            <summary>
+            If this wraps an <see cref="T:System.Exception"/> then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
+            Otherwise the wrapped value will just get passed on.
+            </summary>
+            <param name="transformer">The transformation to apply to the wrapped <see cref="T:System.Exception"/>.</param>
+            <returns>A <see cref="T:Narumikazuchi.Result`1"/> wrapping the transformed <see cref="T:System.Exception"/> or wrapping the stored value</returns>
+        </member>
+        <member name="M:Narumikazuchi.Result`1.UnwrapOr(`0)">
+            <summary>
+            If this instance wraps a value it gets returned, otherwise the <paramref name="defaultValue"/> will get returned.
+            </summary>
+            <param name="defaultValue">The value to return if this instance doesn't wrap a value.</param>
+            <returns>The value wrapped in this instance or <paramref name="defaultValue"/> if this instance does not wrap a value</returns>
+        </member>
+        <member name="P:Narumikazuchi.Result`1.IsOk">
+            <summary>
+            Gets whether or not this instance wraps a value.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`1.IsError">
+            <summary>
+            Gets whether or not this instance wraps an <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`1.IsEmpty">
+            <summary>
+            Gets whether or not this instance actually wraps anything.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`1.Error">
+            <summary>
+            Gets the <see cref="T:System.Exception"/> that this instance wraps, if it wraps an <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`1.Value">
+            <summary>
+            Gets the value that this instance wraps, if it wraps a value.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.Result`2">
+            <summary>
+            Represents a result where the functioncall can fail and actually return an error.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.#ctor(`0)">
+            <summary>
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`2"/> struct.
+            </summary>
+            <param name="value">The value to wrap in this instance.</param>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.#ctor(`1)">
+            <summary>
+            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`2"/> struct.
+            </summary>
+            <param name="error">The error to wrap in this instance.</param>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.AndThen``1(System.Func{`0,``0})">
+            <summary>
+            If this wraps a value then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
+            Otherwise the wrapped <typeparamref name="TError"/> will just get passed on.
+            </summary>
+            <param name="transformer">The transformation to apply to the wrapped value.</param>
+            <returns>A <see cref="T:Narumikazuchi.Result`1"/> wrapping the transformed value or wrapping the stored <typeparamref name="TError"/></returns>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.OrElse``1(System.Func{`1,``0})">
+            <summary>
+            If this wraps a <typeparamref name="TError"/> then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
+            Otherwise the wrapped value will just get passed on.
+            </summary>
+            <param name="transformer">The transformation to apply to the wrapped <typeparamref name="TError"/>.</param>
+            <returns>A <see cref="T:Narumikazuchi.Result`1"/> wrapping the transformed <typeparamref name="TError"/> or wrapping the stored value</returns>
+        </member>
+        <member name="M:Narumikazuchi.Result`2.UnwrapOr(`0)">
+            <summary>
+            If this instance wraps a value it gets returned, otherwise the <paramref name="defaultValue"/> will get returned.
+            </summary>
+            <param name="defaultValue">The value to return if this instance doesn't wrap a value.</param>
+            <returns>The value wrapped in this instance or <paramref name="defaultValue"/> if this instance does not wrap a value</returns>
+        </member>
+        <member name="P:Narumikazuchi.Result`2.IsOk">
+            <summary>
+            Gets whether or not this instance wraps a value.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`2.IsError">
+            <summary>
+            Gets whether or not this instance wraps a <typeparamref name="TError"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`2.IsEmpty">
+            <summary>
+            Gets whether or not this instance actually wraps anything.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`2.Error">
+            <summary>
+            Gets the <typeparamref name="TError"/> that this instance wraps, if it wraps a <typeparamref name="TError"/>.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Result`2.Value">
+            <summary>
+            Gets the value that this instance wraps, if it wraps a value.
+            </summary>
+        </member>
+        <member name="T:Narumikazuchi.EqualityComparison`1">
+            <summary>
+            Represents the method to compare two instances of the same type for equality.
+            </summary>
         </member>
         <member name="T:Narumikazuchi.EventHandler`1">
             <summary>
@@ -207,72 +494,11 @@
             <param name="sender">The object which raised the event.</param>
             <param name="eventArgs">The event data for the raised event.</param>
         </member>
-        <member name="T:Narumikazuchi.EqualityComparison`1">
+        <member name="T:Narumikazuchi.StaticEventHandler`1">
             <summary>
-            Represents the method to compare two instances of the same type for equality.
+            Represents the method that will handle an event with certain event data.
             </summary>
-        </member>
-        <member name="T:Narumikazuchi.ExceptionHelpers">
-            <summary>
-            Contains helpers for throwing exceptions.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.Boolean,System.String)">
-            <summary>
-            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
-            </summary>
-            <param name="source">The source to check against <see langword="null"/>.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="asArgumentException">Whether the method should throw an <see cref="T:System.ArgumentNullException"/> or a <see cref="T:System.NullReferenceException"/>.</param>
-            <param name="varName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
-            <exception cref="T:System.NullReferenceException" />
-            <remarks>
-            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
-            will be filled with the name of the variable by this method.
-            </remarks>
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfLesserThan``1(``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
-            <param name="boundary">The low bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfBiggerThan``1(``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
-            <param name="boundary">The high bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
-            </summary>
-            <param name="source">The source to check against the <paramref name="lowerBoundary"/> and <paramref name="higherBoundary"/>.</param>
-            <param name="lowerBoundary">The low bound to check against.</param>
-            <param name="higherBoundary">The high bound to check against.</param>
-            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
-            <param name="paramName">The name of the parameter.</param>
-            <exception cref="T:System.ArgumentNullException" />
-            <exception cref="T:System.ArgumentOutOfRangeException" />
-        </member>
-        <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
-            <summary>
-            Extracts precise Inforamtion from the specified <see cref="T:System.Exception"/>.
-            </summary>
-            <param name="source">The exception to extract data from.</param>
-            <returns>An information object, containing detailed data on the exception</returns>
-            <exception cref="T:System.ArgumentNullException" />
+            <param name="eventArgs">The event data for the raised event.</param>
         </member>
         <member name="T:Narumikazuchi.ExceptionInformation">
             <summary>
@@ -422,6 +648,102 @@
             Initializes a new instance of the <see cref="T:Narumikazuchi.NotAllowed"/> class.
             </summary>
         </member>
+        <member name="T:Narumikazuchi.ExceptionHelpers">
+            <summary>
+            Contains helpers for throwing exceptions.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfNullOrEmpty(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Throws an <see cref="T:System.NullReferenceException"/> if the source parameter is null.
+            </summary>
+            <param name="source">The source to check against <see langword="null"/>.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="asArgumentException">Whether the method should throw an <see cref="T:System.ArgumentNullException"/> or a <see cref="T:System.NullReferenceException"/>.</param>
+            <param name="varName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.NullReferenceException" />
+            <remarks>
+            The custom message will be formatted using <see cref="M:System.String.Format(System.String,System.Object)"/>. If you provide a custom message, the '{0}' placeholder 
+            will be filled with the name of the variable by this method.
+            </remarks>
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfLesserThan``1(``0,``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is less than the specified bounds.
+            </summary>
+            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+            <param name="boundary">The low bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfBiggerThan``1(``0,``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is bigger than the specified bounds.
+            </summary>
+            <param name="source">The source to check against the <paramref name="boundary"/>.</param>
+            <param name="boundary">The high bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ThrowIfOutOfRange``1(``0,``0,``0,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the source parameter is outside of the specified bounds.
+            </summary>
+            <param name="source">The source to check against the <paramref name="lowerBoundary"/> and <paramref name="higherBoundary"/>.</param>
+            <param name="lowerBoundary">The low bound to check against.</param>
+            <param name="higherBoundary">The high bound to check against.</param>
+            <param name="message">An optional message for the <see cref="T:System.Exception"/> that will be thrown.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:Narumikazuchi.ExceptionHelpers.ExtractInformation(System.Exception)">
+            <summary>
+            Extracts precise Inforamtion from the specified <see cref="T:System.Exception"/>.
+            </summary>
+            <param name="source">The exception to extract data from.</param>
+            <returns>An information object, containing detailed data on the exception</returns>
+            <exception cref="T:System.ArgumentNullException" />
+        </member>
+        <member name="T:Narumikazuchi.SystemExtensions">
+            <summary>
+            Contains extensions for the System namespace.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.SystemExtensions.Clamp``1(``0,``0,``0)">
+            <summary>
+            Returns the comparable clamped between the specified min and max value.
+            </summary>
+            <param name="value"></param>
+            <param name="lowerBoundary">Low-bound for the clamping</param>
+            <param name="higherBoundary">High-bound for the clamping</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.SystemExtensions.SanitizeForFilename(System.String)">
+            <summary>
+            Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
+            </summary>
+            <remarks>
+            Do not confuse a filename for a filepath, since this method will also remove
+            valid path characters like ':' or '/', which are commonly used in paths.
+            </remarks>
+            <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
+        </member>
+        <member name="M:Narumikazuchi.SystemExtensions.SanitizeForFilename(System.String,System.Char)">
+            <summary>
+            Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
+            </summary>
+            <remarks>
+            Do not confuse a filename for a filepath, since this method will also remove
+            valid path characters like ':' or '/', which are commonly used in paths.
+            </remarks>
+            <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
+        </member>
         <member name="T:Narumikazuchi.Converter`1">
             <summary>
             Converts types that implement the <see cref="T:Narumikazuchi.IConvertible`1"/> interface.
@@ -479,6 +801,77 @@
             </summary>
             <param name="propertyName">The name of the property that is changing.</param>
         </member>
+        <member name="T:Narumikazuchi.AttributeResolver">
+            <summary>
+            Checks if a custom attribute is defined or fetches the custom attributes applied to a type, method, parameter etc.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.Assembly)">
+            <summary>
+            Checks if the specified <see cref="T:System.Reflection.Assembly"/> has at least one <typeparamref name="TAttribute"/> defined.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to check.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.MemberInfo)">
+            <summary>
+            Checks if the specified <see cref="T:System.Reflection.MemberInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to check.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.HasAttribute``1(System.Reflection.ParameterInfo)">
+            <summary>
+            Checks if the specified <see cref="T:System.Reflection.ParameterInfo"/> has at least one <typeparamref name="TAttribute"/> defined.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to check.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.Assembly)">
+            <summary>
+            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attributes from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.MemberInfo)">
+            <summary>
+            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attributes from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchAllAttributes``1(System.Reflection.ParameterInfo)">
+            <summary>
+            Fetches all attributes of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attributes from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.Assembly)">
+            <summary>
+            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.Assembly"/>.
+            </summary>
+            <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> to retrieve the attribute from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.MemberInfo)">
+            <summary>
+            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.MemberInfo"/> to retrieve the attribute from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:Narumikazuchi.AttributeResolver.FetchSingleAttribute``1(System.Reflection.ParameterInfo)">
+            <summary>
+            Fetches the only allowed attribute of type <typeparamref name="TAttribute"/> from the specified <see cref="T:System.Reflection.ParameterInfo"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Reflection.ParameterInfo"/> to retrieve the attribute from.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
         <member name="T:Narumikazuchi.Pointer`1">
             <summary>
             Represents a reference to a struct or a reference to a reference for a class. Can be used in a safe context unlike regular pointers.
@@ -486,12 +879,17 @@
         </member>
         <member name="M:Narumikazuchi.Pointer`1.AddressOf(`0@)">
             <summary>
-            Creates a pointer from the address of the reference to the specified <typeparamref name="T"/>.
+            Creates a pointer from the address of the reference to the specified <typeparamref name="TAny"/>.
             </summary>
             <param name="t">The object to create a <see cref="T:Narumikazuchi.Pointer`1"/> of.</param>
-            <returns>A <see cref="T:Narumikazuchi.Pointer`1"/> to the reference of <typeparamref name="T"/></returns>
+            <returns>A <see cref="T:Narumikazuchi.Pointer`1"/> to the reference of <typeparamref name="TAny"/></returns>
         </member>
         <member name="M:Narumikazuchi.Pointer`1.#ctor(System.Void*)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Pointer`1.#ctor(`0*)">
             <summary>
             Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
             </summary>
@@ -524,30 +922,6 @@
             Gets or sets the value of where the pointer currently points at.
             </summary>
             <exception cref="T:System.NullReferenceException"/>
-        </member>
-        <member name="T:Narumikazuchi.SystemExtensions">
-            <summary>
-            Contains extensions for the System namespace.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.SystemExtensions.Clamp``1(``0,``0,``0)">
-            <summary>
-            Returns the comparable clamped between the specified min and max value.
-            </summary>
-            <param name="value"></param>
-            <param name="lowerBoundary">Low-bound for the clamping</param>
-            <param name="higherBoundary">High-bound for the clamping</param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Narumikazuchi.SystemExtensions.SanitizeForFilename(System.String)">
-            <summary>
-            Sanitizes this <see cref="T:System.String"/> to be able to use as valid filename.
-            </summary>
-            <remarks>
-            Do not confuse a filename for a filepath, since this method will also remove
-            valid path characters like ':' or '/', which are commonly used in paths.
-            </remarks>
-            <returns>Another <see cref="T:System.String"/> which represents a valid filename.</returns>
         </member>
         <member name="T:Narumikazuchi.Generated.StringOrUnsignedInt">
             <summary>
@@ -594,6 +968,9 @@
         </member>
         <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
             <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_20FF03FEFFFF07FEFFFF07">
+            <summary>Supports searching for characters in or not in "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".</summary>
         </member>
     </members>
 </doc>

@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narumikazuchi", "Narumikazu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{7F9FE917-9E54-420E-8AE3-953F4C0E346B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{F8F92E30-623B-486A-BD2A-8B2607989795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narumikazuchi.Analyzers", "Narumikazuchi.Analyzers\Narumikazuchi.Analyzers.csproj", "{23317C0E-F525-4D07-9FEE-A0A1396E0E5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,13 @@ Global
 		{7F9FE917-9E54-420E-8AE3-953F4C0E346B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F9FE917-9E54-420E-8AE3-953F4C0E346B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F9FE917-9E54-420E-8AE3-953F4C0E346B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F92E30-623B-486A-BD2A-8B2607989795}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F92E30-623B-486A-BD2A-8B2607989795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F92E30-623B-486A-BD2A-8B2607989795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23317C0E-F525-4D07-9FEE-A0A1396E0E5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23317C0E-F525-4D07-9FEE-A0A1396E0E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23317C0E-F525-4D07-9FEE-A0A1396E0E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23317C0E-F525-4D07-9FEE-A0A1396E0E5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

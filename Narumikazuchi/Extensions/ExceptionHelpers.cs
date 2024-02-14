@@ -162,7 +162,9 @@ static public class ExceptionHelpers
     /// <param name="source">The exception to extract data from.</param>
     /// <returns>An information object, containing detailed data on the exception</returns>
     /// <exception cref="ArgumentNullException" />
+#pragma warning disable
     [Obsolete($"The feature of '{nameof(ExceptionInformation)}' will be removed in future releases.")]
+#pragma warning restore
     public static ExceptionInformation ExtractInformation(this Exception source)
     {
         ArgumentNullException.ThrowIfNull(source);

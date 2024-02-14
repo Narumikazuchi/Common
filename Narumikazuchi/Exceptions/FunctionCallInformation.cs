@@ -3,6 +3,7 @@
 /// <summary>
 /// Contains the information for a function call on the call stack.
 /// </summary>
+[Obsolete($"The feature of '{nameof(FunctionCallInformation)}' will be removed in future releases.")]
 public readonly partial struct FunctionCallInformation
 {
     /// <inheritdoc/>
