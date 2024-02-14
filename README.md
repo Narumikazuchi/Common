@@ -2,7 +2,7 @@
 ![Tests](https://img.shields.io/github/actions/workflow/status/Narumikazuchi/Common/linux-tests.yml?label=linux-tests)
 ![Tests](https://img.shields.io/github/actions/workflow/status/Narumikazuchi/Common/windows-tests.yml?label=windows-tests)  
 
-![Logo](../release/logo.png)  
+![Logo](../release/docs/logo.png)  
 
 # Narumikazuchi
 This library contains some small utilities that I would use occasionaly but don't really fit a certain category. Some of my other libraries also use these types so they basically have been moved to a package for them to share and use.
