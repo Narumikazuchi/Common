@@ -1,3 +1,4 @@
+#if NET8_0_OR_GREATER
 namespace Narumikazuchi;
 
 /// <summary>
@@ -17,3 +18,4 @@ public interface IInlineArray<[ConstrainToImplementation] TSelf, TElement>
     static private readonly Lazy<Int32> s_Length = new(valueFactory: () => AttributeResolver.FetchSingleAttribute<InlineArrayAttribute>(info: typeof(TSelf)).Length,
                                                        mode: LazyThreadSafetyMode.ExecutionAndPublication);
 }
+#endif

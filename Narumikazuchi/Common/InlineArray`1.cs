@@ -1,3 +1,4 @@
+#if NET8_0_OR_GREATER
 namespace Narumikazuchi;
 
 /// <summary>
@@ -105,3 +106,4 @@ static public class InlineArray<TElement>
                                                 length: arraySize);
     }
 }
+#endif
