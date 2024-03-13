@@ -305,7 +305,7 @@ public readonly partial struct FilePath : IEnumerable<Char>, IEquatable<FilePath
     }
 
     /// <summary>
-    /// Gets the extension of the file or directory represented by this path.Returns an empty string when the path is empty.
+    /// Gets the name of the file or directory represented by this path.Returns an empty string when the path is empty.
     /// </summary>
     public String Name
     {
@@ -320,7 +320,7 @@ public readonly partial struct FilePath : IEnumerable<Char>, IEquatable<FilePath
                 Int32 index = m_Value.LastIndexOf(value: '/');
                 if (index is -1)
                 {
-                    return String.Empty;
+                    return m_Value;
                 }
                 else
                 {
@@ -357,7 +357,7 @@ public readonly partial struct FilePath : IEnumerable<Char>, IEquatable<FilePath
                 Int32 index = m_Value.IndexOf(value: '/');
                 if (index is -1)
                 {
-                    return new(path: String.Empty);
+                    return new(path: m_Value);
                 }
                 else
                 {
