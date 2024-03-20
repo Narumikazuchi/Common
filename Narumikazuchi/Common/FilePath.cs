@@ -324,7 +324,7 @@ public readonly partial struct FilePath : IEnumerable<Char>, IEquatable<FilePath
                 }
                 else
                 {
-                    return m_Value[index..];
+                    return m_Value[(index + 1)..];
                 }
             }
         }

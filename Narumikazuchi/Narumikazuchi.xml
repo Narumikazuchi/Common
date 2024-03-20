@@ -230,7 +230,7 @@
         </member>
         <member name="P:Narumikazuchi.FilePath.Name">
             <summary>
-            Gets the extension of the file or directory represented by this path.Returns an empty string when the path is empty.
+            Gets the name of the file or directory represented by this path.Returns an empty string when the path is empty.
             </summary>
         </member>
         <member name="P:Narumikazuchi.FilePath.IsEmpty">
@@ -284,91 +284,7 @@
         <member name="M:Narumikazuchi.InlineArray`1.AsReadOnlySpanUnsafe``1(``0@,System.Int32)">
             <summary>
             Returns a <see cref="T:System.ReadOnlySpan`1"/> representing the <paramref name="inlineArray"/>.
-            </summary>
-            <remarks>
-            This method does not enforce the use of the <see cref="T:System.Runtime.CompilerServices.InlineArrayAttribute"/>. This might therefore fail if used on a struct that is not an inline array.
-            Worst case would be the resulting span reading into unchecked memory.
-            </remarks>
-            <param name="inlineArray">The array to represent as a span.</param>
-            <param name="arraySize">The size of the span. -1 will default to the length of the array.</param>
-            <returns>A <see cref="T:System.ReadOnlySpan`1"/> that represents the <paramref name="inlineArray"/></returns>
-        </member>
-        <member name="T:Narumikazuchi.Optional`1">
-            <summary>
-            Represents a value that might or might not be set.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Optional`1.#ctor(`0,System.Nullable{System.Boolean})">
-            <summary>
-            Instantiates a new instance of the <see cref="T:Narumikazuchi.Optional`1"/> struct.
-            </summary>
-            <param name="value">The value to with this instance.</param>
-            <param name="overrideHasValue">Whether or not the <see cref="P:Narumikazuchi.Optional`1.HasValue"/> will be set to <see langword="true"/></param>
-        </member>
-        <member name="M:Narumikazuchi.Optional`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.Optional`1.Map``1(System.Func{`0,``0})">
-            <summary>
-            Transforms this instance into an instance of another type. The <paramref name="transformer"/> will only be called
-            if this instance actually holds a value.
-            </summary>
-            <param name="transformer">The transformation function to map from <typeparamref name="TAny"/> to <typeparamref name="TOther"/>.</param>
-            <returns>An <see cref="T:Narumikazuchi.Optional`1"/> of type <typeparamref name="TOther"/> depending on whether this instance has a value or not</returns>
-        </member>
-        <member name="M:Narumikazuchi.Optional`1.UseFor(System.Action{`0})">
-            <summary>
-            Executes the <paramref name="action"/> with the value wrapped in this instance as parameter, but only if this
-            instance actually holds a value.
-            </summary>
-            <param name="action">The action to perform on the wrapped value.</param>
-        </member>
-        <member name="M:Narumikazuchi.Optional`1.UnwrapOr(`0)">
-            <summary>
-            If this instance holds a value it gets returned, otherwise the <paramref name="defaultValue"/> will get returned.
-            </summary>
-            <param name="defaultValue">The value to return if this instance doesn't hold a value.</param>
-            <returns>The value wrapped in this instance or <paramref name="defaultValue"/> if this instance does not hold a value</returns>
-        </member>
-        <member name="P:Narumikazuchi.Optional`1.HasValue">
-            <summary>
-            Gets whether or not this instance holds a value.
-            </summary>
-        </member>
-        <member name="P:Narumikazuchi.Optional`1.Value">
-            <summary>
-            Gets the value wrapped in this instance.
-            </summary>
-        </member>
-        <member name="T:Narumikazuchi.Result`1">
-            <summary>
-            Represents a result where the functioncall can fail and actually return an <see cref="T:System.Exception"/>.
-            </summary>
-        </member>
-        <member name="M:Narumikazuchi.Result`1.#ctor(`0)">
-            <summary>
-            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`1"/> struct.
-            </summary>
-            <param name="value">The value to wrap in this instance.</param>
-        </member>
-        <member name="M:Narumikazuchi.Result`1.#ctor(System.Exception)">
-            <summary>
-            Instantiates a new instance of the <see cref="T:Narumikazuchi.Result`1"/> struct.
-            </summary>
-            <param name="error">The error to wrap in this instance.</param>
-        </member>
-        <member name="M:Narumikazuchi.Result`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:Narumikazuchi.Result`1.AndThen``1(System.Func{`0,``0})">
-            <summary>
-            If this wraps a value then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
-            Otherwise the wrapped <see cref="T:System.Exception"/> will just get passed on.
-            </summary>
-            <param name="transformer">The transformation to apply to the wrapped value.</param>
-            <returns>A <see cref="T:Narumikazuchi.Result`1"/> wrapping the transformed value or wrapping the stored <see cref="T:System.Exception"/></returns>
-        </member>
-        <member name="M:Narumikazuchi.Result`1.OrElse``1(System.Func{System.Exception,``0})">
+     me="M:Narumikazuchi.Result`1.OrElse``1(System.Func{System.Exception,``0})">
             <summary>
             If this wraps an <see cref="T:System.Exception"/> then the <paramref name="transformer"/> will map it to <typeparamref name="TOther"/>.
             Otherwise the wrapped value will just get passed on.
@@ -926,6 +842,80 @@
         <member name="T:Narumikazuchi.Generated.StringOrUnsignedInt">
             <summary>
             A type that can be assigned either of these types: <code><see cref="T:System.String"/> | <see cref="T:System.Byte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
+            </summary>
+        </member>
+    </members>
+</doc>
+
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Pointer`1.#ctor(System.UIntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Narumikazuchi.Pointer`1"/> struct.
+            </summary>
+        </member>
+        <member name="M:Narumikazuchi.Pointer`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Narumikazuchi.Pointer`1.Item(System.Int32)">
+            <summary>
+            Gets or sets the value of where the pointer at the specified index points at.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Pointer`1.Address">
+            <summary>
+            Gets the current address of this pointer.
+            </summary>
+        </member>
+        <member name="P:Narumikazuchi.Pointer`1.Value">
+            <summary>
+            Gets or sets the value of where the pointer currently points at.
+            </summary>
+            <exception cref="T:System.NullReferenceException"/>
+        </member>
+        <member name="T:Narumikazuchi.Generated.StringOrUnsignedInt">
+            <summary>
+            A type that can be assigned either of these types: <code><see cref="T:System.String"/> | <see cref="T:System.Byte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
+            </summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the VersionRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.VersionRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.VersionRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <membe><see cref="T:System.String"/> | <see cref="T:System.Byte"/> | <see cref="T:System.UInt16"/> | <see cref="T:System.UInt32"/> | <see cref="T:System.UInt64"/></code>
             </summary>
         </member>
         <member name="T:System.Text.RegularExpressions.Generated.VersionRegex_0">

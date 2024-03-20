@@ -33,13 +33,13 @@
 		<DocumentationFile>Narumikazuchi.xml</DocumentationFile>
 		<Authors>Narumikazuchi</Authors>
 		<Copyright>©2023 Narumikazuchi</Copyright>
-		<Version>6.1.5</Version>
+		<Version>6.1.6</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RepositoryUrl>https://github.com/Narumikazuchi/Common</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReleaseNotes>fixed a bug with FilePath struct.</PackageReleaseNotes>
+		<PackageReleaseNotes>Fixed another bug with FilePath struct.</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 		<PackageProjectUrl>https://github.com/Narumikazuchi/Common/wiki</PackageProjectUrl>
